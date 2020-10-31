@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
+    android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/status_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold|italic"
+                    android:visibility="gone"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:padding="10dp" />
+
+                <View style="@style/Divider"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/icon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:scaleType="fitCenter"
+                            android:layout_gravity="center_vertical"
+                            android:src="@color/colorBlack"
+                            android:layout_marginEnd="10dp"
+                            android:background="@null"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="35dp"
+                            android:baselineAligned="false">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="false"
+                                    android:textStyle="bold"
+                                    android:textSize="17sp"
+                                    android:textColor="?android:attr/textColorPrimary" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold|italic"
+                                    android:focusable="false" />
+                        </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/Divider"/>
+
+                <FrameLayout
+                    android:id="@+id/action_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/action_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="30dp"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:gravity="end" />
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/action_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:background="@null"
+                            android:clickable="false" />
+                </FrameLayout>
+        </LinearLayout>
+</androidx.cardview.widget.CardView>
