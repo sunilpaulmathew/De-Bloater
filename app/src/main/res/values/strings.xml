@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name" translatable="false">De-Bloater</string>
+
+    <string name="about">About</string>
+    <string name="about_summary">De-Bloater is an application using the power of Magisk to debloat unwanted applications systemless-ly!</string>
+    <string name="active">Active</string>
+    <string name="active_app_summary">The entire application list is detailed below. The applications that are assigned to remove will be systemless-ly debloated after a reboot!</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_logs">Change-logs</string>
+    <string name="change_logs_summary">View recent changes on this app</string>
+    <string name="check_update">Check for Updates</string>
+    <string name="check_update_summary">Check for new versions of De-Bloater</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="download_failed">It seems like the download is failed, or a corrupted file is downloaded!</string>
+    <string name="downloading">Downloading %s</string>
+    <string name="get_it">Get It</string>
+    <string name="inactive">Inactive</string>
+    <string name="inactive_apps_summary">The applications that are systemless-ly debloated/assigned to remove are listed in this page!</string>
+    <string name="invite_friend">Invite Friends</string>
+    <string name="invite_friend_summary">Invite a friend to try De-Bloater</string>
+    <string name="more_apps">More Apps</string>
+    <string name="more_apps_summary">More apps from the developer</string>
+    <string name="module_status_initialize">Initialize Module</string>
+    <string name="module_status_reset">Reset Module</string>
+    <string name="no_internet">Please check your internet connection!</string>
+    <string name="no_magisk">Magisk Not Detected</string>
+    <string name="no_root">No Root</string>
+    <string name="press_back_exit">Press the \'Back\' button again to Exit!</string>
+    <string name="reboot">Reboot Device</string>
+    <string name="remove">Remove</string>
+    <string name="report_issue">Report Issue</string>
+    <string name="report_issue_summary">Raise an issue at GitHub</string>
+    <string name="restore">Restore</string>
+    <string name="search_hint">Search…</string>
+    <string name="share_app_message">Get De-Bloater %s from GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>
+    <string name="source_code">Source Code</string>
+    <string name="source_code_summary">Visit GitHub page</string>
+    <string name="status_message_remove">Will be removed after a reboot</string>
+    <string name="status_message_restore">Will be restored after a reboot</string>
+    <string name="storage_access_denied">Permission denied for writing to storage!</string>
+    <string name="support">Support</string>
+    <string name="support_summary">Visit support group</string>
+    <string name="update_available">New update available!\n(%s)</string>
+    <string name="updated_dialog">Congrats! You\'ve already got an up-to-date version of De-Bloater!</string>
+    <string name="version">Version</string>
+</resources>
