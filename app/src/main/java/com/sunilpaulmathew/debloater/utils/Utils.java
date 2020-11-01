@@ -18,6 +18,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.View;
 
@@ -157,6 +158,14 @@ public class Utils {
             return s.substring(0, s.length() - "\n".length());
         }
         return s;
+    }
+
+    public static boolean getBoolean(String name, boolean defaults, Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(name, defaults);
+    }
+
+    public static void saveBoolean(String name, boolean value, Context context) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
     }
 
     public static boolean exist(String file) {

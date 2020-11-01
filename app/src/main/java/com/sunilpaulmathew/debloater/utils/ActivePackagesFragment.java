@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +35,7 @@ import java.util.List;
 
 public class ActivePackagesFragment extends Fragment {
 
+    private AppCompatImageButton mMenu;
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
@@ -46,9 +50,13 @@ public class ActivePackagesFragment extends Fragment {
         PackageTasks.mSearchWord = mRootView.findViewById(R.id.search_word);
         PackageTasks.mSearchButton = mRootView.findViewById(R.id.search_button);
         PackageTasks.mAbout = mRootView.findViewById(R.id.about_summary);
+        AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
 
         PackageTasks.mSearchButton.setOnClickListener(v -> {
             PackageTasks.mSearchButton.setVisibility(View.GONE);
@@ -72,9 +80,55 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
+        mMenu.setOnClickListener(v -> {
+            menuOptions(requireActivity());
+        });
+
         loadUI(requireActivity());
 
         return mRootView;
+    }
+
+    private void menuOptions(Activity activity) {
+        PopupMenu popupMenu = new PopupMenu(activity, mMenu);
+        Menu menu = popupMenu.getMenu();
+        if (PackageTasks.isModuleInitialized()) {
+            menu.add(Menu.NONE, 1, Menu.NONE, R.string.module_status_reset);
+        }
+        SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
+        sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
+                .setChecked(Utils.getBoolean("sort_name", false, activity));
+        sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
+                .setChecked(Utils.getBoolean("sort_id", true, activity));
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.reboot);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case 0:
+                    break;
+                case 1:
+                    PackageTasks.removeModule(activity);
+                    break;
+                case 2:
+                    if (!Utils.getBoolean("sort_name", false, activity)) {
+                        Utils.saveBoolean("sort_name", true, activity);
+                        Utils.saveBoolean("sort_id", false, activity);
+                        reload(activity);
+                    }
+                    break;
+                case 3:
+                    if (!Utils.getBoolean("sort_id", true, activity)) {
+                        Utils.saveBoolean("sort_id", true, activity);
+                        Utils.saveBoolean("sort_name", false, activity);
+                        reload(activity);
+                    }
+                    break;
+                case 4:
+                    Utils.runCommand("svc power reboot");
+                    break;
+            }
+            return false;
+        });
+        popupMenu.show();
     }
 
     private void loadUI(Activity activity) {

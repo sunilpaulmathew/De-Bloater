@@ -1,11 +1,14 @@
 package com.sunilpaulmathew.debloater.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -15,13 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sunilpaulmathew.debloater.R;
 
-import java.io.File;
 import java.util.List;
 
 /*
@@ -30,6 +33,7 @@ import java.util.List;
 
 public class InactivePackagesFragment extends Fragment {
 
+    private AppCompatImageButton mMenu;
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
@@ -44,10 +48,38 @@ public class InactivePackagesFragment extends Fragment {
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        mMenu = mRootView.findViewById(R.id.menu_button);
+
+        mPageTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
+        mMenu.setOnClickListener(v -> {
+            menuOptions(requireActivity());
+        });
 
         loadUI();
 
         return mRootView;
+    }
+
+    private void menuOptions(Activity activity) {
+        PopupMenu popupMenu = new PopupMenu(activity, mMenu);
+        Menu menu = popupMenu.getMenu();
+        if (PackageTasks.isModuleInitialized()) {
+            menu.add(Menu.NONE, 0, Menu.NONE, R.string.module_status_reset);
+        }
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.reboot);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case 0:
+                    PackageTasks.removeModule(activity);
+                    break;
+                case 1:
+                    Utils.runCommand("svc power reboot");
+                    break;
+            }
+            return false;
+        });
+        popupMenu.show();
     }
 
     private void loadUI() {

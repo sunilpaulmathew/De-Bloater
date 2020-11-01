@@ -3,13 +3,10 @@ package com.sunilpaulmathew.debloater;
 import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -27,8 +24,8 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppCompatImageButton mMenu;
     private boolean mExit;
+    private BottomNavigationView mBottomNav;
     private Handler mHandler = new Handler();
 
     @Override
@@ -53,13 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-        mMenu = findViewById(R.id.menu_button);
-        BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
+        mBottomNav = findViewById(R.id.bottom_navigation);
         mBottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        mMenu.setOnClickListener(v -> {
-            menuOptions();
-        });
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -91,32 +83,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    private void menuOptions() {
-        PopupMenu popupMenu = new PopupMenu(this, mMenu);
-        Menu menu = popupMenu.getMenu();
-        if (PackageTasks.isModuleInitialized()) {
-            menu.add(Menu.NONE, 0, Menu.NONE, R.string.module_status_reset);
-        } else {
-            menu.add(Menu.NONE, 1, Menu.NONE, R.string.module_status_initialize);
-        }
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.reboot);
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 0:
-                    PackageTasks.removeModule(this);
-                    break;
-                case 1:
-                    PackageTasks.initializeModule();
-                    break;
-                case 2:
-                    Utils.runCommand("svc power reboot");
-                    break;
-            }
-            return false;
-        });
-        popupMenu.show();
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -142,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             mExit = false;
             super.onBackPressed();
         } else {
-            Utils.snackBar(mMenu, getString(R.string.press_back_exit));
+            Utils.snackBar(mBottomNav, getString(R.string.press_back_exit));
             mExit = true;
             mHandler.postDelayed(() -> mExit = false, 2000);
         }

@@ -20,6 +20,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +43,9 @@ public class PackageTasks {
     public static List<String> getActivePackageData(Context context) {
         List<String> mData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+        if (Utils.getBoolean("sort_name", true, context)) {
+            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
+        }
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
                     && getSupportedAppsList(packageInfo.sourceDir)) {

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class AboutFragment extends Fragment {
 
-    private ArrayList <RecycleViewItem> mData = new ArrayList<RecycleViewItem>();
+    private ArrayList <RecycleViewItem> mData = new ArrayList<>();
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Nullable
