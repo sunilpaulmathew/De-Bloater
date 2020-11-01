@@ -100,7 +100,14 @@ public class ActivePackagesFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
         sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
-        menu.add(Menu.NONE, 4, Menu.NONE, R.string.reboot);
+        SubMenu show = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.show_from));
+        show.add(Menu.NONE, 4, Menu.NONE, getString(R.string.apps_system)).setCheckable(true)
+                .setChecked(Utils.getBoolean("apps_system", true, activity));
+        show.add(Menu.NONE, 5, Menu.NONE, getString(R.string.apps_vendor)).setCheckable(true)
+                .setChecked(Utils.getBoolean("apps_vendor", true, activity));
+        show.add(Menu.NONE, 6, Menu.NONE, getString(R.string.apps_product)).setCheckable(true)
+                .setChecked(Utils.getBoolean("apps_product", true, activity));
+        menu.add(Menu.NONE, 7, Menu.NONE, R.string.reboot);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -123,6 +130,30 @@ public class ActivePackagesFragment extends Fragment {
                     }
                     break;
                 case 4:
+                    if (Utils.getBoolean("apps_system", true, activity)) {
+                        Utils.saveBoolean("apps_system", false, activity);
+                    } else {
+                        Utils.saveBoolean("apps_system", true, activity);
+                    }
+                    reload(activity);
+                    break;
+                case 5:
+                    if (Utils.getBoolean("apps_vendor", true, activity)) {
+                        Utils.saveBoolean("apps_vendor", false, activity);
+                    } else {
+                        Utils.saveBoolean("apps_vendor", true, activity);
+                    }
+                    reload(activity);
+                    break;
+                case 6:
+                    if (Utils.getBoolean("apps_product", true, activity)) {
+                        Utils.saveBoolean("apps_product", false, activity);
+                    } else {
+                        Utils.saveBoolean("apps_product", true, activity);
+                    }
+                    reload(activity);
+                    break;
+                case 7:
                     Utils.runCommand("svc power reboot");
                     break;
             }
@@ -224,7 +255,6 @@ public class ActivePackagesFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
             try {
                 holder.mIcon.setImageDrawable(PackageTasks.getAppIcon(this.data.get(position), holder.mName.getContext()));
-                holder.mIcon.setVisibility(View.VISIBLE);
                 holder.mPath.setText(PackageTasks.getAPKPath(this.data.get(position), holder.mName.getContext()));
                 if (PackageTasks.mSearchText != null && PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().contains(PackageTasks.mSearchText)) {
                     holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().replace(PackageTasks.mSearchText,

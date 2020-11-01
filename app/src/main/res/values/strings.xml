@@ -6,10 +6,13 @@
     <string name="active">Active</string>
     <string name="active_app_summary">The entire application list is detailed below. The applications that are assigned to remove will be systemless-ly debloated after a reboot!</string>
     <string name="apps">%s Applications</string>
+    <string name="apps_system">/system</string>
+    <string name="apps_vendor">/vendor</string>
+    <string name="apps_product">/product</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
     <string name="change_logs_summary">View recent changes on this app</string>
-    <string name="check_update">Check for Updates</string>
+    <string name="check_update">Update Check</string>
     <string name="check_update_summary">Check for new versions of De-Bloater</string>
     <string name="dismiss">Dismiss</string>
     <string name="download_failed">It seems like the download is failed, or a corrupted file is downloaded!</string>
@@ -34,6 +37,7 @@
     <string name="report_issue_summary">Raise an issue at GitHub</string>
     <string name="restore">Restore</string>
     <string name="search_hint">Search…</string>
+    <string name="show_from">Show Apps From</string>
     <string name="share_app_message">Get De-Bloater %s from GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>
     <string name="sort_by">Sort Apps By</string>
     <string name="source_code">Source Code</string>
