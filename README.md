@@ -2,7 +2,7 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-beta--v0.2-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.2/app-release.apk)
+[![](https://img.shields.io/badge/De--Bloater-beta--v0.3-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
@@ -12,7 +12,7 @@
 ## Download
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt=""
-     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.2/app-release.apk)
+     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk)
 
 ## Features
 * Easily remove system apps from "/system", "/vendor", and "/product" directories.

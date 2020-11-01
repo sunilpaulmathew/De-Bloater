@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Added options to sort active packages by name or package id.\n - Improved restoring de-bloated apps.\n - Implemented separate pop-up menu for individual pages.\n - Slightly improved app UI.\n - Miscellaneous changes.",
-  "latestVersionCode": 2,
-  "latestVersion": "beta-v0.2",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.2/app-release.apk",
-  "sha1": "d0c15046f6f4ad5166ae9648df1593854e83f00e"
+  "releaseNotes": " - Added option to show apps from specific folders.\n - Improved inactive app handling.\n - Show app logo on startup.\n - Improved app searching.\n - Miscellaneous changes.",
+  "latestVersionCode": 3,
+  "latestVersion": "beta-v0.3",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk",
+  "sha1": "19c46db4a87d7a8dfa2b4df78aeb9a0409f1a5e9"
 }
