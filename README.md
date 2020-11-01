@@ -3,6 +3,7 @@
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
 [![](https://img.shields.io/badge/De--Bloater-beta--v0.2-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.2/app-release.apk)
+![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
 
