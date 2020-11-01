@@ -39,5 +39,6 @@
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
         android:background="@color/colorBlack"
-        app:menu="@menu/bottom_navigation" />
+        app:menu="@menu/bottom_navigation"
+        android:visibility="gone" />
 </RelativeLayout>

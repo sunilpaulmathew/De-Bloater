@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         mBottomNav = findViewById(R.id.bottom_navigation);
         mBottomNav.setOnNavigationItemSelectedListener(navListener);
+        mBottomNav.setVisibility(View.VISIBLE);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
