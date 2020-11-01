@@ -203,25 +203,9 @@ public class ActivePackagesFragment extends Fragment {
                     if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
                         PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.actionLayout.getContext());
                     } else {
-                        PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.actionLayout.getContext());
+                        PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.mName.getText().toString(), holder.actionLayout.getContext());
                     }
-                    if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
-                        holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.restore));
-                        holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore));
-                        holder.statusMessage.setTextColor(Color.RED);
-                        holder.statusMessage.setVisibility(View.VISIBLE);
-                        holder.actionMessage.setTextColor(Color.GREEN);
-                        holder.mActionIcon.setColorFilter(Color.GREEN);
-                        holder.statusMessage.setText(holder.actionLayout.getContext().getString(R.string.status_message_remove));
-                    } else {
-                        holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.remove));
-                        holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_delete));
-                        holder.statusMessage.setTextColor(Color.GREEN);
-                        holder.statusMessage.setVisibility(View.GONE);
-                        holder.actionMessage.setTextColor(Color.RED);
-                        holder.mActionIcon.setColorFilter(Color.RED);
-                        holder.statusMessage.setText(null);
-                    }
+                    notifyDataSetChanged();
                 });
             } catch (NullPointerException ignored) {}
         }

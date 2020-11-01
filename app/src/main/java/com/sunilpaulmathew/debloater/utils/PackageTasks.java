@@ -57,30 +57,12 @@ public class PackageTasks {
 
     public static List<String> getInactivePackageData() {
         List<String> mData = new ArrayList<>();
-        for (String s: getAppPaths()) {
-            for (final String names : getInactiveAppsList(s)) {
-                String path = MODULE_PARENT + s + "/" + names;
-                if (Utils.exist(path)) {
-                    mData.add(path);
-                }
+        for (String line : Utils.runAndGetOutput("find " + MODULE_PARENT + "/system -type f -name *.apk").split("\\r?\\n")) {
+            if (line.endsWith(".apk")) {
+                mData.add(line);
             }
         }
         return mData;
-    }
-
-    private static List<String> getInactiveAppsList(String path) {
-        List<String> list = new ArrayList<>();
-        if (Utils.exist(MODULE_PARENT + path)) {
-            String files = Utils.runAndGetOutput("ls " + MODULE_PARENT + path);
-            if (!files.isEmpty()) {
-                for (String file : files.split("\\r?\\n")) {
-                    if (file != null && !file.isEmpty() && Utils.exist(MODULE_PARENT + path + "/" + file)) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
     }
 
     private static boolean getSupportedAppsList(String apkPath) {
@@ -90,22 +72,6 @@ public class PackageTasks {
                 || apkPath.contains("/product/overlay") || apkPath.contains("/reserve")
                 || apkPath.contains("/system/vendor/app") || apkPath.contains("/system/vendor/overlay")
                 || apkPath.contains("/system/product/overlay");
-    }
-
-    private static List<String> getAppPaths() {
-        List<String> mPath = new ArrayList<>();
-        mPath.add("/system/app");
-        mPath.add("/system/priv-app");
-        mPath.add("/system/product/app");
-        mPath.add("/system/vendor/app");
-        mPath.add("/system/vendor/overlay");
-        mPath.add("/system/product/overlay");
-        mPath.add("/product/app");
-        mPath.add("/product/overlay");
-        mPath.add("/reserve");
-        mPath.add("/vendor/app");
-        mPath.add("/vendor/overlay");
-        return mPath;
     }
 
     public static PackageManager getPackageManager(Context context) {
@@ -168,10 +134,10 @@ public class PackageTasks {
         return Utils.exist(MODULE_PARENT) && Utils.exist(MODULE_PARENT + "/module.prop");
     }
 
-    static void setToDelete(String path, Context context) {
+    static void setToDelete(String path, String name, Context context) {
         initializeModule();
         new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()).mkdirs();
-        Utils.create("", context.getFilesDir().getPath() + "/De-bloater" + path);
+        Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
         Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", MODULE_PARENT);
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
     }

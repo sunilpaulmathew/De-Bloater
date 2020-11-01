@@ -66,7 +66,9 @@ public class InactivePackagesFragment extends Fragment {
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getInactivePackageData());
+                            if (!PackageTasks.getInactivePackageData().isEmpty()) {
+                                mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getInactivePackageData());
+                            }
                             return null;
                         }
 
@@ -103,7 +105,10 @@ public class InactivePackagesFragment extends Fragment {
         @SuppressLint("UseCompatLoadingForDrawables")
         @Override
         public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
-            holder.appName.setText(new File(this.data.get(position)).getName());
+            holder.appIcon.setImageDrawable(holder.appIcon.getContext().getResources().getDrawable(R.drawable.ic_android));
+            holder.appIcon.setVisibility(View.VISIBLE);
+            holder.appIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
+            holder.appName.setText(Utils.read(this.data.get(position)));
             holder.appID.setText(this.data.get(position).replace("/data/adb/modules/De-bloater",""));
             holder.statusMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
             holder.actionMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.GREEN : Color.RED);
@@ -122,21 +127,6 @@ public class InactivePackagesFragment extends Fragment {
                 } else {
                     Utils.create("", this.data.get(position));
                 }
-                try {
-                    holder.actionMessage.setText(Utils.exist(this.data.get(position)) ?
-                            holder.actionLayout.getContext().getString(R.string.restore) : holder.actionLayout.getContext().getString(R.string.remove));
-                    holder.actionIcon.setImageDrawable(Utils.exist(this.data.get(position)) ?
-                            holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore) : holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_delete));
-                    holder.statusMessage.setTextColor(Utils.exist(this.data.get(position)) ?
-                            Color.RED : Color.GREEN);
-                    holder.actionMessage.setTextColor(Utils.exist(this.data.get(position)) ?
-                            Color.GREEN : Color.RED);
-                    holder.actionIcon.setColorFilter(Utils.exist(this.data.get(position)) ?
-                            Color.GREEN : Color.RED);
-                    holder.statusMessage.setText(Utils.exist(this.data.get(position)) ?
-                            holder.actionLayout.getContext().getString(R.string.status_message_restore) : null);
-                    holder.statusMessage.setVisibility(Utils.exist(this.data.get(position)) ? View.GONE : View.VISIBLE);
-                } catch (IndexOutOfBoundsException ignored) {}
                 notifyDataSetChanged();
             });
 
@@ -149,6 +139,7 @@ public class InactivePackagesFragment extends Fragment {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             private AppCompatImageButton actionIcon;
+            private AppCompatImageButton appIcon;
             private AppCompatTextView appName;
             private AppCompatTextView appID;
             private AppCompatTextView actionMessage;
@@ -158,6 +149,7 @@ public class InactivePackagesFragment extends Fragment {
             public ViewHolder(View view) {
                 super(view);
                 this.actionIcon = view.findViewById(R.id.action_icon);
+                this.appIcon = view.findViewById(R.id.icon);
                 this.appName = view.findViewById(R.id.title);
                 this.appID = view.findViewById(R.id.description);
                 this.actionMessage = view.findViewById(R.id.action_message);
