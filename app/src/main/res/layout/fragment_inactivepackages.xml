@@ -38,7 +38,7 @@
                     android:id="@+id/menu_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_restore"
+                    android:src="@drawable/ic_settings"
                     android:layout_gravity="end"
                     android:background="@null"
                     android:tint="?android:attr/colorAccent" />
