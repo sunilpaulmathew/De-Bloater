@@ -80,9 +80,7 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
-        mMenu.setOnClickListener(v -> {
-            menuOptions(requireActivity());
-        });
+        mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
         loadUI(requireActivity());
 
@@ -209,7 +207,7 @@ public class ActivePackagesFragment extends Fragment {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
                             mRecyclerView.setVisibility(View.GONE);
-                            mRecyclerView.removeAllViews();
+                            PackageTasks.mData.clear();
                         }
 
                         @Override
@@ -221,8 +219,8 @@ public class ActivePackagesFragment extends Fragment {
                         @Override
                         protected void onPostExecute(Void recyclerViewItems) {
                             super.onPostExecute(recyclerViewItems);
-                            mRecycleViewAdapter.notifyDataSetChanged();
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
+                            mRecycleViewAdapter.notifyDataSetChanged();
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;

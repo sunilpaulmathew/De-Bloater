@@ -51,7 +51,7 @@ public class PackageTasks {
                     && getSupportedAppsList(packageInfo.sourceDir, context)) {
                 if (mSearchText == null) {
                     mData.add(packageInfo.packageName);
-                } else if (packageInfo.packageName.toLowerCase().contains(mSearchText.toLowerCase())) {
+                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(mSearchText)) {
                     mData.add(packageInfo.packageName);
                 }
             }
