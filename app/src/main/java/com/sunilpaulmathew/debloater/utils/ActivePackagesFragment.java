@@ -82,7 +82,7 @@ public class ActivePackagesFragment extends Fragment {
 
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
-        loadUI(requireActivity());
+        loadUI();
 
         return mRootView;
     }
@@ -160,7 +160,7 @@ public class ActivePackagesFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void loadUI(Activity activity) {
+    private void loadUI() {
         if (mLoader == null) {
             mHandler.postDelayed(new Runnable() {
                 @SuppressLint("StaticFieldLeak")
@@ -229,6 +229,16 @@ public class ActivePackagesFragment extends Fragment {
                     mLoader.execute();
                 }
             }, 250);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (PackageTasks.mSearchText != null) {
+            PackageTasks.mSearchText = null;
+            PackageTasks.mSearchWord.setText(null);
         }
     }
 
