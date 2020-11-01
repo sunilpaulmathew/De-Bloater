@@ -178,7 +178,7 @@ public class ActivePackagesFragment extends Fragment {
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getActivePackageData(activity));
+                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.mData);
                             return null;
                         }
 

@@ -32,6 +32,7 @@ public class PackageTasks {
 
     private static final String MODULE_PARENT = "/data/adb/modules/De-bloater";
     public static String mSearchText;
+    public static List<String> mData = new ArrayList<>();
     public static AppCompatEditText mSearchWord;
     public static AppCompatImageButton mSearchButton;
     public static AppCompatTextView mAbout;
@@ -41,7 +42,6 @@ public class PackageTasks {
     }
 
     public static List<String> getActivePackageData(Context context) {
-        List<String> mData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
