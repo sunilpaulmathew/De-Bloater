@@ -136,6 +136,9 @@ public class InactivePackagesFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
             holder.appName.setText(Utils.read(this.data.get(position)));
+            if (Utils.isDarkTheme(holder.appName.getContext())) {
+                holder.appName.setTextColor(Utils.getThemeAccentColor(holder.appName.getContext()));
+            }
             holder.appID.setText(this.data.get(position).replace("/data/adb/modules/De-bloater",""));
             setStatus(holder, this.data.get(position));
             holder.actionLayout.setOnClickListener(v -> {

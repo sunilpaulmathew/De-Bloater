@@ -75,6 +75,9 @@ public class AboutFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
             holder.Title.setText(this.data.get(position).getTitle());
+            if (Utils.isDarkTheme(holder.Title.getContext())) {
+                holder.Title.setTextColor(Utils.getThemeAccentColor(holder.Title.getContext()));
+            }
             holder.Description.setText(this.data.get(position).getDescription());
             holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
             holder.mRVLayout.setOnClickListener(v -> {

@@ -270,6 +270,9 @@ public class ActivePackagesFragment extends Fragment {
                 } else {
                     holder.mName.setText(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()));
                 }
+                if (Utils.isDarkTheme(holder.mName.getContext())) {
+                    holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
+                }
                 if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
                     holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.restore));
                     holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore));

@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -71,7 +72,7 @@ public class Utils {
         return !isPackageInstalled("com.smartpack.donate", context);
     }
 
-    private static boolean isDarkTheme(Context context) {
+    public static boolean isDarkTheme(Context context) {
         int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
@@ -151,6 +152,12 @@ public class Utils {
 
     public static boolean magiskSupported() {
         return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk");
+    }
+
+    public static int getThemeAccentColor(Context context) {
+        TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        return value.data;
     }
 
     private static String removeSuffix(@Nullable String s) {
