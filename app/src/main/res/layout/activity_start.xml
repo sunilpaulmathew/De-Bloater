@@ -10,8 +10,18 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="15dp"
         android:src="@mipmap/ic_launcher_foreground"
         android:layout_gravity="center_horizontal"
         android:gravity="center" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/magisk_credit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-35dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/magisk_credit_dialog"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:textSize="20sp" />
 </LinearLayout>
