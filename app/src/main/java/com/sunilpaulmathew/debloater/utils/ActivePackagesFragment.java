@@ -82,7 +82,7 @@ public class ActivePackagesFragment extends Fragment {
 
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
-        loadUI();
+        loadUI(requireActivity());
 
         return mRootView;
     }
@@ -160,7 +160,7 @@ public class ActivePackagesFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void loadUI() {
+    private void loadUI(Activity activity) {
         if (mLoader == null) {
             mHandler.postDelayed(new Runnable() {
                 @SuppressLint("StaticFieldLeak")
@@ -176,7 +176,7 @@ public class ActivePackagesFragment extends Fragment {
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.mData);
+                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getActivePackageData(activity));
                             return null;
                         }
 
@@ -207,7 +207,7 @@ public class ActivePackagesFragment extends Fragment {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
                             mRecyclerView.setVisibility(View.GONE);
-                            PackageTasks.mData.clear();
+                            mRecyclerView.removeAllViews();
                         }
 
                         @Override
