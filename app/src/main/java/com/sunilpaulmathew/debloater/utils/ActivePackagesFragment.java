@@ -59,9 +59,18 @@ public class ActivePackagesFragment extends Fragment {
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
 
         PackageTasks.mSearchButton.setOnClickListener(v -> {
-            PackageTasks.mSearchButton.setVisibility(View.GONE);
-            PackageTasks.mAbout.setVisibility(View.GONE);
-            PackageTasks.mSearchWord.setVisibility(View.VISIBLE);
+            if (PackageTasks.mSearchWord.getVisibility() == View.VISIBLE) {
+                if (PackageTasks.mSearchText != null && !PackageTasks.mSearchText.isEmpty()) {
+                    PackageTasks.mSearchText = null;
+                    PackageTasks.mSearchWord.setText(null);
+                }
+                PackageTasks.mSearchButton.setVisibility(View.VISIBLE);
+                PackageTasks.mAbout.setVisibility(View.VISIBLE);
+                PackageTasks.mSearchWord.setVisibility(View.GONE);
+            } else {
+                PackageTasks.mAbout.setVisibility(View.GONE);
+                PackageTasks.mSearchWord.setVisibility(View.VISIBLE);
+            }
         });
 
         PackageTasks.mSearchWord.addTextChangedListener(new TextWatcher() {

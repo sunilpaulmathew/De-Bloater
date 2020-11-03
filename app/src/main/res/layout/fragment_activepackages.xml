@@ -35,6 +35,16 @@
                     android:textSize="20sp" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/search_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:src="@drawable/ic_search"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@null"
+                    android:tint="@color/colorWhite" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/menu_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -44,33 +54,17 @@
                     android:tint="?android:attr/colorAccent" />
             </FrameLayout>
 
-            <FrameLayout
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/about_summary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="-15dp"
-                android:orientation="horizontal" >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/about_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="40dp"
-                    android:padding="15dp"
-                    android:text="@string/active_app_summary"
-                    android:textSize="15sp"
-                    android:gravity="center"
-                    android:textStyle="bold|italic"
-                    android:textColor="@color/colorWhite" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/search_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_search"
-                    android:layout_gravity="end|center_vertical"
-                    android:background="@null"
-                    android:tint="@color/colorWhite" />
-            </FrameLayout>
+                android:padding="15dp"
+                android:text="@string/active_app_summary"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold|italic"
+                android:textColor="@color/colorWhite" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_word"
