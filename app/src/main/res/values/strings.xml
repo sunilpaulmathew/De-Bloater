@@ -21,7 +21,7 @@
     <string name="downloading">Downloading %s</string>
     <string name="get_it">Get It</string>
     <string name="inactive">Inactive</string>
-    <string name="inactive_apps_summary">The applications that are systemless-ly debloated/assigned to remove are listed in this page!</string>
+    <string name="inactive_apps_summary">The applications that are systemless-ly debloated or assigned to remove are listed in this page!</string>
     <string name="invite_friend">Invite Friends</string>
     <string name="invite_friend_summary">Invite a friend to try De-Bloater</string>
     <string name="magisk_credit_dialog">Powered with Magisk</string>

@@ -56,6 +56,9 @@ public class PackageTasks {
                 }
             }
         }
+        if (Utils.getBoolean("reverse_order", false, context)) {
+            Collections.reverse(mData);
+        }
         return mData;
     }
 

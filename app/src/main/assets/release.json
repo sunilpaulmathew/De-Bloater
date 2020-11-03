@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Added option to show apps from specific folders.\n - Improved inactive app handling.\n - Show app logo on startup.\n - Improved app searching.\n - Miscellaneous changes.",
-  "latestVersionCode": 3,
-  "latestVersion": "beta-v0.3",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk",
-  "sha1": "19c46db4a87d7a8dfa2b4df78aeb9a0409f1a5e9"
+  "releaseNotes": " - Fixed search results occasionally duplicating.\n - Colorize (with accent) titles on recycle view.\n - Added a donate option.\n - Added Russian translation.\n - Added option to reverse app list.\n - Miscellaneous changes.",
+  "latestVersionCode": 4,
+  "latestVersion": "beta-v0.4",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.4/app-release.apk",
+  "sha1": "c00e4633939e94fbc6ec2293d8c49c5f034394f5"
 }

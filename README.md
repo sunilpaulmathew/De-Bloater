@@ -2,7 +2,7 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-beta--v0.3-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk)
+[![](https://img.shields.io/badge/De--Bloater-beta--v0.4-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.4/app-release.apk)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
@@ -12,10 +12,13 @@
 ## Download
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt=""
-     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.3/app-release.apk)
+     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.4/app-release.apk)
 
 ## Features
 * Easily remove system apps from "/system", "/vendor", and "/product" directories.
+
+## Requirement
+De-Bloater requires Root Access and a fully functional Magisk environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
 
 ## How to Use
 Open the app, click the remove button on each app you want to remove. The selected apps will be removed systemless-ly after a reboot. To restore an app, either Reset Module (on the top menu) or selectively restore from the second page. Please note that a restart is necessary to get any of the changes in effect.
@@ -42,6 +45,7 @@ If you like to appreciate my work, please consider donating to me (either via [P
 ## Credits
 * [Grarak](https://github.com/Grarak/), Code contributions (I took some code from [Kernel Adiutor](https://github.com/Grarak/KernelAdiutor/))
 * [John Wu](https://github.com/topjohnwu), libsu & Magisk
+* [MONSTER_PC](https://t.me/MONSTER_PC), Russian Translations
 
 ## License
 
