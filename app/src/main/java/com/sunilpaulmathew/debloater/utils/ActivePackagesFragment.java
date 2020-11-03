@@ -51,12 +51,22 @@ public class ActivePackagesFragment extends Fragment {
         PackageTasks.mSearchButton = mRootView.findViewById(R.id.search_button);
         PackageTasks.mAbout = mRootView.findViewById(R.id.about_summary);
         AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        AppCompatImageButton mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
+        mReverse.setElevation(10);
+        mReverse.setOnClickListener(v -> {
+            if (Utils.getBoolean("reverse_order", false, requireActivity())) {
+                Utils.saveBoolean("reverse_order", false, requireActivity());
+            } else {
+                Utils.saveBoolean("reverse_order", true, requireActivity());
+            }
+            reload(requireActivity());
+        });
 
         PackageTasks.mSearchButton.setOnClickListener(v -> {
             if (PackageTasks.mSearchWord.getVisibility() == View.VISIBLE) {
