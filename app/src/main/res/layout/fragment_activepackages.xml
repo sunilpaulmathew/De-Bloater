@@ -90,6 +90,7 @@
             android:src="@drawable/ic_reverse"
             android:layout_gravity="end"
             android:background="@null"
+            android:visibility="gone"
             android:tint="?android:attr/colorAccent" />
 
         <androidx.recyclerview.widget.RecyclerView

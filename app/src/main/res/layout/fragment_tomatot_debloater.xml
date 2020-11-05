@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:padding="15dp"
+            android:orientation="vertical" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="?android:attr/colorAccent"
+                android:text="@string/custom_scripts_tomatot"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/custom_scripts_tomatot_Summary"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold|italic"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="10dp"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/disabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:focusable="false"
+                        android:textStyle="bold"
+                        android:text="@string/disabled"
+                        android:textSize="17sp"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:focusable="false"
+                        android:textStyle="bold"
+                        android:text="@string/invisible"
+                        android:textSize="17sp"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:focusable="false"
+                        android:textStyle="bold"
+                        android:text="@string/light"
+                        android:textSize="17sp"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/extreme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:focusable="false"
+                        android:textStyle="bold"
+                        android:text="@string/extreme"
+                        android:textSize="17sp"
+                        android:textColor="?android:attr/colorPrimary" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/deblaoter_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:textStyle="italic"
+                    android:textSize="15sp" />
+
+                <FrameLayout
+                    android:id="@+id/action_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/action_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginEnd="30dp"
+                        android:text="@string/apply"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:gravity="end" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/action_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="?android:attr/textColorPrimary"
+                        android:src="@drawable/ic_restore"
+                        android:layout_gravity="end"
+                        android:background="@null"
+                        android:clickable="false" />
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/apps_list_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="10dp"
+            android:visibility="gone"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/apps_list_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:focusable="false"
+                    android:textStyle="bold"
+                    android:text="@string/custom_scripts_tomatot_list"
+                    android:textSize="17sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/apps_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:focusable="false"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary" />
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <include layout="@layout/progress_view_layout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

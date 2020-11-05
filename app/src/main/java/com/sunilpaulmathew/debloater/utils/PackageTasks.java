@@ -11,6 +11,7 @@ package com.sunilpaulmathew.debloater.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
@@ -117,6 +118,13 @@ public class PackageTasks {
                 packageName, context))).toString();
     }
 
+    public static String getIDfromAPK(String path, Context context) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(path, 0);
+        assert info != null;
+        return info.packageName;
+    }
+
     public static Drawable getAppIcon(String packageName, Context context) {
         return getPackageManager(context).getApplicationIcon(Objects.requireNonNull(getAppInfo(packageName, context)));
     }
@@ -153,11 +161,128 @@ public class PackageTasks {
     public static void removeModule(Activity activity) {
         Utils.delete(activity.getFilesDir().getPath() + "/De-bloater");
         Utils.delete(MODULE_PARENT);
+        Utils.saveBoolean("tomatot_extreme", false, activity);
+        Utils.saveBoolean("tomatot_invisible", false, activity);
+        Utils.saveBoolean("tomatot_light", false, activity);
         Utils.restartApp(activity);
     }
 
     public static boolean isModuleInitialized() {
         return Utils.exist(MODULE_PARENT) && Utils.exist(MODULE_PARENT + "/module.prop");
+    }
+
+    public static void enableTomatotInvisible(Context context) {
+        initializeModule();
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        Utils.saveBoolean("tomatot_invisible", true, context);
+    }
+
+    public static void disableTomatotInvisible(Context context) {
+        initializeModule();
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        Utils.saveBoolean("tomatot_invisible", false, context);
+    }
+
+    public static void enableTomatotLight(Context context) {
+        initializeModule();
+        String[] light = CustomScripts.getTomatotLight().toString().substring(1, CustomScripts
+                .getTomatotLight().toString().length() - 1).split(", ");
+        for (String s : light) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        Utils.saveBoolean("tomatot_light", true, context);
+    }
+
+    public static void disableTomatotLight(Context context) {
+        initializeModule();
+        String[] light = CustomScripts.getTomatotLight().toString().substring(1, CustomScripts
+                .getTomatotLight().toString().length() - 1).split(", ");
+        for (String s : light) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        Utils.saveBoolean("tomatot_light", false, context);
+    }
+
+    public static void enableTomatotExtreme(Context context) {
+        initializeModule();
+        String[] extreme = CustomScripts.getTomatotExtreme().toString().substring(1, CustomScripts
+                .getTomatotExtreme().toString().length() - 1).split(", ");
+        for (String s : extreme) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        String[] light = CustomScripts.getTomatotLight().toString().substring(1, CustomScripts
+                .getTomatotLight().toString().length() - 1).split(", ");
+        for (String s : light) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(s) && s.endsWith(".apk")) {
+                setToDelete(s, new File(s).getName(), context);
+            }
+        }
+        Utils.saveBoolean("tomatot_extreme", true, context);
+    }
+
+    public static void disableTomatotExtreme(Context context) {
+        initializeModule();
+        String[] extreme = CustomScripts.getTomatotExtreme().toString().substring(1, CustomScripts
+                .getTomatotExtreme().toString().length() - 1).split(", ");
+        for (String s : extreme) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        String[] light = CustomScripts.getTomatotLight().toString().substring(1, CustomScripts
+                .getTomatotLight().toString().length() - 1).split(", ");
+        for (String s : light) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        String[] invisible = CustomScripts.getTomatotInvisible().toString().substring(1, CustomScripts
+                .getTomatotInvisible().toString().length() - 1).split(", ");
+        for (String s : invisible) {
+            if (Utils.exist(MODULE_PARENT + s)) {
+                revertDelete(s);
+            }
+        }
+        Utils.saveBoolean("tomatot_extreme", false, context);
     }
 
     static void setToDelete(String path, String name, Context context) {
@@ -168,9 +293,8 @@ public class PackageTasks {
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
     }
 
-    static void revertDelete(String path, Context context) {
-        new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()).delete();
-        Utils.delete(MODULE_PARENT + new File(path).getParentFile());
+    static void revertDelete(String path) {
+        Utils.delete(MODULE_PARENT + path);
     }
 
 }

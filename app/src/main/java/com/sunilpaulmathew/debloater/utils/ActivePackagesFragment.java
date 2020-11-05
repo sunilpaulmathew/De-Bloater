@@ -2,6 +2,7 @@ package com.sunilpaulmathew.debloater.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sunilpaulmathew.debloater.R;
 
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -36,6 +38,7 @@ import java.util.List;
 public class ActivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
+    private  AppCompatImageButton mReverse;
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
@@ -51,7 +54,7 @@ public class ActivePackagesFragment extends Fragment {
         PackageTasks.mSearchButton = mRootView.findViewById(R.id.search_button);
         PackageTasks.mAbout = mRootView.findViewById(R.id.about_summary);
         AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
-        AppCompatImageButton mReverse = mRootView.findViewById(R.id.reverse_button);
+        mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
@@ -124,7 +127,8 @@ public class ActivePackagesFragment extends Fragment {
                 .setChecked(Utils.getBoolean("apps_vendor", true, activity));
         show.add(Menu.NONE, 6, Menu.NONE, getString(R.string.apps_product)).setCheckable(true)
                 .setChecked(Utils.getBoolean("apps_product", true, activity));
-        menu.add(Menu.NONE, 7, Menu.NONE, R.string.reboot);
+        menu.add(Menu.NONE, 7, Menu.NONE, R.string.custom_scripts);
+        menu.add(Menu.NONE, 8, Menu.NONE, R.string.reboot);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -171,6 +175,10 @@ public class ActivePackagesFragment extends Fragment {
                     reload(activity);
                     break;
                 case 7:
+                    Intent customScript = new Intent(activity, CustomScriptsActivity.class);
+                    startActivity(customScript);
+                    break;
+                case 8:
                     Utils.runCommand("svc power reboot");
                     break;
             }
@@ -190,6 +198,7 @@ public class ActivePackagesFragment extends Fragment {
                         protected void onPreExecute() {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
+                            mReverse.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
                         }
 
@@ -205,6 +214,7 @@ public class ActivePackagesFragment extends Fragment {
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
+                            mReverse.setVisibility(View.VISIBLE);
                             mLoader = null;
                         }
                     };
@@ -225,6 +235,7 @@ public class ActivePackagesFragment extends Fragment {
                         protected void onPreExecute() {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
+                            mReverse.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
                             mRecyclerView.removeAllViews();
                         }
@@ -242,6 +253,7 @@ public class ActivePackagesFragment extends Fragment {
                             mRecycleViewAdapter.notifyDataSetChanged();
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
+                            mReverse.setVisibility(View.VISIBLE);
                             mLoader = null;
                         }
                     };
@@ -315,7 +327,7 @@ public class ActivePackagesFragment extends Fragment {
                         return;
                     }
                     if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
-                        PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.actionLayout.getContext());
+                        PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()));
                     } else {
                         PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.mName.getText().toString(), holder.actionLayout.getContext());
                     }

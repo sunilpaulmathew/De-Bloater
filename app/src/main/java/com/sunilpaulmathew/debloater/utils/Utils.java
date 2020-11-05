@@ -160,6 +160,12 @@ public class Utils {
         return value.data;
     }
 
+    public static int getPrimaryTextColor(Context context) {
+        TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorPrimary, value, true);
+        return value.data;
+    }
+
     private static String removeSuffix(@Nullable String s) {
         if (s != null && s.endsWith("\n")) {
             return s.substring(0, s.length() - "\n".length());
