@@ -11,7 +11,6 @@ package com.sunilpaulmathew.debloater.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
@@ -116,13 +115,6 @@ public class PackageTasks {
     public static String getAppName(String packageName, Context context) {
         return getPackageManager(context).getApplicationLabel(Objects.requireNonNull(getAppInfo(
                 packageName, context))).toString();
-    }
-
-    public static String getIDfromAPK(String path, Context context) {
-        PackageManager pm = context.getPackageManager();
-        PackageInfo info = pm.getPackageArchiveInfo(path, 0);
-        assert info != null;
-        return info.packageName;
     }
 
     public static Drawable getAppIcon(String packageName, Context context) {

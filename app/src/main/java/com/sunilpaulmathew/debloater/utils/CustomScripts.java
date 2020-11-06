@@ -170,7 +170,7 @@ public class CustomScripts {
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         return mAppList.toString();
@@ -181,13 +181,13 @@ public class CustomScripts {
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         String[] light = getTomatotLight().toString().substring(1, getTomatotLight().toString().length() - 1).split(", ");
         for (String s : light) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         return mAppList.toString();
@@ -198,19 +198,19 @@ public class CustomScripts {
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         String[] light = getTomatotLight().toString().substring(1, getTomatotLight().toString().length() - 1).split(", ");
         for (String s : light) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         String[] extreme = getTomatotExtreme().toString().substring(1, getTomatotExtreme().toString().length() - 1).split(", ");
         for (String s : extreme) {
             if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(PackageTasks.getIDfromAPK(s, context)).append("\n");
+                mAppList.append(s).append("\n");
             }
         }
         return mAppList.toString();
