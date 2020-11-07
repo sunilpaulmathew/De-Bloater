@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Fixed search results occasionally duplicating.\n - Colorize (with accent) titles on recycle view.\n - Added a donate option.\n - Added Russian translation.\n - Added option to reverse app list.\n - Miscellaneous changes.",
-  "latestVersionCode": 4,
-  "latestVersion": "beta-v0.4",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.4/app-release.apk",
-  "sha1": "c00e4633939e94fbc6ec2293d8c49c5f034394f5"
+  "releaseNotes": " - Added custom script page.\n - Switched to blue accent color.\n - Added Ukrainian translation.\n - Updated Russian translation.\n - Miscellaneous changes.",
+  "latestVersionCode": 5,
+  "latestVersion": "v0.5",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.5/app-release.apk",
+  "sha1": "8c8529f2635a8b0ffa94cc696569e0397cd6b4d8"
 }
