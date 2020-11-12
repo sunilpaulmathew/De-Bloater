@@ -1,15 +1,6 @@
-/*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
- *
- * This file is part of Package Manager, a simple, yet powerful application
- * to manage other application installed on an android device.
- *
- */
-
 package com.sunilpaulmathew.debloater.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.MainActivity;
@@ -264,7 +256,7 @@ public class Utils {
                     context, "release.json"))).getString("releaseNotes");
         } catch (JSONException ignored) {
         }
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.change_logs)
                 .setMessage(change_log)
                 .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {

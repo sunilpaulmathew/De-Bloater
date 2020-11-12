@@ -2,7 +2,6 @@ package com.sunilpaulmathew.debloater.utils;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.view.View;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 
@@ -112,7 +112,7 @@ public class UpdateCheck {
     }
 
     private static void updateAvailableDialog(Context context) {
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle(context.getString(R.string.update_available, versionName(context)))
                 .setMessage(context.getString(R.string.change_logs) + "\n" + changelogs(context))
                 .setCancelable(false)
@@ -148,7 +148,7 @@ public class UpdateCheck {
                 if (Utils.exist(LATEST_APK) && Utils.getChecksum(LATEST_APK).contains(Objects.requireNonNull(getChecksum(context)))) {
                     installUpdate(context);
                 } else {
-                    new AlertDialog.Builder(context)
+                    new MaterialAlertDialogBuilder(context)
                             .setMessage(context.getString(R.string.download_failed))
                             .setNegativeButton(context.getString(R.string.cancel), (dialog, id) -> {
                             }).show();
@@ -192,7 +192,7 @@ public class UpdateCheck {
         if (hasVersionInfo(context) && BuildConfig.VERSION_CODE < versionCode(context)) {
             updateAvailableDialog(context);
         } else {
-            new AlertDialog.Builder(context)
+            new MaterialAlertDialogBuilder(context)
                     .setMessage(R.string.updated_dialog)
                     .setPositiveButton(context.getString(R.string.cancel), (dialog, id) -> {
                     }).show();
