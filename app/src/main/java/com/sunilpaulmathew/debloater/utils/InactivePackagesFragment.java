@@ -85,9 +85,9 @@ public class InactivePackagesFragment extends Fragment {
                     break;
                 case 2:
                     if (Utils.isPermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    } else {
+                    } else if (PackageTasks.getInactivePackageData().size() > 0) {
                         try {
                             JSONObject obj = new JSONObject();
                             JSONArray DeBloater = new JSONArray();
@@ -122,6 +122,8 @@ public class InactivePackagesFragment extends Fragment {
                             Utils.snackBar(mRecyclerView, getString(R.string.backup_message, Environment.getExternalStorageDirectory().getPath() + "/de-bloater_list.json"));
                         } catch (JSONException ignored) {
                         }
+                    } else {
+                        Utils.snackBar(mRecyclerView, getString(R.string.backup_list_empty));
                     }
                     break;
             }

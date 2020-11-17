@@ -11,6 +11,7 @@
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
     <string name="backup">Backup</string>
+    <string name="backup_list_empty">You haven\'t removed any apps yet!</string>
     <string name="backup_message">Backup files is created as %s!</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
