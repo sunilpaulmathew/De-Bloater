@@ -97,7 +97,7 @@ public class InactivePackagesFragment extends Fragment {
                     break;
                 case 2:
                     if (Utils.isPermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                     } else if (PackageTasks.getInactivePackageData().size() > 0) {
                         try {
@@ -120,9 +120,14 @@ public class InactivePackagesFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
-                    restore.setType("*/*");
-                    startActivityForResult(restore, 0);
+                    if (Utils.isPermissionDenied(requireActivity())) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    } else {
+                        Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
+                        restore.setType("*/*");
+                        startActivityForResult(restore, 0);
+                    }
                     break;
             }
             return false;
