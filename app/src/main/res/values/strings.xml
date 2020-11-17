@@ -55,6 +55,9 @@
     <string name="report_issue">Report Issue</string>
     <string name="report_issue_summary">Raise an issue at GitHub</string>
     <string name="restore">Restore</string>
+    <string name="restore_error_message">You\'re selected an invalid backup file. Aborting!</string>
+    <string name="restore_question">Restore from %s?</string>
+    <string name="restoring">Restoring…</string>
     <string name="search_hint">Search…</string>
     <string name="show_from">Show Apps From</string>
     <string name="share_app_message">Get De-Bloater %s from GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>

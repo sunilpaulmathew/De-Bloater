@@ -3,11 +3,15 @@ package com.sunilpaulmathew.debloater.utils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -25,13 +29,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -43,8 +51,10 @@ public class InactivePackagesFragment extends Fragment {
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
+    private MaterialTextView mProgressText;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
+    private String mPath;
 
     @Nullable
     @Override
@@ -52,6 +62,7 @@ public class InactivePackagesFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_inactivepackages, container, false);
 
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
+        mProgressText = mRootView.findViewById(R.id.progress_text);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
@@ -75,10 +86,12 @@ public class InactivePackagesFragment extends Fragment {
         }
         menu.add(Menu.NONE, 1, Menu.NONE, R.string.reboot);
         menu.add(Menu.NONE, 2, Menu.NONE, R.string.backup);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.restore);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
                     PackageTasks.removeModule(activity);
+                    reload();
                     break;
                 case 1:
                     Utils.runCommand("svc power reboot");
@@ -91,10 +104,6 @@ public class InactivePackagesFragment extends Fragment {
                         try {
                             JSONObject obj = new JSONObject();
                             JSONArray DeBloater = new JSONArray();
-                            JSONObject customScript = new JSONObject();
-                            JSONArray TE = new JSONArray();
-                            JSONArray TI = new JSONArray();
-                            JSONArray TL = new JSONArray();
                             String[] apps = PackageTasks.getInactivePackageData().toString().substring(1, PackageTasks.getInactivePackageData().toString().length() - 1).split(", ");
                             for (String s : apps) {
                                 JSONObject app = new JSONObject();
@@ -103,21 +112,6 @@ public class InactivePackagesFragment extends Fragment {
                                 DeBloater.put(app);
                                 obj.put("DeBloater", DeBloater);
                             }
-                            if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
-                                customScript.put("enabled", true);
-                                TE.put(customScript);
-                                obj.put("tomatot_extreme", TE);
-                            }
-                            if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-                                customScript.put("enabled", true);
-                                TI.put(customScript);
-                                obj.put("tomatot_invisible", TI);
-                            }
-                            if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
-                                customScript.put("enabled", true);
-                                TL.put(customScript);
-                                obj.put("tomatot_light", TL);
-                            }
                             Utils.create(obj.toString(), Environment.getExternalStorageDirectory().getPath() + "/de-bloated_list.json");
                             Utils.snackBar(mRecyclerView, getString(R.string.backup_message, Environment.getExternalStorageDirectory().getPath() + "/de-bloater_list.json"));
                         } catch (JSONException ignored) {
@@ -125,6 +119,11 @@ public class InactivePackagesFragment extends Fragment {
                     } else {
                         Utils.snackBar(mRecyclerView, getString(R.string.backup_list_empty));
                     }
+                    break;
+                case 3:
+                    Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
+                    restore.setType("*/*");
+                    startActivityForResult(restore, 0);
                     break;
             }
             return false;
@@ -166,6 +165,96 @@ public class InactivePackagesFragment extends Fragment {
                     mLoader.execute();
                 }
             }, 250);
+        }
+    }
+
+    private void reload() {
+        if (mLoader == null) {
+            mHandler.postDelayed(new Runnable() {
+                @SuppressLint("StaticFieldLeak")
+                @Override
+                public void run() {
+                    mLoader = new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            mProgressLayout.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                            mRecyclerView.removeAllViews();
+                        }
+
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getInactivePackageData());
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void recyclerViewItems) {
+                            super.onPostExecute(recyclerViewItems);
+                            mRecyclerView.setAdapter(mRecycleViewAdapter);
+                            mRecycleViewAdapter.notifyDataSetChanged();
+                            mProgressLayout.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mLoader = null;
+                        }
+                    };
+                    mLoader.execute();
+                }
+            }, 250);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            assert uri != null;
+            File file = new File(Objects.requireNonNull(uri.getPath()));
+            if (Utils.isDocumentsUI(uri)) {
+                @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
+                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } else {
+                mPath = Utils.getPath(file);
+            }
+            if (!Restore.validBackup(mPath)) {
+                Utils.snackBar(mRecyclerView, getString(R.string.restore_error_message));
+                return;
+            }
+            new MaterialAlertDialogBuilder(requireActivity())
+                    .setMessage(getString(R.string.restore_question, new File(mPath).getName()))
+                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                    })
+                    .setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                                mProgressLayout.setVisibility(View.VISIBLE);
+                                mProgressText.setText(getString(R.string.restoring));
+                            }
+
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                Restore.restoreBackup(mPath, requireActivity());
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void recyclerViewItems) {
+                                super.onPostExecute(recyclerViewItems);
+                                mProgressLayout.setVisibility(View.GONE);
+                                reload();
+                            }
+                        }.execute();
+                    })
+                    .show();
         }
     }
 

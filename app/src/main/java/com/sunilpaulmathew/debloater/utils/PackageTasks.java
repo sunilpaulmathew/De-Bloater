@@ -156,7 +156,6 @@ public class PackageTasks {
         Utils.saveBoolean("tomatot_extreme", false, activity);
         Utils.saveBoolean("tomatot_invisible", false, activity);
         Utils.saveBoolean("tomatot_light", false, activity);
-        Utils.restartApp(activity);
     }
 
     public static boolean isModuleInitialized() {
