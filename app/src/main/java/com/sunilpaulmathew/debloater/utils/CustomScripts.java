@@ -8,8 +8,6 @@
 
 package com.sunilpaulmathew.debloater.utils;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,7 +163,7 @@ public class CustomScripts {
         return mData;
     }
 
-    public static String getInvisibletList(Context context) {
+    public static String getInvisibletList() {
         StringBuilder mAppList = new StringBuilder();
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {
@@ -176,7 +174,7 @@ public class CustomScripts {
         return mAppList.toString();
     }
 
-    public static String getLightList(Context context) {
+    public static String getLightList() {
         StringBuilder mAppList = new StringBuilder();
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {
@@ -193,7 +191,7 @@ public class CustomScripts {
         return mAppList.toString();
     }
 
-    public static String getExtremeList(Context context) {
+    public static String getExtremeList() {
         StringBuilder mAppList = new StringBuilder();
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
         for (String s : invisible) {

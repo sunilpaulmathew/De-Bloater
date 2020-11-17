@@ -53,13 +53,13 @@ public class TomatotDebloaterFragment extends Fragment {
         }
 
         if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getExtremeList(requireActivity()));
+            mAppsList.setText(CustomScripts.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getInvisibletList(requireActivity()));
+            mAppsList.setText(CustomScripts.getInvisibletList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getLightList(requireActivity()));
+            mAppsList.setText(CustomScripts.getLightList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else {
             mAppListCard.setVisibility(View.GONE);
@@ -197,13 +197,13 @@ public class TomatotDebloaterFragment extends Fragment {
         if (mDisabledT) {
             mAppListCard.setVisibility(View.GONE);
         } else if (mExtremeT) {
-            mAppsList.setText(CustomScripts.getExtremeList(requireActivity()));
+            mAppsList.setText(CustomScripts.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (mInvisibleT) {
-            mAppsList.setText(CustomScripts.getInvisibletList(requireActivity()));
+            mAppsList.setText(CustomScripts.getInvisibletList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (mLightT) {
-            mAppsList.setText(CustomScripts.getLightList(requireActivity()));
+            mAppsList.setText(CustomScripts.getLightList());
             mAppListCard.setVisibility(View.VISIBLE);
         }
     }
