@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 
 /*
@@ -23,9 +23,9 @@ import com.sunilpaulmathew.debloater.R;
 
 public class TomatotDebloaterFragment extends Fragment {
 
-    private AppCompatTextView mAppsList;
+    private MaterialTextView mAppsList;
     private boolean mDisabledT = false, mExtremeT = false, mInvisibleT = false, mLightT = false;
-    private CardView mAppListCard;
+    private MaterialCardView mAppListCard;
     private LinearLayout mProgressLayout;
 
     @SuppressLint("StaticFieldLeak")
@@ -35,14 +35,14 @@ public class TomatotDebloaterFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_tomatot_debloater, container, false);
         LinearLayout mTitleLayout = mRootView.findViewById(R.id.title_layout);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
-        AppCompatTextView mDisabled = mRootView.findViewById(R.id.disabled);
-        AppCompatTextView mInvisible = mRootView.findViewById(R.id.invisible);
-        AppCompatTextView mLight = mRootView.findViewById(R.id.light);
-        AppCompatTextView mExtreme = mRootView.findViewById(R.id.extreme);
-        AppCompatTextView mStatus = mRootView.findViewById(R.id.deblaoter_status);
-        AppCompatTextView mActionMessage = mRootView.findViewById(R.id.action_message);
+        MaterialTextView mDisabled = mRootView.findViewById(R.id.disabled);
+        MaterialTextView mInvisible = mRootView.findViewById(R.id.invisible);
+        MaterialTextView mLight = mRootView.findViewById(R.id.light);
+        MaterialTextView mExtreme = mRootView.findViewById(R.id.extreme);
+        MaterialTextView mStatus = mRootView.findViewById(R.id.deblaoter_status);
+        MaterialTextView mActionMessage = mRootView.findViewById(R.id.action_message);
         mAppsList = mRootView.findViewById(R.id.apps_list);
-        AppCompatTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
+        MaterialTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
         AppCompatImageButton mActionIcon = mRootView.findViewById(R.id.action_icon);
         mAppListCard = mRootView.findViewById(R.id.apps_list_card);
         FrameLayout mActionLayout = mRootView.findViewById(R.id.action_layout);

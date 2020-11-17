@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -17,7 +18,7 @@
             android:padding="15dp"
             android:orientation="vertical" >
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -27,7 +28,7 @@
                 android:gravity="center"
                 android:textSize="20sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/custom_scripts_tomatot_Summary"
@@ -37,7 +38,7 @@
                 android:textColor="@color/colorWhite" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
@@ -56,7 +57,7 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/disabled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
                         android:textSize="17sp"
                         android:textColor="?android:attr/colorPrimary" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/invisible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -78,7 +79,7 @@
                         android:textSize="17sp"
                         android:textColor="?android:attr/colorPrimary" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -89,7 +90,7 @@
                         android:textSize="17sp"
                         android:textColor="?android:attr/colorPrimary" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/extreme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,7 +102,7 @@
                         android:textColor="?android:attr/colorPrimary" />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/deblaoter_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
                     android:orientation="horizontal"
                     android:layout_margin="5dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/action_message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -141,9 +142,9 @@
                         android:clickable="false" />
                 </FrameLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/apps_list_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/apps_list_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/apps_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,7 +184,7 @@
                         android:textColor="?android:attr/textColorPrimary" />
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <include layout="@layout/progress_view_layout" />

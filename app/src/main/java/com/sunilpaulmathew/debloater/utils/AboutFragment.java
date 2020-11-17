@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 
@@ -113,8 +113,8 @@ public class AboutFragment extends Fragment {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             private AppCompatImageButton mIcon;
-            private AppCompatTextView Title;
-            private AppCompatTextView Description;
+            private MaterialTextView Title;
+            private MaterialTextView Description;
             private LinearLayout mRVLayout;
 
             public ViewHolder(View view) {

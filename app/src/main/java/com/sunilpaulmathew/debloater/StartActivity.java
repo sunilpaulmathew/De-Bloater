@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 /*
@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        AppCompatTextView mMagiskCredit = findViewById(R.id.magisk_credit);
+        MaterialTextView mMagiskCredit = findViewById(R.id.magisk_credit);
         if (Utils.isDarkTheme(this)) {
             mMagiskCredit.setTextColor(Utils.getThemeAccentColor(this));
         }

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/unsupported"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

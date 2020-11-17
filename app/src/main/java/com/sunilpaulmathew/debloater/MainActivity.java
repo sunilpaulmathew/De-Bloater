@@ -6,11 +6,11 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.utils.AboutFragment;
 import com.sunilpaulmathew.debloater.utils.ActivePackagesFragment;
 import com.sunilpaulmathew.debloater.utils.InactivePackagesFragment;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppCompatTextView mUnSupported = findViewById(R.id.unsupported);
+        MaterialTextView mUnSupported = findViewById(R.id.unsupported);
 
         if (!Utils.rootAccess()) {
             mUnSupported.setText(R.string.no_root);

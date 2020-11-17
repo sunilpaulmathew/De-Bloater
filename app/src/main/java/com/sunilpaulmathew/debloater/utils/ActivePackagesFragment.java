@@ -20,16 +20,15 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 
 import java.util.List;
-import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -38,7 +37,7 @@ import java.util.Objects;
 public class ActivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
-    private  AppCompatImageButton mReverse;
+    private AppCompatImageButton mReverse;
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
@@ -53,7 +52,7 @@ public class ActivePackagesFragment extends Fragment {
         PackageTasks.mSearchWord = mRootView.findViewById(R.id.search_word);
         PackageTasks.mSearchButton = mRootView.findViewById(R.id.search_button);
         PackageTasks.mAbout = mRootView.findViewById(R.id.about_summary);
-        AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
         mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
@@ -344,10 +343,10 @@ public class ActivePackagesFragment extends Fragment {
         public static class ViewHolder extends RecyclerView.ViewHolder {
             private AppCompatImageButton mActionIcon;
             private AppCompatImageButton mIcon;
-            private AppCompatTextView mName;
-            private AppCompatTextView mPath;
-            private AppCompatTextView actionMessage;
-            private AppCompatTextView statusMessage;
+            private MaterialTextView mName;
+            private MaterialTextView mPath;
+            private MaterialTextView actionMessage;
+            private MaterialTextView statusMessage;
             private FrameLayout actionLayout;
 
             public ViewHolder(View view) {

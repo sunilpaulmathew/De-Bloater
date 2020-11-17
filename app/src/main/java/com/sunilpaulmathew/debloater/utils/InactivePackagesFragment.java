@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -65,7 +64,7 @@ public class InactivePackagesFragment extends Fragment {
         mProgressText = mRootView.findViewById(R.id.progress_text);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        AppCompatTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
         mMenu = mRootView.findViewById(R.id.menu_button);
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
@@ -303,10 +302,10 @@ public class InactivePackagesFragment extends Fragment {
         public static class ViewHolder extends RecyclerView.ViewHolder {
             private AppCompatImageButton actionIcon;
             private AppCompatImageButton appIcon;
-            private AppCompatTextView appName;
-            private AppCompatTextView appID;
-            private AppCompatTextView actionMessage;
-            private AppCompatTextView statusMessage;
+            private MaterialTextView appName;
+            private MaterialTextView appID;
+            private MaterialTextView actionMessage;
+            private MaterialTextView statusMessage;
             private FrameLayout actionLayout;
 
             public ViewHolder(View view) {
