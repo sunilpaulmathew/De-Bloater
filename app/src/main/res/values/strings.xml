@@ -10,6 +10,8 @@
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
+    <string name="backup">Backup</string>
+    <string name="backup_message">Backup files is created as %s!</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
     <string name="change_logs_summary">View recent changes on this app</string>

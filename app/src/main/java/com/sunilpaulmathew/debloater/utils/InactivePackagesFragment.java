@@ -1,10 +1,12 @@
 package com.sunilpaulmathew.debloater.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,11 +20,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sunilpaulmathew.debloater.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -67,6 +74,7 @@ public class InactivePackagesFragment extends Fragment {
             menu.add(Menu.NONE, 0, Menu.NONE, R.string.module_status_reset);
         }
         menu.add(Menu.NONE, 1, Menu.NONE, R.string.reboot);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.backup);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -74,6 +82,47 @@ public class InactivePackagesFragment extends Fragment {
                     break;
                 case 1:
                     Utils.runCommand("svc power reboot");
+                    break;
+                case 2:
+                    if (Utils.isPermissionDenied(requireActivity())) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    } else {
+                        try {
+                            JSONObject obj = new JSONObject();
+                            JSONArray DeBloater = new JSONArray();
+                            JSONObject customScript = new JSONObject();
+                            JSONArray TE = new JSONArray();
+                            JSONArray TI = new JSONArray();
+                            JSONArray TL = new JSONArray();
+                            String[] apps = PackageTasks.getInactivePackageData().toString().substring(1, PackageTasks.getInactivePackageData().toString().length() - 1).split(", ");
+                            for (String s : apps) {
+                                JSONObject app = new JSONObject();
+                                app.put("name", Utils.read(s));
+                                app.put("path", s);
+                                DeBloater.put(app);
+                                obj.put("DeBloater", DeBloater);
+                            }
+                            if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
+                                customScript.put("enabled", true);
+                                TE.put(customScript);
+                                obj.put("tomatot_extreme", TE);
+                            }
+                            if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
+                                customScript.put("enabled", true);
+                                TI.put(customScript);
+                                obj.put("tomatot_invisible", TI);
+                            }
+                            if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+                                customScript.put("enabled", true);
+                                TL.put(customScript);
+                                obj.put("tomatot_light", TL);
+                            }
+                            Utils.create(obj.toString(), Environment.getExternalStorageDirectory().getPath() + "/de-bloated_list.json");
+                            Utils.snackBar(mRecyclerView, getString(R.string.backup_message, Environment.getExternalStorageDirectory().getPath() + "/de-bloater_list.json"));
+                        } catch (JSONException ignored) {
+                        }
+                    }
                     break;
             }
             return false;
