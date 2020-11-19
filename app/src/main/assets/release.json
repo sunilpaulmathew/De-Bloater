@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Added backup and restore options.\n - Use material style elements as much as possible.\n - Miscellaneous changes.",
-  "latestVersionCode": 6,
-  "latestVersion": "v0.6",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.6/app-release.apk",
-  "sha1": "4895f6d1626e031174100dbb2b510421700e3bde"
+  "releaseNotes": " - Use Magisk BusyBox binaries as much as possible.\n - Updated app icon.\n - Miscellaneous changes.",
+  "latestVersionCode": 7,
+  "latestVersion": "v0.7",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.7/app-release.apk",
+  "sha1": "fc4d0f5fb65482efe3698043a4683b3c12d2aa52"
 }
