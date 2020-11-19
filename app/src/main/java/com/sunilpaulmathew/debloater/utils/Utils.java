@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.sunilpaulmathew.debloater.BuildConfig;
-import com.sunilpaulmathew.debloater.MainActivity;
 import com.sunilpaulmathew.debloater.R;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
@@ -38,6 +37,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -144,6 +144,25 @@ public class Utils {
         }
     }
 
+    @NonNull
+    private static String runAndGetError(String command) {
+        StringBuilder sb = new StringBuilder();
+        List<String> outputs = new ArrayList<>();
+        List<String> stderr = new ArrayList<>();
+        try {
+            Shell.su(command).to(outputs, stderr).exec();
+            outputs.addAll(stderr);
+            if (ShellUtils.isValidOutput(outputs)) {
+                for (String output : outputs) {
+                    sb.append(output).append("\n");
+                }
+            }
+            return removeSuffix(sb.toString()).trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static boolean magiskSupported() {
         return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk");
     }
@@ -181,13 +200,11 @@ public class Utils {
     }
 
     public static void delete(String path) {
-        if (exist(path)) {
-            runCommand("rm -r " + path);
-        }
+        runCommand(magiskBusyBox() + " rm -r " + path);
     }
 
     public static void create(String text, String path) {
-        Utils.runCommand("echo '" + text + "' > " + path);
+        Utils.runCommand(magiskBusyBox() + " echo '" + text + "' > " + path);
     }
 
     public static String read(String path) {
@@ -195,7 +212,11 @@ public class Utils {
     }
 
     static void download(String path, String url) {
-        if (isDownloadBinaries()) {
+        if (isMagiskBinaryExist("wget")) {
+            runCommand(magiskBusyBox() + " wget -O " + path + " " + url);
+        } else if (isMagiskBinaryExist("curl")) {
+            runCommand(magiskBusyBox() + " curl -L -o " + path + " " + url);
+        } else if (isDownloadBinaries()) {
             runCommand((Utils.exist("/system/bin/curl") ?
                     "curl -L -o " : "wget -O ") + path + " " + url);
         } else {
@@ -216,11 +237,11 @@ public class Utils {
     }
 
     public static void copy(String source, String dest) {
-        runCommand("cp -rf " + source + " " + dest);
+        runCommand(magiskBusyBox() + " cp -rf " + source + " " + dest);
     }
 
     static void chmod(String permission, String path) {
-        runCommand("chmod " + permission + " " + path);
+        runCommand(magiskBusyBox() + " chmod " + permission + " " + path);
     }
 
     public static String getChecksum(String path) {
@@ -228,13 +249,16 @@ public class Utils {
     }
 
     public static boolean isDownloadBinaries() {
-        return exist("/system/bin/curl") || exist("/system/bin/wget");
+        return isMagiskBinaryExist("curl") || isMagiskBinaryExist("wget") ||
+                exist("/system/bin/curl") || exist("/system/bin/wget");
     }
 
-    public static void restartApp(Activity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        activity.startActivity(intent);
+    public static boolean isMagiskBinaryExist(String command) {
+        return !runAndGetError(magiskBusyBox() + " " + command).contains("applet not found");
+    }
+
+    public static String magiskBusyBox() {
+        return "/data/adb/magisk/busybox";
     }
 
     public static void snackBar(View view, String message) {

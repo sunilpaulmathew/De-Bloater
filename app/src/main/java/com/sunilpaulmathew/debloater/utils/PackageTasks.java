@@ -37,7 +37,7 @@ public class PackageTasks {
     public static AppCompatTextView mAbout;
 
     static void createModuleParent() {
-        Utils.runCommand("mkdir " + MODULE_PARENT);
+        Utils.runCommand(Utils.magiskBusyBox() + " mkdir " + MODULE_PARENT);
     }
 
     public static List<String> getActivePackageData(Context context) {
@@ -64,7 +64,7 @@ public class PackageTasks {
 
     public static List<String> getInactivePackageData() {
         List<String> mData = new ArrayList<>();
-        for (String line : Utils.runAndGetOutput("find " + MODULE_PARENT + "/system -type f -name *.apk").split("\\r?\\n")) {
+        for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + " find " + MODULE_PARENT + "/system -type f -name *.apk").split("\\r?\\n")) {
             if (line.endsWith(".apk")) {
                 mData.add(line);
             }
