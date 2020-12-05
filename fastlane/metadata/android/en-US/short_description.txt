@@ -1,0 +1,1 @@
+use the power of Magisk to debloat unwanted system apps
