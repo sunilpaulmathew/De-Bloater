@@ -12,7 +12,9 @@
 ## Download
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt=""
-     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.7/app-release.apk)
+     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.7/app-release.apk) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+     alt=""
+     height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.sunilpaulmathew.debloater)
 
 ## Features
 * Easily remove system apps from "/system", "/vendor", and "/product" directories.
