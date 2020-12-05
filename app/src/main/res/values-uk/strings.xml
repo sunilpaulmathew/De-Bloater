@@ -9,6 +9,9 @@
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
+    <string name="backup">Бекап</string>
+    <string name="backup_list_empty">Ви ще не видалили жодної програми!</string>
+    <string name="backup_message">Бекапи створюються як %s!</string>
     <string name="cancel">Скасувати</string>
     <string name="change_logs">Зміни</string>
     <string name="change_logs_summary">Переглянути останні зміни в цьому додатку</string>
@@ -51,6 +54,9 @@
     <string name="report_issue">Повідомте про проблему</string>
     <string name="report_issue_summary">Повідомте про проблему на GitHub</string>
     <string name="restore">Відновити</string>
+    <string name="restore_error_message">Ви вибрали недійсний файл бекапу. Невдача!</string>
+    <string name="restore_question">Відновити з %s?</string>
+    <string name="restoring">Відновлення…</string>
     <string name="search_hint">Пошук…</string>
     <string name="show_from">Показати програми з</string>
     <string name="share_app_message">Отримайте De-Bloater %s з GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>
