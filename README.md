@@ -2,7 +2,7 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-v0.7-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.7/app-release.apk)
+[![](https://img.shields.io/badge/De--Bloater-v0.8-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.8/app-release.apk)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
@@ -12,7 +12,7 @@
 ## Download
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt=""
-     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.7/app-release.apk) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+     height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.8/app-release.apk) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
      alt=""
      height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.sunilpaulmathew.debloater)
 
