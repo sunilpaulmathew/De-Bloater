@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Updated Russian & Ukrainian translations.\n - Updates for F-Droid submission.\n - Miscellaneous changes.",
-  "latestVersionCode": 8,
-  "latestVersion": "v0.8",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.8/app-release.apk",
-  "sha1": "47762fb15494ae8e9672d9c11ef7ed73488743b5"
+  "releaseNotes": " - Introduced a signature check to avoid conflicts with F-Droid.",
+  "latestVersionCode": 9,
+  "latestVersion": "v0.9",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.9/app-release.apk",
+  "sha1": "d7ddc01492d0228a0365bd43c182d0dc83cb0f2b"
 }
