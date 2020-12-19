@@ -45,7 +45,11 @@ public class AboutFragment extends Fragment {
         mData.add(new RecycleViewItem(getString(R.string.report_issue), getString(R.string.report_issue_summary), getResources().getDrawable(R.drawable.ic_issue), "https://github.com/sunilpaulmathew/De-Bloater/issues/new"));
         mData.add(new RecycleViewItem(getString(R.string.change_logs), getString(R.string.change_logs_summary), getResources().getDrawable(R.drawable.ic_active), null));
         mData.add(new RecycleViewItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
-        mData.add(new RecycleViewItem(getString(R.string.check_update), getString(R.string.check_update_summary), getResources().getDrawable(R.drawable.ic_update), null));
+        if (UpdateCheck.isSignatureMatched(requireActivity())) {
+            mData.add(new RecycleViewItem(getString(R.string.check_update), getString(R.string.check_update_summary), getResources().getDrawable(R.drawable.ic_update), null));
+        } else {
+            mData.add(new RecycleViewItem(getString(R.string.fdroid), getString(R.string.fdroid_summary), getResources().getDrawable(R.drawable.ic_fdroid), "https://f-droid.org/packages/com.sunilpaulmathew.debloater"));
+        }
         mData.add(new RecycleViewItem(getString(R.string.invite_friend), getString(R.string.invite_friend_summary), getResources().getDrawable(R.drawable.ic_share), null));
         mData.add(new RecycleViewItem(getString(R.string.donate), getString(R.string.donate_summary), getResources().getDrawable(R.drawable.ic_donate), "https://www.paypal.me/menacherry"));
 
@@ -82,13 +86,19 @@ public class AboutFragment extends Fragment {
             holder.Description.setText(this.data.get(position).getDescription());
             holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
             holder.mRVLayout.setOnClickListener(v -> {
-                if (holder.Title.getText().equals(holder.mRVLayout.getContext().getString(R.string.version))) {
+                if (this.data.get(position).getURL() != null) {
+                    Utils.launchUrl(holder.mRVLayout, this.data.get(position).getURL(), holder.mRVLayout.getContext());
+                } else if (position == 0) {
                     Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Uri uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null);
                     settings.setData(uri);
                     holder.mRVLayout.getContext().startActivity(settings);
-                } else if (holder.Title.getText().equals(holder.mRVLayout.getContext().getString(R.string.invite_friend))) {
+                } else if (position == 4) {
+                    Utils.changelogDialog(holder.mRVLayout.getContext());
+                } else if (position == 6) {
+                    UpdateCheck.manualUpdateCheck(holder.mRVLayout, holder.mRVLayout.getContext());
+                } else if (position == 7) {
                     Intent shareapp = new Intent();
                     shareapp.setAction(Intent.ACTION_SEND);
                     shareapp.putExtra(Intent.EXTRA_SUBJECT, holder.mRVLayout.getContext().getString(R.string.app_name));
@@ -96,12 +106,6 @@ public class AboutFragment extends Fragment {
                     shareapp.setType("text/plain");
                     Intent shareIntent = Intent.createChooser(shareapp, null);
                     holder.mRVLayout.getContext().startActivity(shareIntent);
-                } else if (holder.Title.getText().equals(holder.mRVLayout.getContext().getString(R.string.change_logs))) {
-                    Utils.changelogDialog(holder.mRVLayout.getContext());
-                } else if (holder.Title.getText().equals(holder.mRVLayout.getContext().getString(R.string.check_update))) {
-                    UpdateCheck.manualUpdateCheck(holder.mRVLayout, holder.mRVLayout.getContext());
-                } else {
-                    Utils.launchUrl(holder.mRVLayout, this.data.get(position).getURL(), holder.mRVLayout.getContext());
                 }
             });
         }

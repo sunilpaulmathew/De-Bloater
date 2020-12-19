@@ -33,6 +33,8 @@
     <string name="download_failed">It seems like the download is failed, or a corrupted file is downloaded!</string>
     <string name="downloading">Downloading %s</string>
     <string name="extreme">Extreme</string>
+    <string name="fdroid">F-Droid</string>
+    <string name="fdroid_summary">Visit F-Droid page</string>
     <string name="get_it">Get It</string>
     <string name="inactive">Inactive</string>
     <string name="inactive_apps_summary">The applications that are systemless-ly debloated or assigned to remove are listed in this page!</string>

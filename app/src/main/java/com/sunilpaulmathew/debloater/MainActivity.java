@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        if (Utils.rootAccess() && Utils.magiskSupported()) {
+        if (Utils.rootAccess() && Utils.magiskSupported() && UpdateCheck.isSignatureMatched(this)) {
             UpdateCheck.autoUpdateCheck(this);
         }
     }
