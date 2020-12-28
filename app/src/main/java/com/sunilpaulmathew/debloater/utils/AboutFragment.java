@@ -45,6 +45,7 @@ public class AboutFragment extends Fragment {
         mData.add(new RecycleViewItem(getString(R.string.report_issue), getString(R.string.report_issue_summary), getResources().getDrawable(R.drawable.ic_issue), "https://github.com/sunilpaulmathew/De-Bloater/issues/new"));
         mData.add(new RecycleViewItem(getString(R.string.change_logs), getString(R.string.change_logs_summary), getResources().getDrawable(R.drawable.ic_active), null));
         mData.add(new RecycleViewItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
+        mData.add(new RecycleViewItem(getString(R.string.licence), getString(R.string.licence_summary), getResources().getDrawable(R.drawable.ic_licence), null));
         if (UpdateCheck.isSignatureMatched(requireActivity())) {
             mData.add(new RecycleViewItem(getString(R.string.check_update), getString(R.string.check_update_summary), getResources().getDrawable(R.drawable.ic_update), null));
         } else {
@@ -95,10 +96,14 @@ public class AboutFragment extends Fragment {
                     settings.setData(uri);
                     holder.mRVLayout.getContext().startActivity(settings);
                 } else if (position == 4) {
-                    Utils.changelogDialog(holder.mRVLayout.getContext());
+                    Intent changeLog = new Intent(holder.mRVLayout.getContext(), ChangeLogActivity.class);
+                    holder.mRVLayout.getContext().startActivity(changeLog);
                 } else if (position == 6) {
-                    UpdateCheck.manualUpdateCheck(holder.mRVLayout, holder.mRVLayout.getContext());
+                    Intent licence = new Intent(holder.mRVLayout.getContext(), LicenceActivity.class);
+                    holder.mRVLayout.getContext().startActivity(licence);
                 } else if (position == 7) {
+                    UpdateCheck.manualUpdateCheck(holder.mRVLayout, holder.mRVLayout.getContext());
+                } else if (position == 8) {
                     Intent shareapp = new Intent();
                     shareapp.setAction(Intent.ACTION_SEND);
                     shareapp.putExtra(Intent.EXTRA_SUBJECT, holder.mRVLayout.getContext().getString(R.string.app_name));

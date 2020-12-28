@@ -41,6 +41,8 @@
     <string name="invisible">Invisible</string>
     <string name="invite_friend">Invite Friends</string>
     <string name="invite_friend_summary">Invite a friend to try De-Bloater</string>
+    <string name="licence">Licence</string>
+    <string name="licence_summary">View GPL V3</string>
     <string name="light">Light</string>
     <string name="magisk_credit_dialog">Powered with Magisk</string>
     <string name="more_apps">More Apps</string>

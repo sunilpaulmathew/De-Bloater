@@ -26,7 +26,9 @@
         </activity>
 
         <activity android:name=".MainActivity" />
+        <activity android:name=".utils.ChangeLogActivity" />
         <activity android:name=".utils.CustomScriptsActivity" />
+        <activity android:name=".utils.LicenceActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

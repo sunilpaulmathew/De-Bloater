@@ -19,15 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +35,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
@@ -307,21 +302,7 @@ public class Utils {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    public static void changelogDialog(Context context) {
-        String change_log = null;
-        try {
-            change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(
-                    context, "release.json"))).getString("releaseNotes");
-        } catch (JSONException ignored) {
-        }
-        new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.change_logs)
-                .setMessage(change_log)
-                .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
-                }).show();
-    }
-
-    private static String readAssetFile(Context context, String file) {
+    public static String readAssetFile(Context context, String file) {
         InputStream input = null;
         BufferedReader buf = null;
         try {
