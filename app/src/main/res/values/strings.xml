@@ -10,6 +10,7 @@
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
+    <string name="app_summary">Use the power of Magisk to de-bloat system applications systemless-ly</string>
     <string name="backup">Backup</string>
     <string name="backup_list_empty">You haven\'t removed any apps yet!</string>
     <string name="backup_message">Backup files is created as %s!</string>
