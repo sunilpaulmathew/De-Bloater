@@ -11,3 +11,7 @@ The app will systemless-ly replace the selected APKs by making a Magisk module. 
 <b>Troubleshooting</b>
 
 In case, if you accidentally remove some important apps and your phone bootloops, please delete "/data/adb/modules/De-bloater" via recovery.
+
+<b>Please Note</b>
+
+Please be noted that De-Bloater contains its own auto-update implementation, which is only (from v0.10 onwards) available for installation from GitHub release page (and consequently, for IzzyOnDroid). In that case, APK files provided by the developer is directly acquired from the official GitHub release page.
