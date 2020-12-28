@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 
@@ -37,10 +38,10 @@ import java.util.List;
 public class ActivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
-    private AppCompatImageButton mReverse;
     private AsyncTask<Void, Void, Void> mLoader;
     private Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
+    private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
 
