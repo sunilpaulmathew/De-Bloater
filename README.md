@@ -52,6 +52,7 @@ If you like to appreciate my work, please consider donating to me (either via [P
 * [Grarak](https://github.com/Grarak/), Code contributions (I took some code from [Kernel Adiutor](https://github.com/Grarak/KernelAdiutor/))
 * [John Wu](https://github.com/topjohnwu), libsu & Magisk
 * [MONSTER_PC](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
+* [Emre](https://t.me/xcooLwastaken), Turkish Translations
 
 ## License
 
