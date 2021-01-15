@@ -11,15 +11,15 @@ android {
         }
     }
 
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 10
-        versionName "v0.10"
+        targetSdkVersion 30
+        versionCode 11
+        versionName "v0.11"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false
