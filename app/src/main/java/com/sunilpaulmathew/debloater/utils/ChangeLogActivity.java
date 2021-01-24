@@ -32,7 +32,7 @@ public class ChangeLogActivity extends AppCompatActivity {
         MaterialTextView mChangeLog = findViewById(R.id.change_log);
         MaterialTextView mTitle = findViewById(R.id.app_title);
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
-        mTitle.setText(getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+        mTitle.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
         String change_log = null;
         try {
             change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(

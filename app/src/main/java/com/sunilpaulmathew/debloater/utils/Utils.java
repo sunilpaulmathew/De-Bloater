@@ -56,9 +56,12 @@ public class Utils {
         }
     }
 
-    public static boolean isNotDonated(Context context) {
-        if (BuildConfig.DEBUG) return false;
-        return !isPackageInstalled("com.smartpack.donate", context);
+    public static boolean isPlayStoreAvailable(Context context) {
+        return isPackageInstalled("com.android.vending", context);
+    }
+
+    public static boolean isProUser(Context context) {
+        return UpdateCheck.isSignatureMatched(context) && isPlayStoreAvailable(context);
     }
 
     public static boolean isDarkTheme(Context context) {
