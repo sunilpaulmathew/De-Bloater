@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.utils.AboutFragment;
 import com.sunilpaulmathew.debloater.utils.ActivePackagesFragment;
@@ -57,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ActivePackagesFragment()).commit();
+        }
+
+        if (!Utils.getBoolean("warning_message", false, this)) {
+            new MaterialAlertDialogBuilder(this)
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(R.string.warning)
+                    .setMessage(R.string.warning_summary)
+                    .setCancelable(false)
+                    .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+                        finish();
+                    })
+                    .setPositiveButton(getString(R.string.accept), (dialog, id) -> {
+                        Utils.saveBoolean("warning_message", true, this);
+                    }).show();
         }
 
     }
