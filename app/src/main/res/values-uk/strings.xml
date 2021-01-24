@@ -59,7 +59,7 @@
     <string name="restoring">Відновлення…</string>
     <string name="search_hint">Пошук…</string>
     <string name="show_from">Показати програми з</string>
-    <string name="share_app_message">Отримайте De-Bloater %s з GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>
+    <string name="share_app_message">Отримайте De-Bloater %s з</string>
     <string name="sort_by">Сортувати програми за</string>
     <string name="source_code">Вихідний код</string>
     <string name="source_code_summary">Відвідайте сторінку GitHub</string>

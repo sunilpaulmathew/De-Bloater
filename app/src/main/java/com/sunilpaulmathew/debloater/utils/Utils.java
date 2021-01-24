@@ -64,6 +64,16 @@ public class Utils {
         return UpdateCheck.isSignatureMatched(context) && isPlayStoreAvailable(context);
     }
 
+    public static String getAppStoreURL(Context context) {
+        if (isProUser(context)) {
+            return " Google Play: https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater";
+        } else if (UpdateCheck.isSignatureMatched(context)) {
+            return " GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest";
+        } else {
+            return " F-Droid: https://f-droid.org/packages/com.sunilpaulmathew.debloater/";
+        }
+    }
+
     public static boolean isDarkTheme(Context context) {
         int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;

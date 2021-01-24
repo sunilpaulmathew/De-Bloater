@@ -55,6 +55,8 @@
     <string name="no_root">No Root</string>
     <string name="package_id">Package ID</string>
     <string name="press_back_exit">Press the \'Back\' button again to Exit!</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="rate_us_Summary">Rate or/and Review De-Bloater in PlayStore</string>
     <string name="reboot">Reboot Device</string>
     <string name="remove">Remove</string>
     <string name="report_issue">Report Issue</string>
@@ -65,7 +67,7 @@
     <string name="restoring">Restoring…</string>
     <string name="search_hint">Search…</string>
     <string name="show_from">Show Apps From</string>
-    <string name="share_app_message">Get De-Bloater %s from GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest</string>
+    <string name="share_app_message">Get De-Bloater %s from</string>
     <string name="sort_by">Sort Apps By</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Visit GitHub page</string>

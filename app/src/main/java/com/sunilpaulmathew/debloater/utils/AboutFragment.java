@@ -111,7 +111,7 @@ public class AboutFragment extends Fragment {
                     Intent shareapp = new Intent();
                     shareapp.setAction(Intent.ACTION_SEND);
                     shareapp.putExtra(Intent.EXTRA_SUBJECT, holder.mRVLayout.getContext().getString(R.string.app_name));
-                    shareapp.putExtra(Intent.EXTRA_TEXT, holder.mRVLayout.getContext().getString(R.string.share_app_message, BuildConfig.VERSION_NAME));
+                    shareapp.putExtra(Intent.EXTRA_TEXT, holder.mRVLayout.getContext().getString(R.string.share_app_message, BuildConfig.VERSION_NAME) + Utils.getAppStoreURL(holder.mRVLayout.getContext()));
                     shareapp.setType("text/plain");
                     Intent shareIntent = Intent.createChooser(shareapp, null);
                     holder.mRVLayout.getContext().startActivity(shareIntent);
