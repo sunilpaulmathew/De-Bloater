@@ -54,6 +54,7 @@ public class AboutFragment extends Fragment {
             mData.add(new RecycleViewItem(getString(R.string.fdroid), getString(R.string.fdroid_summary), getResources().getDrawable(R.drawable.ic_fdroid), "https://f-droid.org/packages/com.sunilpaulmathew.debloater"));
         }
         mData.add(new RecycleViewItem(getString(R.string.invite_friend), getString(R.string.invite_friend_summary), getResources().getDrawable(R.drawable.ic_share), null));
+        mData.add(new RecycleViewItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(R.drawable.ic_translate), "https://github.com/sunilpaulmathew/De-Bloater/blob/master/app/src/main/res/values/strings.xml"));
         if (!Utils.isProUser(requireActivity())) {
             mData.add(new RecycleViewItem(getString(R.string.donate), getString(R.string.donate_summary), getResources().getDrawable(R.drawable.ic_donate), "https://www.paypal.me/menacherry"));
         }

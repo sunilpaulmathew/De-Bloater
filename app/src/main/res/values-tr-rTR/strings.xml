@@ -72,6 +72,8 @@
     <string name="storage_access_denied">Depolamaya erişim izni reddedildi!</string>
     <string name="support">Destek</string>
     <string name="support_summary">Destek grubunu ziyaret et</string>
+    <string name="translations">Çeviriler</string>
+    <string name="translations_summary">Bu uygulamayı çevirmeme yardım et!</string>
     <string name="update_available">Yeni güncelleme mevcut!\n(%s)</string>
     <string name="updated_dialog">Tebrikler! De-Bloater\'ın güncel sürümüne sahipsiniz!</string>
     <string name="version">Versiyon</string>
