@@ -2,7 +2,7 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-v0.11-green)](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.11/app-release.apk)
+[![](https://img.shields.io/badge/De--Bloater-v0.11-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
@@ -10,7 +10,10 @@
 ### De-Bloater is an application using the power of Magisk to de-bloat unwanted applications systemless-ly.
 
 ## Download
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt=""
+     height="80">](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
+     [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt=""
      height="80">](https://f-droid.org/packages/com.sunilpaulmathew.debloater)
      [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
