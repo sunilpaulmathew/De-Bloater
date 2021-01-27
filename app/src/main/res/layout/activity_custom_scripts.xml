@@ -2,14 +2,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="?android:attr/colorBackground"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:gravity="center" >
+    android:orientation="vertical" >
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="?android:attr/colorPrimary" />
+        android:layout_height="match_parent" >
+    </FrameLayout>
 </LinearLayout>

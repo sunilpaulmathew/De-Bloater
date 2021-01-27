@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBlack"
-            android:padding="15dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="15dp" >
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"

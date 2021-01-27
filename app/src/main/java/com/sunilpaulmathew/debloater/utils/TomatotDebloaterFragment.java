@@ -33,8 +33,10 @@ public class TomatotDebloaterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_tomatot_debloater, container, false);
-        LinearLayout mTitleLayout = mRootView.findViewById(R.id.title_layout);
+
+        AppCompatImageButton mActionIcon = mRootView.findViewById(R.id.action_icon);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
+        LinearLayout mTitleLayout = mRootView.findViewById(R.id.title_layout);
         MaterialTextView mDisabled = mRootView.findViewById(R.id.disabled);
         MaterialTextView mInvisible = mRootView.findViewById(R.id.invisible);
         MaterialTextView mLight = mRootView.findViewById(R.id.light);
@@ -43,7 +45,6 @@ public class TomatotDebloaterFragment extends Fragment {
         MaterialTextView mActionMessage = mRootView.findViewById(R.id.action_message);
         mAppsList = mRootView.findViewById(R.id.apps_list);
         MaterialTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
-        AppCompatImageButton mActionIcon = mRootView.findViewById(R.id.action_icon);
         mAppListCard = mRootView.findViewById(R.id.apps_list_card);
         FrameLayout mActionLayout = mRootView.findViewById(R.id.action_layout);
         if (Utils.isDarkTheme(requireActivity())) {
@@ -53,13 +54,13 @@ public class TomatotDebloaterFragment extends Fragment {
         }
 
         if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getExtremeList());
+            mAppsList.setText(Tomatot.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getInvisibletList());
+            mAppsList.setText(Tomatot.getInvisibletList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
-            mAppsList.setText(CustomScripts.getLightList());
+            mAppsList.setText(Tomatot.getLightList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else {
             mAppListCard.setVisibility(View.GONE);
@@ -150,33 +151,33 @@ public class TomatotDebloaterFragment extends Fragment {
                 protected Void doInBackground(Void... voids) {
                     if (mDisabledT) {
                         if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
-                            PackageTasks.disableTomatotInvisible(requireActivity());
+                            Tomatot.disableTomatotInvisible(requireActivity());
                         } else if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
-                            PackageTasks.disableTomatotLight(requireActivity());
+                            Tomatot.disableTomatotLight(requireActivity());
                         } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
-                            PackageTasks.disableTomatotExtreme(requireActivity());
+                            Tomatot.disableTomatotExtreme(requireActivity());
                         }
                     } else if (mExtremeT) {
                         if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
-                            PackageTasks.disableTomatotInvisible(requireActivity());
+                            Tomatot.disableTomatotInvisible(requireActivity());
                         } else if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
-                            PackageTasks.disableTomatotLight(requireActivity());
+                            Tomatot.disableTomatotLight(requireActivity());
                         }
-                        PackageTasks.enableTomatotExtreme(requireActivity());
+                        Tomatot.enableTomatotExtreme(requireActivity());
                     } else if (mInvisibleT) {
                         if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
-                            PackageTasks.disableTomatotLight(requireActivity());
+                            Tomatot.disableTomatotLight(requireActivity());
                         } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
-                            PackageTasks.disableTomatotExtreme(requireActivity());
+                            Tomatot.disableTomatotExtreme(requireActivity());
                         }
-                        PackageTasks.enableTomatotInvisible(requireActivity());
+                        Tomatot.enableTomatotInvisible(requireActivity());
                     } else if (mLightT) {
                         if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
-                            PackageTasks.disableTomatotInvisible(requireActivity());
+                            Tomatot.disableTomatotInvisible(requireActivity());
                         } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
-                            PackageTasks.disableTomatotExtreme(requireActivity());
+                            Tomatot.disableTomatotExtreme(requireActivity());
                         }
-                        PackageTasks.enableTomatotLight(requireActivity());
+                        Tomatot.enableTomatotLight(requireActivity());
                     }
                     return null;
                 }
@@ -197,13 +198,13 @@ public class TomatotDebloaterFragment extends Fragment {
         if (mDisabledT) {
             mAppListCard.setVisibility(View.GONE);
         } else if (mExtremeT) {
-            mAppsList.setText(CustomScripts.getExtremeList());
+            mAppsList.setText(Tomatot.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (mInvisibleT) {
-            mAppsList.setText(CustomScripts.getInvisibletList());
+            mAppsList.setText(Tomatot.getInvisibletList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (mLightT) {
-            mAppsList.setText(CustomScripts.getLightList());
+            mAppsList.setText(Tomatot.getLightList());
             mAppListCard.setVisibility(View.VISIBLE);
         }
     }
