@@ -127,7 +127,9 @@ public class ActivePackagesFragment extends Fragment {
                 .setChecked(Utils.getBoolean("apps_vendor", true, activity));
         show.add(Menu.NONE, 6, Menu.NONE, getString(R.string.apps_product)).setCheckable(true)
                 .setChecked(Utils.getBoolean("apps_product", true, activity));
-        menu.add(Menu.NONE, 7, Menu.NONE, R.string.custom_scripts);
+        SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
+        customScripts.add(Menu.NONE, 7, Menu.NONE, R.string.custom_scripts_tomatot);
+        customScripts.add(Menu.NONE, 9, Menu.NONE, R.string.custom_scripts_uad);
         menu.add(Menu.NONE, 8, Menu.NONE, R.string.reboot);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
@@ -175,11 +177,15 @@ public class ActivePackagesFragment extends Fragment {
                     reload(activity);
                     break;
                 case 7:
-                    Intent customScript = new Intent(activity, CustomScriptsActivity.class);
-                    startActivity(customScript);
+                    Intent tomatotScript = new Intent(activity, TomatotActivity.class);
+                    startActivity(tomatotScript);
                     break;
                 case 8:
                     Utils.runCommand("svc power reboot");
+                    break;
+                case 9:
+                    Intent uadScript = new Intent(activity, UADActivity.class);
+                    startActivity(uadScript);
                     break;
             }
             return false;

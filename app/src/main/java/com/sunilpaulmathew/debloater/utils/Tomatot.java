@@ -12,8 +12,6 @@ import java.util.List;
 
 public class Tomatot {
 
-    private static final String MODULE_PARENT = "/data/adb/modules/De-bloater";
-
     static List<String> getTomatotInvisible() {
         List<String> mData = new ArrayList<>();
         mData.add("/system/app/AntHalService/AntHalService.apk");
@@ -228,7 +226,7 @@ public class Tomatot {
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
                 .toString().length() - 1).split(", ");
         for (String s : invisible) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }
@@ -259,14 +257,14 @@ public class Tomatot {
         String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
                 .toString().length() - 1).split(", ");
         for (String s : light) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
                 .toString().length() - 1).split(", ");
         for (String s : invisible) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }
@@ -304,21 +302,21 @@ public class Tomatot {
         String[] extreme = getTomatotExtreme().toString().substring(1, getTomatotExtreme()
                 .toString().length() - 1).split(", ");
         for (String s : extreme) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }
         String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
                 .toString().length() - 1).split(", ");
         for (String s : light) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }
         String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
                 .toString().length() - 1).split(", ");
         for (String s : invisible) {
-            if (Utils.exist(MODULE_PARENT + s)) {
+            if (Utils.exist(PackageTasks.getModulePath() + s)) {
                 PackageTasks.revertDelete(s);
             }
         }

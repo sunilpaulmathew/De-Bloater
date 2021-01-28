@@ -6,6 +6,7 @@
     <string name="accept">Accept</string>
     <string name="active">Active</string>
     <string name="active_app_summary">The entire application list is detailed below. The applications that are assigned to remove will be systemless-ly debloated after a reboot!</string>
+    <string name="aosp">AOSP</string>
     <string name="apply">Apply</string>
     <string name="apps">%s Applications</string>
     <string name="apps_system">/system</string>
@@ -28,6 +29,10 @@
     <string name="custom_scripts_tomatot_invisible">Remove only apps related to telemetry or that don\'t have any function.</string>
     <string name="custom_scripts_tomatot_light">Remove all the apps included in the invisible list as well as some other apps that rarely used.</string>
     <string name="custom_scripts_tomatot_Summary">Adaptation of the debloater script originally developed by Tomatot for OnePlus 6! Please use this script on other devices at your own risk.</string>
+    <string name="custom_scripts_uad">Universal Android Debloater</string>
+    <string name="custom_scripts_uad_disabled">This script is currently disabled!</string>
+    <string name="custom_scripts_uad_enabled">This script is currently enabled!</string>
+    <string name="custom_scripts_uad_summary">Adaptation of the Universal Android Debloater originally developed by W1nst0n with an aim to improve the battery performance and privacy by removing unnecessary and obscure system apps.</string>
     <string name="disabled">Disabled</string>
     <string name="dismiss">Dismiss</string>
     <string name="donate">Donate</string>
@@ -37,6 +42,7 @@
     <string name="extreme">Extreme</string>
     <string name="fdroid">F-Droid</string>
     <string name="fdroid_summary">Visit F-Droid page</string>
+    <string name="google">Google</string>
     <string name="get_it">Get It</string>
     <string name="inactive">Inactive</string>
     <string name="inactive_apps_summary">The applications that are systemless-ly debloated or assigned to remove are listed in this page!</string>
@@ -54,6 +60,7 @@
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_magisk">Magisk Not Detected</string>
     <string name="no_root">No Root</string>
+    <string name="oneplus">OnePlus</string>
     <string name="package_id">Package ID</string>
     <string name="press_back_exit">Press the \'Back\' button again to Exit!</string>
     <string name="rate_us">Rate Us</string>

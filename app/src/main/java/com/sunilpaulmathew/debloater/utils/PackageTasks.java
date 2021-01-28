@@ -135,6 +135,10 @@ public class PackageTasks {
         return apkPath;
     }
 
+    public static String getModulePath() {
+        return MODULE_PARENT;
+    }
+
     public static void initializeModule() {
         if (!Utils.exist(MODULE_PARENT)) {
             createModuleParent();
@@ -156,7 +160,6 @@ public class PackageTasks {
         Utils.saveBoolean("tomatot_extreme", false, activity);
         Utils.saveBoolean("tomatot_invisible", false, activity);
         Utils.saveBoolean("tomatot_light", false, activity);
-        Utils.saveBoolean("uad_google", false, activity);
     }
 
     public static boolean isModuleInitialized() {

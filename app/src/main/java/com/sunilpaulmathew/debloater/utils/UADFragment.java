@@ -1,0 +1,151 @@
+package com.sunilpaulmathew.debloater.utils;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
+import com.sunilpaulmathew.debloater.R;
+
+/*
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2021
+ */
+
+public class UADFragment extends Fragment {
+
+    private AppCompatImageButton mSelectIcon;
+    private MaterialCardView mAppListCard;
+    private MaterialTextView mActionMessage, mAppsList, mScriptTitle, mScriptStatus;
+    private LinearLayout mProgressLayout;
+
+    private String mAppList;
+    private String mScriptPath;
+    private String mTitle;
+
+    @SuppressLint("StaticFieldLeak")
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View mRootView = inflater.inflate(R.layout.fragment_uad, container, false);
+
+        AppCompatImageButton mActionIcon = mRootView.findViewById(R.id.action_icon);
+        mSelectIcon = mRootView.findViewById(R.id.select_icon);
+        FrameLayout mActionLayout = mRootView.findViewById(R.id.action_layout);
+        mProgressLayout = mRootView.findViewById(R.id.progress_layout);
+        LinearLayout mTitleLayout = mRootView.findViewById(R.id.title_layout);
+        mAppListCard = mRootView.findViewById(R.id.apps_list_card);
+        mActionMessage = mRootView.findViewById(R.id.action_message);
+        mAppsList = mRootView.findViewById(R.id.apps_list);
+        MaterialTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
+        mScriptTitle = mRootView.findViewById(R.id.script_title);
+        mScriptStatus = mRootView.findViewById(R.id.deblaoter_status);
+
+        if (Utils.isDarkTheme(requireActivity())) {
+            mActionMessage.setTextColor(Utils.getThemeAccentColor(requireActivity()));
+            mActionIcon.setColorFilter(Utils.getThemeAccentColor(requireActivity()));
+            mAppsListTitle.setTextColor(Utils.getThemeAccentColor(requireActivity()));
+            mScriptTitle.setTextColor(Utils.getThemeAccentColor(requireActivity()));
+        }
+
+        if (Build.BRAND.equalsIgnoreCase("oneplus")) {
+            mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
+            mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getOnePlusList(requireActivity());
+            mTitle = getString(R.string.oneplus);
+        } else {
+            mScriptPath = PackageTasks.getModulePath() + "/uad_google";
+            mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getGoogleList(requireActivity());
+            mTitle = getString(R.string.google);
+        }
+        setStatus();
+
+        mTitleLayout.setOnClickListener(v -> Utils.launchUrl(mRootView, "https://gitlab.com/W1nst0n/universal-android-debloater",
+                requireActivity()));
+
+        mActionLayout.setOnClickListener(v -> new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mProgressLayout.setVisibility(View.VISIBLE);
+                mAppListCard.setVisibility(View.GONE);
+            }
+            @Override
+            protected Void doInBackground(Void... voids) {
+                UAD.applyScript(mScriptPath, requireActivity());
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mProgressLayout.setVisibility(View.GONE);
+                requireActivity().onBackPressed();
+            }
+        }.execute());
+
+        mSelectIcon.setOnClickListener(v -> {
+            selectionMenu(requireActivity());
+        });
+
+        return mRootView;
+    }
+
+    private void selectionMenu(Activity activity) {
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), mSelectIcon);
+        Menu menu = popupMenu.getMenu();
+        menu.add(Menu.NONE, 0, Menu.NONE, R.string.aosp);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.google);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.oneplus);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case 0:
+                    Utils.saveString("setDefault", "aosp", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getAOSPList(activity);
+                    mTitle = getString(R.string.aosp);
+                    setStatus();
+                    break;
+                case 1:
+                    Utils.saveString("setDefault", "google", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_google";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getGoogleList(activity);
+                    mTitle = getString(R.string.google);
+                    setStatus();
+                    break;
+                case 2:
+                    Utils.saveString("setDefault", "oneplus", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getOnePlusList(activity);
+                    mTitle = getString(R.string.oneplus);
+                    setStatus();
+                    break;
+            }
+            return false;
+        });
+        popupMenu.show();
+    }
+
+    private void setStatus() {
+        if (Utils.exist(mScriptPath)) {
+            mScriptStatus.setText(getString(R.string.custom_scripts_uad_enabled));
+        } else {
+            mScriptStatus.setText(getString(R.string.custom_scripts_uad_disabled));
+        }
+        mActionMessage.setText(Utils.exist(mScriptPath) ? getString(R.string.restore) : getString(R.string.apply));
+        mScriptTitle.setText(mTitle);
+        mAppsList.setText(mAppList);
+    }
+
+}

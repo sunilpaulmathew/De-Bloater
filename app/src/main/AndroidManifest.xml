@@ -27,8 +27,9 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".utils.ChangeLogActivity" />
-        <activity android:name=".utils.CustomScriptsActivity" />
         <activity android:name=".utils.LicenceActivity" />
+        <activity android:name=".utils.TomatotActivity" />
+        <activity android:name=".utils.UADActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
