@@ -65,6 +65,10 @@ public class UADFragment extends Fragment {
             mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
             mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getOnePlusList(requireActivity());
             mTitle = getString(R.string.oneplus);
+        } else if (Build.BRAND.equalsIgnoreCase("asus")) {
+            mScriptPath = PackageTasks.getModulePath() + "/uad_asus";
+            mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getASUSList(requireActivity());
+            mTitle = getString(R.string.asus);
         } else {
             mScriptPath = PackageTasks.getModulePath() + "/uad_google";
             mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getGoogleList(requireActivity());
@@ -95,9 +99,7 @@ public class UADFragment extends Fragment {
             }
         }.execute());
 
-        mSelectIcon.setOnClickListener(v -> {
-            selectionMenu(requireActivity());
-        });
+        mSelectIcon.setOnClickListener(v -> selectionMenu(requireActivity()));
 
         return mRootView;
     }
@@ -108,6 +110,11 @@ public class UADFragment extends Fragment {
         menu.add(Menu.NONE, 0, Menu.NONE, R.string.aosp);
         menu.add(Menu.NONE, 1, Menu.NONE, R.string.google);
         menu.add(Menu.NONE, 2, Menu.NONE, R.string.oneplus);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.asus);
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.carrier);
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.huawei);
+        menu.add(Menu.NONE, 6, Menu.NONE, R.string.lg);
+        menu.add(Menu.NONE, 7, Menu.NONE, R.string.samsung);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -129,6 +136,41 @@ public class UADFragment extends Fragment {
                     mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
                     mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getOnePlusList(activity);
                     mTitle = getString(R.string.oneplus);
+                    setStatus();
+                    break;
+                case 3:
+                    Utils.saveString("setDefault", "asus", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getASUSList(activity);
+                    mTitle = getString(R.string.asus);
+                    setStatus();
+                    break;
+                case 4:
+                    Utils.saveString("setDefault", "carrier", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_carrier";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getCarrierList(activity);
+                    mTitle = getString(R.string.carrier);
+                    setStatus();
+                    break;
+                case 5:
+                    Utils.saveString("setDefault", "huawei", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_huawei";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getHuaweiList(activity);
+                    mTitle = getString(R.string.huawei);
+                    setStatus();
+                    break;
+                case 6:
+                    Utils.saveString("setDefault", "lg", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_lg";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getLGList(activity);
+                    mTitle = getString(R.string.lg);
+                    setStatus();
+                    break;
+                case 7:
+                    Utils.saveString("setDefault", "samsung", activity);
+                    mScriptPath = PackageTasks.getModulePath() + "/uad_samsung";
+                    mAppList = Utils.exist(mScriptPath) ? Utils.read(mScriptPath) : UAD.getSamsungList(activity);
+                    mTitle = getString(R.string.samsung);
                     setStatus();
                     break;
             }

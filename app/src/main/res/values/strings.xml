@@ -13,10 +13,12 @@
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
     <string name="app_summary">Use the power of Magisk to de-bloat system applications systemless-ly</string>
+    <string name="asus">ASUS</string>
     <string name="backup">Backup</string>
     <string name="backup_list_empty">You haven\'t removed any apps yet!</string>
     <string name="backup_message">Backup files is created as %s!</string>
     <string name="cancel">Cancel</string>
+    <string name="carrier">Carrier</string>
     <string name="change_logs">Change-logs</string>
     <string name="change_logs_summary">View recent changes on this app</string>
     <string name="check_update">Update Check</string>
@@ -44,11 +46,13 @@
     <string name="fdroid_summary">Visit F-Droid page</string>
     <string name="google">Google</string>
     <string name="get_it">Get It</string>
+    <string name="huawei">Huawei</string>
     <string name="inactive">Inactive</string>
     <string name="inactive_apps_summary">The applications that are systemless-ly debloated or assigned to remove are listed in this page!</string>
     <string name="invisible">Invisible</string>
     <string name="invite_friend">Invite Friends</string>
     <string name="invite_friend_summary">Invite a friend to try De-Bloater</string>
+    <string name="lg">LG</string>
     <string name="licence">Licence</string>
     <string name="licence_summary">View GPL V3</string>
     <string name="light">Light</string>
@@ -73,6 +77,7 @@
     <string name="restore_error_message">You\'re selected an invalid backup file. Aborting!</string>
     <string name="restore_question">Restore from %s?</string>
     <string name="restoring">Restoring…</string>
+    <string name="samsung">Samsung</string>
     <string name="search_hint">Search…</string>
     <string name="show_from">Show Apps From</string>
     <string name="share_app_message">Get De-Bloater %s from</string>

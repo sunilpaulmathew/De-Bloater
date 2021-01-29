@@ -1,6 +1,5 @@
 package com.sunilpaulmathew.debloater.utils;
 
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
