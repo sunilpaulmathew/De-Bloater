@@ -95,5 +95,5 @@
     <string name="updated_dialog">Congrats! You\'ve already got an up-to-date version of De-Bloater!</string>
     <string name="version">Version</string>
     <string name="warning">Warning</string>
-    <string name="warning_summary">This application is too powerful! Please use it carefully. The developer of this app doesn\'t take any responsibility if something went wrong due to the inappropriate use of this app.</string>
+    <string name="warning_summary">De-Bloater is too powerful! Please use it carefully. The developer of this application doesn\'t take any responsibility if something went wrong due to its inappropriate use.</string>
 </resources>
