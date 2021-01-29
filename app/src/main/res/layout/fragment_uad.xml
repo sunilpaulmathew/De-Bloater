@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="?android:attr/colorAccent"
+                android:textColor="@color/ColorBlue"
                 android:text="@string/custom_scripts_uad"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -67,7 +67,6 @@
                         android:id="@+id/select_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="?android:attr/textColorPrimary"
                         android:src="@drawable/ic_select"
                         android:layout_gravity="end"
                         android:background="@null"
@@ -78,7 +77,6 @@
                     android:id="@+id/deblaoter_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
@@ -96,7 +94,6 @@
                         android:id="@+id/action_message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="?android:attr/textColorPrimary"
                         android:layout_marginEnd="30dp"
                         android:text="@string/apply"
                         android:textStyle="bold"
@@ -107,7 +104,6 @@
                         android:id="@+id/action_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="?android:attr/textColorPrimary"
                         android:src="@drawable/ic_restore"
                         android:layout_gravity="end"
                         android:background="@null"
@@ -142,8 +138,7 @@
                         android:focusable="false"
                         android:textStyle="bold"
                         android:text="@string/custom_scripts_tomatot_list"
-                        android:textSize="17sp"
-                        android:textColor="?android:attr/textColorPrimary" />
+                        android:textSize="17sp" />
                 </FrameLayout>
 
                 <androidx.core.widget.NestedScrollView
@@ -157,8 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:focusable="false"
-                        android:textStyle="bold"
-                        android:textColor="?android:attr/textColorPrimary" />
+                        android:textStyle="bold" />
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

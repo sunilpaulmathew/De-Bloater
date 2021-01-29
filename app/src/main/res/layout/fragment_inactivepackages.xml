@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/colorBackground"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -30,7 +29,7 @@
                     android:layout_marginEnd="50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="@color/ColorBlue"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
@@ -41,7 +40,7 @@
                     android:src="@drawable/ic_settings"
                     android:layout_gravity="end"
                     android:background="@null"
-                    android:tint="?android:attr/colorAccent" />
+                    android:tint="@color/ColorBlue" />
             </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView

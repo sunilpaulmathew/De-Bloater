@@ -19,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/colorBlack"
-            android:tint="?attr/colorAccent"
+            android:tint="@color/ColorBlue"
             android:gravity="center_vertical"
             android:src="@drawable/ic_back" />
 
@@ -38,7 +38,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/colorBackground"
         android:layout_marginBottom="50sp"
         android:layout_marginTop="50dp"
         android:layout_gravity="start"
@@ -59,7 +58,7 @@
         android:text="@string/cancel"
         android:textStyle="bold"
         android:background="@color/colorBlack"
-        android:textColor="?attr/colorAccent"
+        android:textColor="@color/ColorBlue"
         android:textSize="18sp"
         android:padding="10dp" />
 </com.google.android.material.card.MaterialCardView>

@@ -14,7 +14,6 @@
             android:scaleType="fitCenter"
             android:layout_gravity="center_vertical"
             android:src="@color/colorBlack"
-            android:tint="?android:attr/textColorPrimary"
             android:background="@null" />
 
         <LinearLayout
@@ -33,8 +32,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="?android:attr/textColorPrimary" />
+                    android:textSize="17sp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/description"

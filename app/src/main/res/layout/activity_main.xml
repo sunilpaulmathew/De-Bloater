@@ -17,8 +17,6 @@
             android:gravity="center"
             android:textSize="23sp"
             android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"
-            android:background="?android:attr/colorBackground"
             android:visibility="gone" />
 
         <FrameLayout
@@ -33,8 +31,8 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:itemIconTint="?attr/colorAccent"
-        app:itemTextColor="?attr/colorAccent"
+        app:itemIconTint="@color/ColorBlue"
+        app:itemTextColor="@color/ColorBlue"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
