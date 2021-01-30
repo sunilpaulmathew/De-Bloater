@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -31,6 +31,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.utils.Restore;
+import com.sunilpaulmathew.debloater.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

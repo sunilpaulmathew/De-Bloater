@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

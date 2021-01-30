@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q" >
-        <activity android:name=".StartActivity">
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +26,10 @@
         </activity>
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".utils.ChangeLogActivity" />
-        <activity android:name=".utils.LicenceActivity" />
-        <activity android:name=".utils.TomatotActivity" />
-        <activity android:name=".utils.UADActivity" />
+        <activity android:name=".activities.ChangeLogActivity" />
+        <activity android:name=".activities.LicenceActivity" />
+        <activity android:name=".activities.TomatotActivity" />
+        <activity android:name=".activities.UADActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

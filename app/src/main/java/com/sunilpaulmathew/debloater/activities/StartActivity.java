@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater;
+package com.sunilpaulmathew.debloater.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textview.MaterialTextView;
+import com.sunilpaulmathew.debloater.MainActivity;
+import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 /*

@@ -1,10 +1,11 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.fragments.TomatotDebloaterFragment;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 4, 2020

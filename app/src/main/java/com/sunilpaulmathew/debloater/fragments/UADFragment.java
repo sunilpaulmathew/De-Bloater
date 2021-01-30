@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.utils.UAD;
+import com.sunilpaulmathew.debloater.utils.Utils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2021

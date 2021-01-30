@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

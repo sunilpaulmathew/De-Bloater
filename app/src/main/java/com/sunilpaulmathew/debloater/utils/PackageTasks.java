@@ -166,7 +166,7 @@ public class PackageTasks {
         return Utils.exist(MODULE_PARENT) && Utils.exist(MODULE_PARENT + "/module.prop");
     }
 
-    static void setToDelete(String path, String name, Context context) {
+    public static void setToDelete(String path, String name, Context context) {
         initializeModule();
         new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()).mkdirs();
         Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
@@ -174,7 +174,7 @@ public class PackageTasks {
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
     }
 
-    static void revertDelete(String path) {
+    public static void revertDelete(String path) {
         Utils.delete(MODULE_PARENT + path);
     }
 

@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,6 +28,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.activities.TomatotActivity;
+import com.sunilpaulmathew.debloater.activities.UADActivity;
+import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
 

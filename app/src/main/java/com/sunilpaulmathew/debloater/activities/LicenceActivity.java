@@ -1,4 +1,4 @@
-package com.sunilpaulmathew.debloater.utils;
+package com.sunilpaulmathew.debloater.activities;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.fragments.LicenceFragment;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on December 28, 2020
