@@ -18,6 +18,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
@@ -134,7 +135,12 @@ public class UADFragment extends Fragment {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 mProgressLayout.setVisibility(View.GONE);
-                requireActivity().onBackPressed();
+                new MaterialAlertDialogBuilder(requireActivity())
+                        .setMessage(R.string.custom_scripts_applied_message)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
+                            requireActivity().finish();
+                        }).show();
             }
         }.execute());
 

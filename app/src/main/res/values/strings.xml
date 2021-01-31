@@ -24,6 +24,7 @@
     <string name="check_update">Update Check</string>
     <string name="check_update_summary">Check for new versions of De-Bloater</string>
     <string name="custom_scripts">Custom Scripts</string>
+    <string name="custom_scripts_applied_message">Everything done! The changes will be done after a reboot.</string>
     <string name="custom_scripts_tomatot">Tomatot Debloater</string>
     <string name="custom_scripts_tomatot_list">The following apps are included in this script!</string>
     <string name="custom_scripts_tomatot_disabled">Tomatot debloater is currently disabled</string>
