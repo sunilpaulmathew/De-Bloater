@@ -140,7 +140,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableGoogle(Context context) {
+    private static void enableGoogle(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getGoogle().toString().substring(1, getGoogle().toString().length() - 1).split(", ");
@@ -153,7 +153,7 @@ public class UAD {
         }
     }
 
-    public static void disableGoogle() {
+    private static void disableGoogle() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_google").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -209,7 +209,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableOnePlus(Context context) {
+    private static void enableOnePlus(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getOnePlus().toString().substring(1, getOnePlus().toString().length() - 1).split(", ");
@@ -222,7 +222,7 @@ public class UAD {
         }
     }
 
-    public static void disableOnePlus() {
+    private static void disableOnePlus() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_oneplus").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -282,7 +282,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableAOSP(Context context) {
+    private static void enableAOSP(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getAOSP().toString().substring(1, getAOSP().toString().length() - 1).split(", ");
@@ -295,7 +295,7 @@ public class UAD {
         }
     }
 
-    public static void disableAOSP() {
+    private static void disableAOSP() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_aosp").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -326,7 +326,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableASUS(Context context) {
+    private static void enableASUS(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getASUS().toString().substring(1, getASUS().toString().length() - 1).split(", ");
@@ -339,7 +339,7 @@ public class UAD {
         }
     }
 
-    public static void disableASUS() {
+    private static void disableASUS() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_asus").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -479,7 +479,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableCarrier(Context context) {
+    private static void enableCarrier(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getCarrier().toString().substring(1, getCarrier().toString().length() - 1).split(", ");
@@ -492,7 +492,7 @@ public class UAD {
         }
     }
 
-    public static void disableCarrier() {
+    private static void disableCarrier() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_carrier").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -599,7 +599,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableHuawei(Context context) {
+    private static void enableHuawei(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getHuawei().toString().substring(1, getHuawei().toString().length() - 1).split(", ");
@@ -612,7 +612,7 @@ public class UAD {
         }
     }
 
-    public static void disableHuawei() {
+    private static void disableHuawei() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_huawei").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -726,7 +726,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableLG(Context context) {
+    private static void enableLG(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getLG().toString().substring(1, getLG().toString().length() - 1).split(", ");
@@ -739,7 +739,7 @@ public class UAD {
         }
     }
 
-    public static void disableLG() {
+    private static void disableLG() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_lg").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
@@ -1067,7 +1067,7 @@ public class UAD {
         return mAppList.toString();
     }
 
-    public static void enableSamsung(Context context) {
+    private static void enableSamsung(Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         String[] apps = getSamsung().toString().substring(1, getSamsung().toString().length() - 1).split(", ");
@@ -1080,12 +1080,773 @@ public class UAD {
         }
     }
 
-    public static void disableSamsung() {
+    private static void disableSamsung() {
         try {
             for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_samsung").split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
                     PackageTasks.revertDelete(line);
                     Utils.delete(PackageTasks.getModulePath() + "/uad_samsung");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getMotorola() {
+        List<String> mData = new ArrayList<>();
+        mData.add("android.autoinstalls.config.motorola.layout");
+        mData.add("com.lenovo.lsf.user");
+        mData.add("com.lmi.motorola.rescuesecurity");
+        mData.add("com.motorola.android.fmradio");
+        mData.add("com.motorola.android.jvtcmd");
+        mData.add("com.motorola.android.nativedropboxagent");
+        mData.add("com.motorola.android.providers.chromehomepage");
+        mData.add("com.motorola.android.provisioning");
+        mData.add("com.motorola.android.settings.diag_mdlog");
+        mData.add("com.motorola.android.settings.modemdebug");
+        mData.add("com.motorola.appdirectedsmsproxy");
+        mData.add("com.motorola.bach.modemstats");
+        mData.add("com.motorola.brapps");
+        mData.add("com.motorola.bug2go");
+        mData.add("com.motorola.ccc.devicemanagement");
+        mData.add("com.motorola.ccc.mainplm");
+        mData.add("com.motorola.ccc.notification");
+        mData.add("com.motorola.contacts.preloadcontacts");
+        mData.add("com.motorola.demo");
+        mData.add("com.motorola.demo.env");
+        mData.add("com.motorola.easyprefix");
+        mData.add("com.motorola.email");
+        mData.add("com.motorola.fmplayer");
+        mData.add("com.motorola.frameworks.singlehand");
+        mData.add("com.motorola.genie");
+        mData.add("com.motorola.gesture");
+        mData.add("com.motorola.help");
+        mData.add("com.motorola.lifetimedata");
+        mData.add("com.motorola.hiddenmenuapp");
+        mData.add("com.motorola.moto");
+        mData.add("com.motorola.motocare");
+        mData.add("com.motorola.motocare.internal");
+        mData.add("com.motorola.motocit");
+        mData.add("com.motorola.motodisplay");
+        mData.add("com.motorola.paks");
+        mData.add("com.motorola.programmenu");
+        mData.add("com.motorola.ptt.prip");
+        mData.add("com.motorola.setup");
+        mData.add("com.motorola.slpc_sys");
+        mData.add("com.motorola.timeweatherwidget");
+        return mData;
+    }
+
+    public static String getMotorolaList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getMotorola().toString().substring(1, getMotorola().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableMotorola(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getMotorola().toString().substring(1, getMotorola().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_motorola");
+            }
+        }
+    }
+
+    private static void disableMotorola() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_motorola").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_motorola");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getNokia() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.android.partnerbrowsercustomizations.btl.s600ww.overlay");
+        mData.add("com.android.providers.calendar.overlay.base.s600ww");
+        mData.add("com.android.providers.settings.btl.s600ww.overlay");
+        mData.add("com.android.providers.settings.overlay.base.s600ww");
+        mData.add("com.android.retaildemo.overlay.base.s600ww");
+        mData.add("com.data.overlay.base.s600ww");
+        mData.add("com.evenwell.apnwidget.overlay.base.s600ww");
+        mData.add("com.evenwell.AprUploadService");
+        mData.add("com.evenwell.AprUploadService.data.overlay.base");
+        mData.add("com.evenwell.AprUploadService.data.overlay.base.s600ww");
+        mData.add("com.evenwell.AprUploadService.data.overlay.base.s600id");
+        mData.add("com.evenwell.autoregistration");
+        mData.add("com.evenwell.autoregistration.overlay.base");
+        mData.add("com.evenwell.autoregistration.overlay.base.s600id");
+        mData.add("com.evenwell.autoregistration.overlay.base.s600ww");
+        mData.add("com.evenwell.autoregistration.overlay.base.s600ww");
+        mData.add("com.evenwell.autoregistration.overlay.d.base.s600id");
+        mData.add("com.evenwell.autoregistration.overlay.d.base.s600ww");
+        mData.add("com.evenwell.batteryprotect");
+        mData.add("com.evenwell.batteryprotect.overlay.base");
+        mData.add("com.evenwell.batteryprotect.overlay.base.s600id");
+        mData.add("com.evenwell.batteryprotect.overlay.base.s600ww");
+        mData.add("com.evenwell.batteryprotect.overlay.d.base.s600e0");
+        mData.add("com.evenwell.bboxsbox");
+        mData.add("com.evenwell.bboxsbox.app");
+        mData.add("com.evenwell.bokeheditor");
+        mData.add("com.evenwell.bokeheditor.overlay.base.s600ww");
+        mData.add("com.evenwell.CPClient");
+        mData.add("com.evenwell.CPClient.overlay.base");
+        mData.add("com.evenwell.CPClient.overlay.base.s600id");
+        mData.add("com.evenwell.CPClient.overlay.base.s600ww");
+        mData.add("com.evenwell.custmanager");
+        mData.add("com.evenwell.custmanager.data.overlay.base");
+        mData.add("com.evenwell.custmanager.data.overlay.base.s600id");
+        mData.add("com.evenwell.custmanager.data.overlay.base.s600ww");
+        mData.add("com.evenwell.customerfeedback.overlay.base.s600ww");
+        mData.add("com.evenwell.dataagent");
+        mData.add("com.evenwell.dataagent.overlay.base");
+        mData.add("com.evenwell.dataagent.overlay.base.s600id");
+        mData.add("com.evenwell.dataagent.overlay.base.s600ww");
+        mData.add("com.evenwell.DbgCfgTool");
+        mData.add("com.evenwell.DbgCfgTool.overlay.base");
+        mData.add("com.evenwell.DbgCfgTool.overlay.base.s600id");
+        mData.add("com.evenwell.DbgCfgTool.overlay.base.s600ww");
+        mData.add("com.evenwell.defaultappconfigure.overlay.base.s600ww");
+        mData.add("com.evenwell.DeviceMonitorControl");
+        mData.add("com.evenwell.DeviceMonitorControl.data.overlay.base");
+        mData.add("com.evenwell.DeviceMonitorControl.data.overlay.base.s600id");
+        mData.add("com.evenwell.DeviceMonitorControl.data.overlay.base.s600ww");
+        mData.add("com.evenwell.email.data.overlay.base.s600ww");
+        mData.add("com.evenwell.factorywizard");
+        mData.add("com.evenwell.factorywizard.overlay.base");
+        mData.add("com.evenwell.factorywizard.overlay.base.s600ww");
+        mData.add("com.evenwell.foxlauncher.partner");
+        mData.add("com.evenwell.fqc");
+        mData.add("com.evenwell.legalterm");
+        mData.add("com.evenwell.legalterm.overlay.base.s600ww");
+        mData.add("com.evenwell.managedprovisioning");
+        mData.add("com.evenwell.managedprovisioning.overlay.base");
+        mData.add("com.evenwell.managedprovisioning.overlay.base.s600id");
+        mData.add("com.evenwell.managedprovisioning.overlay.base.s600ww");
+        mData.add("com.evenwell.mappartner");
+        mData.add("com.evenwell.nps");
+        mData.add("com.evenwell.nps.overlay.base");
+        mData.add("com.evenwell.nps.overlay.base.s600id");
+        mData.add("com.evenwell.nps.overlay.base.s600ww");
+        mData.add("com.evenwell.pandorasbox");
+        mData.add("com.evenwell.pandorasbox.app");
+        mData.add("com.evenwell.partnerbrowsercustomizations");
+        mData.add("com.evenwell.partnerbrowsercustomizations.overlay.base");
+        mData.add("com.evenwell.partnerbrowsercustomizations.overlay.base.s600id");
+        mData.add("com.evenwell.partnerbrowsercustomizations.overlay.base.s600ww");
+        mData.add("com.evenwell.permissiondetection");
+        mData.add("com.evenwell.permissiondetection.overlay.base.s600ww");
+        mData.add("com.evenwell.phone.overlay.base.s600ww");
+        mData.add("com.evenwell.phone.overlay.base");
+        mData.add("com.evenwell.PowerMonitor");
+        mData.add("com.evenwell.PowerMonitor.overlay.base");
+        mData.add("com.evenwell.PowerMonitor.overlay.base.s600id");
+        mData.add("com.evenwell.PowerMonitor.overlay.base.s600ww");
+        mData.add("com.evenwell.providers.downloads.overlay.base.s600ww");
+        mData.add("com.evenwell.providers.downloads.ui.overlay.base.s600ww");
+        mData.add("com.evenwell.providers.partnerbookmarks.overlay.base.s600ww");
+        mData.add("com.evenwell.providers.weather");
+        mData.add("com.evenwell.providers.weather.overlay.base.s600ww");
+        mData.add("com.evenwell.pushagent");
+        mData.add("com.evenwell.pushagent.overlay.base");
+        mData.add("com.evenwell.pushagent.overlay.base.s600id");
+        mData.add("com.evenwell.pushagent.overlay.base.s600ww");
+        mData.add("com.evenwell.retaildemoapp");
+        mData.add("com.evenwell.retaildemoapp.overlay.base");
+        mData.add("com.evenwell.retaildemoapp.overlay.base.s600id");
+        mData.add("com.evenwell.retaildemoapp.overlay.base.s600ww");
+        mData.add("com.evenwell.screenlock.overlay.base.s600ww");
+        mData.add("com.evenwell.settings.data.overlay.base");
+        mData.add("com.evenwell.settings.data.overlay.base.s600ww");
+        mData.add("com.evenwell.SettingsUtils");
+        mData.add("com.evenwell.SettingsUtils.overlay.base.s600ww");
+        mData.add("com.evenwell.SetupWizard");
+        mData.add("com.evenwell.SetupWizard.overlay.base");
+        mData.add("com.evenwell.setupwizard.btl.s600ww.overlay");
+        mData.add("com.evenwell.SetupWizard.overlay.d.base.s600ww");
+        mData.add("com.evenwell.SetupWizard.overlay.base.s600ww");
+        mData.add("com.evenwell.stbmonitor");
+        mData.add("com.evenwell.stbmonitor.data.overlay.base");
+        mData.add("com.evenwell.stbmonitor.data.overlay.base.s600id");
+        mData.add("com.evenwell.stbmonitor.data.overlay.base.s600ww");
+        mData.add("com.evenwell.telecom.data.overlay.base");
+        mData.add("com.evenwell.telecom.data.overlay.base.s600id");
+        mData.add("com.evenwell.telecom.data.overlay.base.s600ww");
+        mData.add("com.evenwell.UsageStatsLogReceiver");
+        mData.add("com.evenwell.UsageStatsLogReceiver.data.overlay.back.s600id");
+        mData.add("com.evenwell.UsageStatsLogReceiver.data.overlay.base.s600ww");
+        mData.add("com.evenwell.weather.overlay.base.s600ww");
+        mData.add("com.evenwell.weatherservice");
+        mData.add("com.evenwell.weatherservice.overlay.base.s600ww");
+        mData.add("com.fih.infodisplay");
+        mData.add("com.fih.StatsdLogger");
+        mData.add("com.foxconn.ifaa");
+        mData.add("com.hmdglobal.datago");
+        mData.add("com.hmdglobal.datago.overlay.base");
+        mData.add("com.hmdglobal.datago.overlay.base.s600ww");
+        mData.add("com.hmdglobal.support");
+        return mData;
+    }
+
+    public static String getNokiaList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getNokia().toString().substring(1, getNokia().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableNokia(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getNokia().toString().substring(1, getNokia().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_nokia");
+            }
+        }
+    }
+
+    private static void disableNokia() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_nokia").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_nokia");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getOppo() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.coloros.appmanager");
+        mData.add("com.coloros.assistantscreen");
+        mData.add("com.coloros.backuprestore");
+        mData.add("com.coloros.childrenspace");
+        mData.add("com.coloros.cloud");
+        mData.add("com.coloros.directui");
+        mData.add("com.coloros.findmyphone");
+        mData.add("com.coloros.gamespace");
+        mData.add("com.coloros.healthcheck");
+        mData.add("com.coloros.mcs");
+        mData.add("com.coloros.ocrscanner");
+        mData.add("com.coloros.oppomultiapp");
+        mData.add("com.coloros.phonenoareainquire");
+        mData.add("com.coloros.smartdrive");
+        mData.add("com.coloros.soundrecorder");
+        mData.add("com.coloros.speechassist");
+        mData.add("com.coloros.weather.service");
+        mData.add("com.coloros.widget.smallweather");
+        mData.add("com.heytap.cloud");
+        mData.add("com.mobiletools.systemhelper");
+        mData.add("com.nearme.atlas");
+        mData.add("com.nearme.browser");
+        mData.add("com.nearme.instant.platform");
+        mData.add("com.nearme.themestore");
+        mData.add("com.oppo.fingerprints.fingerprintsensortest");
+        mData.add("com.oppo.logkitservice");
+        mData.add("com.oppo.logkit");
+        mData.add("com.oppo.market");
+        mData.add("com.oppo.music");
+        mData.add("com.oppo.ovoicemanager");
+        mData.add("com.oppo.oppopowermonitor");
+        mData.add("com.oppo.quicksearchbox");
+        mData.add("com.oppo.securepay");
+        mData.add("com.coloros.wallet");
+        mData.add("com.realme.findphone.client2");
+        return mData;
+    }
+
+    public static String getOppoList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getOppo().toString().substring(1, getOppo().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableOppo(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getOppo().toString().substring(1, getOppo().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_oppo");
+            }
+        }
+    }
+
+    private static void disableOppo() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_oppo").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_oppo");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getSony() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.sony.tvsideview.videoph");
+        mData.add("com.sonyericsson.android.addoncamera.artfilter");
+        mData.add("com.sonyericsson.android.omacp");
+        mData.add("com.sonyericsson.conversations.res.overlay_305");
+        mData.add("com.sonyericsson.conversations.res.overlay");
+        mData.add("com.sonyericsson.idd.agent");
+        mData.add("com.sonyericsson.mtp.extension.backuprestore");
+        mData.add("com.sonyericsson.mtp.extension.update");
+        mData.add("com.sonyericsson.music");
+        mData.add("com.sonyericsson.settings.res.overlay_305");
+        mData.add("com.sonyericsson.startupflagservice");
+        mData.add("com.sonyericsson.textinput.chinese");
+        mData.add("com.sonyericsson.trackid.res.overlay");
+        mData.add("com.sonyericsson.trackid.res.overlay_305");
+        mData.add("com.sonyericsson.unsupportedheadsetnotifier");
+        mData.add("com.sonyericsson.wappush");
+        mData.add("com.sonyericsson.warrantytime");
+        mData.add("com.sonyericsson.xhs");
+        mData.add("com.sonymobile.advancedlogging");
+        mData.add("com.sonymobile.advancedwidget.topcontacts");
+        mData.add("com.sonymobile.android.addoncamera.soundphoto");
+        mData.add("com.sonymobile.androidapp.cameraaddon.areffect");
+        mData.add("com.sonymobile.android.externalkeyboard");
+        mData.add("com.sonymobile.android.contacts.res.overlay_305");
+        mData.add("com.sonymobile.android.externalkeyboardjp");
+        mData.add("com.sonymobile.anondata");
+        mData.add("com.sonymobile.aptx.notifier");
+        mData.add("com.sonymobile.assist");
+        mData.add("com.sonymobile.assist.persistent");
+        mData.add("com.sonymobile.cameracommon.wearablebridge");
+        mData.add("com.sonymobile.coverapp2");
+        mData.add("com.sonymobile.demoappchecker");
+        mData.add("com.sonymobile.deviceconfigtool");
+        mData.add("com.sonymobile.dualshockmanager");
+        mData.add("com.sonymobile.email");
+        mData.add("com.sonymobile.entrance");
+        mData.add("com.sonymobile.getmore.client");
+        mData.add("com.sonymobile.getset");
+        mData.add("com.sonymobile.getset.priv");
+        mData.add("com.sonymobile.gettoknowit");
+        mData.add("com.sonymobile.glovemode");
+        mData.add("com.sonymobile.googleanalyticsproxy");
+        mData.add("com.sonymobile.intelligent.backlight");
+        mData.add("com.sonymobile.indeviceintelligence");
+        mData.add("com.sonymobile.intelligent.gesture");
+        mData.add("com.sonymobile.intelligent.iengine");
+        mData.add("com.sonymobile.intelligent.observer");
+        mData.add("com.sonymobile.lifelog");
+        mData.add("com.sonymobile.moviecreator.rmm");
+        mData.add("com.sonymobile.mtp.extension.fotaupdate");
+        mData.add("com.sonymobile.music.googlelyricsplugin");
+        mData.add("com.sonymobile.music.wikipediaplugin");
+        mData.add("com.sonymobile.music.youtubekaraokeplugin");
+        mData.add("com.sonymobile.music.youtubeplugin");
+        mData.add("com.sonymobile.pip");
+        mData.add("com.sonymobile.pobox");
+        mData.add("com.sonymobile.prediction");
+        mData.add("com.sonymobile.retaildemo");
+        mData.add("com.sonymobile.scan3d");
+        mData.add("com.sonymobile.simlockunlockapp");
+        mData.add("com.sonymobile.smartcharger");
+        mData.add("com.sonymobile.support");
+        mData.add("com.sonymobile.synchub");
+        mData.add("com.sonymobile.themes.sou.cid18.black");
+        mData.add("com.sonymobile.themes.sou.cid19.silver");
+        mData.add("com.sonymobile.themes.sou.cid20.blue");
+        mData.add("com.sonymobile.themes.sou.cid21.pink");
+        mData.add("com.sonymobile.themes.xperialoops2");
+        mData.add("com.sonymobile.xperialounge.services");
+        mData.add("com.sonymobile.xperiaxlivewallpaper");
+        mData.add("com.sonymobile.xperiaxlivewallpaper.product.res.overlay");
+        mData.add("com.sonymobile.xperiaservices");
+        mData.add("com.sonymobile.xperiatransfermobile");
+        mData.add("com.sonymobile.xperiaweather");
+        return mData;
+    }
+
+    public static String getSonyList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getSony().toString().substring(1, getSony().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableSony(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getSony().toString().substring(1, getSony().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_sony");
+            }
+        }
+    }
+
+    private static void disableSony() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_sony").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_sony");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getXiaomi() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.asus.calculator");
+        mData.add("com.asus.ia.asusapp");
+        mData.add("com.asus.soundrecorder");
+        return mData;
+    }
+
+    public static String getXiaomiList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getXiaomi().toString().substring(1, getXiaomi().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableXiaomi(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getXiaomi().toString().substring(1, getXiaomi().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_xiaomi");
+            }
+        }
+    }
+
+    private static void disableXiaomi() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_xiaomi").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_xiaomi");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getZTE() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.zte.assistant");
+        mData.add("com.zte.weather");
+        return mData;
+    }
+
+    public static String getZTEList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getZTE().toString().substring(1, getZTE().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableZTE(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getZTE().toString().substring(1, getZTE().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_zte");
+            }
+        }
+    }
+
+    private static void disableZTE() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_zte").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_zte");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static List<String> getMiscellaneous() {
+        List<String> mData = new ArrayList<>();
+        mData.add("com.amazon.appmanager");
+        mData.add("com.amazon.avod.thirdpartyclient");
+        mData.add("com.amazon.mShop.android");
+        mData.add("com.amazon.fv");
+        mData.add("com.amazon.kindle");
+        mData.add("com.amazon.mp3");
+        mData.add("com.amazon.venezia");
+        mData.add("com.amazon.aa");
+        mData.add("com.amazon.aa.attribution");
+        mData.add("com.amazon.mShop.android.shopping");
+        mData.add("com.amazon.mShop.android.shopping.vpl");
+        mData.add("com.amazon.clouddrive.photos");
+        mData.add("in.amazon.mShop.android.shopping");
+        mData.add("com.facebook.katana");
+        mData.add("com.facebook.system");
+        mData.add("com.facebook.appmanager");
+        mData.add("com.facebook.services");
+        mData.add("com.facebook.orca");
+        mData.add("com.instagram.android");
+        mData.add("com.whatsapp");
+        mData.add("com.microsoft.skydrive");
+        mData.add("com.skype.raider");
+        mData.add("com.microsoft.office.excel");
+        mData.add("com.microsoft.office.word");
+        mData.add("com.microsoft.office.outlook");
+        mData.add("com.microsoft.office.powerpoint");
+        mData.add("com.skype.m2");
+        mData.add("com.microsoft.office.officehubhl");
+        mData.add("com.microsoft.office.officehub");
+        mData.add("com.microsoft.office.officehubrow");
+        mData.add("com.microsoft.appmanager");
+        mData.add("com.microsoft.translator");
+        mData.add("com.caf.fmradio");
+        mData.add("org.codeaurora.gps.gpslogsave");
+        mData.add("com.qti.qualcomm.datastatusnotification");
+        mData.add("com.qti.service.colorservice");
+        mData.add("com.qti.confuridialer");
+        mData.add("com.qti.snapdragon.qdcm_ff");
+        mData.add("com.qualcomm.atfwd");
+        mData.add("com.qualcomm.embms");
+        mData.add("com.qualcomm.location");
+        mData.add("com.qualcomm.simcontacts");
+        mData.add("com.qualcomm.qti.auth.fidocryptoservice");
+        mData.add("com.qualcomm.qti.autoregistration");
+        mData.add("com.qualcomm.qti.callfeaturessetting");
+        mData.add("com.qualcomm.qti.confdialer");
+        mData.add("com.qti.dpmserviceapp");
+        mData.add("com.qualcomm.qti.networksetting");
+        mData.add("com.qualcomm.qti.optinoverlay");
+        mData.add("com.qualcomm.qti.perfdump");
+        mData.add("com.qualcomm.qti.qms.service.connectionsecurity");
+        mData.add("com.qualcomm.qti.qms.service.telemetry");
+        mData.add("com.qualcomm.qti.qtisystemservice");
+        mData.add("com.qualcomm.qti.roamingsettings");
+        mData.add("com.qualcomm.qti.rcsbootstraputil");
+        mData.add("com.qualcomm.qti.rcsimsbootstraputil");
+        mData.add("com.qualcomm.qti.uceshimservice");
+        mData.add("com.qti.xdivert");
+        mData.add("com.quicinc.cne.CNEService");
+        mData.add("com.qti.qualcomm.datastatusnotification");
+        mData.add("com.qualcomm.qti.dynamicddsservice");
+        mData.add("com.qualcomm.qti.lpa");
+        mData.add("com.qualcomm.qti.remoteSimlockAuth");
+        mData.add("com.qualcomm.qti.uim");
+        mData.add("com.quicinc.fmradio");
+        mData.add("com.qualcomm.qti.qmmi");
+        mData.add("com.qti.confuridialer");
+        mData.add("cci.usage");
+        mData.add("com.aaa.android.discounts");
+        mData.add("com.aaa.android.discounts.vpl");
+        mData.add("com.aspiro.tidal.vpl");
+        mData.add("com.aspiro.tidal");
+        mData.add("com.audible.application");
+        mData.add("com.bleacherreport.android.teamstream");
+        mData.add("com.blurb.checkout");
+        mData.add("com.booking");
+        mData.add("com.cequint.ecid");
+        mData.add("com.cnn.mobile.android.phone");
+        mData.add("com.contextlogic.wish");
+        mData.add("com.cootek.smartinputv5.language.englishgb");
+        mData.add("com.cootek.smartinputv5.language.spanishus");
+        mData.add("com.crowdcare.agent.k");
+        mData.add("com.devhd.feedly");
+        mData.add("com.diotek.sec.lookup.dictionary");
+        mData.add("com.directv.dvrscheduler");
+        mData.add("com.discoveryscreen");
+        mData.add("com.dna.solitaireapp");
+        mData.add("com.draftkings.dknativermgGP.vpl");
+        mData.add("com.drivemode");
+        mData.add("com.ebay.mobile");
+        mData.add("com.ebay.carrier");
+        mData.add("com.ehernandez.radiolainolvidable");
+        mData.add("com.emoji.keyboard.touchpal");
+        mData.add("com.eterno");
+        mData.add("com.evernote");
+        mData.add("com.galaxyfirsatlari");
+        mData.add("com.generalmobi.go2pay");
+        mData.add("com.gotv.nflgamecenter.us.lite");
+        mData.add("com.groupon");
+        mData.add("com.hancom.office.editor.hidden");
+        mData.add("com.handmark.expressweather");
+        mData.add("com.handmark.expressweather.vpl");
+        mData.add("com.hulu.plus");
+        mData.add("com.ideashower.readitlater.pro");
+        mData.add("com.imdb.mobile");
+        mData.add("com.infraware.polarisoffice5");
+        mData.add("com.ironsource.appcloud.oobe");
+        mData.add("com.ironsource.appcloud.oobe.huawei");
+        mData.add("com.king.candycrush4");
+        mData.add("com.king.candycrushsodasaga");
+        mData.add("com.king.candycrushsaga");
+        mData.add("com.linkedin.android");
+        mData.add("com.lookout");
+        mData.add("com.micredit.in");
+        mData.add("com.netflix.mediaclient");
+        mData.add("com.netflix.partner.activation");
+        mData.add("com.niksoftware.snapseed");
+        mData.add("com.nuance.swype.input");
+        mData.add("com.opera.branding");
+        mData.add("com.opera.branding.news");
+        mData.add("com.opera.mini.native");
+        mData.add("com.opera.preinstall");
+        mData.add("com.opera.max.oem");
+        mData.add("com.opera.max.preinstall");
+        mData.add("com.particlenews.newsbreak");
+        mData.add("com.phonepe.app");
+        mData.add("com.pinsight.v1");
+        mData.add("com.playphone.gamestore");
+        mData.add("com.playphone.gamestore.loot");
+        mData.add("com.pure.indosat.care");
+        mData.add("com.huaqin.Fm");
+        mData.add("com.nextradioapp.nextradio");
+        mData.add("com.pinsight.dw");
+        mData.add("com.realvnc.android.remote");
+        mData.add("com.remotefairy4");
+        mData.add("com.republicwireless.tel");
+        mData.add("com.rhapsody");
+        mData.add("com.rhapsody.vpl");
+        mData.add("com.roaming.android.gsimbase");
+        mData.add("com.roaming.android.gsimcontentprovider");
+        mData.add("com.sem.factoryapp");
+        mData.add("com.servicemagic.consumer");
+        mData.add("com.setk.widget");
+        mData.add("com.sharecare.askmd");
+        mData.add("com.slacker.radio");
+        mData.add("com.shopee.id");
+        mData.add("com.smithmicro.netwise.director.comcast.oem");
+        mData.add("com.spotify.music");
+        mData.add("com.swiftkey.swiftkeyconfigurator");
+        mData.add("com.synchronoss.dcs.att.r2g");
+        mData.add("com.s.antivirus");
+        mData.add("com.telenav.app.android.cingular");
+        mData.add("com.telenav.app.android.scout_us");
+        mData.add("com.til.timesnews");
+        mData.add("com.tracker.t");
+        mData.add("com.turner.cnvideoapp");
+        mData.add("com.tripadvisor.tripadvisor");
+        mData.add("com.ubercab");
+        mData.add("com.ubercab.driver");
+        mData.add("com.ubercab.eats");
+        mData.add("com.UCMobile.intl");
+        mData.add("com.ume.browser.northamerica");
+        mData.add("com.vlingo.midas");
+        mData.add("com.wb.goog.got.conquest");
+        mData.add("com.yahoo.mobile.client.android.liveweather");
+        mData.add("com.yellowpages.android.ypmobile");
+        mData.add("com.yelp.android");
+        mData.add("com.zhiliaoapp.musically");
+        mData.add("de.axelspringer.yana.zeropage");
+        mData.add("flipboard.app");
+        mData.add("flipboard.boxer.app");
+        mData.add("id.co.babe");
+        mData.add("in.mohalla.sharechat");
+        mData.add("in.playsimple.wordtrip");
+        mData.add("jp.co.omronsoft.openwnn");
+        mData.add("jp.gocro.smartnews.android");
+        mData.add("msgplus.jibe.sca.vpl");
+        mData.add("net.sharewire.parkmobilev2");
+        mData.add("pl.zdunex25.updater");
+        mData.add("tv.fubo.mobile.vpl");
+        mData.add("tv.peel.app");
+        mData.add("zpub.res");
+        mData.add("com.monotype.android.font.chococooky");
+        mData.add("com.monotype.android.font.cooljazz");
+        mData.add("com.monotype.android.font.foundation");
+        mData.add("com.monotype.android.font.rosemary");
+        mData.add("com.dsi.ant.plugins.antplus");
+        mData.add("com.dsi.ant.sample.acquirechannels");
+        mData.add("com.dsi.ant.server");
+        mData.add("com.dsi.ant.service.socket");
+        mData.add("co.sitic.pp");
+        mData.add("com.mediatek.atmwifimeta");
+        mData.add("com.mediatek.engineermode");
+        mData.add("com.mediatek.mdmconfig");
+        mData.add("com.mediatek.mtklogger");
+        mData.add("com.mediatek.providers.drm");
+        mData.add("com.mediatek.wfo.impl");
+        return mData;
+    }
+
+    public static String getMiscellaneousList(Context context) {
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getMiscellaneous().toString().substring(1, getMiscellaneous().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                mAppList.append(PackageTasks.getAppName(s, context)).append("\n");
+            }
+        }
+        return mAppList.toString();
+    }
+
+    private static void enableMiscellaneous(Context context) {
+        PackageTasks.initializeModule();
+        StringBuilder mAppList = new StringBuilder();
+        String[] apps = getMiscellaneous().toString().substring(1, getMiscellaneous().toString().length() - 1).split(", ");
+        for (String s : apps) {
+            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
+                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
+                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
+                Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_misc");
+            }
+        }
+    }
+
+    private static void disableMiscellaneous() {
+        try {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_misc").split("\\r?\\n")) {
+                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
+                    PackageTasks.revertDelete(line);
+                    Utils.delete(PackageTasks.getModulePath() + "/uad_misc");
                 }
             }
         } catch (Exception ignored) {
@@ -1123,6 +1884,27 @@ public class UAD {
                 case "samsung":
                     disableSamsung();
                     break;
+                case "motorola":
+                    disableMotorola();
+                    break;
+                case "nokia":
+                    disableNokia();
+                    break;
+                case "oppo":
+                    disableOppo();
+                    break;
+                case "sony":
+                    disableSony();
+                    break;
+                case "xiaomi":
+                    disableXiaomi();
+                    break;
+                case "zte":
+                    disableZTE();
+                    break;
+                case "misc":
+                    disableMiscellaneous();
+                    break;
                 default:
                     disableGoogle();
                     break;
@@ -1149,6 +1931,27 @@ public class UAD {
                     break;
                 case "samsung":
                     enableSamsung(activity);
+                    break;
+                case "motorola":
+                    enableMotorola(activity);
+                    break;
+                case "nokia":
+                    enableNokia(activity);
+                    break;
+                case "oppo":
+                    enableOppo(activity);
+                    break;
+                case "sony":
+                    enableSony(activity);
+                    break;
+                case "xiaomi":
+                    enableXiaomi(activity);
+                    break;
+                case "zte":
+                    enableZTE(activity);
+                    break;
+                case "misc":
+                    enableMiscellaneous(activity);
                     break;
                 default:
                     enableGoogle(activity);

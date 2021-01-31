@@ -57,14 +57,18 @@
     <string name="licence_summary">View GPL V3</string>
     <string name="light">Light</string>
     <string name="magisk_credit_dialog">Powered with Magisk</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="module_status_reset">Reset Module</string>
     <string name="more_apps">More Apps</string>
     <string name="more_apps_summary">More apps from the developer</string>
-    <string name="module_status_reset">Reset Module</string>
+    <string name="motorola">Motorola</string>
     <string name="name">Name</string>
+    <string name="nokia">Nokia</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_magisk">Magisk Not Detected</string>
     <string name="no_root">No Root</string>
     <string name="oneplus">OnePlus</string>
+    <string name="oppo">Oppo</string>
     <string name="package_id">Package ID</string>
     <string name="press_back_exit">Press the \'Back\' button again to Exit!</string>
     <string name="rate_us">Rate Us</string>
@@ -81,6 +85,7 @@
     <string name="search_hint">Search…</string>
     <string name="show_from">Show Apps From</string>
     <string name="share_app_message">Get De-Bloater %s from</string>
+    <string name="sony">Sony</string>
     <string name="sort_by">Sort Apps By</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Visit GitHub page</string>
@@ -96,4 +101,6 @@
     <string name="version">Version</string>
     <string name="warning">Warning</string>
     <string name="warning_summary">De-Bloater is too powerful! Please use it carefully. The developer of this application doesn\'t take any responsibility if something went wrong due to its inappropriate use.</string>
+    <string name="xiaomi">Xiaomi</string>
+    <string name="zte">ZTE</string>
 </resources>
