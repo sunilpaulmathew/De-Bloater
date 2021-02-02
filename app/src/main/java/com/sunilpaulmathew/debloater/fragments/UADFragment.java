@@ -116,7 +116,7 @@ public class UADFragment extends Fragment {
         }
         setStatus();
 
-        mTitleLayout.setOnClickListener(v -> Utils.launchUrl(mRootView, "https://gitlab.com/W1nst0n/universal-android-debloater",
+        mTitleLayout.setOnClickListener(v -> Utils.launchUrl( "https://gitlab.com/W1nst0n/universal-android-debloater",
                 requireActivity()));
 
         mActionLayout.setOnClickListener(v -> new AsyncTask<Void, Void, Void>() {

@@ -26,7 +26,6 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
-    private BottomNavigationView mBottomNav;
     private Handler mHandler = new Handler();
 
     @Override
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-        mBottomNav = findViewById(R.id.bottom_navigation);
+        BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
         mBottomNav.setOnNavigationItemSelectedListener(navListener);
         mBottomNav.setVisibility(View.VISIBLE);
 
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             mExit = false;
             super.onBackPressed();
         } else {
-            Utils.snackBar(mBottomNav, getString(R.string.press_back_exit));
+            Utils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit));
             mExit = true;
             mHandler.postDelayed(() -> mExit = false, 2000);
         }

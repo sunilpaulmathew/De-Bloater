@@ -102,15 +102,15 @@ public class Utils {
                 4 : 3 : getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
     }
 
-    public static void launchUrl(View view, String url, Context context) {
+    public static void launchUrl(String url, Activity activity) {
         if (url == null) return;
-        if (isNetworkUnavailable(context)) {
-            snackBar(view, context.getString(R.string.no_internet));
+        if (isNetworkUnavailable(activity)) {
+            snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
         } else {
             try {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
-                context.startActivity(i);
+                activity.startActivity(i);
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
             }

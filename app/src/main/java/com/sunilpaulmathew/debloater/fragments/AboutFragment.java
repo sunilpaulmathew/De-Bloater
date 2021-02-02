@@ -1,6 +1,7 @@
 package com.sunilpaulmathew.debloater.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -100,7 +101,7 @@ public class AboutFragment extends Fragment {
             holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
             holder.mRVLayout.setOnClickListener(v -> {
                 if (this.data.get(position).getURL() != null) {
-                    Utils.launchUrl(holder.mRVLayout, this.data.get(position).getURL(), holder.mRVLayout.getContext());
+                    Utils.launchUrl(this.data.get(position).getURL(), (Activity) holder.mRVLayout.getContext());
                 } else if (position == 0) {
                     Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -114,7 +115,7 @@ public class AboutFragment extends Fragment {
                     Intent licence = new Intent(holder.mRVLayout.getContext(), LicenceActivity.class);
                     holder.mRVLayout.getContext().startActivity(licence);
                 } else if (position == 7) {
-                    UpdateCheck.manualUpdateCheck(holder.mRVLayout, holder.mRVLayout.getContext());
+                    UpdateCheck.manualUpdateCheck((Activity) holder.mRVLayout.getContext());
                 } else if (position == 8) {
                     Intent shareapp = new Intent();
                     shareapp.setAction(Intent.ACTION_SEND);

@@ -12,7 +12,6 @@ import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -184,24 +183,24 @@ public class UpdateCheck {
         }
     }
 
-    public static void manualUpdateCheck(View view, Context context) {
-        if (Utils.isPermissionDenied(context)) {
-            ActivityCompat.requestPermissions((Activity) context, new String[]{
+    public static void manualUpdateCheck(Activity activity) {
+        if (Utils.isPermissionDenied(activity)) {
+            ActivityCompat.requestPermissions((Activity) activity, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.snackBar(view, context.getString(R.string.storage_access_denied));
+            Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied));
             return;
         }
-        if (Utils.isNetworkUnavailable(context)) {
-            Utils.snackBar(view, context.getString(R.string.no_internet));
+        if (Utils.isNetworkUnavailable(activity)) {
+            Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
             return;
         }
-        getVersionInfo(context);
-        if (hasVersionInfo(context) && BuildConfig.VERSION_CODE < versionCode(context)) {
-            updateAvailableDialog(context);
+        getVersionInfo(activity);
+        if (hasVersionInfo(activity) && BuildConfig.VERSION_CODE < versionCode(activity)) {
+            updateAvailableDialog(activity);
         } else {
-            new MaterialAlertDialogBuilder(context)
+            new MaterialAlertDialogBuilder(activity)
                     .setMessage(R.string.updated_dialog)
-                    .setPositiveButton(context.getString(R.string.cancel), (dialog, id) -> {
+                    .setPositiveButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     }).show();
         }
     }

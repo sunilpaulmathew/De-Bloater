@@ -91,7 +91,7 @@ public class TomatotDebloaterFragment extends Fragment {
             mDisabled.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mStatus.setText(R.string.custom_scripts_tomatot_disabled);
         }
-        mTitleLayout.setOnClickListener(v -> Utils.launchUrl(mRootView, "https://forum.xda-developers.com" +
+        mTitleLayout.setOnClickListener(v -> Utils.launchUrl("https://forum.xda-developers.com" +
                 "/oneplus-6/oneplus-6--6t-cross-device-development/tool-tomatot-debloater-basic-script-to-t3869427",
                 requireActivity()));
         mDisabled.setOnClickListener(v -> {
