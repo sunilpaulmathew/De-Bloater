@@ -1,2 +1,0 @@
-* Added Turkish translations.
-* Miscellaneous changes.
