@@ -3,7 +3,6 @@ package com.sunilpaulmathew.debloater.fragments;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,10 +13,8 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
@@ -28,12 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
-import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.activities.TomatotActivity;
 import com.sunilpaulmathew.debloater.activities.UADActivity;
+import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
-
-import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -47,7 +43,7 @@ public class ActivePackagesFragment extends Fragment {
     private LinearLayout mProgressLayout;
     private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
-    private RecycleViewAdapter mRecycleViewAdapter;
+    private ActivePackagesAdapter mRecycleViewAdapter;
 
     @Nullable
     @Override
@@ -214,7 +210,7 @@ public class ActivePackagesFragment extends Fragment {
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getActivePackageData(activity));
+                            mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
                             return null;
                         }
 
@@ -252,7 +248,7 @@ public class ActivePackagesFragment extends Fragment {
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageTasks.getActivePackageData(activity));
+                            mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
                             return null;
                         }
 
@@ -281,97 +277,6 @@ public class ActivePackagesFragment extends Fragment {
             PackageTasks.mSearchText = null;
             PackageTasks.mSearchWord.setText(null);
         }
-    }
-
-    private static class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
-
-        private List<String> data;
-        private static final String MODULE_PARENT = "/data/adb/modules/De-bloater";
-
-        public RecycleViewAdapter(List<String> data) {
-            this.data = data;
-        }
-
-        @NonNull
-        @Override
-        public RecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_layout, parent, false);
-            return new RecycleViewAdapter.ViewHolder(rowItem);
-        }
-
-        @SuppressLint("UseCompatLoadingForDrawables")
-        @Override
-        public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
-            try {
-                holder.mIcon.setImageDrawable(PackageTasks.getAppIcon(this.data.get(position), holder.mName.getContext()));
-                holder.mPath.setText(PackageTasks.getAPKPath(this.data.get(position), holder.mName.getContext()));
-                if (PackageTasks.mSearchText != null && PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().contains(PackageTasks.mSearchText)) {
-                    holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().replace(PackageTasks.mSearchText,
-                            "<b><i><font color=\"" + Color.RED + "\">" + PackageTasks.mSearchText + "</font></i></b>")));
-                } else {
-                    holder.mName.setText(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()));
-                }
-                if (Utils.isDarkTheme(holder.mName.getContext())) {
-                    holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
-                }
-                if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
-                    holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.restore));
-                    holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore));
-                    holder.statusMessage.setTextColor(Color.RED);
-                    holder.statusMessage.setVisibility(View.VISIBLE);
-                    holder.actionMessage.setTextColor(Color.GREEN);
-                    holder.mActionIcon.setColorFilter(Color.GREEN);
-                    holder.statusMessage.setText(holder.actionLayout.getContext().getString(R.string.status_message_remove));
-                } else {
-                    holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.remove));
-                    holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_delete));
-                    holder.statusMessage.setTextColor(Color.GREEN);
-                    holder.statusMessage.setVisibility(View.GONE);
-                    holder.actionMessage.setTextColor(Color.RED);
-                    holder.mActionIcon.setColorFilter(Color.RED);
-                    holder.statusMessage.setText(null);
-                }
-                holder.actionLayout.setOnClickListener(v -> {
-                    if (Utils.isPermissionDenied(holder.actionLayout.getContext())) {
-                        Utils.snackBar(holder.actionLayout, holder.actionLayout.getContext().getString(R.string.storage_access_denied));
-                        return;
-                    }
-                    if (Utils.exist(MODULE_PARENT + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(MODULE_PARENT + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
-                        PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()));
-                    } else {
-                        PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.mName.getText().toString(), holder.actionLayout.getContext());
-                    }
-                    notifyDataSetChanged();
-                });
-            } catch (NullPointerException ignored) {}
-        }
-
-        @Override
-        public int getItemCount() {
-            return this.data.size();
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            private AppCompatImageButton mActionIcon;
-            private AppCompatImageButton mIcon;
-            private MaterialTextView mName;
-            private MaterialTextView mPath;
-            private MaterialTextView actionMessage;
-            private MaterialTextView statusMessage;
-            private FrameLayout actionLayout;
-
-            public ViewHolder(View view) {
-                super(view);
-                this.mActionIcon = view.findViewById(R.id.action_icon);
-                this.mIcon = view.findViewById(R.id.icon);
-                this.mName = view.findViewById(R.id.title);
-                this.mPath = view.findViewById(R.id.description);
-                this.actionMessage = view.findViewById(R.id.action_message);
-                this.statusMessage = view.findViewById(R.id.status_message);
-                this.actionLayout = view.findViewById(R.id.action_layout);
-            }
-        }
-
     }
     
 }
