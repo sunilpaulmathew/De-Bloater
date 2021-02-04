@@ -20,12 +20,10 @@
     <string name="custom_scripts">Пользовательские скрипты</string>
     <string name="custom_scripts_tomatot">Tomatot Debloater</string>
     <string name="custom_scripts_tomatot_list">В этот скрипт включены следующие приложения!</string>
-    <string name="custom_scripts_tomatot_disabled">Tomatot debloater в настоящее время отключен</string>
     <string name="custom_scripts_tomatot_extreme">Удалите все приложения, включенные в список invisible и light, а также несколько приложений Google и функций, которые не являются абсолютно необходимыми, но полезны для некоторых людей.</string>
     <string name="custom_scripts_tomatot_invisible">Удалите только приложения, связанные с телеметрией или не имеющие никакой функции.</string>
     <string name="custom_scripts_tomatot_light">Удалите все приложения, включенные в список invisible, а также некоторые другие редко используемые приложения.</string>
     <string name="custom_scripts_tomatot_Summary">Адаптация debloater скрипта, изначально разработанного Tomatot для OnePlus 6! Используйте этот сценарий на других устройствах на свой страх и риск.</string>
-    <string name="disabled">Отключено</string>
     <string name="dismiss">Закрыть</string>
     <string name="donate">Пожертвовать</string>
     <string name="donate_summary">Пожертвуйте, чтобы поддержать разработчика!</string>

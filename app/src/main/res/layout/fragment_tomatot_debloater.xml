@@ -58,16 +58,6 @@
                     android:padding="10dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/disabled"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:focusable="false"
-                        android:textStyle="bold"
-                        android:text="@string/disabled"
-                        android:textSize="17sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/invisible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,7 +110,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"
-                        android:text="@string/apply"
                         android:textStyle="bold"
                         android:textSize="15sp"
                         android:gravity="end" />

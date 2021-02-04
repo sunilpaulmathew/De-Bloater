@@ -21,12 +21,10 @@
     <string name="custom_scripts">Özel Scriptler</string>
     <string name="custom_scripts_tomatot">Tomatot Debloater</string>
     <string name="custom_scripts_tomatot_list">Listedeki uygulamalar scripte dahildir!</string>
-    <string name="custom_scripts_tomatot_disabled">Tomatot debloaterı şu anda aktif değil.</string>
     <string name="custom_scripts_tomatot_extreme">Görünmez ve açık listede yer alan tüm uygulamaların yanı sıra birkaç Google Uygulamasını ve kesinlikle gerekli olmayan ancak bazı kişiler için yararlı olan uygulamaları ve özellikleri kaldırın.</string>
     <string name="custom_scripts_tomatot_invisible">Yalnızca telemetri ile ilgili veya herhangi bir işlevi olmayan uygulamaları kaldırın.</string>
     <string name="custom_scripts_tomatot_light">Görünmez listede bulunan tüm uygulamaları ve nadiren kullanılan diğer bazı uygulamaları kaldırın.</string>
     <string name="custom_scripts_tomatot_Summary">Başlangıçta Tomatot tarafından OnePlus 6 için geliştirilen debloater betiğinin genele uyarlanması! Bu komut dosyasını çalıştırmak sonucunda oluşacak riskler size aittir.</string>
-    <string name="disabled">Devre dışı bırakıldı.</string>
     <string name="dismiss">Yoksay</string>
     <string name="donate">Bağış yap!</string>
     <string name="donate_summary">Gelişimi desteklemek için bağış yap!</string>

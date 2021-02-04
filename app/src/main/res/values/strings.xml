@@ -27,7 +27,6 @@
     <string name="custom_scripts_applied_message">Everything done! The changes will be done after a reboot.</string>
     <string name="custom_scripts_tomatot">Tomatot Debloater</string>
     <string name="custom_scripts_tomatot_list">The following apps are included in this script!</string>
-    <string name="custom_scripts_tomatot_disabled">Tomatot debloater is currently disabled</string>
     <string name="custom_scripts_tomatot_extreme">Remove all the apps included in the invisible and light list as well as a few Google Apps and features that are not absolutely necessary but useful for some people.</string>
     <string name="custom_scripts_tomatot_invisible">Remove only apps related to telemetry or that don\'t have any function.</string>
     <string name="custom_scripts_tomatot_light">Remove all the apps included in the invisible list as well as some other apps that rarely used.</string>
@@ -36,7 +35,6 @@
     <string name="custom_scripts_uad_disabled">This script is currently disabled!</string>
     <string name="custom_scripts_uad_enabled">This script is currently enabled!</string>
     <string name="custom_scripts_uad_summary">Adaptation of the Universal Android Debloater originally developed by W1nst0n with an aim to improve the battery performance and privacy by removing unnecessary and obscure system apps.</string>
-    <string name="disabled">Disabled</string>
     <string name="dismiss">Dismiss</string>
     <string name="donate">Donate</string>
     <string name="donate_summary">Donate to support the development!</string>

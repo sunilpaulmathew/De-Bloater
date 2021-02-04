@@ -27,7 +27,7 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 public class TomatotDebloaterFragment extends Fragment {
 
     private MaterialTextView mAppsList;
-    private boolean mDisabledT = false, mExtremeT = false, mInvisibleT = false, mLightT = false;
+    private boolean mExtremeT = false, mInvisibleT = false, mLightT = false;
     private MaterialCardView mAppListCard;
     private LinearLayout mProgressLayout;
 
@@ -40,7 +40,6 @@ public class TomatotDebloaterFragment extends Fragment {
         AppCompatImageButton mActionIcon = mRootView.findViewById(R.id.action_icon);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         LinearLayout mTitleLayout = mRootView.findViewById(R.id.title_layout);
-        MaterialTextView mDisabled = mRootView.findViewById(R.id.disabled);
         MaterialTextView mInvisible = mRootView.findViewById(R.id.invisible);
         MaterialTextView mLight = mRootView.findViewById(R.id.light);
         MaterialTextView mExtreme = mRootView.findViewById(R.id.extreme);
@@ -57,89 +56,74 @@ public class TomatotDebloaterFragment extends Fragment {
         }
 
         if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
+            mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
+            mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
+            mExtreme.setTextColor(Utils.getThemeAccentColor(requireActivity()));
+            mStatus.setText(R.string.custom_scripts_uad_enabled);
+            mActionMessage.setText(R.string.restore);
             mAppsList.setText(Tomatot.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
-        } else if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-            mAppsList.setText(Tomatot.getInvisibletList());
-            mAppListCard.setVisibility(View.VISIBLE);
         } else if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+            mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
+            mLight.setTextColor(Utils.getThemeAccentColor(requireActivity()));
+            mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
+            mStatus.setText(R.string.custom_scripts_uad_enabled);
+            mActionMessage.setText(R.string.restore);
             mAppsList.setText(Tomatot.getLightList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else {
-            mAppListCard.setVisibility(View.GONE);
-        }
-
-        if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mExtreme.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_extreme);
-        } else if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mLight.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_light);
-        } else if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mInvisible.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_invisible);
-        } else {
-            mDisabled.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_disabled);
+            mStatus.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+                    R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
+            mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+                    R.string.restore : R.string.apply);
+            mInvisibleT = true;
+            mAppsList.setText(Tomatot.getInvisibletList());
+            mAppListCard.setVisibility(View.VISIBLE);
         }
+
         mTitleLayout.setOnClickListener(v -> Utils.launchUrl("https://forum.xda-developers.com" +
                 "/oneplus-6/oneplus-6--6t-cross-device-development/tool-tomatot-debloater-basic-script-to-t3869427",
                 requireActivity()));
-        mDisabled.setOnClickListener(v -> {
-            mDisabledT = true;
-            mExtremeT = false;
-            mInvisibleT = false;
-            mLightT = false;
-            mDisabled.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_disabled);
-            updateAppList();
-        });
         mInvisible.setOnClickListener(v -> {
-            mDisabledT = false;
             mExtremeT = false;
             mInvisibleT = true;
             mLightT = false;
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mInvisible.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_invisible);
+            mStatus.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+                    R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
+            mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+                    R.string.restore : R.string.apply);
             updateAppList();
         });
         mLight.setOnClickListener(v -> {
-            mDisabledT = false;
             mExtremeT = false;
             mInvisibleT = false;
             mLightT = true;
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_light);
+            mStatus.setText(Utils.getBoolean("tomatot_light", false, requireActivity()) ?
+                    R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_light);
+            mActionMessage.setText(Utils.getBoolean("tomatot_light", false, requireActivity()) ?
+                    R.string.restore : R.string.apply);
             updateAppList();
         });
         mExtreme.setOnClickListener(v -> {
-            mDisabledT = false;
             mExtremeT = true;
             mInvisibleT = false;
             mLightT = false;
-            mDisabled.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mStatus.setText(R.string.custom_scripts_tomatot_extreme);
+            mStatus.setText(Utils.getBoolean("tomatot_extreme", false, requireActivity()) ?
+                    R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_extreme);
+            mActionMessage.setText(Utils.getBoolean("tomatot_extreme", false, requireActivity()) ?
+                    R.string.restore : R.string.apply);
             updateAppList();
         });
         mActionLayout.setOnClickListener(v -> {
@@ -152,35 +136,30 @@ public class TomatotDebloaterFragment extends Fragment {
                 }
                 @Override
                 protected Void doInBackground(Void... voids) {
-                    if (mDisabledT) {
-                        if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
-                            Tomatot.disableTomatotInvisible(requireActivity());
-                        } else if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
-                            Tomatot.disableTomatotLight(requireActivity());
-                        } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
+                    if (mExtremeT) {
+                        if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
                             Tomatot.disableTomatotExtreme(requireActivity());
-                        }
-                    } else if (mExtremeT) {
-                        if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
+                        } else {
                             Tomatot.disableTomatotInvisible(requireActivity());
-                        } else if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
                             Tomatot.disableTomatotLight(requireActivity());
+                            Tomatot.enableTomatotExtreme(requireActivity());
                         }
-                        Tomatot.enableTomatotExtreme(requireActivity());
                     } else if (mInvisibleT) {
-                        if (Utils.getBoolean("tomatot_light", true, requireActivity())) {
-                            Tomatot.disableTomatotLight(requireActivity());
-                        } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
-                            Tomatot.disableTomatotExtreme(requireActivity());
-                        }
-                        Tomatot.enableTomatotInvisible(requireActivity());
-                    } else if (mLightT) {
-                        if (Utils.getBoolean("tomatot_invisible", true, requireActivity())) {
+                        if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
                             Tomatot.disableTomatotInvisible(requireActivity());
-                        } else if (Utils.getBoolean("tomatot_extreme", true, requireActivity())) {
+                        } else {
+                            Tomatot.disableTomatotLight(requireActivity());
                             Tomatot.disableTomatotExtreme(requireActivity());
+                            Tomatot.enableTomatotInvisible(requireActivity());
                         }
-                        Tomatot.enableTomatotLight(requireActivity());
+                    } else if (mLightT) {
+                        if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+                            Tomatot.disableTomatotLight(requireActivity());
+                        } else {
+                            Tomatot.disableTomatotInvisible(requireActivity());
+                            Tomatot.disableTomatotExtreme(requireActivity());
+                            Tomatot.enableTomatotLight(requireActivity());
+                        }
                     }
                     return null;
                 }
@@ -203,9 +182,7 @@ public class TomatotDebloaterFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void updateAppList() {
-        if (mDisabledT) {
-            mAppListCard.setVisibility(View.GONE);
-        } else if (mExtremeT) {
+        if (mExtremeT) {
             mAppsList.setText(Tomatot.getExtremeList());
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (mInvisibleT) {
