@@ -111,8 +111,8 @@ public class InactivePackagesFragment extends Fragment {
                                 DeBloater.put(app);
                                 obj.put("DeBloater", DeBloater);
                             }
-                            Utils.create(obj.toString(), Environment.getExternalStorageDirectory().getPath() + "/de-bloated_list.json");
-                            Utils.snackBar(mRecyclerView, getString(R.string.backup_message, Environment.getExternalStorageDirectory().getPath() + "/de-bloater_list.json"));
+                            Utils.create(obj.toString(), PackageTasks.getStoragePath(requireActivity()) + "/de-bloated_list.json");
+                            Utils.snackBar(mRecyclerView, getString(R.string.backup_message, PackageTasks.getStoragePath(requireActivity()) + "/de-bloater_list.json"));
                         } catch (JSONException ignored) {
                         }
                     } else {
