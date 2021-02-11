@@ -1,7 +1,0 @@
-* Adapted Universal Android Debloater by @W1nst0n.
-* Re-organized and largely improved coding.
-* Slightly improved app UI.
-* Added a start-up warning message.
-* Temporarily fixed storage relates issues on Android 11.
-* Updated build tools and dependencies.
-* Miscellaneous changes.

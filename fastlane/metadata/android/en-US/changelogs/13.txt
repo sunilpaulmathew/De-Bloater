@@ -1,0 +1,5 @@
+* Improved Universal Android and Tomatot debloater.
+* Updated Turkish and Russian translation.
+* Updated storage handling for Android 10 and above.
+* Updated build tools and dependencies.
+* Miscellaneous changes.

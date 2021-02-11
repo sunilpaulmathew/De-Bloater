@@ -2,6 +2,14 @@
 
 <i>De-Bloater</i> requires Root Access and a fully functional Magisk environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
 
+<b>Features</b>
+
+- Easily remove system applications from "/system", "/vendor", and "/product" directories (Reboot required).
+- Restore de-bloated apps, either individually or as a whole (Reboot required).
+- Includes pre-defined de-bloated scripts (Universal Android and Tomatot debloater).
+- Elegantly designed user interface with an auto-dark/light theme.
+- A lot more.
+
 <b>How to Use</b>
 
 Open the app, click the remove button on each app you want to remove. The selected apps will be removed systemless-ly after a reboot. To restore an app, either Reset Module (on the top menu) or selectively restore from the second page. Please note that a restart is necessary to get any of the changes in effect.
@@ -14,7 +22,7 @@ In case, if you accidentally remove some important apps and your phone bootloops
 
 <b>Translations</b>
 
-Please help me to translate this app - Original language string in English is available at <a href='https://github.com/sunilpaulmathew/De-Bloater/blob/master/app/src/main/res/values/strings.xml'>GitHub</a>.
+Please help me to translate this application via <a href='https://poeditor.com/join/project?hash=BZS89Ev3WG'>POEditor</a>. You may also translate after downloading the original language string available <a href='https://github.com/sunilpaulmathew/De-Bloater/blob/master/app/src/main/res/values/strings.xml'>here</a>.
 
 <b>Please Note</b>
 
