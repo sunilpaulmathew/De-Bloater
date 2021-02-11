@@ -51,7 +51,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
         holder.Title.setText(this.data.get(position).getTitle());
         if (Utils.isDarkTheme(holder.Title.getContext())) {
             holder.Title.setTextColor(Utils.getThemeAccentColor(holder.Title.getContext()));
-        } else if (position != 0 && !this.data.get(position).getTitle().equals(holder.Title.getContext().getString(R.string.fdroid))){
+        } else if (position != 0 && !this.data.get(position).getTitle().equals(holder.Title.getContext()
+                .getString(R.string.fdroid)) && !this.data.get(position).getTitle().equals(holder.Title
+                .getContext().getString(R.string.translations))) {
             holder.mIcon.setColorFilter(Color.BLACK);
         }
         holder.Description.setText(this.data.get(position).getDescription());

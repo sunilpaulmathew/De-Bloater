@@ -38,6 +38,9 @@ The app will systemless-ly replace the selected APKs by making a Magisk module. 
 ## Troubleshooting
 In case, if you accidentally remove some important apps and your phone bootloops, please delete "/data/adb/modules/De-bloater" via recovery.
 
+## Translations
+Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
+
 ## Donations
 If you like to appreciate my work, please consider donating to me (either via [Liberapay](https://liberapay.com/sunilpaulmathew/donate), [PayPal](https://www.paypal.me/menacherry/), [Ko-fi](https://ko-fi.com/sunilpaulmathew/), or by purchasing the [SmartPack Donation Package](https://play.google.com/store/apps/details?id=com.smartpack.donate) from playstore) as it is helpful to continue my projects more active, although it is not at all necessary.
 
