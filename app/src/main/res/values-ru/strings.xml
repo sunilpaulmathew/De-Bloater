@@ -77,8 +77,7 @@
     <string name="support_summary">"Посетите группу поддержки"</string>
     <string name="translations">"Перевод"</string>
     <string name="translations_summary">"Помогите мне перевести это приложение!"</string>
-    <string name="update_available">"Доступно обновление!
-(%s)"</string>
+    <string name="update_available">"Доступно обновление!\n(%s)"</string>
     <string name="updated_dialog">"Поздравляю! У вас уже установлена последняя версия De-Bloater!"</string>
     <string name="version">"Версия"</string>
     <string name="warning">"Предупреждение"</string>

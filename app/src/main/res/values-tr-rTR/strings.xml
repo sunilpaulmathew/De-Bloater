@@ -33,8 +33,7 @@
     <string name="custom_scripts_uad">"Evrensel Android De-bloater"</string>
     <string name="custom_scripts_uad_disabled">"Script şuanda devre dışı!"</string>
     <string name="custom_scripts_uad_enabled">"Script şuanda aktif!"</string>
-    <string name="custom_scripts_uad_summary">"Gereksiz ve belirsiz sistem uygulamalarını kaldırarak pil performansını ve gizliliği artırmak amacıyla orijinal olarak W1nst0n tarafından geliştirilen Evrensel Android Debloater'ın uyarlanmasıdır.
-"</string>
+    <string name="custom_scripts_uad_summary">"Gereksiz ve belirsiz sistem uygulamalarını kaldırarak pil performansını ve gizliliği artırmak amacıyla orijinal olarak W1nst0n tarafından geliştirilen Evrensel Android Debloater'ın uyarlanmasıdır."</string>
     <string name="dismiss">"Yoksay"</string>
     <string name="donate">"Bağış yap!"</string>
     <string name="donate_summary">"Gelişimi desteklemek için bağış yap!"</string>
@@ -95,8 +94,7 @@
     <string name="support_summary">"Destek grubunu ziyaret et"</string>
     <string name="translations">"Çeviriler"</string>
     <string name="translations_summary">"Bu uygulamayı çevirmeme yardım et!"</string>
-    <string name="update_available">"Yeni güncelleme mevcut!
-(%s)"</string>
+    <string name="update_available">"Yeni güncelleme mevcut!\n(%s)"</string>
     <string name="updated_dialog">"Tebrikler! De-Bloater'ın güncel sürümüne sahipsiniz!"</string>
     <string name="version">"Versiyon"</string>
     <string name="warning">"Dikkat!"</string>
