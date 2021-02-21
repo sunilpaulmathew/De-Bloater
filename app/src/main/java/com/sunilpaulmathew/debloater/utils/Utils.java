@@ -60,17 +60,17 @@ public class Utils {
         return isPackageInstalled("com.android.vending", context);
     }
 
-    public static boolean isProUser(Context context) {
-        return UpdateCheck.isSignatureMatched(context) && isPlayStoreAvailable(context);
+    public static boolean isFDroidAvailable(Context context) {
+        return isPackageInstalled("org.fdroid.fdroid", context);
     }
 
     public static String getAppStoreURL(Context context) {
-        if (isProUser(context)) {
+        if (isPlayStoreAvailable(context)) {
             return " Google Play: https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater";
-        } else if (UpdateCheck.isSignatureMatched(context)) {
-            return " GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest";
-        } else {
+        } else if (isFDroidAvailable(context)) {
             return " F-Droid: https://f-droid.org/packages/com.sunilpaulmathew.debloater/";
+        } else {
+            return " GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest";
         }
     }
 
