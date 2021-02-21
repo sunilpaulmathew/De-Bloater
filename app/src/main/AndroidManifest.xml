@@ -27,7 +27,6 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".activities.ChangeLogActivity" />
-        <activity android:name=".activities.LicenceActivity" />
         <activity android:name=".activities.TomatotActivity" />
         <activity android:name=".activities.UADActivity" />
 
