@@ -1,0 +1,3 @@
+* Added Spanish and Italian translations.
+* Updated some options in about page.
+* Miscellaneous changes.
