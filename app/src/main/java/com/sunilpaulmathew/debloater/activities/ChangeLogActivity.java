@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
@@ -29,7 +28,6 @@ public class ChangeLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changelog);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
         MaterialTextView mChangeLog = findViewById(R.id.change_log);
         MaterialTextView mTitle = findViewById(R.id.app_title);
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
@@ -42,10 +40,7 @@ public class ChangeLogActivity extends AppCompatActivity {
         }
         mChangeLog.setText(change_log);
         mCancel.setOnClickListener(v -> {
-            onBackPressed();
-        });
-        mBack.setOnClickListener(v -> {
-            onBackPressed();
+            finish();
         });
     }
 

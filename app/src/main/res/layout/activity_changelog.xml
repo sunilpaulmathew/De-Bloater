@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center"
-    android:padding="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorBlack"
-        android:gravity="center_vertical"
-        android:baselineAligned="false">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@color/colorBlack"
-            android:tint="@color/ColorBlue"
-            android:gravity="center_vertical"
-            android:src="@drawable/ic_back" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:text="@string/about"
-            android:textColor="@color/ColorBlue"
-            android:textIsSelectable="true"
-            android:textSize="20sp" />
-    </LinearLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="50sp"
         android:layout_gravity="start"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp" >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="100dp"
@@ -118,11 +89,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_horizontal"
-        android:layout_gravity="bottom"
-        android:text="@string/cancel"
-        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorBlack"
         android:textColor="@color/ColorBlue"
+        android:text="@string/cancel"
+        android:textStyle="bold"
         android:textSize="18sp"
         android:padding="10dp" />
-</com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
