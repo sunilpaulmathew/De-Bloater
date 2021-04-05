@@ -2,7 +2,6 @@
 
     <string name="about">"Hakkında"</string>
     <string name="about_summary">"De-Bloater, Magisk'in gücünü kullanarak önyüklü gelen uygulamalardan sistemsiz olarak kurtulmanızı sağlar!"</string>
-    <string name="accept">"Kabul Et"</string>
     <string name="active">"Aktif"</string>
     <string name="active_app_summary">"Bütün uygulamalar aşağıda listelenmiştir. Kaldırmayı seçtiğiniz uygulamaların işleme alınması için yeniden başlatın!"</string>
     <string name="aosp">"AOSP"</string>

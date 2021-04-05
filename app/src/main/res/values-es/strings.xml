@@ -2,7 +2,6 @@
 
     <string name="about">Acerca de</string>
     <string name="about_summary">De-Bloater es una aplicación que usa el poder de Magisk para quitar aplicaciones no deseadas del sistema!</string>
-    <string name="accept">Aceptar</string>
     <string name="active">Activo</string>
     <string name="active_app_summary">La lista completa de aplicaciones se muestra abajo. Las aplicaciones a ser removidas serán quitadas del sistema después de reiniciar!</string>
     <string name="aosp">AOSP</string>

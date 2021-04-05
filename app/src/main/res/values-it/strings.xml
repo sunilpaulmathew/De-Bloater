@@ -2,7 +2,6 @@
 
     <string name="about">"Di"</string>
     <string name="about_summary">"De-Bloater è un'applicazione che utilizza la potenza di Magisk per scaricare applicazioni indesiderate senza sistema!"</string>
-    <string name="accept">"Accetta"</string>
     <string name="active">"Attivo"</string>
     <string name="active_app_summary">"L'intero elenco delle applicazioni è dettagliato di seguito. Le applicazioni assegnate alla rimozione verranno eliminate senza sistema dopo un riavvio!"</string>
     <string name="aosp">"AOSP"</string>

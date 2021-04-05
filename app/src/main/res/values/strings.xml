@@ -3,7 +3,6 @@
 
     <string name="about">About</string>
     <string name="about_summary">De-Bloater is an application using the power of Magisk to debloat unwanted applications systemless-ly!</string>
-    <string name="accept">Accept</string>
     <string name="active">Active</string>
     <string name="active_app_summary">The entire application list is detailed below. The applications that are assigned to remove will be systemless-ly debloated after a reboot!</string>
     <string name="aosp">AOSP</string>
