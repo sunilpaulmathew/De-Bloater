@@ -45,15 +45,6 @@ public class Restore {
         return null;
     }
 
-    public static boolean isHidden(String string) {
-        try {
-            JSONObject obj = new JSONObject(string);
-            return obj.getBoolean("hidden");
-        } catch (JSONException ignored) {
-        }
-        return false;
-    }
-
     public static boolean validBackup(String path) {
         return getAppList(Utils.read(path)) != null;
     }

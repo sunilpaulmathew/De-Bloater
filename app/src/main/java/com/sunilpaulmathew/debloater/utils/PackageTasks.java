@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Environment;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -130,12 +129,8 @@ public class PackageTasks {
         return apkPath;
     }
 
-    public static String getStoragePath(Context context) {
-        if (Build.VERSION.SDK_INT >= 29) {
-            return Objects.requireNonNull(context.getExternalFilesDir("")).toString();
-        } else {
-            return Environment.getExternalStorageDirectory().getPath();
-        }
+    public static String getStoragePath() {
+        return Environment.getExternalStorageDirectory().getPath();
     }
 
     public static String getModulePath() {

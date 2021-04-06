@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 14
         versionName "v0.14"
         vectorDrawables.useSupportLibrary = true
