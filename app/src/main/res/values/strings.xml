@@ -8,6 +8,7 @@
     <string name="aosp">AOSP</string>
     <string name="apply">Apply</string>
     <string name="apps">%s Applications</string>
+    <string name="apps_all">All</string>
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
@@ -81,7 +82,6 @@
     <string name="restoring">Restoring…</string>
     <string name="samsung">Samsung</string>
     <string name="search_hint">Search…</string>
-    <string name="show_from">Show Apps From</string>
     <string name="share_app_message">Get De-Bloater %s from</string>
     <string name="sony">Sony</string>
     <string name="sort_by">Sort Apps By</string>

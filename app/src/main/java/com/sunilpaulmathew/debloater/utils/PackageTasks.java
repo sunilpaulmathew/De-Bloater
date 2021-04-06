@@ -47,6 +47,8 @@ public class PackageTasks {
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
+        } else {
+            Collections.sort(packages, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.packageName, rhs.packageName));
         }
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
@@ -75,30 +77,21 @@ public class PackageTasks {
     }
 
     private static boolean getSupportedAppsList(String apkPath, Context context) {
-        boolean system = Utils.getBoolean("apps_system", true, context);
-        boolean vendor = Utils.getBoolean("apps_vendor", true, context);
-        boolean product = Utils.getBoolean("apps_product", true, context);
+        String mStatus = Utils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
                 || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/vendor/app")
                 || apkPath.startsWith("/system/vendor/overlay") || apkPath.startsWith("/system/product/overlay");
         boolean vendorApps = apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/vendor/app");
         boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/overlay");
-        if (system && vendor && product) {
-            return systemApps || vendorApps || productApps;
-        } else if (system && vendor) {
-            return systemApps || vendorApps;
-        } else if (system && product) {
-            return systemApps || productApps;
-        } else if (vendor && product) {
-            return vendorApps || productApps;
-        } else if (system) {
-            return systemApps;
-        } else if (vendor) {
-            return vendorApps;
-        } else if (product) {
-            return productApps;
-        } else {
-            return false;
+        switch (mStatus) {
+            case "system":
+                return systemApps;
+            case "product":
+                return productApps;
+            case "vendor":
+                return vendorApps;
+            default:
+                return systemApps || vendorApps || productApps;
         }
     }
 

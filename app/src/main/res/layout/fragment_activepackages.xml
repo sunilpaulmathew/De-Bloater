@@ -80,6 +80,16 @@
                 android:textStyle="italic"/>
         </LinearLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            app:tabSelectedTextColor="?attr/colorAccent"
+            app:tabTextColor="@color/colorWhite"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/reverse_button"
             android:layout_width="wrap_content"

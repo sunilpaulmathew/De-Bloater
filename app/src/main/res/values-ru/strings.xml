@@ -65,7 +65,6 @@
     <string name="restore_question">"Восстановить из %s?"</string>
     <string name="restoring">"Восстановление…"</string>
     <string name="search_hint">"Поиск…"</string>
-    <string name="show_from">"Показать приложения из"</string>
     <string name="share_app_message">"Получите De-Bloater %s с"</string>
     <string name="sort_by">"Сортировать приложения по"</string>
     <string name="source_code">"Исходный код"</string>

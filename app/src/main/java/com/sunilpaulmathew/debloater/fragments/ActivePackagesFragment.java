@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.TomatotActivity;
@@ -30,6 +31,8 @@ import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
+
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -58,6 +61,8 @@ public class ActivePackagesFragment extends Fragment {
         mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
@@ -86,6 +91,54 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_all)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_system)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_product)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_vendor)));
+
+        Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
+
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                String mStatus = Utils.getString("appTypes", "all", requireActivity());
+                switch (tab.getPosition()) {
+                    case 0:
+                        if (!mStatus.equals("all")) {
+                            Utils.saveString("appTypes", "all", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                    case 1:
+                        if (!mStatus.equals("system")) {
+                            Utils.saveString("appTypes", "system", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                    case 2:
+                        if (!mStatus.equals("product")) {
+                            Utils.saveString("appTypes", "product", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                    case 3:
+                        if (!mStatus.equals("vendor")) {
+                            Utils.saveString("appTypes", "vendor", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
         PackageTasks.mSearchWord.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -109,6 +162,20 @@ public class ActivePackagesFragment extends Fragment {
         return mRootView;
     }
 
+    private int getTabPosition(Activity activity) {
+        String mStatus = Utils.getString("appTypes", "all", activity);
+        switch (mStatus) {
+            case "vendor":
+                return 3;
+            case "product":
+                return 2;
+            case "system":
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
     private void menuOptions(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mMenu);
         Menu menu = popupMenu.getMenu();
@@ -120,17 +187,10 @@ public class ActivePackagesFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
         sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
-        SubMenu show = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.show_from));
-        show.add(Menu.NONE, 4, Menu.NONE, getString(R.string.apps_system)).setCheckable(true)
-                .setChecked(Utils.getBoolean("apps_system", true, activity));
-        show.add(Menu.NONE, 5, Menu.NONE, getString(R.string.apps_vendor)).setCheckable(true)
-                .setChecked(Utils.getBoolean("apps_vendor", true, activity));
-        show.add(Menu.NONE, 6, Menu.NONE, getString(R.string.apps_product)).setCheckable(true)
-                .setChecked(Utils.getBoolean("apps_product", true, activity));
         SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
-        customScripts.add(Menu.NONE, 7, Menu.NONE, R.string.custom_scripts_tomatot);
-        customScripts.add(Menu.NONE, 9, Menu.NONE, R.string.custom_scripts_uad);
-        menu.add(Menu.NONE, 8, Menu.NONE, R.string.reboot);
+        customScripts.add(Menu.NONE, 4, Menu.NONE, R.string.custom_scripts_tomatot);
+        customScripts.add(Menu.NONE, 5, Menu.NONE, R.string.custom_scripts_uad);
+        menu.add(Menu.NONE, 6, Menu.NONE, R.string.reboot);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -153,39 +213,15 @@ public class ActivePackagesFragment extends Fragment {
                     }
                     break;
                 case 4:
-                    if (Utils.getBoolean("apps_system", true, activity)) {
-                        Utils.saveBoolean("apps_system", false, activity);
-                    } else {
-                        Utils.saveBoolean("apps_system", true, activity);
-                    }
-                    reload(activity);
-                    break;
-                case 5:
-                    if (Utils.getBoolean("apps_vendor", true, activity)) {
-                        Utils.saveBoolean("apps_vendor", false, activity);
-                    } else {
-                        Utils.saveBoolean("apps_vendor", true, activity);
-                    }
-                    reload(activity);
-                    break;
-                case 6:
-                    if (Utils.getBoolean("apps_product", true, activity)) {
-                        Utils.saveBoolean("apps_product", false, activity);
-                    } else {
-                        Utils.saveBoolean("apps_product", true, activity);
-                    }
-                    reload(activity);
-                    break;
-                case 7:
                     Intent tomatotScript = new Intent(activity, TomatotActivity.class);
                     startActivity(tomatotScript);
                     break;
-                case 8:
-                    Utils.runCommand("svc power reboot");
-                    break;
-                case 9:
+                case 5:
                     Intent uadScript = new Intent(activity, UADActivity.class);
                     startActivity(uadScript);
+                    break;
+                case 6:
+                    Utils.runCommand("svc power reboot");
                     break;
             }
             return false;
