@@ -1,0 +1,3 @@
+* Added a top TabLayout to easily switch app types.
+* Fixed likely crashes on Android 11.
+* Miscellaneous changes.
