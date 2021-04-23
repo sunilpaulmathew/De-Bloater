@@ -45,7 +45,7 @@ public class Restore {
         return null;
     }
 
-    public static boolean validBackup(String path) {
+    public static boolean isValidBackup(String path) {
         return getAppList(Utils.read(path)) != null;
     }
 

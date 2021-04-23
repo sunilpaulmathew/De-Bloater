@@ -215,6 +215,10 @@ public class InactivePackagesFragment extends Fragment {
 
         if (requestCode == 0 && data != null) {
             File mSelectedFile = FilePicker.getSelectedFile();
+            if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
+                Utils.snackBar(mRecyclerView, getString(R.string.restore_error_message));
+                return;
+            }
             new MaterialAlertDialogBuilder(requireActivity())
                     .setMessage(getString(R.string.restore_question, mSelectedFile.getName()))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
