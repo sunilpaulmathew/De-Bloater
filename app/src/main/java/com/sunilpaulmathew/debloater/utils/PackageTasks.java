@@ -8,12 +8,14 @@
 
 package com.sunilpaulmathew.debloater.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -43,7 +45,7 @@ public class PackageTasks {
 
     public static List<String> getActivePackageData(Context context) {
         List<String> mData = new ArrayList<>();
-        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+        @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
         } else {
@@ -174,6 +176,17 @@ public class PackageTasks {
 
     public static void revertDelete(String path) {
         Utils.delete(MODULE_PARENT + path);
+    }
+
+    public static void toggleKeyboard(int mode, Context context) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (mode == 1) {
+            if (mSearchWord.requestFocus()) {
+                imm.showSoftInput(mSearchWord, InputMethodManager.SHOW_IMPLICIT);
+            }
+        } else {
+            imm.hideSoftInputFromWindow(mSearchWord.getWindowToken(), 0);
+        }
     }
 
 }

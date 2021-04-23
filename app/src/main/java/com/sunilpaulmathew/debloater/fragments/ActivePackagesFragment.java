@@ -81,9 +81,11 @@ public class ActivePackagesFragment extends Fragment {
                 PackageTasks.mSearchButton.setVisibility(View.VISIBLE);
                 PackageTasks.mAbout.setVisibility(View.VISIBLE);
                 PackageTasks.mSearchWord.setVisibility(View.GONE);
+                PackageTasks.toggleKeyboard(0, requireActivity());
             } else {
                 PackageTasks.mAbout.setVisibility(View.GONE);
                 PackageTasks.mSearchWord.setVisibility(View.VISIBLE);
+                PackageTasks.toggleKeyboard(1, requireActivity());
             }
         });
 
