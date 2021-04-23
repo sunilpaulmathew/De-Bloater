@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> {
 
-    private ArrayList<RecycleViewItem> data;
+    private final ArrayList<RecycleViewItem> data;
 
     public AboutAdapter(ArrayList<RecycleViewItem> data) {
         this.data = data;
@@ -89,10 +89,10 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatImageButton mIcon;
-        private MaterialTextView Title;
-        private MaterialTextView Description;
-        private LinearLayout mRVLayout;
+        private final AppCompatImageButton mIcon;
+        private final MaterialTextView Title;
+        private final MaterialTextView Description;
+        private final LinearLayout mRVLayout;
 
         public ViewHolder(View view) {
             super(view);

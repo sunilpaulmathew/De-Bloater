@@ -4,13 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -38,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.Objects;
+
+import in.sunilpaulmathew.rootfilepicker.activities.FilePickerActivity;
+import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -48,12 +47,11 @@ public class InactivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
     private AsyncTask<Void, Void, Void> mLoader;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialTextView mProgressText;
     private RecyclerView mRecyclerView;
     private InactivePackagesAdapter mRecycleViewAdapter;
-    private String mPath;
 
     @Nullable
     @Override
@@ -124,9 +122,10 @@ public class InactivePackagesFragment extends Fragment {
                         ActivityCompat.requestPermissions(requireActivity(), new String[] {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                     } else {
-                        Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
-                        restore.setType("*/*");
-                        startActivityForResult(restore, 0);
+                        FilePicker.setPath(Environment.getExternalStorageDirectory().toString());
+                        FilePicker.setExtension("json");
+                        Intent filePicker = new Intent(getActivity(), FilePickerActivity.class);
+                        startActivityForResult(filePicker, 0);
                     }
                     break;
             }
@@ -214,25 +213,10 @@ public class InactivePackagesFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            assert uri != null;
-            File file = new File(Objects.requireNonNull(uri.getPath()));
-            if (Utils.isDocumentsUI(uri)) {
-                @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
-                if (cursor != null && cursor.moveToFirst()) {
-                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
-                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            } else {
-                mPath = Utils.getPath(file);
-            }
-            if (!Restore.validBackup(mPath)) {
-                Utils.snackBar(mRecyclerView, getString(R.string.restore_error_message));
-                return;
-            }
+        if (requestCode == 0 && data != null) {
+            File mSelectedFile = FilePicker.getSelectedFile();
             new MaterialAlertDialogBuilder(requireActivity())
-                    .setMessage(getString(R.string.restore_question, new File(mPath).getName()))
+                    .setMessage(getString(R.string.restore_question, mSelectedFile.getName()))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
                     .setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
@@ -246,7 +230,7 @@ public class InactivePackagesFragment extends Fragment {
 
                             @Override
                             protected Void doInBackground(Void... voids) {
-                                Restore.restoreBackup(mPath, requireActivity());
+                                Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
                                 return null;
                             }
 

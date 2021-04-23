@@ -23,7 +23,7 @@ import java.util.List;
 
 public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackagesAdapter.ViewHolder> {
 
-    private List<String> data;
+    private final List<String> data;
 
     public InactivePackagesAdapter(List<String> data) {
         this.data = data;
@@ -64,13 +64,13 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatImageButton actionIcon;
-        private AppCompatImageButton appIcon;
-        private MaterialTextView appName;
-        private MaterialTextView appID;
-        private MaterialTextView actionMessage;
-        private MaterialTextView statusMessage;
-        private FrameLayout actionLayout;
+        private final AppCompatImageButton actionIcon;
+        private final AppCompatImageButton appIcon;
+        private final MaterialTextView appName;
+        private final MaterialTextView appID;
+        private final MaterialTextView actionMessage;
+        private final MaterialTextView statusMessage;
+        private final FrameLayout actionLayout;
 
         public ViewHolder(View view) {
             super(view);

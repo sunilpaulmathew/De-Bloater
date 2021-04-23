@@ -24,7 +24,7 @@ import java.util.List;
 
 public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAdapter.ViewHolder> {
 
-    private List<String> data;
+    private final List<String> data;
 
     public ActivePackagesAdapter(List<String> data) {
         this.data = data;
@@ -90,13 +90,13 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatImageButton mActionIcon;
-        private AppCompatImageButton mIcon;
-        private MaterialTextView mName;
-        private MaterialTextView mPath;
-        private MaterialTextView actionMessage;
-        private MaterialTextView statusMessage;
-        private FrameLayout actionLayout;
+        private final AppCompatImageButton mActionIcon;
+        private final AppCompatImageButton mIcon;
+        private final MaterialTextView mName;
+        private final MaterialTextView mPath;
+        private final MaterialTextView actionMessage;
+        private final MaterialTextView statusMessage;
+        private final FrameLayout actionLayout;
 
         public ViewHolder(View view) {
             super(view);

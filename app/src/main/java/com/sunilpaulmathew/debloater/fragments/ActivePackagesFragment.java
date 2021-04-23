@@ -42,7 +42,7 @@ public class ActivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
     private AsyncTask<Void, Void, Void> mLoader;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
@@ -68,11 +68,7 @@ public class ActivePackagesFragment extends Fragment {
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
         mReverse.setElevation(10);
         mReverse.setOnClickListener(v -> {
-            if (Utils.getBoolean("reverse_order", false, requireActivity())) {
-                Utils.saveBoolean("reverse_order", false, requireActivity());
-            } else {
-                Utils.saveBoolean("reverse_order", true, requireActivity());
-            }
+            Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
             reload(requireActivity());
         });
 

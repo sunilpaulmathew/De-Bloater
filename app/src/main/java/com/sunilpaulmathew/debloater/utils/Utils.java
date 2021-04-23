@@ -9,7 +9,6 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.TypedValue;
@@ -26,7 +25,6 @@ import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,8 +41,7 @@ import java.util.List;
 public class Utils {
 
     static {
-        Shell.Config.verboseLogging(BuildConfig.DEBUG);
-        Shell.Config.setTimeout(10);
+        Shell.enableVerboseLogging = BuildConfig.DEBUG;
     }
 
     public static boolean isPackageInstalled(String packageID, Context context) {
@@ -289,38 +286,6 @@ public class Utils {
         } else {
             return Html.fromHtml(text);
         }
-    }
-
-    public static String getPath(File file) {
-        String path = file.getAbsolutePath();
-        if (path.startsWith("/document/raw:")) {
-            path = path.replace("/document/raw:", "");
-        } else if (path.startsWith("/document/primary:")) {
-            path = (Environment.getExternalStorageDirectory() + ("/") + path.replace("/document/primary:", ""));
-        } else if (path.startsWith("/document/")) {
-            path = path.replace("/document/", "/storage/").replace(":", "/");
-        }
-        if (path.startsWith("/storage_root/storage/emulated/0")) {
-            path = path.replace("/storage_root/storage/emulated/0", "/storage/emulated/0");
-        } else if (path.startsWith("/storage_root")) {
-            path = path.replace("storage_root", "storage/emulated/0");
-        }
-        if (path.startsWith("/external")) {
-            path = path.replace("external", "storage/emulated/0");
-        } if (path.startsWith("/root/")) {
-            path = path.replace("/root", "");
-        }
-        if (path.contains("file%3A%2F%2F%2F")) {
-            path = path.replace("file%3A%2F%2F%2F", "").replace("%2F", "/");
-        }
-        if (path.contains("%2520")) {
-            path = path.replace("%2520", " ");
-        }
-        return path;
-    }
-
-    public static boolean isDocumentsUI(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
     public static String readAssetFile(Context context, String file) {

@@ -1,6 +1,7 @@
 package com.sunilpaulmathew.debloater;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener
+    @SuppressLint("NonConstantResourceId")
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener
             = menuItem -> {
         Fragment selectedFragment = null;
 
