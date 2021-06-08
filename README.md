@@ -64,10 +64,15 @@ If you like to appreciate my work, please consider donating to me (either via [L
 * [Emre](https://t.me/xcooLwastaken), Turkish Translations
 * [Firerust96](https://github.com/Firerust96), Spanish Translations
 * lay4play, Italian Translations
+* Axel Schaab, German Translations
+* alex & Ktosspl, Polish Translations
+* Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
+
+_If you think I missed your name, please let me know._
 
 ## License
 
-    Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
 
     De-Bloater is a free softwares: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
