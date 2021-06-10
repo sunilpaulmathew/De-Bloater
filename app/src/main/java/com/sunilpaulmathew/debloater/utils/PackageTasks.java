@@ -17,10 +17,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,14 +29,8 @@ import java.util.Objects;
 
 public class PackageTasks {
 
-    private static final String MODULE_PARENT = "/data/adb/modules/De-bloater";
-    public static String mSearchText;
-    public static AppCompatEditText mSearchWord;
-    public static AppCompatImageButton mSearchButton;
-    public static AppCompatTextView mAbout;
-
     static void createModuleParent() {
-        Utils.runCommand(Utils.magiskBusyBox() + " mkdir " + MODULE_PARENT);
+        Utils.runCommand(Utils.magiskBusyBox() + " mkdir " + Common.getModuleParent());
     }
 
     public static List<String> getActivePackageData(Context context) {
@@ -54,9 +44,9 @@ public class PackageTasks {
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
                     && getSupportedAppsList(packageInfo.sourceDir, context)) {
-                if (mSearchText == null) {
+                if (Common.getSearchText() == null) {
                     mData.add(packageInfo.packageName);
-                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(mSearchText)) {
+                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(Common.getSearchText())) {
                     mData.add(packageInfo.packageName);
                 }
             }
@@ -69,7 +59,7 @@ public class PackageTasks {
 
     public static List<String> getInactivePackageData() {
         List<String> mData = new ArrayList<>();
-        for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + " find " + MODULE_PARENT + "/system -type f -name *.apk").split("\\r?\\n")) {
+        for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + " find " + Common.getModuleParent() + "/system -type f -name *.apk").split("\\r?\\n")) {
             if (line.endsWith(".apk")) {
                 mData.add(line);
             }
@@ -142,56 +132,56 @@ public class PackageTasks {
     }
 
     public static String getModulePath() {
-        return MODULE_PARENT;
+        return Common.getModuleParent();
     }
 
     public static void initializeModule() {
-        if (!Utils.exist(MODULE_PARENT)) {
+        if (!Utils.exist(Common.getModuleParent())) {
             createModuleParent();
-            Utils.chmod("755", MODULE_PARENT);
+            Utils.chmod("755", Common.getModuleParent());
             Utils.create("id=De-bloater\n" +
                             "name=De-bloater\n" +
                             "version=v1.0\n" +
                             "versionCode=1\n" +
                             "author=sunilpaulmathew\n" +
                             "description=De-bloat apps Systemless-ly",
-                    MODULE_PARENT + "/module.prop");
-            Utils.chmod("644", MODULE_PARENT + "/module.prop");
+                    Common.getModuleParent() + "/module.prop");
+            Utils.chmod("644", Common.getModuleParent() + "/module.prop");
         }
     }
 
     public static void removeModule(Activity activity) {
         Utils.delete(activity.getFilesDir().getPath() + "/De-bloater");
-        Utils.delete(MODULE_PARENT);
+        Utils.delete(Common.getModuleParent());
         Utils.saveBoolean("tomatot_extreme", false, activity);
         Utils.saveBoolean("tomatot_invisible", false, activity);
         Utils.saveBoolean("tomatot_light", false, activity);
     }
 
     public static boolean isModuleInitialized() {
-        return Utils.exist(MODULE_PARENT) && Utils.exist(MODULE_PARENT + "/module.prop");
+        return Utils.exist(Common.getModuleParent()) && Utils.exist(Common.getModuleParent() + "/module.prop");
     }
 
     public static void setToDelete(String path, String name, Context context) {
         initializeModule();
         new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()).mkdirs();
         Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
-        Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", MODULE_PARENT);
+        Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", Common.getModuleParent());
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
     }
 
     public static void revertDelete(String path) {
-        Utils.delete(MODULE_PARENT + path);
+        Utils.delete(Common.getModuleParent() + path);
     }
 
     public static void toggleKeyboard(int mode, Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (mode == 1) {
-            if (mSearchWord.requestFocus()) {
-                imm.showSoftInput(mSearchWord, InputMethodManager.SHOW_IMPLICIT);
+            if (Common.getSearchWord().requestFocus()) {
+                imm.showSoftInput(Common.getSearchWord(), InputMethodManager.SHOW_IMPLICIT);
             }
         } else {
-            imm.hideSoftInputFromWindow(mSearchWord.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(Common.getSearchWord().getWindowToken(), 0);
         }
     }
 

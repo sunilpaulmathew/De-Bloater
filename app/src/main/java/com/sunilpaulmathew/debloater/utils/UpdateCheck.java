@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -35,16 +34,13 @@ import java.util.Objects;
 
 public class UpdateCheck {
 
-    private static final String LATEST_VERSION_URL = "https://raw.githubusercontent.com/sunilpaulmathew/De-Bloater/master/app/src/main/assets/release.json";
-    private static final String LATEST_APK = Environment.getExternalStorageDirectory().toString() + "/app-release.apk";
-
     private static void getVersionInfo(Context context) {
         if (Utils.isPermissionDenied(context)) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             return;
         }
-        Utils.download(releaseInfo(context), LATEST_VERSION_URL);
+        Utils.download(releaseInfo(context), Common.getLatestVersionUrl());
     }
 
     private static void getLatestApp(Context context) {
@@ -53,7 +49,7 @@ public class UpdateCheck {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             return;
         }
-        Utils.download(LATEST_APK, getLatestApk(context));
+        Utils.download(Common.geLatestAPK(context), getLatestApk(context));
     }
 
     private static String versionName(Context context) {
@@ -151,7 +147,7 @@ public class UpdateCheck {
                 try {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {}
-                if (Utils.exist(LATEST_APK) && Utils.getChecksum(LATEST_APK).contains(Objects.requireNonNull(getChecksum(context)))) {
+                if (Utils.exist(Common.geLatestAPK(context)) && Utils.getChecksum(Common.geLatestAPK(context)).contains(Objects.requireNonNull(getChecksum(context)))) {
                     installUpdate(context);
                 } else {
                     new MaterialAlertDialogBuilder(context)
@@ -210,7 +206,7 @@ public class UpdateCheck {
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         Uri uriFile;
         uriFile = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider",
-                new File(LATEST_APK));
+                new File(Common.geLatestAPK(context)));
         intent.setDataAndType(uriFile, "application/vnd.android.package-archive");
         context.startActivity(Intent.createChooser(intent, ""));
     }

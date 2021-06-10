@@ -29,6 +29,7 @@ import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.TomatotActivity;
 import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -53,9 +54,9 @@ public class ActivePackagesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_activepackages, container, false);
 
-        PackageTasks.mSearchWord = mRootView.findViewById(R.id.search_word);
-        PackageTasks.mSearchButton = mRootView.findViewById(R.id.search_button);
-        PackageTasks.mAbout = mRootView.findViewById(R.id.about_summary);
+        Common.initializeSearchWord(mRootView, R.id.search_word);
+        Common.initializeSearchButton(mRootView, R.id.search_button);
+        Common.initializeAboutSummary(mRootView, R.id.about_summary);
         MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
         mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
@@ -72,19 +73,19 @@ public class ActivePackagesFragment extends Fragment {
             reload(requireActivity());
         });
 
-        PackageTasks.mSearchButton.setOnClickListener(v -> {
-            if (PackageTasks.mSearchWord.getVisibility() == View.VISIBLE) {
-                if (PackageTasks.mSearchText != null && !PackageTasks.mSearchText.isEmpty()) {
-                    PackageTasks.mSearchText = null;
-                    PackageTasks.mSearchWord.setText(null);
+        Common.getSearchButton().setOnClickListener(v -> {
+            if (Common.getSearchWord().getVisibility() == View.VISIBLE) {
+                if (Common.getSearchText() != null && !Common.getSearchText().isEmpty()) {
+                    Common.setSearchText(null);
+                    Common.getSearchWord().setText(null);
                 }
-                PackageTasks.mSearchButton.setVisibility(View.VISIBLE);
-                PackageTasks.mAbout.setVisibility(View.VISIBLE);
-                PackageTasks.mSearchWord.setVisibility(View.GONE);
+                Common.getSearchButton().setVisibility(View.VISIBLE);
+                Common.getAboutSummary().setVisibility(View.VISIBLE);
+                Common.getSearchWord().setVisibility(View.GONE);
                 PackageTasks.toggleKeyboard(0, requireActivity());
             } else {
-                PackageTasks.mAbout.setVisibility(View.GONE);
-                PackageTasks.mSearchWord.setVisibility(View.VISIBLE);
+                Common.getAboutSummary().setVisibility(View.GONE);
+                Common.getSearchWord().setVisibility(View.VISIBLE);
                 PackageTasks.toggleKeyboard(1, requireActivity());
             }
         });
@@ -137,7 +138,7 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
-        PackageTasks.mSearchWord.addTextChangedListener(new TextWatcher() {
+        Common.getSearchWord().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -148,7 +149,7 @@ public class ActivePackagesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                PackageTasks.mSearchText = s.toString().toLowerCase();
+                Common.setSearchText(s.toString().toLowerCase());
                 reload(requireActivity());
             }
         });
@@ -307,9 +308,9 @@ public class ActivePackagesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        if (PackageTasks.mSearchText != null) {
-            PackageTasks.mSearchText = null;
-            PackageTasks.mSearchWord.setText(null);
+        if (Common.getSearchText() != null) {
+            Common.setSearchText(null);
+            Common.getSearchWord().setText(null);
         }
     }
     

@@ -16,7 +16,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.fragments.AboutFragment;
 import com.sunilpaulmathew.debloater.fragments.ActivePackagesFragment;
 import com.sunilpaulmathew.debloater.fragments.InactivePackagesFragment;
-import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -108,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (PackageTasks.mSearchWord.getVisibility() == View.VISIBLE) {
-            if (PackageTasks.mSearchText != null) {
-                PackageTasks.mSearchText = null;
-                PackageTasks.mSearchWord.setText(null);
+        if (Common.getSearchWord().getVisibility() == View.VISIBLE) {
+            if (Common.getSearchText() != null) {
+                Common.setSearchText(null);
+                Common.getSearchWord().setText(null);
             }
-            PackageTasks.mSearchButton.setVisibility(View.VISIBLE);
-            PackageTasks.mAbout.setVisibility(View.VISIBLE);
-            PackageTasks.mSearchWord.setVisibility(View.GONE);
+            Common.getSearchButton().setVisibility(View.VISIBLE);
+            Common.getAboutSummary().setVisibility(View.VISIBLE);
+            Common.getSearchWord().setVisibility(View.GONE);
             return;
         }
         if (mExit) {

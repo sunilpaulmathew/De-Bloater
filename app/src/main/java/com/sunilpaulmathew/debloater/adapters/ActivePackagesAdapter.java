@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -43,9 +44,9 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
         try {
             holder.mIcon.setImageDrawable(PackageTasks.getAppIcon(this.data.get(position), holder.mName.getContext()));
             holder.mPath.setText(PackageTasks.getAPKPath(this.data.get(position), holder.mName.getContext()));
-            if (PackageTasks.mSearchText != null && PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().contains(PackageTasks.mSearchText)) {
-                holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().replace(PackageTasks.mSearchText,
-                        "<b><i><font color=\"" + Color.RED + "\">" + PackageTasks.mSearchText + "</font></i></b>")));
+            if (Common.getSearchText() != null && PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().contains(Common.getSearchText())) {
+                holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().replace(Common.getSearchText(),
+                        "<b><i><font color=\"" + Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
             } else {
                 holder.mName.setText(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()));
             }
