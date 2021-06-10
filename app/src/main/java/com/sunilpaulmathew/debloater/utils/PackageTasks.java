@@ -80,10 +80,14 @@ public class PackageTasks {
     private static boolean getSupportedAppsList(String apkPath, Context context) {
         String mStatus = Utils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
-                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/vendor/app")
-                || apkPath.startsWith("/system/vendor/overlay") || apkPath.startsWith("/system/product/overlay");
+                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app")
+                || apkPath.startsWith("/system/vendor/app") || apkPath.startsWith("/system/vendor/overlay")
+                || apkPath.startsWith("/system/product/overlay") || apkPath.startsWith("/system/system_ext/app")
+                || apkPath.startsWith("/system/system_ext/priv-app") || apkPath.startsWith("/system_ext/app")
+                || apkPath.startsWith("/system_ext/priv-app");
         boolean vendorApps = apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/vendor/app");
-        boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/overlay");
+        boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/priv-app")
+                || apkPath.startsWith("/product/overlay");
         switch (mStatus) {
             case "system":
                 return systemApps;
@@ -127,6 +131,8 @@ public class PackageTasks {
             apkPath = apkPath.replace("/product", "/system/product");
         } else if (apkPath.startsWith("/vendor/")) {
             apkPath = apkPath.replace("/vendor", "/system/vendor");
+        } else if (apkPath.startsWith("/system_ext/")) {
+            apkPath = apkPath.replace("/system_ext", "/system/system_ext");
         }
         return apkPath;
     }
