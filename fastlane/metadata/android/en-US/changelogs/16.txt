@@ -1,5 +1,0 @@
-* Updates for Android 11.
-* App will now targets latest SDK.
-* Implement own file picker for restore activities.
-* Improved searching.
-* Miscellaneous changes.

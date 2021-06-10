@@ -5,7 +5,6 @@ package com.sunilpaulmathew.debloater.utils;
  */
 
 import android.content.Context;
-import android.os.Environment;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
