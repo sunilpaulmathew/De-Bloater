@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTitle(R.string.warning)
                     .setMessage(R.string.warning_summary)
                     .setCancelable(false)
-                    .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
+                    .setPositiveButton(getString(R.string.ok), (dialog, id) -> {
                     }).show();
             Utils.saveBoolean("warning_message", true, this);
         }
