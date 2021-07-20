@@ -30,6 +30,15 @@ public class Common {
         return mAbout;
     }
 
+    public static boolean isTextMatched(String searchText) {
+        for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
+            if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String getModuleParent() {
         return "/data/adb/modules/De-bloater";
     }

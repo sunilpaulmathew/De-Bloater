@@ -44,8 +44,8 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
         try {
             holder.mIcon.setImageDrawable(PackageTasks.getAppIcon(this.data.get(position), holder.mName.getContext()));
             holder.mPath.setText(PackageTasks.getAPKPath(this.data.get(position), holder.mName.getContext()));
-            if (Common.getSearchText() != null && PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().contains(Common.getSearchText())) {
-                holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).toLowerCase().replace(Common.getSearchText(),
+            if (Common.getSearchText() != null && Common.isTextMatched(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()))) {
+                holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).replace(Common.getSearchText(),
                         "<b><i><font color=\"" + Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
             } else {
                 holder.mName.setText(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()));
