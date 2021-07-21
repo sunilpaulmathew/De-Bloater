@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Documentation
+title: General
 permalink: /general/
 ---
 
@@ -8,7 +8,7 @@ permalink: /general/
     tab1 { padding-left: 4em; }
 </style>
 
-## Documentation
+## General
 
 <p style="text-align: justify;"><tab1>De-Bloater is an application using the power of Magisk to de-bloat unwanted applications systemless-ly. The application is available to download via <a href="https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater" target="_blank">Google Play</a> or <a href="https://f-droid.org/packages/com.sunilpaulmathew.debloater" target="_blank">F-Droid</a>.</tab1></p>
 
