@@ -1,6 +1,0 @@
-* Allow debloating more apps (e.g. from /system_ext (need more testing) and /product/priv-app folders).
-* Added Polish & German translations and updated others.
-* Updated gradle plugin.
-* Internal improvements.
-* Miscellaneous changes.
-

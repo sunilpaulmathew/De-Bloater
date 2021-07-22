@@ -1,0 +1,3 @@
+* Improved case sensitivity in searching.
+* Updated gradle build tools.
+* Miscellaneous changes.
