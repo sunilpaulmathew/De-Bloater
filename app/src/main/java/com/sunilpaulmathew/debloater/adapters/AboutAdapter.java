@@ -19,6 +19,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.ChangeLogActivity;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.RecycleViewItem;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -70,7 +71,8 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
                 Intent changeLog = new Intent(holder.mRVLayout.getContext(), ChangeLogActivity.class);
                 holder.mRVLayout.getContext().startActivity(changeLog);
             } else if (position == 7) {
-                UpdateCheck.manualUpdateCheck((Activity) holder.mRVLayout.getContext());
+                UpdateCheck.isManualUpdate(true);
+                new UpdateCheck(Common.getLatestVersionUrl()).initialize(0, (Activity) holder.mRVLayout.getContext());
             } else if (position == 8) {
                 Intent shareapp = new Intent();
                 shareapp.setAction(Intent.ACTION_SEND);

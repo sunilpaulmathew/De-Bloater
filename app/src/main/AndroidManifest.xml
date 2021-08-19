@@ -4,6 +4,7 @@
     package="com.sunilpaulmathew.debloater">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -18,7 +19,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:supportsRtl="true" >
-        <activity android:name=".activities.StartActivity">
+
+        <activity android:name=".activities.StartActivity"
+            tools:ignore="IntentFilterExportedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
