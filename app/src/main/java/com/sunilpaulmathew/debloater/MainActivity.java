@@ -1,17 +1,14 @@
 package com.sunilpaulmathew.debloater;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.fragments.AboutFragment;
 import com.sunilpaulmathew.debloater.fragments.ActivePackagesFragment;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Initialize App Theme
-        Utils.initializeAppTheme(this);
+        Utils.initializeAppTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -46,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             mUnSupported.setText(R.string.no_magisk);
             mUnSupported.setVisibility(View.VISIBLE);
             return;
-        } else if (Utils.isPermissionDenied(this)) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
@@ -58,17 +52,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ActivePackagesFragment()).commit();
-        }
-
-        if (!Utils.getBoolean("warning_message", false, this)) {
-            new MaterialAlertDialogBuilder(this)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(R.string.warning)
-                    .setMessage(R.string.warning_summary)
-                    .setCancelable(false)
-                    .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
-                    }).show();
-            Utils.saveBoolean("warning_message", true, this);
         }
 
     }
@@ -102,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if (Utils.rootAccess() && Utils.magiskSupported() && !Utils.isPlayStoreAvailable(this) && UpdateCheck.isSignatureMatched(this)) {
-            new UpdateCheck(Common.getLatestVersionUrl()).initialize(1, this);
+            new UpdateCheck().initialize(1, this);
         }
     }
 

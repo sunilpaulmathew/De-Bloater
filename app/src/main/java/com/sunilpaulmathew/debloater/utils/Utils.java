@@ -76,12 +76,8 @@ public class Utils {
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    public static void initializeAppTheme(Context context) {
-        if (isDarkTheme(context)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+    public static void initializeAppTheme() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
     private static int getOrientation(Activity activity) {
@@ -213,11 +209,11 @@ public class Utils {
     }
 
     public static void delete(String path) {
-        runCommand(magiskBusyBox() + " rm -r " + path);
+        runCommand(magiskBusyBox() + "rm -r " + path);
     }
 
     public static void create(String text, String path) {
-        Utils.runCommand(magiskBusyBox() + " echo '" + text + "' > " + path);
+        Utils.runCommand(magiskBusyBox() + "echo '" + text + "' > " + path);
     }
 
     public static String read(String path) {
@@ -225,36 +221,23 @@ public class Utils {
     }
 
     static void download(String path, String url) {
-        if (isMagiskBinaryExist("wget")) {
-            runCommand(magiskBusyBox() + " wget -O " + path + " " + url);
-        } else if (isMagiskBinaryExist("curl")) {
-            runCommand(magiskBusyBox() + " curl -L -o " + path + " " + url);
-        } else if (isDownloadBinaries()) {
-            runCommand((Utils.exist("/system/bin/curl") ?
-                    "curl -L -o " : "wget -O ") + path + " " + url);
-        } else {
-            /*
-             * Based on the following stackoverflow discussion
-             * Ref: https://stackoverflow.com/questions/15758856/android-how-to-download-file-from-webserver
-             */
-            try (InputStream input = new URL(url).openStream();
-                 OutputStream output = new FileOutputStream(path)) {
-                byte[] data = new byte[4096];
-                int count;
-                while ((count = input.read(data)) != -1) {
-                    output.write(data, 0, count);
-                }
-            } catch (Exception ignored) {
+        try (InputStream input = new URL(url).openStream();
+             OutputStream output = new FileOutputStream(path)) {
+            byte[] data = new byte[4096];
+            int count;
+            while ((count = input.read(data)) != -1) {
+                output.write(data, 0, count);
             }
+        } catch (Exception ignored) {
         }
     }
 
     public static void copy(String source, String dest) {
-        runCommand(magiskBusyBox() + " cp -rf " + source + " " + dest);
+        runCommand(magiskBusyBox() + "cp -rf " + source + " " + dest);
     }
 
     static void chmod(String permission, String path) {
-        runCommand(magiskBusyBox() + " chmod " + permission + " " + path);
+        runCommand(magiskBusyBox() + "chmod " + permission + " " + path);
     }
 
     public static String getChecksum(String path) {
@@ -267,11 +250,15 @@ public class Utils {
     }
 
     public static boolean isMagiskBinaryExist(String command) {
-        return !runAndGetError(magiskBusyBox() + " " + command).contains("applet not found");
+        return !runAndGetError(magiskBusyBox() + command).contains("applet not found");
     }
 
     public static String magiskBusyBox() {
-        return "/data/adb/magisk/busybox";
+        if (Utils.exist("/data/adb/magisk/busybox")) {
+            return "/data/adb/magisk/busybox ";
+        } else {
+            return "";
+        }
     }
 
     public static void snackBar(View view, String message) {

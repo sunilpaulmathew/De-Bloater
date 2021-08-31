@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UAD {
 
-    private static List<String> getGoogle() {
+    public static List<String> getGoogle() {
         List<String> mData = new ArrayList<>();
         mData.add("com.android.hotwordenrollment.okgoogle");
         mData.add("com.android.hotwordenrollment.xgoogle");
@@ -129,43 +129,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getGoogleList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] google = getGoogle().toString().substring(1, getGoogle().toString().length() - 1).split(", ");
-        for (String s : google) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableGoogle(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getGoogle().toString().substring(1, getGoogle().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_google");
-    }
-
-    private static void disableGoogle() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_google").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_google");
-    }
-
-    private static List<String> getOnePlus() {
+    public static List<String> getOnePlus() {
         List<String> mData = new ArrayList<>();
         mData.add("cn.oneplus.photos");
         mData.add("com.example.wifirftest");
@@ -198,43 +162,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getOnePlusList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getOnePlus().toString().substring(1, getOnePlus().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableOnePlus(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getOnePlus().toString().substring(1, getOnePlus().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_oneplus");
-    }
-
-    private static void disableOnePlus() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_oneplus").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_oneplus");
-    }
-
-    private static List<String> getAOSP() {
+    public static List<String> getAOSP() {
         List<String> mData = new ArrayList<>();
         mData.add("com.android.bips");
         mData.add("com.android.bluetoothmidiservice");
@@ -271,43 +199,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getAOSPList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getAOSP().toString().substring(1, getAOSP().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableAOSP(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getAOSP().toString().substring(1, getAOSP().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_aosp");
-    }
-
-    private static void disableAOSP() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_aosp").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_aosp");
-    }
-
-    private static List<String> getASUS() {
+    public static List<String> getASUS() {
         List<String> mData = new ArrayList<>();
         mData.add("com.asus.calculator");
         mData.add("com.asus.ia.asusapp");
@@ -315,43 +207,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getASUSList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getASUS().toString().substring(1, getASUS().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableASUS(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getASUS().toString().substring(1, getASUS().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_asus");
-    }
-
-    private static void disableASUS() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_asus").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_asus");
-    }
-
-    private static List<String> getCarrier() {
+    public static List<String> getCarrier() {
         List<String> mData = new ArrayList<>();
         mData.add("com.mobitv.client.tmobiletvhd");
         mData.add("com.tmobile.pr.adapt");
@@ -468,43 +324,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getCarrierList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getCarrier().toString().substring(1, getCarrier().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableCarrier(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getCarrier().toString().substring(1, getCarrier().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_carrier");
-    }
-
-    private static void disableCarrier() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_carrier").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_carrier");
-    }
-
-    private static List<String> getHuawei() {
+    public static List<String> getHuawei() {
         List<String> mData = new ArrayList<>();
         mData.add("com.android.keyguard");
         mData.add("com.android.hwmirror");
@@ -588,43 +408,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getHuaweiList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getHuawei().toString().substring(1, getHuawei().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableHuawei(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getHuawei().toString().substring(1, getHuawei().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_huawei");
-    }
-
-    private static void disableHuawei() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_huawei").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_huawei");
-    }
-
-    private static List<String> getLG() {
+    public static List<String> getLG() {
         List<String> mData = new ArrayList<>();
         mData.add("com.android.LGSetupWizard");
         mData.add("com.lge.appbox.client");
@@ -715,43 +499,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getLGList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getLG().toString().substring(1, getLG().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableLG(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getLG().toString().substring(1, getLG().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_lg");
-    }
-
-    private static void disableLG() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_lg").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_lg");
-    }
-
-    private static List<String> getSamsung() {
+    public static List<String> getSamsung() {
         List<String> mData = new ArrayList<>();
         mData.add("android.autoinstalls.config.samsung");
         mData.add("com.aura.oobe.samsung");
@@ -1056,43 +804,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getSamsungList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getSamsung().toString().substring(1, getSamsung().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableSamsung(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getSamsung().toString().substring(1, getSamsung().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_samsung");
-    }
-
-    private static void disableSamsung() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_samsung").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_samsung");
-    }
-
-    private static List<String> getMotorola() {
+    public static List<String> getMotorola() {
         List<String> mData = new ArrayList<>();
         mData.add("android.autoinstalls.config.motorola.layout");
         mData.add("com.lenovo.lsf.user");
@@ -1137,43 +849,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getMotorolaList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getMotorola().toString().substring(1, getMotorola().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableMotorola(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getMotorola().toString().substring(1, getMotorola().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_motorola");
-    }
-
-    private static void disableMotorola() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_motorola").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_motorola");
-    }
-
-    private static List<String> getNokia() {
+    public static List<String> getNokia() {
         List<String> mData = new ArrayList<>();
         mData.add("com.android.partnerbrowsercustomizations.btl.s600ww.overlay");
         mData.add("com.android.providers.calendar.overlay.base.s600ww");
@@ -1301,43 +977,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getNokiaList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getNokia().toString().substring(1, getNokia().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableNokia(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getNokia().toString().substring(1, getNokia().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_nokia");
-    }
-
-    private static void disableNokia() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_nokia").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_nokia");
-    }
-
-    private static List<String> getOppo() {
+    public static List<String> getOppo() {
         List<String> mData = new ArrayList<>();
         mData.add("com.coloros.appmanager");
         mData.add("com.coloros.assistantscreen");
@@ -1377,43 +1017,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getOppoList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getOppo().toString().substring(1, getOppo().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableOppo(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getOppo().toString().substring(1, getOppo().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_oppo");
-    }
-
-    private static void disableOppo() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_oppo").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_oppo");
-    }
-
-    private static List<String> getSony() {
+    public static List<String> getSony() {
         List<String> mData = new ArrayList<>();
         mData.add("com.sony.tvsideview.videoph");
         mData.add("com.sonyericsson.android.addoncamera.artfilter");
@@ -1492,43 +1096,7 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getSonyList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getSony().toString().substring(1, getSony().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableSony(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getSony().toString().substring(1, getSony().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_sony");
-    }
-
-    private static void disableSony() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_sony").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_sony");
-    }
-
-    private static List<String> getXiaomi() {
+    public static List<String> getXiaomi() {
         List<String> mData = new ArrayList<>();
         mData.add("android.autoinstalls.config.Xiaomi.cepheus");
         mData.add("android.autoinstalls.config.Xiaomi.dipper");
@@ -1655,86 +1223,14 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getXiaomiList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getXiaomi().toString().substring(1, getXiaomi().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableXiaomi(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getXiaomi().toString().substring(1, getXiaomi().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_xiaomi");
-    }
-
-    private static void disableXiaomi() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_xiaomi").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_xiaomi");
-    }
-
-    private static List<String> getZTE() {
+    public static List<String> getZTE() {
         List<String> mData = new ArrayList<>();
         mData.add("com.zte.assistant");
         mData.add("com.zte.weather");
         return mData;
     }
 
-    public static List<String> getZTEList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getZTE().toString().substring(1, getZTE().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
-            }
-        }
-        return mAppList;
-    }
-
-    private static void enableZTE(Context context) {
-        PackageTasks.initializeModule();
-        StringBuilder mAppList = new StringBuilder();
-        String[] apps = getZTE().toString().substring(1, getZTE().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
-        }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_zte");
-    }
-
-    private static void disableZTE() {
-        try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_zte").split("\\r?\\n")) {
-                if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
-                    PackageTasks.revertDelete(line);
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_zte");
-    }
-
-    private static List<String> getMiscellaneous() {
+    public static List<String> getMiscellaneous() {
         List<String> mData = new ArrayList<>();
         mData.add("com.amazon.appmanager");
         mData.add("com.amazon.avod.thirdpartyclient");
@@ -1936,145 +1432,134 @@ public class UAD {
         return mData;
     }
 
-    public static List<String> getMiscellaneousList(Context context) {
-        List<String> mAppList = new ArrayList<>();
-        String[] apps = getMiscellaneous().toString().substring(1, getMiscellaneous().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                mAppList.add(s);
+    public static void applyScript(String path, Activity activity) {
+        String script = Utils.getString("setDefault", null, activity);
+        if (Utils.exist(path)) {
+            switch (script) {
+                case "aosp":
+                    disable("uad_aosp");
+                    break;
+                case "oneplus":
+                    disable("uad_oneplus");
+                    break;
+                case "asus":
+                    disable("uad_asus");
+                    break;
+                case "carrier":
+                    disable("uad_carrier");
+                    break;
+                case "huawei":
+                    disable("uad_huawei");
+                    break;
+                case "lg":
+                    disable("uad_lg");
+                    break;
+                case "samsung":
+                    disable("uad_samsung");
+                    break;
+                case "motorola":
+                    disable("uad_motorola");
+                    break;
+                case "nokia":
+                    disable("uad_nokia");
+                    break;
+                case "oppo":
+                    disable("uad_oppo");
+                    break;
+                case "sony":
+                    disable("uad_sony");
+                    break;
+                case "xiaomi":
+                    disable("uad_xiaomi");
+                    break;
+                case "zte":
+                    disable("uad_zte");
+                    break;
+                case "misc":
+                    disable("uad_misc");
+                    break;
+                default:
+                    disable("uad_google");
+                    break;
+            }
+        } else {
+            switch (script) {
+                case "aosp":
+                    enable("uad_aosp", Common.getAOSP(), activity);
+                    break;
+                case "oneplus":
+                    enable("uad_oneplus", Common.getOnePlus(), activity);
+                    break;
+                case "asus":
+                    enable("uad_asus", Common.getAsus(), activity);
+                    break;
+                case "carrier":
+                    enable("uad_carrier", Common.getCarrier(), activity);
+                    break;
+                case "huawei":
+                    enable("uad_huawei", Common.getHuawei(), activity);
+                    break;
+                case "lg":
+                    enable("uad_lg", Common.getLG(), activity);
+                    break;
+                case "samsung":
+                    enable("uad_samsung", Common.getSamsung(), activity);
+                    break;
+                case "motorola":
+                    enable("uad_motorola", Common.getMoto(), activity);
+                    break;
+                case "nokia":
+                    enable("uad_nokia", Common.getNokia(), activity);
+                    break;
+                case "oppo":
+                    enable("uad_oppo", Common.getOppo(), activity);
+                    break;
+                case "sony":
+                    enable("uad_sony", Common.getSony(), activity);
+                    break;
+                case "xiaomi":
+                    enable("uad_xiaomi", Common.getXiaomi(), activity);
+                    break;
+                case "zte":
+                    enable("uad_zte", Common.getZTE(), activity);
+                    break;
+                case "misc":
+                    enable("uad_misc", Common.getMisc(), activity);
+                    break;
+                default:
+                    enable("uad_google", Common.getGoogle(), activity);
+                    break;
             }
         }
-        return mAppList;
     }
 
-    private static void enableMiscellaneous(Context context) {
+    private static void enable(String tag, List<RecycleViewItem> items, Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
-        String[] apps = getMiscellaneous().toString().substring(1, getMiscellaneous().toString().length() - 1).split(", ");
-        for (String s : apps) {
-            if (Utils.isPackageInstalled(s, context) && isSystemApp(PackageTasks.getAPKPath(s, context))) {
-                PackageTasks.setToDelete(PackageTasks.getAPKPath(s, context), new File(PackageTasks.getAPKPath(s, context)).getName(), context);
-                mAppList.append(PackageTasks.getAPKPath(s, context)).append("\n");
-            }
+        for (RecycleViewItem item : items) {
+            PackageTasks.setToDelete(item.getDescription(), new File(item.getDescription()).getName(), context);
+            mAppList.append(item.getDescription()).append("\n");
         }
-        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/uad_misc");
+        Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/" + tag);
     }
 
-    private static void disableMiscellaneous() {
+    private static void disable(String tag) {
         try {
-            for (String line : Utils.read(PackageTasks.getModulePath() + "/uad_misc").split("\\r?\\n")) {
+            for (String line : Utils.read(PackageTasks.getModulePath() + "/" + tag).split("\\r?\\n")) {
                 if (line.startsWith("/system/") && Utils.exist(PackageTasks.getModulePath() + line)) {
                     PackageTasks.revertDelete(line);
                 }
             }
         } catch (Exception ignored) {
         }
-        Utils.delete(PackageTasks.getModulePath() + "/uad_misc");
+        Utils.delete(PackageTasks.getModulePath() + "/" + tag);
     }
 
-    private static boolean isSystemApp(String apkPath) {
-        return apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
-                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/vendor/app")
-                || apkPath.startsWith("/system/vendor/overlay") || apkPath.startsWith("/system/product/overlay");
-    }
-
-    public static void applyScript(String path, Activity activity) {
-        String script = Utils.getString("setDefault", null, activity);
-        if (Utils.exist(path)) {
-            switch (script) {
-                case "aosp":
-                    disableAOSP();
-                    break;
-                case "oneplus":
-                    disableOnePlus();
-                    break;
-                case "asus":
-                    disableASUS();
-                    break;
-                case "carrier":
-                    disableCarrier();
-                    break;
-                case "huawei":
-                    disableHuawei();
-                    break;
-                case "lg":
-                    disableLG();
-                    break;
-                case "samsung":
-                    disableSamsung();
-                    break;
-                case "motorola":
-                    disableMotorola();
-                    break;
-                case "nokia":
-                    disableNokia();
-                    break;
-                case "oppo":
-                    disableOppo();
-                    break;
-                case "sony":
-                    disableSony();
-                    break;
-                case "xiaomi":
-                    disableXiaomi();
-                    break;
-                case "zte":
-                    disableZTE();
-                    break;
-                case "misc":
-                    disableMiscellaneous();
-                    break;
-                default:
-                    disableGoogle();
-                    break;
-            }
-        } else {
-            switch (script) {
-                case "aosp":
-                    enableAOSP(activity);
-                    break;
-                case "oneplus":
-                    enableOnePlus(activity);
-                    break;
-                case "asus":
-                    enableASUS(activity);
-                    break;
-                case "carrier":
-                    enableCarrier(activity);
-                    break;
-                case "huawei":
-                    enableHuawei(activity);
-                    break;
-                case "lg":
-                    enableLG(activity);
-                    break;
-                case "samsung":
-                    enableSamsung(activity);
-                    break;
-                case "motorola":
-                    enableMotorola(activity);
-                    break;
-                case "nokia":
-                    enableNokia(activity);
-                    break;
-                case "oppo":
-                    enableOppo(activity);
-                    break;
-                case "sony":
-                    enableSony(activity);
-                    break;
-                case "xiaomi":
-                    enableXiaomi(activity);
-                    break;
-                case "zte":
-                    enableZTE(activity);
-                    break;
-                case "misc":
-                    enableMiscellaneous(activity);
-                    break;
-                default:
-                    enableGoogle(activity);
-                    break;
+    public static void setUADData(List<String> input, List<RecycleViewItem> output, Context context) {
+        for (String packageName : input) {
+            if (Utils.isPackageInstalled(packageName, context) && PackageTasks.isSystemApp(packageName, context)) {
+                output.add(new RecycleViewItem(PackageTasks.getAppName(packageName, context), PackageTasks.getAPKPath(packageName, context),
+                        PackageTasks.getAppIcon(packageName, context), packageName));
             }
         }
     }

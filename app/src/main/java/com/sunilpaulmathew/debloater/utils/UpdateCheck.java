@@ -10,7 +10,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import androidx.core.app.ActivityCompat;
@@ -44,10 +43,9 @@ public class UpdateCheck {
     private static boolean mManualUpdate = false;
     private static int mVersionCode = 0;
     private static JSONObject mJSONObject = null;
-    private static String mChangeLog = null, mSHA1 = null, mReleaseURL = null, mURL = null, mVersionName = null;
+    private static String mChangeLog = null, mSHA1 = null, mReleaseURL = null, mVersionName = null;
 
-    public UpdateCheck(String url) {
-        mURL = url;
+    public UpdateCheck() {
     }
 
     private static boolean isManualUpdate() {
@@ -64,8 +62,8 @@ public class UpdateCheck {
         return mSmartPackKey.equals(mAppKey);
     }
 
-    private static boolean isUpdateAvailable(int currentVersion) {
-        return currentVersion < getVersionCode();
+    private static boolean isUpdateAvailable() {
+        return BuildConfig.VERSION_CODE < getVersionCode();
     }
 
     @SuppressLint("PackageManagerGetSignatures")
@@ -101,7 +99,7 @@ public class UpdateCheck {
                 })
                 .setPositiveButton(activity.getString(R.string.get_it), (dialog, id) -> {
                     if (Utils.isPermissionDenied(activity)) {
-                        ActivityCompat.requestPermissions((Activity) activity, new String[]{
+                        ActivityCompat.requestPermissions(activity, new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                         Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied));
                         return;
@@ -163,17 +161,20 @@ public class UpdateCheck {
     }
 
     private static void parseJSON(int updateCheckInterval, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             private long ucTimeStamp;
             private int interval;
-            protected void onPreExecute() {
+            @Override
+            public void onPreExecute() {
                 ucTimeStamp = PreferenceManager.getDefaultSharedPreferences(activity).getLong("ucTimeStamp", 0);
                 interval = updateCheckInterval * 60 * 60 * 1000;
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 if (System.currentTimeMillis() > ucTimeStamp + interval) {
-                    try (InputStream is = new URL(mURL).openStream()) {
+                    try (InputStream is = new URL(Common.getLatestVersionUrl()).openStream()) {
                         BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
                         String jsonText = readAll(rd);
                         mJSONObject = new JSONObject(jsonText);
@@ -185,18 +186,16 @@ public class UpdateCheck {
                     } catch (JSONException | IOException ignored) {
                     }
                 }
-                return null;
             }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
 
+            @Override
+            public void onPostExecute() {
                 if (isManualUpdate()) {
                     if (mJSONObject == null) {
                         Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
                         return;
                     }
-                    if (isUpdateAvailable(BuildConfig.VERSION_CODE)) {
+                    if (isUpdateAvailable()) {
                         updateAvailableDialog(activity).show();
                     } else {
                         new MaterialAlertDialogBuilder(activity)
@@ -208,7 +207,7 @@ public class UpdateCheck {
                     if (mJSONObject == null) {
                         return;
                     }
-                    if (isUpdateAvailable(BuildConfig.VERSION_CODE)) {
+                    if (isUpdateAvailable()) {
                         updateAvailableDialog(activity).show();
                     }
                 }
@@ -220,24 +219,24 @@ public class UpdateCheck {
     }
 
     private static void updaterTask(Context context) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             private ProgressDialog mProgressDialog;
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 mProgressDialog = new ProgressDialog(context);
                 mProgressDialog.setMessage(context.getString(R.string.downloading, getVersionName() + "..."));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 getLatestApp(context);
-                return null;
             }
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 try {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {}

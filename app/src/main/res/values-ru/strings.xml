@@ -43,7 +43,6 @@
     <string name="invite_friend_summary">"Пригласите друга попробовать De-Bloater"</string>
     <string name="licence">"Лицензия"</string>
     <string name="light">"Light"</string>
-    <string name="magisk_credit_dialog">"Работает с Magisk"</string>
     <string name="miscellaneous">"Разное"</string>
     <string name="module_status_reset">"Сброс модуля"</string>
     <string name="more_apps">"Больше от разработчика"</string>
@@ -79,6 +78,5 @@
     <string name="update_available">"Доступно обновление!\n(%s)"</string>
     <string name="updated_dialog">"Поздравляю! У вас уже установлена последняя версия De-Bloater!"</string>
     <string name="version">"Версия"</string>
-    <string name="warning">"Предупреждение"</string>
     <string name="warning_summary">"De-Bloater очень силен! Пожалуйста, используйте его c осторожноcтью. Разработчик этого приложения не несет никакой ответственности, если что-то пошло не так из-за ненадлежащего использования."</string>
 </resources>

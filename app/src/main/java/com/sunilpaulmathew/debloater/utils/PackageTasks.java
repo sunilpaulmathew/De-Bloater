@@ -1,17 +1,9 @@
-/*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
- *
- * This file is part of Package Manager, a simple, yet powerful application
- * to manage other application installed on an android device.
- *
- */
-
 package com.sunilpaulmathew.debloater.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
@@ -30,26 +22,39 @@ import java.util.Objects;
 public class PackageTasks {
 
     static void createModuleParent() {
-        Utils.runCommand(Utils.magiskBusyBox() + " mkdir " + Common.getModuleParent());
+        Utils.runCommand(Utils.magiskBusyBox() + "mkdir " + Common.getModuleParent());
     }
 
-    public static List<String> getActivePackageData(Context context) {
-        List<String> mData = new ArrayList<>();
-        @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
-        if (Utils.getBoolean("sort_name", true, context)) {
-            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
-        } else {
-            Collections.sort(packages, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.packageName, rhs.packageName));
-        }
+    public static List<RecycleViewItem> getRawData(Context context) {
+        List<RecycleViewItem> mData = new ArrayList<>();
+        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
-            if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
-                    && getSupportedAppsList(packageInfo.sourceDir, context)) {
+            if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                mData.add(new RecycleViewItem(
+                        getAppName(packageInfo.packageName, context),
+                        getAPKPath(packageInfo.packageName, context),
+                        getAppIcon(packageInfo.packageName, context),
+                        packageInfo.packageName));
+            }
+        }
+        return mData;
+    }
+
+    public static List<RecycleViewItem> getActivePackageData(Context context) {
+        List<RecycleViewItem> mData = new ArrayList<>();
+        for (RecycleViewItem item : Common.getRawData()) {
+            if (getSupportedAppsList(item.getDescription(), context)) {
                 if (Common.getSearchText() == null) {
-                    mData.add(packageInfo.packageName);
-                } else if (Common.isTextMatched(getPackageManager(context).getApplicationLabel(packageInfo).toString())) {
-                    mData.add(packageInfo.packageName);
+                    mData.add(item);
+                } else if (Common.isTextMatched(item.getTitle())) {
+                    mData.add(item);
                 }
             }
+        }
+        if (Utils.getBoolean("sort_name", true, context)) {
+            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getTitle(), rhs.getTitle()));
+        } else {
+            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getURL(), rhs.getURL()));
         }
         if (Utils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
@@ -59,12 +64,19 @@ public class PackageTasks {
 
     public static List<String> getInactivePackageData() {
         List<String> mData = new ArrayList<>();
-        for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + " find " + Common.getModuleParent() + "/system -type f -name *.apk").split("\\r?\\n")) {
+        for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + "find " + Common.getModuleParent() + "/system -type f -name *.apk").split("\\r?\\n")) {
             if (line.endsWith(".apk")) {
                 mData.add(line);
             }
         }
         return mData;
+    }
+
+    public static boolean isSystemApp(String packageName, Context context) {
+        try {
+            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        } catch (NullPointerException ignored) {}
+        return false;
     }
 
     private static boolean getSupportedAppsList(String apkPath, Context context) {
@@ -115,8 +127,7 @@ public class PackageTasks {
         return Objects.requireNonNull(getAppInfo(packageName, context)).sourceDir;
     }
 
-    public static String getAdjAPKPath(String packageName, Context context) {
-        String apkPath = getAPKPath(packageName, context);
+    public static String getAdjAPKPath(String apkPath) {
         if (apkPath.startsWith("/product/")) {
             apkPath = apkPath.replace("/product", "/system/product");
         } else if (apkPath.startsWith("/vendor/")) {
@@ -125,6 +136,34 @@ public class PackageTasks {
             apkPath = apkPath.replace("/system_ext", "/system/system_ext");
         }
         return apkPath;
+    }
+
+    private static PackageInfo getPackageInfo(String apkPath, Context context) {
+        return getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+    }
+
+    public static CharSequence getAPKName(String apkPath, Context context) {
+        if (getPackageInfo(apkPath, context) != null) {
+            return getPackageInfo(apkPath, context).applicationInfo.loadLabel(getPackageManager(context));
+        } else {
+            return null;
+        }
+    }
+
+    public static String getAPKId(String apkPath, Context context) {
+        if (getPackageInfo(apkPath, context) != null) {
+            return getPackageInfo(apkPath, context).applicationInfo.packageName;
+        } else {
+            return null;
+        }
+    }
+
+    public static Drawable getAPKIcon(String apkPath, Context context) {
+        if (getPackageInfo(apkPath, context) != null) {
+            return getPackageInfo(apkPath, context).applicationInfo.loadIcon(getPackageManager(context));
+        } else {
+            return null;
+        }
     }
 
     public static String getStoragePath() {

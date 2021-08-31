@@ -55,7 +55,6 @@
     <string name="licence">Licence</string>
     <string name="licence_summary">View GPL V3</string>
     <string name="light">Light</string>
-    <string name="magisk_credit_dialog">Powered with Magisk</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="module_status_reset">Reset Module</string>
     <string name="more_apps">More Apps</string>
@@ -87,6 +86,7 @@
     <string name="sort_by">Sort Apps By</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Visit GitHub page</string>
+    <string name="start">Start</string>
     <string name="status_message_remove">Will be removed after a reboot</string>
     <string name="status_message_restore">Will be restored after a reboot</string>
     <string name="storage_access_denied">Permission denied for writing to storage!</string>
@@ -97,8 +97,7 @@
     <string name="update_available">New update available!\n(%s)</string>
     <string name="updated_dialog">Congrats! You\'ve already got an up-to-date version of De-Bloater!</string>
     <string name="version">Version</string>
-    <string name="warning">Warning</string>
-    <string name="warning_summary">De-Bloater is too powerful! Please use it carefully. The developer of this application doesn\'t take any responsibility if something went wrong due to its inappropriate use.</string>
+    <string name="warning_summary">De-Bloater is too powerful! Please use it carefully. The developer of this application doesn\'t take any responsibility if something wrong happened due the inappropriate use!</string>
     <string name="xiaomi">Xiaomi</string>
     <string name="zte">ZTE</string>
 </resources>

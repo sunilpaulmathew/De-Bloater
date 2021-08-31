@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 03, 2020
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class Tomatot {
 
-    static List<String> getTomatotInvisible() {
+    public static List<String> getTomatotInvisible() {
         List<String> mData = new ArrayList<>();
         mData.add("/system/app/AntHalService/AntHalService.apk");
         mData.add("/system/app/AutoRegistration/AutoRegistration.apk");
@@ -59,7 +60,7 @@ public class Tomatot {
         return mData;
     }
 
-    static List<String> getTomatotLight() {
+    public static List<String> getTomatotLight() {
         List<String> mData = new ArrayList<>();
         mData.add("/system/app/ARCore_stub/ARCore_stub.apk");
         mData.add("/system/app/BackupRestoreRemoteService/BackupRestoreRemoteService.apk");
@@ -111,7 +112,7 @@ public class Tomatot {
         return mData;
     }
 
-    static List<String> getTomatotExtreme() {
+    public static List<String> getTomatotExtreme() {
         List<String> mData = new ArrayList<>();
         mData.add("/system/app/Backup.apk");
         mData.add("/system/app/BluetoothMidiService/BluetoothMidiService.apk");
@@ -158,169 +159,76 @@ public class Tomatot {
         return mData;
     }
 
-    public static String getInvisibletList() {
-        StringBuilder mAppList = new StringBuilder();
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        return mAppList.toString();
-    }
-
-    public static String getLightList() {
-        StringBuilder mAppList = new StringBuilder();
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight().toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        return mAppList.toString();
-    }
-
-    public static String getExtremeList() {
-        StringBuilder mAppList = new StringBuilder();
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible().toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight().toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        String[] extreme = getTomatotExtreme().toString().substring(1, getTomatotExtreme().toString().length() - 1).split(", ");
-        for (String s : extreme) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                mAppList.append(s).append("\n");
-            }
-        }
-        return mAppList.toString();
-    }
-
-    public static void enableTomatotInvisible(Context context) {
+    public static void enable(String tag, List<RecycleViewItem> items, Context context) {
         PackageTasks.initializeModule();
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
+        for (RecycleViewItem item : items) {
+            if (Utils.exist(item.getDescription())) {
+                PackageTasks.setToDelete(item.getDescription(), new File(item.getDescription()).getName(), context);
             }
         }
-        Utils.saveBoolean("tomatot_invisible", true, context);
+        Utils.saveBoolean(tag, true, context);
     }
 
-    public static void disableTomatotInvisible(Context context) {
-        PackageTasks.initializeModule();
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
+    public static void disable(String tag, List<RecycleViewItem> items, Context context) {
+        for (RecycleViewItem item : items) {
+            if (Utils.exist(PackageTasks.getModulePath() + item.getDescription())) {
+                PackageTasks.revertDelete(item.getDescription());
             }
         }
-        Utils.saveBoolean("tomatot_invisible", false, context);
+        Utils.saveBoolean(tag, false, context);
     }
 
-    public static void enableTomatotLight(Context context) {
-        PackageTasks.initializeModule();
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
-                .toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
-            }
-        }
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
-            }
-        }
-        Utils.saveBoolean("tomatot_light", true, context);
+    public static boolean isScriptEnabled(String tag, Context context) {
+        return Utils.getBoolean(tag, false, context);
     }
 
-    public static void disableTomatotLight(Context context) {
-        PackageTasks.initializeModule();
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
-                .toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
+    public static void setInvisibleData(Context context) {
+        for (String path : getTomatotInvisible()) {
+            if (Utils.exist(path)) {
+                Common.geTInvisible().add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
-            }
-        }
-        Utils.saveBoolean("tomatot_light", false, context);
     }
 
-    public static void enableTomatotExtreme(Context context) {
-        PackageTasks.initializeModule();
-        String[] extreme = getTomatotExtreme().toString().substring(1, getTomatotExtreme()
-                .toString().length() - 1).split(", ");
-        for (String s : extreme) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
+    public static void setLightData(Context context) {
+        List<RecycleViewItem> items = new ArrayList<>();
+        for (String path : getTomatotInvisible()) {
+            if (Utils.exist(path)) {
+                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
-                .toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
+        for (String path : getTomatotLight()) {
+            if (Utils.exist(path)) {
+                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(s) && s.endsWith(".apk")) {
-                PackageTasks.setToDelete(s, new File(s).getName(), context);
-            }
-        }
-        Utils.saveBoolean("tomatot_extreme", true, context);
+        Common.getTLight().addAll(items);
     }
 
-    public static void disableTomatotExtreme(Context context) {
-        PackageTasks.initializeModule();
-        String[] extreme = getTomatotExtreme().toString().substring(1, getTomatotExtreme()
-                .toString().length() - 1).split(", ");
-        for (String s : extreme) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
+    public static void setExtremeData(Context context) {
+        List<RecycleViewItem> items = new ArrayList<>();
+        for (String path : getTomatotInvisible()) {
+            if (Utils.exist(path)) {
+                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        String[] light = getTomatotLight().toString().substring(1, getTomatotLight()
-                .toString().length() - 1).split(", ");
-        for (String s : light) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
+        for (String path : getTomatotLight()) {
+            if (Utils.exist(path)) {
+                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        String[] invisible = getTomatotInvisible().toString().substring(1, getTomatotInvisible()
-                .toString().length() - 1).split(", ");
-        for (String s : invisible) {
-            if (Utils.exist(PackageTasks.getModulePath() + s)) {
-                PackageTasks.revertDelete(s);
+        for (String path : getTomatotExtreme()) {
+            if (Utils.exist(path)) {
+                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
             }
         }
-        Utils.saveBoolean("tomatot_extreme", false, context);
+        Common.getTExtreme().addAll(items);
     }
 
 }

@@ -53,7 +53,6 @@
     <string name="licence">"Licencja"</string>
     <string name="licence_summary">"Zobacz licencję GPL V3"</string>
     <string name="light">"Lekki"</string>
-    <string name="magisk_credit_dialog">"Wspierane z Magisk"</string>
     <string name="miscellaneous">"Różne"</string>
     <string name="module_status_reset">"Resetuj aplikację"</string>
     <string name="more_apps">"Więcej apliakcji"</string>
@@ -95,7 +94,6 @@
     <string name="update_available">"Dostępna nowa aktuaizacja!\n(%s)"</string>
     <string name="updated_dialog">"Gratulacje! Masz aktualną wersję De-Bloatera! "</string>
     <string name="version">"Wersja"</string>
-    <string name="warning">"Ostrzeżenie"</string>
     <string name="warning_summary">"De-Bloater to bardzo potężne narzędzie! Proszę używać go ostrożnie. Twórca tej aplikacji nie ponosi żadnej odpowiedzialności, jeśli by coś poszło nie tak z powodu jej niewłaściwego użycia. "</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>

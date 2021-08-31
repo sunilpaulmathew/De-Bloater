@@ -1,13 +1,10 @@
 package com.sunilpaulmathew.debloater.fragments;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Restore;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -46,8 +44,6 @@ import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
 public class InactivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
-    private AsyncTask<Void, Void, Void> mLoader;
-    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialTextView mProgressText;
     private RecyclerView mRecyclerView;
@@ -66,9 +62,7 @@ public class InactivePackagesFragment extends Fragment {
         mMenu = mRootView.findViewById(R.id.menu_button);
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
-        mMenu.setOnClickListener(v -> {
-            menuOptions(requireActivity());
-        });
+        mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
         loadUI();
 
@@ -88,7 +82,7 @@ public class InactivePackagesFragment extends Fragment {
             switch (item.getItemId()) {
                 case 0:
                     PackageTasks.removeModule(activity);
-                    reload();
+                    loadUI();
                     break;
                 case 1:
                     Utils.runCommand("svc power reboot");
@@ -135,80 +129,31 @@ public class InactivePackagesFragment extends Fragment {
     }
 
     private void loadUI() {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            mProgressLayout.setVisibility(View.VISIBLE);
-                            mRecyclerView.setVisibility(View.GONE);
-                        }
+        new AsyncTasks() {
 
-                        @Override
-                        protected Void doInBackground(Void... voids) {
-                            if (!PackageTasks.getInactivePackageData().isEmpty()) {
-                                mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
-                            }
-                            return null;
-                        }
+            @Override
+            public void onPreExecute() {
+                mProgressLayout.setVisibility(View.VISIBLE);
+                mRecyclerView.setVisibility(View.GONE);
+                mRecyclerView.removeAllViews();
+            }
 
-                        @Override
-                        protected void onPostExecute(Void recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mProgressLayout.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
+            @Override
+            public void doInBackground() {
+                if (!PackageTasks.getInactivePackageData().isEmpty()) {
+                    mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
                 }
-            }, 250);
-        }
+            }
+
+            @Override
+            public void onPostExecute() {
+                mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mProgressLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 
-    private void reload() {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            mProgressLayout.setVisibility(View.VISIBLE);
-                            mRecyclerView.setVisibility(View.GONE);
-                            mRecyclerView.removeAllViews();
-                        }
-
-                        @Override
-                        protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mRecycleViewAdapter.notifyDataSetChanged();
-                            mProgressLayout.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
-                }
-            }, 250);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -223,29 +168,26 @@ public class InactivePackagesFragment extends Fragment {
                     .setMessage(getString(R.string.restore_question, mSelectedFile.getName()))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
-                    .setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
-                        new AsyncTask<Void, Void, Void>() {
-                            @Override
-                            protected void onPreExecute() {
-                                super.onPreExecute();
-                                mProgressLayout.setVisibility(View.VISIBLE);
-                                mProgressText.setText(getString(R.string.restoring));
-                            }
+                    .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
+                            new AsyncTasks() {
 
-                            @Override
-                            protected Void doInBackground(Void... voids) {
-                                Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
-                                return null;
-                            }
+                                @Override
+                                public void onPreExecute() {
+                                    mProgressLayout.setVisibility(View.VISIBLE);
+                                    mProgressText.setText(getString(R.string.restoring));
+                                }
 
-                            @Override
-                            protected void onPostExecute(Void recyclerViewItems) {
-                                super.onPostExecute(recyclerViewItems);
-                                mProgressLayout.setVisibility(View.GONE);
-                                reload();
-                            }
-                        }.execute();
-                    })
+                                @Override
+                                public void doInBackground() {
+                                    Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
+                                }
+
+                                @Override
+                                public void onPostExecute() {
+                                    mProgressLayout.setVisibility(View.GONE);
+                                    loadUI();
+                                }
+                            }.execute())
                     .show();
         }
     }

@@ -36,6 +36,7 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
         return new InactivePackagesAdapter.ViewHolder(rowItem);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull InactivePackagesAdapter.ViewHolder holder, int position) {
         holder.appName.setText(Utils.read(this.data.get(position)));
@@ -43,7 +44,15 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
             holder.appName.setTextColor(Utils.getThemeAccentColor(holder.appName.getContext()));
         }
         holder.appID.setText(this.data.get(position).replace("/data/adb/modules/De-bloater",""));
-        setStatus(holder, this.data.get(position));
+        holder.appIcon.setImageDrawable(holder.appIcon.getContext().getResources().getDrawable(R.drawable.ic_android));
+        holder.appIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
+        holder.statusMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
+        holder.actionMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.GREEN : Color.RED);
+        holder.actionIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.GREEN : Color.RED);
+        holder.actionMessage.setText(Utils.exist(this.data.get(position)) ? holder.actionMessage.getContext().getString(R.string.restore) : holder.actionMessage.getContext().getString(R.string.remove));
+        holder.actionIcon.setImageDrawable(Utils.exist(this.data.get(position)) ? holder.actionIcon.getContext().getResources().getDrawable(R.drawable.ic_restore) : holder.actionIcon.getContext().getResources().getDrawable(R.drawable.ic_delete));
+        holder.statusMessage.setText(Utils.exist(this.data.get(position)) ? null : holder.statusMessage.getContext().getString(R.string.status_message_restore));
+        holder.statusMessage.setVisibility(Utils.exist(this.data.get(position)) ? View.GONE : View.VISIBLE);
         holder.actionLayout.setOnClickListener(v -> {
             if (Utils.isPermissionDenied(holder.actionLayout.getContext())) {
                 Utils.snackBar(holder.actionLayout, holder.actionLayout.getContext().getString(R.string.storage_access_denied));
@@ -54,7 +63,7 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
             } else {
                 Utils.create(holder.appName.getText().toString(), this.data.get(position));
             }
-            setStatus(holder, this.data.get(position));
+            notifyItemChanged(position);
         });
     }
 
@@ -82,19 +91,6 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
             this.statusMessage = view.findViewById(R.id.status_message);
             this.actionLayout = view.findViewById(R.id.action_layout);
         }
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private void setStatus(ViewHolder holder, String string) {
-        holder.appIcon.setImageDrawable(holder.appIcon.getContext().getResources().getDrawable(R.drawable.ic_android));
-        holder.appIcon.setColorFilter(Utils.exist(string) ? Color.RED : Color.GREEN);
-        holder.statusMessage.setTextColor(Utils.exist(string) ? Color.RED : Color.GREEN);
-        holder.actionMessage.setTextColor(Utils.exist(string) ? Color.GREEN : Color.RED);
-        holder.actionIcon.setColorFilter(Utils.exist(string) ? Color.GREEN : Color.RED);
-        holder.actionMessage.setText(Utils.exist(string) ? holder.actionMessage.getContext().getString(R.string.restore) : holder.actionMessage.getContext().getString(R.string.remove));
-        holder.actionIcon.setImageDrawable(Utils.exist(string) ? holder.actionIcon.getContext().getResources().getDrawable(R.drawable.ic_restore) : holder.actionIcon.getContext().getResources().getDrawable(R.drawable.ic_delete));
-        holder.statusMessage.setText(Utils.exist(string) ? null : holder.statusMessage.getContext().getString(R.string.status_message_restore));
-        holder.statusMessage.setVisibility(Utils.exist(string) ? View.GONE : View.VISIBLE);
     }
 
 }

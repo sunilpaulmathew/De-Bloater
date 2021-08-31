@@ -53,7 +53,6 @@
     <string name="licence">"Licencia"</string>
     <string name="licence_summary">"Mirar GPL V3"</string>
     <string name="light">"Claro"</string>
-    <string name="magisk_credit_dialog">"Potenciado con Magisk"</string>
     <string name="miscellaneous">"Misceláneo"</string>
     <string name="module_status_reset">"Reiniciar módulo"</string>
     <string name="more_apps">"Más apps"</string>
@@ -95,7 +94,6 @@
     <string name="update_available">"Nueva actualización disponible!\n(%s)"</string>
     <string name="updated_dialog">"Felicidades! Estás usando la versión mas reciente de De-Bloater!"</string>
     <string name="version">"Versión"</string>
-    <string name="warning">"Advertencia"</string>
     <string name="warning_summary">"De-Bloater es muy poderoso! Por favor úsalo con cuidado. El desarrollador de esta aplicación no se hace responsable si algo sale mal debido a su uso incorrecto."</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>

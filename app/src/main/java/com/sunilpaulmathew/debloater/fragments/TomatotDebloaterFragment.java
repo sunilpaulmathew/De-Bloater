@@ -1,7 +1,5 @@
 package com.sunilpaulmathew.debloater.fragments;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +10,16 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.AsyncTasks;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.Tomatot;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -26,12 +29,12 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 public class TomatotDebloaterFragment extends Fragment {
 
-    private MaterialTextView mAppsList;
     private boolean mExtremeT = false, mInvisibleT = false, mLightT = false;
     private MaterialCardView mAppListCard;
     private LinearLayout mProgressLayout;
+    private RecyclerView mRecyclerView;
+    private ActivePackagesAdapter mRecycleViewAdapter;
 
-    @SuppressLint("StaticFieldLeak")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,7 +48,9 @@ public class TomatotDebloaterFragment extends Fragment {
         MaterialTextView mExtreme = mRootView.findViewById(R.id.extreme);
         MaterialTextView mStatus = mRootView.findViewById(R.id.deblaoter_status);
         MaterialTextView mActionMessage = mRootView.findViewById(R.id.action_message);
-        mAppsList = mRootView.findViewById(R.id.apps_list);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
         MaterialTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
         mAppListCard = mRootView.findViewById(R.id.apps_list_card);
         FrameLayout mActionLayout = mRootView.findViewById(R.id.action_layout);
@@ -55,21 +60,25 @@ public class TomatotDebloaterFragment extends Fragment {
             mAppsListTitle.setTextColor(Utils.getThemeAccentColor(requireActivity()));
         }
 
-        if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
+        if (Tomatot.isScriptEnabled("tomatot_extreme", requireActivity())) {
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mStatus.setText(R.string.custom_scripts_uad_enabled);
             mActionMessage.setText(R.string.restore);
-            mAppsList.setText(Tomatot.getExtremeList());
+            mExtremeT = true;
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
-        } else if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+        } else if (Tomatot.isScriptEnabled("tomatot_light", requireActivity())) {
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mStatus.setText(R.string.custom_scripts_uad_enabled);
             mActionMessage.setText(R.string.restore);
-            mAppsList.setText(Tomatot.getLightList());
+            mLightT = true;
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
         } else {
             mInvisible.setTextColor(Utils.getThemeAccentColor(requireActivity()));
@@ -80,7 +89,8 @@ public class TomatotDebloaterFragment extends Fragment {
             mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mInvisibleT = true;
-            mAppsList.setText(Tomatot.getInvisibletList());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
         }
 
@@ -98,7 +108,8 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
             mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            updateAppList();
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mLight.setOnClickListener(v -> {
             mExtremeT = false;
@@ -111,7 +122,8 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_light);
             mActionMessage.setText(Utils.getBoolean("tomatot_light", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            updateAppList();
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mExtreme.setOnClickListener(v -> {
             mExtremeT = true;
@@ -124,74 +136,71 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_extreme);
             mActionMessage.setText(Utils.getBoolean("tomatot_extreme", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            updateAppList();
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
-        mActionLayout.setOnClickListener(v -> {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    mProgressLayout.setVisibility(View.VISIBLE);
-                    mAppListCard.setVisibility(View.GONE);
-                }
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    if (mExtremeT) {
-                        if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
-                            Tomatot.disableTomatotExtreme(requireActivity());
-                        } else {
-                            Tomatot.disableTomatotInvisible(requireActivity());
-                            Tomatot.disableTomatotLight(requireActivity());
-                            Tomatot.enableTomatotExtreme(requireActivity());
-                        }
-                    } else if (mInvisibleT) {
-                        if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
-                            Tomatot.disableTomatotInvisible(requireActivity());
-                        } else {
-                            Tomatot.disableTomatotLight(requireActivity());
-                            Tomatot.disableTomatotExtreme(requireActivity());
-                            Tomatot.enableTomatotInvisible(requireActivity());
-                        }
-                    } else if (mLightT) {
-                        if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
-                            Tomatot.disableTomatotLight(requireActivity());
-                        } else {
-                            Tomatot.disableTomatotInvisible(requireActivity());
-                            Tomatot.disableTomatotExtreme(requireActivity());
-                            Tomatot.enableTomatotLight(requireActivity());
+        mActionLayout.setOnClickListener(v ->
+                new AsyncTasks() {
+
+                    @Override
+                    public void onPreExecute() {
+                        mProgressLayout.setVisibility(View.VISIBLE);
+                        mAppListCard.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void doInBackground() {
+                        if (mExtremeT) {
+                            if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
+                                Tomatot.disable("tomatot_extreme", Common.getTExtreme(), requireActivity());
+                            } else {
+                                if (Tomatot.isScriptEnabled("tomatot_invisible", requireActivity())) {
+                                    Tomatot.disable("tomatot_invisible", Common.geTInvisible(), requireActivity());
+                                }
+                                if (Tomatot.isScriptEnabled("tomatot_light", requireActivity())) {
+                                    Tomatot.disable("tomatot_light", Common.getTLight(), requireActivity());
+                                }
+                                Tomatot.enable("tomatot_extreme", Common.getTExtreme(), requireActivity());
+                            }
+                        } else if (mInvisibleT) {
+                            if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
+                                Tomatot.disable("tomatot_invisible", Common.geTInvisible(), requireActivity());
+                            } else {
+                                if (Tomatot.isScriptEnabled("tomatot_light", requireActivity())) {
+                                    Tomatot.disable("tomatot_light", Common.getTLight(), requireActivity());
+                                }
+                                if (Tomatot.isScriptEnabled("tomatot_extreme", requireActivity())) {
+                                    Tomatot.disable("tomatot_extreme", Common.getTExtreme(), requireActivity());
+                                }
+                                Tomatot.enable("tomatot_invisible", Common.geTInvisible(), requireActivity());
+                            }
+                        } else if (mLightT) {
+                            if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+                                Tomatot.disable("tomatot_light", Common.getTLight(), requireActivity());
+                            } else {
+                                if (Tomatot.isScriptEnabled("tomatot_invisible", requireActivity())) {
+                                    Tomatot.disable("tomatot_invisible", Common.geTInvisible(), requireActivity());
+                                }
+                                if (Tomatot.isScriptEnabled("tomatot_extreme", requireActivity())) {
+                                    Tomatot.disable("tomatot_extreme", Common.getTExtreme(), requireActivity());
+                                }
+                                Tomatot.enable("tomatot_light", Common.getTLight(), requireActivity());
+                            }
                         }
                     }
-                    return null;
-                }
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    super.onPostExecute(aVoid);
-                    mProgressLayout.setVisibility(View.GONE);
-                    new MaterialAlertDialogBuilder(requireActivity())
-                            .setMessage(R.string.custom_scripts_applied_message)
-                            .setCancelable(false)
-                            .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
-                                requireActivity().finish();
-                            }).show();
-                }
-            }.execute();
-        });
+
+                    @Override
+                    public void onPostExecute() {
+                        mProgressLayout.setVisibility(View.GONE);
+                        new MaterialAlertDialogBuilder(requireActivity())
+                                .setMessage(R.string.custom_scripts_applied_message)
+                                .setCancelable(false)
+                                .setPositiveButton(getString(R.string.cancel), (dialog, id) -> requireActivity().finish()).show();
+                    }
+                }.execute()
+        );
 
         return mRootView;
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void updateAppList() {
-        if (mExtremeT) {
-            mAppsList.setText(Tomatot.getExtremeList());
-            mAppListCard.setVisibility(View.VISIBLE);
-        } else if (mInvisibleT) {
-            mAppsList.setText(Tomatot.getInvisibletList());
-            mAppListCard.setVisibility(View.VISIBLE);
-        } else if (mLightT) {
-            mAppsList.setText(Tomatot.getLightList());
-            mAppListCard.setVisibility(View.VISIBLE);
-        }
     }
 
 }

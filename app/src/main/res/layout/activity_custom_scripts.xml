@@ -1,12 +1,27 @@
 <LinearLayout
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" >
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:gravity="center" >
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="175dp"
+        android:layout_height="20dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressBackgroundTint="@color/ColorBlue"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
     </FrameLayout>
 </LinearLayout>

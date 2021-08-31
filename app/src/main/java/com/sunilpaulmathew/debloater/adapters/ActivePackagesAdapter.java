@@ -15,6 +15,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.utils.RecycleViewItem;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
@@ -25,9 +26,9 @@ import java.util.List;
 
 public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAdapter.ViewHolder> {
 
-    private final List<String> data;
+    private final List<RecycleViewItem> data;
 
-    public ActivePackagesAdapter(List<String> data) {
+    public ActivePackagesAdapter(List<RecycleViewItem> data) {
         this.data = data;
     }
 
@@ -42,18 +43,18 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
     @Override
     public void onBindViewHolder(@NonNull ActivePackagesAdapter.ViewHolder holder, int position) {
         try {
-            holder.mIcon.setImageDrawable(PackageTasks.getAppIcon(this.data.get(position), holder.mName.getContext()));
-            holder.mPath.setText(PackageTasks.getAPKPath(this.data.get(position), holder.mName.getContext()));
-            if (Common.getSearchText() != null && Common.isTextMatched(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()))) {
-                holder.mName.setText(Utils.fromHtml(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()).replace(Common.getSearchText(),
+            holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
+            holder.mPath.setText(this.data.get(position).getDescription());
+            if (Common.getSearchText() != null && Common.isTextMatched(this.data.get(position).getTitle())) {
+                holder.mName.setText(Utils.fromHtml(this.data.get(position).getTitle().replace(Common.getSearchText(),
                         "<b><i><font color=\"" + Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
             } else {
-                holder.mName.setText(PackageTasks.getAppName(this.data.get(position), holder.mName.getContext()));
+                holder.mName.setText(this.data.get(position).getTitle());
             }
             if (Utils.isDarkTheme(holder.mName.getContext())) {
                 holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
             }
-            if (Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
+            if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getDescription()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getDescription()))) {
                 holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.restore));
                 holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore));
                 holder.statusMessage.setTextColor(Color.RED);
@@ -71,16 +72,12 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
                 holder.statusMessage.setText(null);
             }
             holder.actionLayout.setOnClickListener(v -> {
-                if (Utils.isPermissionDenied(holder.actionLayout.getContext())) {
-                    Utils.snackBar(holder.actionLayout, holder.actionLayout.getContext().getString(R.string.storage_access_denied));
-                    return;
-                }
-                if (Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAPKPath(this.data.get(position), holder.actionLayout.getContext())) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()))) {
-                    PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()));
+                if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getDescription()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getDescription()))) {
+                    PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getDescription()));
                 } else {
-                    PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position), holder.actionLayout.getContext()), holder.mName.getText().toString(), holder.actionLayout.getContext());
+                    PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getDescription()), holder.mName.getText().toString(), holder.actionLayout.getContext());
                 }
-                notifyDataSetChanged();
+                notifyItemChanged(position);
             });
         } catch (NullPointerException ignored) {}
     }

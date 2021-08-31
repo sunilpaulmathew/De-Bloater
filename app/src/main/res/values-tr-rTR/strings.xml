@@ -53,7 +53,6 @@
     <string name="licence">"Lisans"</string>
     <string name="licence_summary">"GPL V3'i göster"</string>
     <string name="light">"Hafif"</string>
-    <string name="magisk_credit_dialog">"Magisk ile güçlendirilmiştir"</string>
     <string name="miscellaneous">"Çeşitli"</string>
     <string name="module_status_reset">"Modülü yeniden başlat"</string>
     <string name="more_apps">"Daha fazla uygulama"</string>
@@ -95,7 +94,6 @@
     <string name="update_available">"Yeni güncelleme mevcut!\n(%s)"</string>
     <string name="updated_dialog">"Tebrikler! De-Bloater'ın güncel sürümüne sahipsiniz!"</string>
     <string name="version">"Versiyon"</string>
-    <string name="warning">"Dikkat!"</string>
     <string name="warning_summary">"De-Bloater çok güçlü! Lütfen dikkatli kullanın. Bu uygulamanın geliştiricisi, uygunsuz kullanımı nedeniyle bir şeyler ters giderse herhangi bir sorumluluk kabul etmez."</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>

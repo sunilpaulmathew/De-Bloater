@@ -1,11 +1,8 @@
 package com.sunilpaulmathew.debloater.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,6 +26,7 @@ import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.TomatotActivity;
 import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -42,8 +40,6 @@ import java.util.Objects;
 public class ActivePackagesFragment extends Fragment {
 
     private AppCompatImageButton mMenu;
-    private AsyncTask<Void, Void, Void> mLoader;
-    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
@@ -70,7 +66,7 @@ public class ActivePackagesFragment extends Fragment {
         mReverse.setElevation(10);
         mReverse.setOnClickListener(v -> {
             Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
-            reload(requireActivity());
+            loadUI(requireActivity());
         });
 
         Common.getSearchButton().setOnClickListener(v -> {
@@ -150,7 +146,7 @@ public class ActivePackagesFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 Common.setSearchText(s.toString().toLowerCase());
-                reload(requireActivity());
+                loadUI(requireActivity());
             }
         });
 
@@ -201,14 +197,14 @@ public class ActivePackagesFragment extends Fragment {
                     if (!Utils.getBoolean("sort_name", false, activity)) {
                         Utils.saveBoolean("sort_name", true, activity);
                         Utils.saveBoolean("sort_id", false, activity);
-                        reload(activity);
+                        loadUI(activity);
                     }
                     break;
                 case 3:
                     if (!Utils.getBoolean("sort_id", true, activity)) {
                         Utils.saveBoolean("sort_id", true, activity);
                         Utils.saveBoolean("sort_name", false, activity);
-                        reload(activity);
+                        loadUI(activity);
                     }
                     break;
                 case 4:
@@ -229,79 +225,29 @@ public class ActivePackagesFragment extends Fragment {
     }
 
     private void loadUI(Activity activity) {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            mProgressLayout.setVisibility(View.VISIBLE);
-                            mReverse.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.GONE);
-                        }
+        new AsyncTasks() {
 
-                        @Override
-                        protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
-                            return null;
-                        }
+            @Override
+            public void onPreExecute() {
+                mProgressLayout.setVisibility(View.VISIBLE);
+                mReverse.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.GONE);
+                mRecyclerView.removeAllViews();
+            }
 
-                        @Override
-                        protected void onPostExecute(Void recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mProgressLayout.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mReverse.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
-                }
-            }, 250);
-        }
-    }
+            @Override
+            public void doInBackground() {
+                mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
+            }
 
-    private void reload(Activity activity) {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            mProgressLayout.setVisibility(View.VISIBLE);
-                            mReverse.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.GONE);
-                            mRecyclerView.removeAllViews();
-                        }
-
-                        @Override
-                        protected Void doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mRecycleViewAdapter.notifyDataSetChanged();
-                            mProgressLayout.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mReverse.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
-                }
-            }, 250);
-        }
+            @Override
+            public void onPostExecute() {
+                mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mProgressLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                mReverse.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 
     @Override
