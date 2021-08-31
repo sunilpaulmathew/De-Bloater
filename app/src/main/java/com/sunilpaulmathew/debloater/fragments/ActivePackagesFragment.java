@@ -178,10 +178,11 @@ public class ActivePackagesFragment extends Fragment {
             menu.add(Menu.NONE, 1, Menu.NONE, R.string.module_status_reset);
         }
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
-        sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
+        sort.add(0, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
-        sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
+        sort.add(0, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
+        sort.setGroupCheckable(0, true, true);
         SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
         customScripts.add(Menu.NONE, 4, Menu.NONE, R.string.custom_scripts_tomatot);
         customScripts.add(Menu.NONE, 5, Menu.NONE, R.string.custom_scripts_uad);
