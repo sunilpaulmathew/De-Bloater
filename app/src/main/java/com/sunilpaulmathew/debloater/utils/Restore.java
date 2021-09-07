@@ -1,6 +1,7 @@
 package com.sunilpaulmathew.debloater.utils;
 
 import android.content.Context;
+import android.os.Build;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 public class Restore {
 
-    public static JSONArray getAppList(String json) {
+    private static JSONArray getAppList(String json) {
         if (json != null && !json.isEmpty()) {
             try {
                 JSONObject main = new JSONObject(json);
@@ -27,7 +28,18 @@ public class Restore {
         return null;
     }
 
-    public static String getName(String string) {
+    private static JSONObject getDeviceInfo(String json) {
+        if (json != null && !json.isEmpty()) {
+            try {
+                JSONObject baseJSON = new JSONObject(json);
+                return new JSONObject(baseJSON.getString("Device"));
+            } catch (JSONException ignored) {
+            }
+        }
+        return null;
+    }
+
+    private static String getName(String string) {
         try {
             JSONObject obj = new JSONObject(string);
             return obj.getString("name");
@@ -36,7 +48,25 @@ public class Restore {
         return null;
     }
 
-    public static String getPath(String string) {
+    private static String getModel(String string) {
+        if (getDeviceInfo(string) == null) return null;
+        try {
+            return getDeviceInfo(string).getString("Model");
+        } catch (JSONException ignored) {
+        }
+        return null;
+    }
+
+    private static int getSDK(String string) {
+        if (getDeviceInfo(string) == null) return 0;
+        try {
+            return getDeviceInfo(string).getInt("SDK");
+        } catch (JSONException ignored) {
+        }
+        return 0;
+    }
+
+    private static String getPath(String string) {
         try {
             JSONObject obj = new JSONObject(string);
             return obj.getString("path");
@@ -49,6 +79,11 @@ public class Restore {
         return getAppList(Utils.read(path)) != null;
     }
 
+    public static boolean isJSONMatched(String path) {
+        if (getDeviceInfo(Utils.read(path)) == null) return true;
+        return Objects.equals(getModel(Utils.read(path)), Build.MODEL) && getSDK(Utils.read(path)) == Build.VERSION.SDK_INT;
+    }
+
     public static void restoreBackup(String path, Context context) {
         List<String> mRestoreData = new ArrayList<>();
         if (Utils.exist(path)) {
@@ -59,8 +94,7 @@ public class Restore {
                 }
             }
         }
-        String[] apps = mRestoreData.toArray(new String[0]);
-        for (String s : apps) {
+        for (String s : mRestoreData) {
             if (Utils.exist(Objects.requireNonNull(getPath(s)).replace("/data/adb/modules/De-bloater",""))) {
                 PackageTasks.setToDelete(Objects.requireNonNull(getPath(s)).replace("/data/adb/modules/De-bloater",""), getName(s), context);
             }

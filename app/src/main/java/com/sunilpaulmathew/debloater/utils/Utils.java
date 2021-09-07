@@ -244,15 +244,6 @@ public class Utils {
         return runAndGetOutput("sha1sum " + path);
     }
 
-    public static boolean isDownloadBinaries() {
-        return isMagiskBinaryExist("curl") || isMagiskBinaryExist("wget") ||
-                exist("/system/bin/curl") || exist("/system/bin/wget");
-    }
-
-    public static boolean isMagiskBinaryExist(String command) {
-        return !runAndGetError(magiskBusyBox() + command).contains("applet not found");
-    }
-
     public static String magiskBusyBox() {
         if (Utils.exist("/data/adb/magisk/busybox")) {
             return "/data/adb/magisk/busybox ";

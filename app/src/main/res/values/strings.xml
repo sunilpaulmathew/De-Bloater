@@ -17,6 +17,7 @@
     <string name="backup">Backup</string>
     <string name="backup_list_empty">You haven\'t removed any apps yet!</string>
     <string name="backup_message">Backup files is created as %s!</string>
+    <string name="backup_share_message">In order to create a database of pre-defined profiles for public usage, please consider sharing the best de-bloater profiles made by you with the developer of De-Bloater. Thank You!\n\nEmail: smartpack.org@gmail.com\nTelegram: https://t.me/smartpack_kmanager</string>
     <string name="cancel">Cancel</string>
     <string name="carrier">Carrier</string>
     <string name="change_logs">Change-logs</string>
@@ -77,11 +78,13 @@
     <string name="report_issue_summary">Raise an issue at GitHub</string>
     <string name="restore">Restore</string>
     <string name="restore_error_message">You\'re selected an invalid backup file. Aborting!</string>
+    <string name="restore_mismatch_message">You\'re selected a backup file created for a different device or Android version. Do you still want to restore?</string>
     <string name="restore_question">Restore from %s?</string>
     <string name="restoring">Restoring…</string>
     <string name="samsung">Samsung</string>
     <string name="search_hint">Search…</string>
     <string name="share_app_message">Get De-Bloater %s from</string>
+    <string name="share_profile">Share Profile</string>
     <string name="sony">Sony</string>
     <string name="sort_by">Sort Apps By</string>
     <string name="source_code">Source Code</string>

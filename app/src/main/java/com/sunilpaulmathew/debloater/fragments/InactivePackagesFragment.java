@@ -1,8 +1,9 @@
 package com.sunilpaulmathew.debloater.fragments;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -14,13 +15,14 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
+import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
 import com.sunilpaulmathew.debloater.utils.AsyncTasks;
@@ -88,23 +90,44 @@ public class InactivePackagesFragment extends Fragment {
                     Utils.runCommand("svc power reboot");
                     break;
                 case 2:
-                    if (Utils.isPermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    } else if (PackageTasks.getInactivePackageData().size() > 0) {
+                    if (PackageTasks.getInactivePackageData().size() > 0) {
+                        File jsonFile = new File(PackageTasks.getStoragePath(), Build.MODEL.replace(" ","_") + "_" + Build.VERSION.SDK_INT + ".json");
                         try {
                             JSONObject obj = new JSONObject();
+                            JSONObject device = new JSONObject();
                             JSONArray DeBloater = new JSONArray();
-                            String[] apps = PackageTasks.getInactivePackageData().toString().substring(1, PackageTasks.getInactivePackageData().toString().length() - 1).split(", ");
-                            for (String s : apps) {
+                            device.put("Manufacturer", Build.MANUFACTURER);
+                            device.put("Brand", Build.BRAND);
+                            device.put("Model", Build.MODEL);
+                            device.put("Version", Build.VERSION.RELEASE);
+                            device.put("SDK", Build.VERSION.SDK_INT);
+                            obj.put("Device", device);
+                            for (String s : PackageTasks.getInactivePackageData()) {
                                 JSONObject app = new JSONObject();
                                 app.put("name", Utils.read(s));
                                 app.put("path", s);
                                 DeBloater.put(app);
                                 obj.put("DeBloater", DeBloater);
                             }
-                            Utils.create(obj.toString(), PackageTasks.getStoragePath() + "/de-bloated_list.json");
-                            Utils.snackBar(mRecyclerView, getString(R.string.backup_message, PackageTasks.getStoragePath() + "/de-bloater_list.json"));
+                            Utils.create(obj.toString(), jsonFile.getAbsolutePath());
+                            new MaterialAlertDialogBuilder(requireActivity())
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(getString(R.string.backup_message, jsonFile.getAbsolutePath()) + "\n\n" + getString(R.string.backup_share_message))
+                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.share_profile), (dialogInterface, i) -> {
+                                        Uri uriFile = FileProvider.getUriForFile(activity,
+                                                BuildConfig.APPLICATION_ID + ".provider", jsonFile);
+                                        Intent share = new Intent(Intent.ACTION_SEND);
+                                        share.setType("*/*");
+                                        share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                                        share.putExtra(Intent.EXTRA_TEXT, "De-Bloater profile for " + Build.MODEL + " (SDK: " + Build.VERSION.SDK_INT + ").");
+                                        share.putExtra(Intent.EXTRA_STREAM, uriFile);
+                                        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                        Intent shareIntent = Intent.createChooser(share, null);
+                                        startActivity(shareIntent);
+                                    }).show();
                         } catch (JSONException ignored) {
                         }
                     } else {
@@ -112,15 +135,10 @@ public class InactivePackagesFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    if (Utils.isPermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    } else {
-                        FilePicker.setPath(Environment.getExternalStorageDirectory().toString());
-                        FilePicker.setExtension("json");
-                        Intent filePicker = new Intent(getActivity(), FilePickerActivity.class);
-                        startActivityForResult(filePicker, 0);
-                    }
+                    FilePicker.setPath(Environment.getExternalStorageDirectory().toString());
+                    FilePicker.setExtension("json");
+                    Intent filePicker = new Intent(getActivity(), FilePickerActivity.class);
+                    startActivityForResult(filePicker, 0);
                     break;
             }
             return false;
@@ -165,7 +183,8 @@ public class InactivePackagesFragment extends Fragment {
                 return;
             }
             new MaterialAlertDialogBuilder(requireActivity())
-                    .setMessage(getString(R.string.restore_question, mSelectedFile.getName()))
+                    .setMessage(Restore.isJSONMatched(mSelectedFile.getAbsolutePath()) ? getString(R.string.restore_question,
+                            mSelectedFile.getName()) : getString(R.string.restore_mismatch_message))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
                     .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
