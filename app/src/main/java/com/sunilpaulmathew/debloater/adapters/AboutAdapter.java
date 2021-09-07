@@ -19,7 +19,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.ChangeLogActivity;
-import com.sunilpaulmathew.debloater.utils.RecycleViewItem;
+import com.sunilpaulmathew.debloater.utils.AboutItems;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -31,9 +31,9 @@ import java.util.ArrayList;
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> {
 
-    private final ArrayList<RecycleViewItem> data;
+    private final ArrayList<AboutItems> data;
 
-    public AboutAdapter(ArrayList<RecycleViewItem> data) {
+    public AboutAdapter(ArrayList<AboutItems> data) {
         this.data = data;
     }
 
