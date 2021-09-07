@@ -19,8 +19,8 @@ public class Common {
     private static AppCompatEditText mSearchWord;
     private static AppCompatImageButton mSearchButton;
     private static AppCompatTextView mAbout;
-    private static List<RecycleViewItem> mRawData;
-    private static final List<RecycleViewItem> mAOSP = new ArrayList<>(), mAsus = new ArrayList<>(),
+    private static List<PackageItem> mRawData;
+    private static final List<PackageItem> mAOSP = new ArrayList<>(), mAsus = new ArrayList<>(),
             mCarrier = new ArrayList<>(), mGoogle = new ArrayList<>(), mHuawei = new ArrayList<>(),
             mLG = new ArrayList<>(), mSamsung = new ArrayList<>(), mMisc = new ArrayList<>(),
             mMoto = new ArrayList<>(), mNokia = new ArrayList<>(), mOnePlus = new ArrayList<>(),
@@ -50,79 +50,79 @@ public class Common {
         return false;
     }
 
-    public static List<RecycleViewItem> getAOSP() {
+    public static List<PackageItem> getAOSP() {
         return mAOSP;
     }
 
-    public static List<RecycleViewItem> getAsus() {
+    public static List<PackageItem> getAsus() {
         return mAsus;
     }
 
-    public static List<RecycleViewItem> getCarrier() {
+    public static List<PackageItem> getCarrier() {
         return mCarrier;
     }
 
-    public static List<RecycleViewItem> getGoogle() {
+    public static List<PackageItem> getGoogle() {
         return mGoogle;
     }
 
-    public static List<RecycleViewItem> getHuawei() {
+    public static List<PackageItem> getHuawei() {
         return mHuawei;
     }
 
-    public static List<RecycleViewItem> getLG() {
+    public static List<PackageItem> getLG() {
         return mLG;
     }
 
-    public static List<RecycleViewItem> getMisc() {
+    public static List<PackageItem> getMisc() {
         return mMisc;
     }
 
-    public static List<RecycleViewItem> getMoto() {
+    public static List<PackageItem> getMoto() {
         return mMoto;
     }
 
-    public static List<RecycleViewItem> getNokia() {
+    public static List<PackageItem> getNokia() {
         return mNokia;
     }
 
-    public static List<RecycleViewItem> getOppo() {
+    public static List<PackageItem> getOppo() {
         return mOppo;
     }
 
-    public static List<RecycleViewItem> getOnePlus() {
+    public static List<PackageItem> getOnePlus() {
         return mOnePlus;
     }
 
-    public static List<RecycleViewItem> getRawData() {
+    public static List<PackageItem> getRawData() {
         return mRawData;
     }
 
-    public static List<RecycleViewItem> getSamsung() {
+    public static List<PackageItem> getSamsung() {
         return mSamsung;
     }
 
-    public static List<RecycleViewItem> getSony() {
+    public static List<PackageItem> getSony() {
         return mSony;
     }
 
-    public static List<RecycleViewItem> geTInvisible() {
+    public static List<PackageItem> geTInvisible() {
         return mTInvisible;
     }
 
-    public static List<RecycleViewItem> getTLight() {
+    public static List<PackageItem> getTLight() {
         return mTLight;
     }
 
-    public static List<RecycleViewItem> getTExtreme() {
+    public static List<PackageItem> getTExtreme() {
         return mTExtreme;
     }
 
-    public static List<RecycleViewItem> getXiaomi() {
+    public static List<PackageItem> getXiaomi() {
         return mXiaomi;
     }
 
-    public static List<RecycleViewItem> getZTE() {
+    public static List<PackageItem> getZTE() {
         return mZTE;
     }
 
@@ -154,7 +154,7 @@ public class Common {
         mAbout = view.findViewById(id);
     }
 
-    public static void setRawData(List<RecycleViewItem> rawData) {
+    public static void setRawData(List<PackageItem> rawData) {
         mRawData = rawData;
     }
 

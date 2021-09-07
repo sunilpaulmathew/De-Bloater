@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
         if (Utils.isDarkTheme(holder.appName.getContext())) {
             holder.appName.setTextColor(Utils.getThemeAccentColor(holder.appName.getContext()));
         }
-        holder.appID.setText(this.data.get(position).replace("/data/adb/modules/De-bloater",""));
+        holder.appID.setText(this.data.get(position).replace(Common.getModuleParent(),""));
         holder.appIcon.setImageDrawable(holder.appIcon.getContext().getResources().getDrawable(R.drawable.ic_android));
         holder.appIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
         holder.statusMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
@@ -54,10 +55,6 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
         holder.statusMessage.setText(Utils.exist(this.data.get(position)) ? null : holder.statusMessage.getContext().getString(R.string.status_message_restore));
         holder.statusMessage.setVisibility(Utils.exist(this.data.get(position)) ? View.GONE : View.VISIBLE);
         holder.actionLayout.setOnClickListener(v -> {
-            if (Utils.isPermissionDenied(holder.actionLayout.getContext())) {
-                Utils.snackBar(holder.actionLayout, holder.actionLayout.getContext().getString(R.string.storage_access_denied));
-                return;
-            }
             if (Utils.exist(this.data.get(position))) {
                 Utils.delete(this.data.get(position));
             } else {

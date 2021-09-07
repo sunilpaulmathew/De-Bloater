@@ -159,20 +159,20 @@ public class Tomatot {
         return mData;
     }
 
-    public static void enable(String tag, List<RecycleViewItem> items, Context context) {
+    public static void enable(String tag, List<PackageItem> items, Context context) {
         PackageTasks.initializeModule();
-        for (RecycleViewItem item : items) {
-            if (Utils.exist(item.getDescription())) {
-                PackageTasks.setToDelete(item.getDescription(), new File(item.getDescription()).getName(), context);
+        for (PackageItem item : items) {
+            if (Utils.exist(item.getAPKPath())) {
+                PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
             }
         }
         Utils.saveBoolean(tag, true, context);
     }
 
-    public static void disable(String tag, List<RecycleViewItem> items, Context context) {
-        for (RecycleViewItem item : items) {
-            if (Utils.exist(PackageTasks.getModulePath() + item.getDescription())) {
-                PackageTasks.revertDelete(item.getDescription());
+    public static void disable(String tag, List<PackageItem> items, Context context) {
+        for (PackageItem item : items) {
+            if (Utils.exist(PackageTasks.getModulePath() + item.getAPKPath())) {
+                PackageTasks.revertDelete(item.getAPKPath());
             }
         }
         Utils.saveBoolean(tag, false, context);
@@ -185,47 +185,47 @@ public class Tomatot {
     public static void setInvisibleData(Context context) {
         for (String path : getTomatotInvisible()) {
             if (Utils.exist(path)) {
-                Common.geTInvisible().add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                Common.geTInvisible().add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
     }
 
     public static void setLightData(Context context) {
-        List<RecycleViewItem> items = new ArrayList<>();
+        List<PackageItem> items = new ArrayList<>();
         for (String path : getTomatotInvisible()) {
             if (Utils.exist(path)) {
-                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
         for (String path : getTomatotLight()) {
             if (Utils.exist(path)) {
-                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
         Common.getTLight().addAll(items);
     }
 
     public static void setExtremeData(Context context) {
-        List<RecycleViewItem> items = new ArrayList<>();
+        List<PackageItem> items = new ArrayList<>();
         for (String path : getTomatotInvisible()) {
             if (Utils.exist(path)) {
-                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
         for (String path : getTomatotLight()) {
             if (Utils.exist(path)) {
-                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
         for (String path : getTomatotExtreme()) {
             if (Utils.exist(path)) {
-                items.add(new RecycleViewItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context)));
+                items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
+                        path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
             }
         }
         Common.getTExtreme().addAll(items);

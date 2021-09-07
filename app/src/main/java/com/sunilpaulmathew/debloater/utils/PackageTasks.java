@@ -25,36 +25,38 @@ public class PackageTasks {
         Utils.runCommand(Utils.magiskBusyBox() + "mkdir " + Common.getModuleParent());
     }
 
-    public static List<RecycleViewItem> getRawData(Context context) {
-        List<RecycleViewItem> mData = new ArrayList<>();
+    public static List<PackageItem> getRawData(Context context) {
+        List<PackageItem> mData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                mData.add(new RecycleViewItem(
+                mData.add(new PackageItem(
                         getAppName(packageInfo.packageName, context),
-                        getAPKPath(packageInfo.packageName, context),
+                        isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
+                                context) : getAPKPath(packageInfo.packageName, context),
                         getAppIcon(packageInfo.packageName, context),
-                        packageInfo.packageName));
+                        packageInfo.packageName,
+                        isUpdatedSystemApp(packageInfo.packageName, context)));
             }
         }
         return mData;
     }
 
-    public static List<RecycleViewItem> getActivePackageData(Context context) {
-        List<RecycleViewItem> mData = new ArrayList<>();
-        for (RecycleViewItem item : Common.getRawData()) {
-            if (getSupportedAppsList(item.getDescription(), context)) {
+    public static List<PackageItem> getActivePackageData(Context context) {
+        List<PackageItem> mData = new ArrayList<>();
+        for (PackageItem item : Common.getRawData()) {
+            if (getSupportedAppsList(item.getAPKPath(), context)) {
                 if (Common.getSearchText() == null) {
                     mData.add(item);
-                } else if (Common.isTextMatched(item.getTitle())) {
+                } else if (Common.isTextMatched(item.getAppName())) {
                     mData.add(item);
                 }
             }
         }
         if (Utils.getBoolean("sort_name", true, context)) {
-            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getTitle(), rhs.getTitle()));
+            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
         } else {
-            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getURL(), rhs.getURL()));
+            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
         }
         if (Utils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
@@ -79,6 +81,13 @@ public class PackageTasks {
         return false;
     }
 
+    public static boolean isUpdatedSystemApp(String packageName, Context context) {
+        try {
+            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
+        } catch (NullPointerException ignored) {}
+        return false;
+    }
+
     private static boolean getSupportedAppsList(String apkPath, Context context) {
         String mStatus = Utils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
@@ -98,7 +107,7 @@ public class PackageTasks {
             case "vendor":
                 return vendorApps;
             default:
-                return systemApps || vendorApps || productApps;
+                return true;
         }
     }
 
@@ -125,6 +134,25 @@ public class PackageTasks {
 
     public static String getAPKPath(String packageName, Context context) {
         return Objects.requireNonNull(getAppInfo(packageName, context)).sourceDir;
+    }
+
+    public static String findSystemAPKPath(String packageName, Context context) {
+        String mAPKPath = null;
+        for (String line : Utils.runAndGetOutput("dumpsys package " + packageName + " | grep resourcePath").replace("resourcePath=","").split("\\r?\\n")) {
+            if (!line.startsWith("/data/")) {
+                mAPKPath = line.replaceAll("\\s+","");
+                for (File mFile : Objects.requireNonNull(new File(mAPKPath).listFiles())) {
+                    if (Objects.equals(getAPKId(mFile.getAbsolutePath(), context), packageName)) {
+                        mAPKPath = mAPKPath + File.separator + mFile.getName();
+                    }
+                }
+            }
+        }
+        if (Utils.exist(mAPKPath)) {
+            return mAPKPath;
+        } else {
+            return getAPKPath(packageName, context);
+        }
     }
 
     public static String getAdjAPKPath(String apkPath) {

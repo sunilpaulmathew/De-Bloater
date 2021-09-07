@@ -1533,12 +1533,12 @@ public class UAD {
         }
     }
 
-    private static void enable(String tag, List<RecycleViewItem> items, Context context) {
+    private static void enable(String tag, List<PackageItem> items, Context context) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
-        for (RecycleViewItem item : items) {
-            PackageTasks.setToDelete(item.getDescription(), new File(item.getDescription()).getName(), context);
-            mAppList.append(item.getDescription()).append("\n");
+        for (PackageItem item : items) {
+            PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
+            mAppList.append(item.getAPKPath()).append("\n");
         }
         Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/" + tag);
     }
@@ -1555,11 +1555,14 @@ public class UAD {
         Utils.delete(PackageTasks.getModulePath() + "/" + tag);
     }
 
-    public static void setUADData(List<String> input, List<RecycleViewItem> output, Context context) {
+    public static void setUADData(List<String> input, List<PackageItem> output, Context context) {
         for (String packageName : input) {
             if (Utils.isPackageInstalled(packageName, context) && PackageTasks.isSystemApp(packageName, context)) {
-                output.add(new RecycleViewItem(PackageTasks.getAppName(packageName, context), PackageTasks.getAPKPath(packageName, context),
-                        PackageTasks.getAppIcon(packageName, context), packageName));
+                output.add(new PackageItem(PackageTasks.getAppName(packageName, context),
+                        PackageTasks.isUpdatedSystemApp(packageName, context) ? PackageTasks.findSystemAPKPath(
+                                packageName, context) : PackageTasks.getAPKPath(packageName, context),
+                        PackageTasks.getAppIcon(packageName, context), packageName,
+                        PackageTasks.isUpdatedSystemApp(packageName, context)));
             }
         }
     }
