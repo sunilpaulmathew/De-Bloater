@@ -1,6 +1,0 @@
-* Largely improved app UI response.
-* Replaced deprecated AsyncTask with a custom one.
-* Added a welcome screen on the first app launch.
-* Cleaned a lot of unnecessary code and largely improved coding quality.
-* Enhanced Tomatot debloater.
-* A lot more improvements under-the-hood.
