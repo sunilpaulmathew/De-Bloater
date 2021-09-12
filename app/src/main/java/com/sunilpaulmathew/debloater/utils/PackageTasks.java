@@ -137,22 +137,21 @@ public class PackageTasks {
     }
 
     public static String findSystemAPKPath(String packageName, Context context) {
-        String mAPKPath = null;
-        for (String line : Utils.runAndGetOutput("dumpsys package " + packageName + " | grep resourcePath").replace("resourcePath=","").split("\\r?\\n")) {
-            if (!line.startsWith("/data/")) {
-                mAPKPath = line.replaceAll("\\s+","");
-                for (File mFile : Objects.requireNonNull(new File(mAPKPath).listFiles())) {
-                    if (Objects.equals(getAPKId(mFile.getAbsolutePath(), context), packageName)) {
-                        mAPKPath = mAPKPath + File.separator + mFile.getName();
+        try {
+            String mAPKPath = null;
+            for (String line : Utils.runAndGetOutput("dumpsys package " + packageName + " | grep resourcePath").replace("resourcePath=", "").split("\\r?\\n")) {
+                if (!line.startsWith("/data/")) {
+                    mAPKPath = line.replaceAll("\\s+", "");
+                    for (File mFile : Objects.requireNonNull(new File(mAPKPath).listFiles())) {
+                        if (Objects.equals(getAPKId(mFile.getAbsolutePath(), context), packageName)) {
+                            mAPKPath = mAPKPath + File.separator + mFile.getName();
+                        }
                     }
                 }
             }
-        }
-        if (Utils.exist(mAPKPath)) {
-            return mAPKPath;
-        } else {
-            return getAPKPath(packageName, context);
-        }
+            if (Utils.exist(mAPKPath)) return mAPKPath;
+        } catch (NullPointerException ignored) {}
+        return getAPKPath(packageName, context);
     }
 
     public static String getAdjAPKPath(String apkPath) {
