@@ -1,3 +1,0 @@
-* De-Bloater now handles updated system apps.
-* Improved backup/restore profiles.
-* Miscellaneous changes.

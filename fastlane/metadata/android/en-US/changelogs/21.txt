@@ -1,0 +1,4 @@
+* Fixed crashing Tomatot Debloater page.
+* Fixed crashing app when root access is unavailable.
+* Updated gradle plugin.
+* Miscellaneous changes.
