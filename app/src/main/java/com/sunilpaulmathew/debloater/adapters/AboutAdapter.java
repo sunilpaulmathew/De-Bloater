@@ -19,11 +19,13 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.ChangeLogActivity;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sCreditsUtils;
 import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
 import in.sunilpaulmathew.sCommon.Utils.sTranslatorUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -79,6 +81,13 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
                 new sTranslatorUtils(v.getContext().getString(R.string.app_name), "https://poeditor.com/join/project?hash=BZS89Ev3WG",
                         (Activity) v.getContext()).show();
             } else if (position == 9) {
+                new sCreditsUtils(Common.getCredits(),
+                        sUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
+                        sUtils.getDrawable(R.drawable.ic_back, v.getContext()),
+                        sUtils.getColor(R.color.ColorBlue, v.getContext()),
+                        20, v.getContext().getString(R.string.app_name), "2021-2022, sunilpaulmathew",
+                        BuildConfig.VERSION_NAME).launchCredits(v.getContext());
+            } else if (position == 10) {
                 Intent shareapp = new Intent();
                 shareapp.setAction(Intent.ACTION_SEND);
                 shareapp.putExtra(Intent.EXTRA_SUBJECT, holder.mRVLayout.getContext().getString(R.string.app_name));

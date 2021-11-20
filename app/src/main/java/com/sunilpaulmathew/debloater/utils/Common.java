@@ -14,6 +14,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
+
 public class Common {
 
     private static AppCompatEditText mSearchWord;
@@ -125,6 +127,21 @@ public class Common {
     public static List<PackageItem> getZTE() {
         return mZTE;
     }
+
+    public static List<sSerializableItems> getCredits() {
+        List<sSerializableItems> mData = new ArrayList<>();
+        mData.add(new sSerializableItems(null, "Willi Ye", "Kernel Adiutor", "https://github.com/Grarak/KernelAdiutor"));
+        mData.add(new sSerializableItems(null, "John Wu", "libsu & Magisk", "https://github.com/topjohnwu"));
+        mData.add(new sSerializableItems(null, "Nikita", "Russian & Ukrainian Translations", "https://t.me/MONSTER_PC"));
+        mData.add(new sSerializableItems(null, "Emre", "Turkish Translations", "https://t.me/xcooLwastaken"));
+        mData.add(new sSerializableItems(null, "Firerust96", "Spanish Translations", "https://github.com/Firerust96"));
+        mData.add(new sSerializableItems(null, "lay4play", "Italian Translations", null));
+        mData.add(new sSerializableItems(null, "Axel Schaab", "German Translations", null));
+        mData.add(new sSerializableItems(null, "alex", "Polish Translations", null));
+        mData.add(new sSerializableItems(null, "Ktosspl", "Polish Translations", null));
+        return mData;
+    }
+
 
     public static String getModuleParent() {
         return "/data/adb/modules/De-bloater";
