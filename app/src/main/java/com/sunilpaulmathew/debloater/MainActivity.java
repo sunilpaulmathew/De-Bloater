@@ -17,6 +17,9 @@ import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
+import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
  */
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Initialize App Theme
-        Utils.initializeAppTheme();
+        sThemeUtils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             mExit = false;
             super.onBackPressed();
         } else {
-            Utils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit));
+            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit)).show();
             mExit = true;
             mHandler.postDelayed(() -> mExit = false, 2000);
         }

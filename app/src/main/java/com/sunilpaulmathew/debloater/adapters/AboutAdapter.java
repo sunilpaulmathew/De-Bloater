@@ -19,11 +19,14 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.ChangeLogActivity;
-import com.sunilpaulmathew.debloater.utils.AboutItems;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
+import in.sunilpaulmathew.sCommon.Utils.sTranslatorUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 03, 2021
@@ -31,9 +34,9 @@ import java.util.ArrayList;
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> {
 
-    private final ArrayList<AboutItems> data;
+    private final List<sSerializableItems> data;
 
-    public AboutAdapter(ArrayList<AboutItems> data) {
+    public AboutAdapter(List<sSerializableItems> data) {
         this.data = data;
     }
 
@@ -47,19 +50,19 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull AboutAdapter.ViewHolder holder, int position) {
-        holder.Title.setText(this.data.get(position).getTitle());
-        if (Utils.isDarkTheme(holder.Title.getContext())) {
+        holder.Title.setText(this.data.get(position).getTextOne());
+        if (sUtils.isDarkTheme(holder.Title.getContext())) {
             holder.Title.setTextColor(Utils.getThemeAccentColor(holder.Title.getContext()));
-        } else if (position != 0 && !this.data.get(position).getTitle().equals(holder.Title.getContext()
-                .getString(R.string.fdroid)) && !this.data.get(position).getTitle().equals(holder.Title
+        } else if (position != 0 && !this.data.get(position).getTextOne().equals(holder.Title.getContext()
+                .getString(R.string.fdroid)) && !this.data.get(position).getTextTwo().equals(holder.Title
                 .getContext().getString(R.string.translations))) {
             holder.mIcon.setColorFilter(Color.BLACK);
         }
-        holder.Description.setText(this.data.get(position).getDescription());
+        holder.Description.setText(this.data.get(position).getTextTwo());
         holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
         holder.mRVLayout.setOnClickListener(v -> {
-            if (this.data.get(position).getURL() != null) {
-                Utils.launchUrl(this.data.get(position).getURL(), (Activity) holder.mRVLayout.getContext());
+            if (this.data.get(position).getTextThree() != null) {
+                sUtils.launchUrl(this.data.get(position).getTextThree(), (Activity) holder.mRVLayout.getContext());
             } else if (position == 0) {
                 Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -73,6 +76,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
                 UpdateCheck.isManualUpdate(true);
                 new UpdateCheck().initialize(0, (Activity) holder.mRVLayout.getContext());
             } else if (position == 8) {
+                new sTranslatorUtils(v.getContext().getString(R.string.app_name), "https://poeditor.com/join/project?hash=BZS89Ev3WG",
+                        (Activity) v.getContext()).show();
+            } else if (position == 9) {
                 Intent shareapp = new Intent();
                 shareapp.setAction(Intent.ACTION_SEND);
                 shareapp.putExtra(Intent.EXTRA_SUBJECT, holder.mRVLayout.getContext().getString(R.string.app_name));

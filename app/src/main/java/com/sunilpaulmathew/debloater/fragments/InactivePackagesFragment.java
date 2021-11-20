@@ -25,7 +25,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
-import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Restore;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -38,6 +37,8 @@ import java.io.File;
 
 import in.sunilpaulmathew.rootfilepicker.activities.FilePickerActivity;
 import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -131,7 +132,7 @@ public class InactivePackagesFragment extends Fragment {
                         } catch (JSONException ignored) {
                         }
                     } else {
-                        Utils.snackBar(mRecyclerView, getString(R.string.backup_list_empty));
+                        sUtils.snackBar(mRecyclerView, getString(R.string.backup_list_empty)).show();
                     }
                     break;
                 case 3:
@@ -147,7 +148,7 @@ public class InactivePackagesFragment extends Fragment {
     }
 
     private void loadUI() {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -179,7 +180,7 @@ public class InactivePackagesFragment extends Fragment {
         if (requestCode == 0 && data != null) {
             File mSelectedFile = FilePicker.getSelectedFile();
             if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
-                Utils.snackBar(mRecyclerView, getString(R.string.restore_error_message));
+               sUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
                 return;
             }
             new MaterialAlertDialogBuilder(requireActivity())
@@ -188,7 +189,7 @@ public class InactivePackagesFragment extends Fragment {
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
                     .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
-                            new AsyncTasks() {
+                            new sExecutor() {
 
                                 @Override
                                 public void onPreExecute() {

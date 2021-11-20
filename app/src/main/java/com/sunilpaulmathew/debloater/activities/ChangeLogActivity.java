@@ -11,10 +11,8 @@ import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Objects;
+import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on December 28, 2020
@@ -32,16 +30,9 @@ public class ChangeLogActivity extends AppCompatActivity {
         MaterialTextView mTitle = findViewById(R.id.app_title);
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
         mTitle.setText(getString(R.string.app_name) + (Utils.isPlayStoreAvailable(this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
-        String change_log = null;
-        try {
-            change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(
-                    this, "release.json"))).getString("fullReleaseNotes");
-        } catch (JSONException ignored) {
-        }
-        mChangeLog.setText(change_log);
-        mCancel.setOnClickListener(v -> {
-            finish();
-        });
+        mChangeLog.setText(sJSONUtils.getString(sJSONUtils.getJSONObject(sUtils.readAssetFile(
+                "release.json", this)), "fullReleaseNotes"));
+        mCancel.setOnClickListener(v -> finish());
     }
 
 }

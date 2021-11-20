@@ -18,7 +18,6 @@
     <string name="backup_list_empty">You haven\'t removed any apps yet!</string>
     <string name="backup_message">Backup files is created as %s!</string>
     <string name="backup_share_message">In order to create a database of pre-defined profiles for public usage, please consider sharing the best de-bloater profiles made by you with the developer of De-Bloater. Thank You!\n\nEmail: smartpack.org@gmail.com\nTelegram: https://t.me/smartpack_kmanager</string>
-    <string name="cancel">Cancel</string>
     <string name="carrier">Carrier</string>
     <string name="change_logs">Change-logs</string>
     <string name="change_logs_summary">View recent changes on this app</string>
@@ -36,7 +35,6 @@
     <string name="custom_scripts_uad_disabled">This script is currently disabled!</string>
     <string name="custom_scripts_uad_enabled">This script is currently enabled!</string>
     <string name="custom_scripts_uad_summary">Adaptation of the Universal Android Debloater originally developed by W1nst0n with an aim to improve the battery performance and privacy by removing unnecessary and obscure system apps.</string>
-    <string name="dismiss">Dismiss</string>
     <string name="donate">Donate</string>
     <string name="donate_summary">Donate to support the development!</string>
     <string name="download_failed">It seems like the download is failed, or a corrupted file is downloaded!</string>
@@ -95,8 +93,6 @@
     <string name="storage_access_denied">Permission denied for writing to storage!</string>
     <string name="support">Support</string>
     <string name="support_summary">Visit support group</string>
-    <string name="translations">Translations</string>
-    <string name="translations_summary">Help me to translate this app!</string>
     <string name="uninstall">Uninstall</string>
     <string name="update_available">New update available!\n(%s)</string>
     <string name="updated_dialog">Congrats! You\'ve already got an up-to-date version of De-Bloater!</string>

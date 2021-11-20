@@ -11,10 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.fragments.UADFragment;
-import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UAD;
-import com.sunilpaulmathew.debloater.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2020
@@ -31,11 +32,11 @@ public class UADActivity extends AppCompatActivity {
         LinearLayout mLinearLayout = findViewById(R.id.layout_main);
         ProgressBar mProgressBar = findViewById(R.id.progress);
 
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
-                if (Utils.isDarkTheme(UADActivity.this)) {
+                if (sUtils.isDarkTheme(UADActivity.this)) {
                     mLinearLayout.setBackgroundColor(Color.BLACK);
                 } else {
                     mLinearLayout.setBackgroundColor(Color.WHITE);

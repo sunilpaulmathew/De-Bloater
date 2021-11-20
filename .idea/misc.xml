@@ -3,10 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/activity_changelog.xml" value="0.1" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/activity_custom_scripts.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/activity_start.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/fragment_about.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/fragment_activepackages.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/fragment_inactivepackages.xml" value="0.1" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/fragment_tomatot_debloater.xml" value="0.1" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/fragment_uad.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/progress_view_layout.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/recycle_view_about.xml" value="0.1" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/app/De-Bloater/app/src/main/res/layout/recycle_view_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

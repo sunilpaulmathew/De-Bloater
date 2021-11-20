@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 17, 2020
  */
@@ -18,61 +20,27 @@ import java.util.Objects;
 public class Restore {
 
     private static JSONArray getAppList(String json) {
-        if (json != null && !json.isEmpty()) {
-            try {
-                JSONObject main = new JSONObject(json);
-                return main.getJSONArray("DeBloater");
-            } catch (JSONException ignored) {
-            }
-        }
-        return null;
+        return sJSONUtils.getJSONArray(sJSONUtils.getJSONObject(json), "DeBloater");
     }
 
     private static JSONObject getDeviceInfo(String json) {
-        if (json != null && !json.isEmpty()) {
-            try {
-                JSONObject baseJSON = new JSONObject(json);
-                return new JSONObject(baseJSON.getString("Device"));
-            } catch (JSONException ignored) {
-            }
-        }
-        return null;
+        return sJSONUtils.getJSONObject(sJSONUtils.getString(sJSONUtils.getJSONObject(json), "Device"));
     }
 
     private static String getName(String string) {
-        try {
-            JSONObject obj = new JSONObject(string);
-            return obj.getString("name");
-        } catch (JSONException ignored) {
-        }
-        return null;
+        return sJSONUtils.getString(sJSONUtils.getJSONObject(string), "name");
     }
 
     private static String getModel(String string) {
-        if (getDeviceInfo(string) == null) return null;
-        try {
-            return getDeviceInfo(string).getString("Model");
-        } catch (JSONException ignored) {
-        }
-        return null;
+        return sJSONUtils.getString(sJSONUtils.getJSONObject(string), "Model");
     }
 
     private static int getSDK(String string) {
-        if (getDeviceInfo(string) == null) return 0;
-        try {
-            return getDeviceInfo(string).getInt("SDK");
-        } catch (JSONException ignored) {
-        }
-        return 0;
+        return sJSONUtils.getInt(sJSONUtils.getJSONObject(string), "SDK");
     }
 
     private static String getPath(String string) {
-        try {
-            JSONObject obj = new JSONObject(string);
-            return obj.getString("path");
-        } catch (JSONException ignored) {
-        }
-        return null;
+        return sJSONUtils.getString(sJSONUtils.getJSONObject(string), "path");
     }
 
     public static boolean isValidBackup(String path) {

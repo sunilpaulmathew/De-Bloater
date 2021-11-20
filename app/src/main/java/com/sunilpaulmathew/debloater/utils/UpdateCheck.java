@@ -12,7 +12,6 @@ import android.content.pm.Signature;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,6 +32,11 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 31, 2020
@@ -98,10 +102,11 @@ public class UpdateCheck {
                 .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                 })
                 .setPositiveButton(activity.getString(R.string.get_it), (dialog, id) -> {
-                    if (Utils.isPermissionDenied(activity)) {
-                        ActivityCompat.requestPermissions(activity, new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                        Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied));
+                    if (sPermissionUtils.isPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+                        sPermissionUtils.requestPermission(new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        }, activity);
+                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied)).show();
                         return;
                     }
                     updaterTask(activity);
@@ -138,9 +143,10 @@ public class UpdateCheck {
     }
 
     private static void getLatestApp(Context context) {
-        if (Utils.isPermissionDenied(context)) {
-            ActivityCompat.requestPermissions((Activity) context, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        if (sPermissionUtils.isPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)) {
+            sPermissionUtils.requestPermission(new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, (Activity) context);
             return;
         }
         Utils.download(Common.geLatestAPK(context), getUrl());
@@ -161,7 +167,7 @@ public class UpdateCheck {
     }
 
     private static void parseJSON(int updateCheckInterval, Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             private long ucTimeStamp;
             private int interval;
@@ -178,11 +184,11 @@ public class UpdateCheck {
                         BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
                         String jsonText = readAll(rd);
                         mJSONObject = new JSONObject(jsonText);
-                        mChangeLog = mJSONObject.getString("releaseNotes");
-                        mReleaseURL = mJSONObject.getString("releaseUrl");
-                        mSHA1 = mJSONObject.getString("sha1");
-                        mVersionCode = mJSONObject.getInt("latestVersionCode");
-                        mVersionName = mJSONObject.getString("latestVersion");
+                        mChangeLog = sJSONUtils.getString(mJSONObject,"releaseNotes");
+                        mReleaseURL = sJSONUtils.getString(mJSONObject,"releaseUrl");
+                        mSHA1 = sJSONUtils.getString(mJSONObject,"sha1");
+                        mVersionCode = sJSONUtils.getInt(mJSONObject,"latestVersionCode");
+                        mVersionName = sJSONUtils.getString(mJSONObject,"latestVersion");
                     } catch (JSONException | IOException ignored) {
                     }
                 }
@@ -192,7 +198,7 @@ public class UpdateCheck {
             public void onPostExecute() {
                 if (isManualUpdate()) {
                     if (mJSONObject == null) {
-                        Utils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
+                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet)).show();
                         return;
                     }
                     if (isUpdateAvailable()) {
@@ -219,7 +225,7 @@ public class UpdateCheck {
     }
 
     private static void updaterTask(Context context) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             private ProgressDialog mProgressDialog;
             @Override

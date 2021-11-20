@@ -1,11 +1,11 @@
 package com.sunilpaulmathew.debloater.utils;
 
+import static in.sunilpaulmathew.sCommon.Utils.sPackageUtils.isUpdatedSystemApp;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.view.inputmethod.InputMethodManager;
 
@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
@@ -31,10 +35,10 @@ public class PackageTasks {
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 mData.add(new PackageItem(
-                        getAppName(packageInfo.packageName, context),
+                        sPackageUtils.getAppName(packageInfo.packageName, context).toString(),
                         isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
-                                context) : getAPKPath(packageInfo.packageName, context),
-                        getAppIcon(packageInfo.packageName, context),
+                                context) : sPackageUtils.getSourceDir(packageInfo.packageName, context),
+                        sPackageUtils.getAppIcon(packageInfo.packageName, context),
                         packageInfo.packageName,
                         isUpdatedSystemApp(packageInfo.packageName, context)));
             }
@@ -53,12 +57,12 @@ public class PackageTasks {
                 }
             }
         }
-        if (Utils.getBoolean("sort_name", true, context)) {
+        if (sUtils.getBoolean("sort_name", true, context)) {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
         } else {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
         }
-        if (Utils.getBoolean("reverse_order", false, context)) {
+        if (sUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;
@@ -74,22 +78,8 @@ public class PackageTasks {
         return mData;
     }
 
-    public static boolean isSystemApp(String packageName, Context context) {
-        try {
-            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-        } catch (NullPointerException ignored) {}
-        return false;
-    }
-
-    public static boolean isUpdatedSystemApp(String packageName, Context context) {
-        try {
-            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
-        } catch (NullPointerException ignored) {}
-        return false;
-    }
-
     private static boolean getSupportedAppsList(String apkPath, Context context) {
-        String mStatus = Utils.getString("appTypes", "all", context);
+        String mStatus = sUtils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
                 || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app")
                 || apkPath.startsWith("/system/vendor/app") || apkPath.startsWith("/system/vendor/overlay")
@@ -112,28 +102,7 @@ public class PackageTasks {
     }
 
     public static PackageManager getPackageManager(Context context) {
-        return context.getApplicationContext().getPackageManager();
-    }
-
-    public static ApplicationInfo getAppInfo(String packageName, Context context) {
-        try {
-            return getPackageManager(context).getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-        } catch (Exception ignored) {
-        }
-        return null;
-    }
-
-    public static String getAppName(String packageName, Context context) {
-        return getPackageManager(context).getApplicationLabel(Objects.requireNonNull(getAppInfo(
-                packageName, context))).toString();
-    }
-
-    public static Drawable getAppIcon(String packageName, Context context) {
-        return getPackageManager(context).getApplicationIcon(Objects.requireNonNull(getAppInfo(packageName, context)));
-    }
-
-    public static String getAPKPath(String packageName, Context context) {
-        return Objects.requireNonNull(getAppInfo(packageName, context)).sourceDir;
+        return context.getPackageManager();
     }
 
     public static String findSystemAPKPath(String packageName, Context context) {
@@ -143,7 +112,7 @@ public class PackageTasks {
                 if (!line.startsWith("/data/")) {
                     mAPKPath = line.replaceAll("\\s+", "");
                     for (File mFile : Objects.requireNonNull(new File(mAPKPath).listFiles())) {
-                        if (Objects.equals(getAPKId(mFile.getAbsolutePath(), context), packageName)) {
+                        if (Objects.equals(sAPKUtils.getPackageName(mFile.getAbsolutePath(), context), packageName)) {
                             mAPKPath = mAPKPath + File.separator + mFile.getName();
                         }
                     }
@@ -151,7 +120,7 @@ public class PackageTasks {
             }
             if (Utils.exist(mAPKPath)) return mAPKPath;
         } catch (NullPointerException ignored) {}
-        return getAPKPath(packageName, context);
+        return sPackageUtils.getSourceDir(packageName, context);
     }
 
     public static String getAdjAPKPath(String apkPath) {
@@ -163,34 +132,6 @@ public class PackageTasks {
             apkPath = apkPath.replace("/system_ext", "/system/system_ext");
         }
         return apkPath;
-    }
-
-    private static PackageInfo getPackageInfo(String apkPath, Context context) {
-        return getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
-    }
-
-    public static CharSequence getAPKName(String apkPath, Context context) {
-        if (getPackageInfo(apkPath, context) != null) {
-            return getPackageInfo(apkPath, context).applicationInfo.loadLabel(getPackageManager(context));
-        } else {
-            return null;
-        }
-    }
-
-    public static String getAPKId(String apkPath, Context context) {
-        if (getPackageInfo(apkPath, context) != null) {
-            return getPackageInfo(apkPath, context).applicationInfo.packageName;
-        } else {
-            return null;
-        }
-    }
-
-    public static Drawable getAPKIcon(String apkPath, Context context) {
-        if (getPackageInfo(apkPath, context) != null) {
-            return getPackageInfo(apkPath, context).applicationInfo.loadIcon(getPackageManager(context));
-        } else {
-            return null;
-        }
     }
 
     public static String getStoragePath() {
@@ -219,9 +160,9 @@ public class PackageTasks {
     public static void removeModule(Activity activity) {
         Utils.delete(activity.getFilesDir().getPath() + "/De-bloater");
         Utils.delete(Common.getModuleParent());
-        Utils.saveBoolean("tomatot_extreme", false, activity);
-        Utils.saveBoolean("tomatot_invisible", false, activity);
-        Utils.saveBoolean("tomatot_light", false, activity);
+        sUtils.saveBoolean("tomatot_extreme", false, activity);
+        sUtils.saveBoolean("tomatot_invisible", false, activity);
+        sUtils.saveBoolean("tomatot_light", false, activity);
     }
 
     public static boolean isModuleInitialized() {

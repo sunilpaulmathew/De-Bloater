@@ -12,10 +12,11 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.MainActivity;
 import com.sunilpaulmathew.debloater.R;
-import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
-import com.sunilpaulmathew.debloater.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 1, 2020
@@ -32,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
         MaterialTextView mWarning = findViewById(R.id.warning);
         ProgressBar mProgress = findViewById(R.id.progress);
 
-        if (!Utils.getBoolean("warning_message", false, this)) {
+        if (!sUtils.getBoolean("warning_message", false, this)) {
             mProgress.setVisibility(View.GONE);
             mWarning.setVisibility(View.VISIBLE);
             mStartCard.setVisibility(View.VISIBLE);
@@ -49,12 +50,12 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private static void loadUI(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
-                if (!Utils.getBoolean("warning_message", false, activity)) {
-                    Utils.saveBoolean("warning_message", true, activity);
+                if (!sUtils.getBoolean("warning_message", false, activity)) {
+                    sUtils.saveBoolean("warning_message", true, activity);
                 }
             }
 

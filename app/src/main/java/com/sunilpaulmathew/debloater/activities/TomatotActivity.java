@@ -11,9 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.fragments.TomatotDebloaterFragment;
-import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.Tomatot;
-import com.sunilpaulmathew.debloater.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 4, 2020
@@ -30,11 +31,11 @@ public class TomatotActivity extends AppCompatActivity {
         LinearLayout mLinearLayout = findViewById(R.id.layout_main);
         ProgressBar mProgressBar = findViewById(R.id.progress);
 
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
-                if (Utils.isDarkTheme(TomatotActivity.this)) {
+                if (sUtils.isDarkTheme(TomatotActivity.this)) {
                     mLinearLayout.setBackgroundColor(Color.BLACK);
                 } else {
                     mLinearLayout.setBackgroundColor(Color.WHITE);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -92,32 +93,29 @@
             app:tabGravity="fill"
             app:tabMode="fixed" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/reverse_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/ColorBlue"
-            android:layout_marginTop="-20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="end"
-            app:cardCornerRadius="10dp"
-            android:visibility="gone" >
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_reverse"
-                android:tint="@color/colorWhite"
-                android:background="@null"
-                android:clickable="false" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-20dp"/>
+        <include layout="@layout/layout_recyclerview" />
     </LinearLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/reverse_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/ColorBlue"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="end"
+        app:cardCornerRadius="10dp"
+        android:visibility="gone" >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_reverse"
+            android:tint="@color/colorWhite"
+            android:background="@null"
+            android:clickable="false" />
+    </com.google.android.material.card.MaterialCardView>
+
     <include layout="@layout/progress_view_layout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

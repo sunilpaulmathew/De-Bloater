@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2021
  */
@@ -1433,7 +1436,7 @@ public class UAD {
     }
 
     public static void applyScript(String path, Activity activity) {
-        String script = Utils.getString("setDefault", null, activity);
+        String script = sUtils.getString("setDefault", null, activity);
         if (Utils.exist(path)) {
             switch (script) {
                 case "aosp":
@@ -1557,12 +1560,12 @@ public class UAD {
 
     public static void setUADData(List<String> input, List<PackageItem> output, Context context) {
         for (String packageName : input) {
-            if (Utils.isPackageInstalled(packageName, context) && PackageTasks.isSystemApp(packageName, context)) {
-                output.add(new PackageItem(PackageTasks.getAppName(packageName, context),
-                        PackageTasks.isUpdatedSystemApp(packageName, context) ? PackageTasks.findSystemAPKPath(
-                                packageName, context) : PackageTasks.getAPKPath(packageName, context),
-                        PackageTasks.getAppIcon(packageName, context), packageName,
-                        PackageTasks.isUpdatedSystemApp(packageName, context)));
+            if (sPackageUtils.isPackageInstalled(packageName, context) && sPackageUtils.isSystemApp(packageName, context)) {
+                output.add(new PackageItem(sPackageUtils.getAppName(packageName, context).toString(),
+                        sPackageUtils.isUpdatedSystemApp(packageName, context) ? PackageTasks.findSystemAPKPath(
+                                packageName, context) : sPackageUtils.getSourceDir(packageName, context),
+                        sPackageUtils.getAppIcon(packageName, context), packageName,
+                        sPackageUtils.isUpdatedSystemApp(packageName, context)));
             }
         }
     }

@@ -18,10 +18,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
-import com.sunilpaulmathew.debloater.utils.AsyncTasks;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.Tomatot;
 import com.sunilpaulmathew.debloater.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 4, 2020
@@ -54,7 +56,7 @@ public class TomatotDebloaterFragment extends Fragment {
         MaterialTextView mAppsListTitle = mRootView.findViewById(R.id.apps_list_title);
         mAppListCard = mRootView.findViewById(R.id.apps_list_card);
         FrameLayout mActionLayout = mRootView.findViewById(R.id.action_layout);
-        if (Utils.isDarkTheme(requireActivity())) {
+        if (sUtils.isDarkTheme(requireActivity())) {
             mActionMessage.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mActionIcon.setColorFilter(Utils.getThemeAccentColor(requireActivity()));
             mAppsListTitle.setTextColor(Utils.getThemeAccentColor(requireActivity()));
@@ -84,9 +86,9 @@ public class TomatotDebloaterFragment extends Fragment {
             mInvisible.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+            mStatus.setText(sUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
-            mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+            mActionMessage.setText(sUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mInvisibleT = true;
             mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
@@ -94,7 +96,7 @@ public class TomatotDebloaterFragment extends Fragment {
             mAppListCard.setVisibility(View.VISIBLE);
         }
 
-        mTitleLayout.setOnClickListener(v -> Utils.launchUrl("https://forum.xda-developers.com" +
+        mTitleLayout.setOnClickListener(v -> sUtils.launchUrl("https://forum.xda-developers.com" +
                 "/oneplus-6/oneplus-6--6t-cross-device-development/tool-tomatot-debloater-basic-script-to-t3869427",
                 requireActivity()));
         mInvisible.setOnClickListener(v -> {
@@ -104,9 +106,9 @@ public class TomatotDebloaterFragment extends Fragment {
             mInvisible.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+            mStatus.setText(sUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
-            mActionMessage.setText(Utils.getBoolean("tomatot_invisible", false, requireActivity()) ?
+            mActionMessage.setText(sUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
             mRecyclerView.setAdapter(mRecycleViewAdapter);
@@ -118,9 +120,9 @@ public class TomatotDebloaterFragment extends Fragment {
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mExtreme.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
-            mStatus.setText(Utils.getBoolean("tomatot_light", false, requireActivity()) ?
+            mStatus.setText(sUtils.getBoolean("tomatot_light", false, requireActivity()) ?
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_light);
-            mActionMessage.setText(Utils.getBoolean("tomatot_light", false, requireActivity()) ?
+            mActionMessage.setText(sUtils.getBoolean("tomatot_light", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight());
             mRecyclerView.setAdapter(mRecycleViewAdapter);
@@ -132,15 +134,15 @@ public class TomatotDebloaterFragment extends Fragment {
             mInvisible.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mLight.setTextColor(Utils.getPrimaryTextColor(requireActivity()));
             mExtreme.setTextColor(Utils.getThemeAccentColor(requireActivity()));
-            mStatus.setText(Utils.getBoolean("tomatot_extreme", false, requireActivity()) ?
+            mStatus.setText(sUtils.getBoolean("tomatot_extreme", false, requireActivity()) ?
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_extreme);
-            mActionMessage.setText(Utils.getBoolean("tomatot_extreme", false, requireActivity()) ?
+            mActionMessage.setText(sUtils.getBoolean("tomatot_extreme", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme());
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mActionLayout.setOnClickListener(v ->
-                new AsyncTasks() {
+                new sExecutor() {
 
                     @Override
                     public void onPreExecute() {
@@ -151,7 +153,7 @@ public class TomatotDebloaterFragment extends Fragment {
                     @Override
                     public void doInBackground() {
                         if (mExtremeT) {
-                            if (Utils.getBoolean("tomatot_extreme", false, requireActivity())) {
+                            if (sUtils.getBoolean("tomatot_extreme", false, requireActivity())) {
                                 Tomatot.disable("tomatot_extreme", Common.getTExtreme(), requireActivity());
                             } else {
                                 if (Tomatot.isScriptEnabled("tomatot_invisible", requireActivity())) {
@@ -163,7 +165,7 @@ public class TomatotDebloaterFragment extends Fragment {
                                 Tomatot.enable("tomatot_extreme", Common.getTExtreme(), requireActivity());
                             }
                         } else if (mInvisibleT) {
-                            if (Utils.getBoolean("tomatot_invisible", false, requireActivity())) {
+                            if (sUtils.getBoolean("tomatot_invisible", false, requireActivity())) {
                                 Tomatot.disable("tomatot_invisible", Common.geTInvisible(), requireActivity());
                             } else {
                                 if (Tomatot.isScriptEnabled("tomatot_light", requireActivity())) {
@@ -175,7 +177,7 @@ public class TomatotDebloaterFragment extends Fragment {
                                 Tomatot.enable("tomatot_invisible", Common.geTInvisible(), requireActivity());
                             }
                         } else if (mLightT) {
-                            if (Utils.getBoolean("tomatot_light", false, requireActivity())) {
+                            if (sUtils.getBoolean("tomatot_light", false, requireActivity())) {
                                 Tomatot.disable("tomatot_light", Common.getTLight(), requireActivity());
                             } else {
                                 if (Tomatot.isScriptEnabled("tomatot_invisible", requireActivity())) {

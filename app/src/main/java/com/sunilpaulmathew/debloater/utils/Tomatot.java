@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 03, 2020
  */
@@ -166,7 +169,7 @@ public class Tomatot {
                 PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
             }
         }
-        Utils.saveBoolean(tag, true, context);
+        sUtils.saveBoolean(tag, true, context);
     }
 
     public static void disable(String tag, List<PackageItem> items, Context context) {
@@ -175,19 +178,19 @@ public class Tomatot {
                 PackageTasks.revertDelete(item.getAPKPath());
             }
         }
-        Utils.saveBoolean(tag, false, context);
+        sUtils.saveBoolean(tag, false, context);
     }
 
     public static boolean isScriptEnabled(String tag, Context context) {
-        return Utils.getBoolean(tag, false, context);
+        return sUtils.getBoolean(tag, false, context);
     }
 
     public static void setInvisibleData(Context context) {
         try {
             for (String path : getTomatotInvisible()) {
                 if (Utils.exist(path)) {
-                    Common.geTInvisible().add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    Common.geTInvisible().add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
         } catch (NullPointerException ignored) {}
@@ -198,14 +201,14 @@ public class Tomatot {
             List<PackageItem> items = new ArrayList<>();
             for (String path : getTomatotInvisible()) {
                 if (Utils.exist(path)) {
-                    items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    items.add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
             for (String path : getTomatotLight()) {
                 if (Utils.exist(path)) {
-                    items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    items.add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
             Common.getTLight().addAll(items);
@@ -217,20 +220,20 @@ public class Tomatot {
             List<PackageItem> items = new ArrayList<>();
             for (String path : getTomatotInvisible()) {
                 if (Utils.exist(path)) {
-                    items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    items.add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
             for (String path : getTomatotLight()) {
                 if (Utils.exist(path)) {
-                    items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    items.add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
             for (String path : getTomatotExtreme()) {
                 if (Utils.exist(path)) {
-                    items.add(new PackageItem(Objects.requireNonNull(PackageTasks.getAPKName(path, context)).toString(),
-                            path, PackageTasks.getAPKIcon(path, context), PackageTasks.getAPKId(path, context), false));
+                    items.add(new PackageItem(Objects.requireNonNull(sAPKUtils.getAPKName(path, context)).toString(),
+                            path, sAPKUtils.getAPKIcon(path, context), sAPKUtils.getPackageName(path, context), false));
                 }
             }
             Common.getTExtreme().addAll(items);

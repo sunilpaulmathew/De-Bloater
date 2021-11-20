@@ -23,6 +23,8 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 03, 2021
  */
@@ -54,12 +56,12 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
             } else {
                 holder.mName.setText(this.data.get(position).getAppName());
             }
-            if (Utils.isDarkTheme(holder.mName.getContext())) {
+            if (sUtils.isDarkTheme(holder.mName.getContext())) {
                 holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
             }
             if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getAPKPath()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()))) {
                 holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.restore));
-                holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_restore));
+                holder.mActionIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_restore, holder.actionLayout.getContext()));
                 holder.statusMessage.setTextColor(Color.RED);
                 holder.statusMessage.setVisibility(View.VISIBLE);
                 holder.actionMessage.setTextColor(Color.GREEN);
@@ -67,7 +69,7 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
                 holder.statusMessage.setText(holder.actionLayout.getContext().getString(R.string.status_message_remove));
             } else {
                 holder.actionMessage.setText(holder.actionLayout.getContext().getString(R.string.remove));
-                holder.mActionIcon.setImageDrawable(holder.actionLayout.getContext().getResources().getDrawable(R.drawable.ic_delete));
+                holder.mActionIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_delete, holder.actionLayout.getContext()));
                 holder.statusMessage.setTextColor(Color.GREEN);
                 holder.statusMessage.setVisibility(View.GONE);
                 holder.actionMessage.setTextColor(Color.RED);
