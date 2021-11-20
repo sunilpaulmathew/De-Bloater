@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textview.MaterialTextView;
@@ -17,6 +17,7 @@ import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
+import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mExit;
     private final Handler mHandler = new Handler();
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Initialize App Theme
@@ -36,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
         MaterialTextView mUnSupported = findViewById(R.id.unsupported);
+        ViewPager mViewPager = findViewById(R.id.view_pager);
 
         if (!Utils.rootAccess()) {
             mUnSupported.setText(R.string.no_root);
@@ -48,40 +52,37 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(navListener);
+        sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
+
+        adapter.AddFragment(new ActivePackagesFragment(), null);
+        adapter.AddFragment(new InactivePackagesFragment(), null);
+        adapter.AddFragment(new AboutFragment(), null);
+
+        mViewPager.setAdapter(adapter);
+
+        mBottomNav.setOnItemSelectedListener(
+                menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_active:
+                            mViewPager.setCurrentItem(0);
+                            break;
+                        case R.id.nav_inactive:
+                            mViewPager.setCurrentItem(1);
+                            break;
+                        case R.id.nav_about:
+                            mViewPager.setCurrentItem(2);
+                            break;
+                    }
+                    return false;
+                }
+        );
         mBottomNav.setVisibility(View.VISIBLE);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ActivePackagesFragment()).commit();
+            mViewPager.setCurrentItem(0);
         }
 
     }
-
-    @SuppressLint("NonConstantResourceId")
-    private final BottomNavigationView.OnNavigationItemSelectedListener navListener
-            = menuItem -> {
-        Fragment selectedFragment = null;
-
-        switch (menuItem.getItemId()) {
-            case R.id.nav_active:
-                selectedFragment = new ActivePackagesFragment();
-                break;
-            case R.id.nav_inactive:
-                selectedFragment = new InactivePackagesFragment();
-                break;
-            case R.id.nav_about:
-                selectedFragment = new AboutFragment();
-                break;
-        }
-
-        assert selectedFragment != null;
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                selectedFragment).commit();
-
-        return true;
-    };
 
     @Override
     public void onStart() {
