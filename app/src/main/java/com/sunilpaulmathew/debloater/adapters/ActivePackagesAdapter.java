@@ -49,6 +49,13 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
     public void onBindViewHolder(@NonNull ActivePackagesAdapter.ViewHolder holder, int position) {
         try {
             holder.mIcon.setImageDrawable(this.data.get(position).getAppIcon());
+            if (this.data.get(position).getPackageName() != null) {
+                holder.mPackageName.setText(this.data.get(position).getPackageName());
+                holder.mPackageName.setVisibility(View.VISIBLE);
+                holder.mPackageName.setTextColor(Color.RED);
+            } else {
+                holder.mPackageName.setVisibility(View.GONE);
+            }
             holder.mPath.setText(this.data.get(position).getAPKPath());
             if (Common.getSearchText() != null && Common.isTextMatched(this.data.get(position).getAppName())) {
                 holder.mName.setText(Utils.fromHtml(this.data.get(position).getAppName().replace(Common.getSearchText(),
@@ -107,12 +114,8 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatImageButton mActionIcon;
-        private final AppCompatImageButton mIcon;
-        private final MaterialTextView mName;
-        private final MaterialTextView mPath;
-        private final MaterialTextView actionMessage;
-        private final MaterialTextView statusMessage;
+        private final AppCompatImageButton mActionIcon, mIcon;
+        private final MaterialTextView mName, mPackageName, mPath, actionMessage, statusMessage;
         private final FrameLayout actionLayout;
 
         public ViewHolder(View view) {
@@ -120,6 +123,7 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
             this.mActionIcon = view.findViewById(R.id.action_icon);
             this.mIcon = view.findViewById(R.id.icon);
             this.mName = view.findViewById(R.id.title);
+            this.mPackageName = view.findViewById(R.id.packageName);
             this.mPath = view.findViewById(R.id.description);
             this.actionMessage = view.findViewById(R.id.action_message);
             this.statusMessage = view.findViewById(R.id.status_message);
