@@ -11,13 +11,13 @@ android {
         }
     }
 
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 21
         versionName "v0.21"
         vectorDrawables.useSupportLibrary = true

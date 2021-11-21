@@ -22,7 +22,7 @@
         android:supportsRtl="true" >
 
         <activity android:name=".activities.StartActivity"
-            tools:ignore="IntentFilterExportedReceiver" >
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +30,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
-        <activity android:name=".activities.ChangeLogActivity" />
-        <activity android:name=".activities.TomatotActivity" />
-        <activity android:name=".activities.UADActivity" />
+        <activity android:name=".MainActivity"
+            android:exported="false" />
+        <activity android:name=".activities.ChangeLogActivity"
+            android:exported="false" />
+        <activity android:name=".activities.TomatotActivity"
+            android:exported="false" />
+        <activity android:name=".activities.UADActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
