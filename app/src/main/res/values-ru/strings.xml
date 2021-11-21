@@ -13,7 +13,6 @@
     <string name="backup">"Бэкап"</string>
     <string name="backup_list_empty">"Вы еще не удалили ни одного приложения!"</string>
     <string name="backup_message">"Бэкапы создаются как %s!"</string>
-    <string name="cancel">"Отмена"</string>
     <string name="change_logs">"Изменения"</string>
     <string name="change_logs_summary">"Посмотреть последние изменения в этом приложении"</string>
     <string name="check_update">"Проверка обновлений"</string>
@@ -29,7 +28,6 @@
     <string name="custom_scripts_uad_disabled">"Этот скрип в настоящее время отключен!"</string>
     <string name="custom_scripts_uad_enabled">"Этот скрипт в настоящее время включен!"</string>
     <string name="custom_scripts_uad_summary">"Адаптация Universal Android Debloater, изначально разработанная W1nst0n с целью повышения экономии аккумулятора и повышения конфиденциальности за счет удаления ненужных и непонятных системных приложений."</string>
-    <string name="dismiss">"Закрыть"</string>
     <string name="donate">"Пожертвовать"</string>
     <string name="donate_summary">"Пожертвуйте, чтобы поддержать разработчика!"</string>
     <string name="download_failed">"Похоже, что загрузка не удалась, или загружен поврежденный файл!"</string>
@@ -73,8 +71,6 @@
     <string name="storage_access_denied">"Запрещено разрешение на запись в хранилище!"</string>
     <string name="support">"Группа поддержки"</string>
     <string name="support_summary">"Посетите группу поддержки"</string>
-    <string name="translations">"Перевод"</string>
-    <string name="translations_summary">"Помогите мне перевести это приложение!"</string>
     <string name="update_available">"Доступно обновление!\n(%s)"</string>
     <string name="updated_dialog">"Поздравляю! У вас уже установлена последняя версия De-Bloater!"</string>
     <string name="version">"Версия"</string>

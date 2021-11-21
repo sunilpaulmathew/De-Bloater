@@ -15,7 +15,6 @@
     <string name="backup">"Backup"</string>
     <string name="backup_list_empty">"Nie usunąłeś jeszcze żadnych aplikacji!"</string>
     <string name="backup_message">"Pliki do backupu stworzone jako %s!"</string>
-    <string name="cancel">"Anuluj"</string>
     <string name="carrier">"Operator"</string>
     <string name="change_logs">"Change-log"</string>
     <string name="change_logs_summary">"Zobacz ostatnie zmiany w aplikacji"</string>
@@ -33,7 +32,6 @@
     <string name="custom_scripts_uad_disabled">"Skrypt nieaktywny"</string>
     <string name="custom_scripts_uad_enabled">"Skrypt aktywny"</string>
     <string name="custom_scripts_uad_summary">"Adaptacja Universal Android Debloater pierwotnie opracowana przez W1nst0n w celu poprawy wydajności baterii i prywatności poprzez usunięcie niepotrzebnych i niejasnych aplikacji systemowych. "</string>
-    <string name="dismiss">"Usunąć"</string>
     <string name="donate">"Dotacja"</string>
     <string name="donate_summary">"Wpłać na wsparcie rozwoju projektu! "</string>
     <string name="download_failed">"Wygląda na to, że pobieranie nie powiodło się lub został pobrany uszkodzony plik! "</string>
@@ -89,8 +87,6 @@
     <string name="storage_access_denied">"Brak pozwolenia na zapis w pamięci! "</string>
     <string name="support">"Wsparcie"</string>
     <string name="support_summary">"Odwiedź grupę wsparcia"</string>
-    <string name="translations">"Tłumaczenia"</string>
-    <string name="translations_summary">"Pomóż przetłumaczyć aplikację!"</string>
     <string name="update_available">"Dostępna nowa aktuaizacja!\n(%s)"</string>
     <string name="updated_dialog">"Gratulacje! Masz aktualną wersję De-Bloatera! "</string>
     <string name="version">"Wersja"</string>

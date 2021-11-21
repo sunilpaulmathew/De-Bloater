@@ -15,7 +15,6 @@
     <string name="backup">"Yedekle"</string>
     <string name="backup_list_empty">"Henüz hiçbir uygulamayı kaldırmadın!"</string>
     <string name="backup_message">"Yedekleme dosyası oluşturuldu. %s!"</string>
-    <string name="cancel">"İptal et"</string>
     <string name="carrier">"Operatör"</string>
     <string name="change_logs">"Değişiklikleri göster"</string>
     <string name="change_logs_summary">"Bu uygulamadaki son değişiklikleri gösterir."</string>
@@ -33,7 +32,6 @@
     <string name="custom_scripts_uad_disabled">"Script şuanda devre dışı!"</string>
     <string name="custom_scripts_uad_enabled">"Script şuanda aktif!"</string>
     <string name="custom_scripts_uad_summary">"Gereksiz ve belirsiz sistem uygulamalarını kaldırarak pil performansını ve gizliliği artırmak amacıyla orijinal olarak W1nst0n tarafından geliştirilen Evrensel Android Debloater'ın uyarlanmasıdır."</string>
-    <string name="dismiss">"Yoksay"</string>
     <string name="donate">"Bağış yap!"</string>
     <string name="donate_summary">"Gelişimi desteklemek için bağış yap!"</string>
     <string name="download_failed">"Görünüşe göre yükleme başarısız oldu ya da yükleme dosyası zarar görmüş!"</string>
@@ -89,8 +87,6 @@
     <string name="storage_access_denied">"Depolamaya erişim izni reddedildi!"</string>
     <string name="support">"Destek"</string>
     <string name="support_summary">"Destek grubunu ziyaret et"</string>
-    <string name="translations">"Çeviriler"</string>
-    <string name="translations_summary">"Bu uygulamayı çevirmeme yardım et!"</string>
     <string name="update_available">"Yeni güncelleme mevcut!\n(%s)"</string>
     <string name="updated_dialog">"Tebrikler! De-Bloater'ın güncel sürümüne sahipsiniz!"</string>
     <string name="version">"Versiyon"</string>

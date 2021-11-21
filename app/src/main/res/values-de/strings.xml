@@ -15,7 +15,6 @@
     <string name="backup">"Sicherung"</string>
     <string name="backup_list_empty">"Du hast noch keine Apps entfernt!"</string>
     <string name="backup_message">"Sicherung unter %s gespeichert!"</string>
-    <string name="cancel">"Abbruch"</string>
     <string name="carrier">"Mobilanbieter"</string>
     <string name="change_logs">"Change Log"</string>
     <string name="change_logs_summary">"Aktuelle Änderungen dieser App"</string>
@@ -33,7 +32,6 @@
     <string name="custom_scripts_uad_disabled">"Dieses Skript ist im Moment deaktiviert!"</string>
     <string name="custom_scripts_uad_enabled">"Dieses Skript ist im Moment aktiviert!"</string>
     <string name="custom_scripts_uad_summary">"Anpassung des Universal Android Debloaters von W1nst0n mit dem Ziel die Akkulaufzeit und den Schutz der Nutzerdaten durch Entfernung von unnötigen oder unklaren Systemapps zu verbessern."</string>
-    <string name="dismiss">"Schließen"</string>
     <string name="donate">"Spende"</string>
     <string name="donate_summary">"Spende um die Entwicklung zu unterstützen!"</string>
     <string name="download_failed">"Es scheint der Download hat nicht funktioniert oder es wurde eine beschädigte Datei heruntergeladen!"</string>
@@ -89,8 +87,6 @@
     <string name="storage_access_denied">"Kein Schreibzugriff auf den Speicher!"</string>
     <string name="support">"Support"</string>
     <string name="support_summary">"Besuche die Supportgruppe"</string>
-    <string name="translations">"Übersetzungen"</string>
-    <string name="translations_summary">"Hilf mit die App zu übersetzen!"</string>
     <string name="update_available">"Neues Update verfügbar!\n(%s)"</string>
     <string name="updated_dialog">"Glückwunsch, du hast die letzte Version von De-Bloater installiert!"</string>
     <string name="version">"Version"</string>

@@ -15,7 +15,6 @@
     <string name="backup">"Copia de seguridad"</string>
     <string name="backup_list_empty">"Todavía no has removido ninguna app!"</string>
     <string name="backup_message">"Archivo de respaldo ha sido creado como %s!"</string>
-    <string name="cancel">"Cancelar"</string>
     <string name="carrier">"Operador"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="change_logs_summary">"Ver cambios recientes en esta app."</string>
@@ -33,7 +32,6 @@
     <string name="custom_scripts_uad_disabled">"Este script está desactivado!"</string>
     <string name="custom_scripts_uad_enabled">"Este script esta activado!"</string>
     <string name="custom_scripts_uad_summary">"Adaptación de Universal Android Debloater desarrollado originalmente por W1nst0n con el objetivo de mejorar el rendimiento de la batería y la privacidad removiendo aplicaciones de sistema oscuras e inútiles."</string>
-    <string name="dismiss">"Descartar"</string>
     <string name="donate">"Donar"</string>
     <string name="donate_summary">"Dona para apoyar el desarrollo!"</string>
     <string name="download_failed">"Parece que la descarga ha fallado, o un archivo corrupto ha sido descargado!"</string>
@@ -89,8 +87,6 @@
     <string name="storage_access_denied">"Permiso de escribir en el almacenamiento denegado!"</string>
     <string name="support">"Soporte"</string>
     <string name="support_summary">"Visita el grupo de soporte"</string>
-    <string name="translations">"Traducciones"</string>
-    <string name="translations_summary">"Ayúdame traduciendo esta aplicación!"</string>
     <string name="update_available">"Nueva actualización disponible!\n(%s)"</string>
     <string name="updated_dialog">"Felicidades! Estás usando la versión mas reciente de De-Bloater!"</string>
     <string name="version">"Versión"</string>
