@@ -60,7 +60,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="-15dp"
                 android:padding="15dp"
-                android:text="@string/active_app_summary"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:textStyle="bold|italic"
@@ -90,6 +89,7 @@
             android:background="@color/colorBlack"
             app:tabSelectedTextColor="?attr/colorAccent"
             app:tabTextColor="@color/colorWhite"
+            android:visibility="gone"
             app:tabGravity="fill"
             app:tabMode="fixed" />
 

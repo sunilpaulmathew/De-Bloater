@@ -112,14 +112,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (Common.getSearchWord().getVisibility() == View.VISIBLE) {
+        if (Common.getActiveSearchWord().getVisibility() == View.VISIBLE || Common.getInactiveSearchWord()
+                .getVisibility() == View.VISIBLE) {
             if (Common.getSearchText() != null) {
                 Common.setSearchText(null);
-                Common.getSearchWord().setText(null);
+                if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
+                    Common.getInactiveSearchWord().setText(null);
+                } else {
+                    Common.getActiveSearchWord().setText(null);
+                }
             }
-            Common.getSearchButton().setVisibility(View.VISIBLE);
             Common.getAboutSummary().setVisibility(View.VISIBLE);
-            Common.getSearchWord().setVisibility(View.GONE);
+            if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
+                Common.getInactiveSearchWord().setVisibility(View.GONE);
+            } else {
+                Common.getActiveSearchWord().setVisibility(View.GONE);
+            }
             return;
         }
         if (mExit) {

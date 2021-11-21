@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
+import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Restore;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -55,19 +58,57 @@ public class InactivePackagesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_inactivepackages, container, false);
+        View mRootView = inflater.inflate(R.layout.fragment_packages, container, false);
 
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mProgressText = mRootView.findViewById(R.id.progress_text);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
+        MaterialTextView mTitle = mRootView.findViewById(R.id.page_title);
+        MaterialTextView mSummary = mRootView.findViewById(R.id.about_summary);
+        Common.initializeInactiveSearchWord(mRootView, R.id.search_word);
+        AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
 
-        mPageTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
+        mTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
+        mSummary.setText(getString(R.string.inactive_apps_summary));
+
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
         loadUI();
+
+        mSearchButton.setOnClickListener(v -> {
+            if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
+                if (Common.getSearchText() != null && !Common.getSearchText().isEmpty()) {
+                    Common.setSearchText(null);
+                    Common.getInactiveSearchWord().setText(null);
+                }
+                Common.getAboutSummary().setVisibility(View.VISIBLE);
+                Common.getInactiveSearchWord().setVisibility(View.GONE);
+                PackageTasks.toggleKeyboard(Common.getInactiveSearchWord(), 0, requireActivity());
+            } else {
+                Common.getAboutSummary().setVisibility(View.GONE);
+                Common.getInactiveSearchWord().setVisibility(View.VISIBLE);
+                PackageTasks.toggleKeyboard(Common.getInactiveSearchWord(), 1, requireActivity());
+            }
+        });
+
+        Common.getInactiveSearchWord().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Common.setSearchText(s.toString().toLowerCase());
+                loadUI();
+            }
+        });
 
         return mRootView;
     }
@@ -159,9 +200,7 @@ public class InactivePackagesFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                if (!PackageTasks.getInactivePackageData().isEmpty()) {
-                    mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
-                }
+                mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
             }
 
             @Override
@@ -209,6 +248,26 @@ public class InactivePackagesFragment extends Fragment {
                                 }
                             }.execute())
                     .show();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (Common.getSearchText() != null) {
+            Common.setSearchText(null);
+            Common.getInactiveSearchWord().setText(null);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (Common.getSearchText() != null) {
+            Common.setSearchText(null);
+            Common.getInactiveSearchWord().setText(null);
         }
     }
     

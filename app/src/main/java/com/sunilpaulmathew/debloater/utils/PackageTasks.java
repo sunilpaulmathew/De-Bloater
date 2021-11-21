@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.appcompat.widget.AppCompatEditText;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,7 +74,11 @@ public class PackageTasks {
         List<String> mData = new ArrayList<>();
         for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + "find " + Common.getModuleParent() + "/system -type f -name *.apk").split("\\r?\\n")) {
             if (line.endsWith(".apk")) {
-                mData.add(line);
+                if (Common.getSearchText() == null) {
+                    mData.add(line);
+                } else if (Common.isTextMatched(line)) {
+                    mData.add(line);
+                }
             }
         }
         return mData;
@@ -181,14 +187,14 @@ public class PackageTasks {
         Utils.delete(Common.getModuleParent() + path);
     }
 
-    public static void toggleKeyboard(int mode, Context context) {
+    public static void toggleKeyboard(AppCompatEditText editText, int mode, Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (mode == 1) {
-            if (Common.getSearchWord().requestFocus()) {
-                imm.showSoftInput(Common.getSearchWord(), InputMethodManager.SHOW_IMPLICIT);
+            if (editText.requestFocus()) {
+                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
         } else {
-            imm.hideSoftInputFromWindow(Common.getSearchWord().getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         }
     }
 

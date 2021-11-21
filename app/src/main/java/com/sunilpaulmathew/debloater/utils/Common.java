@@ -8,7 +8,6 @@ import android.content.Context;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.ArrayList;
@@ -18,8 +17,7 @@ import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
 
 public class Common {
 
-    private static AppCompatEditText mSearchWord;
-    private static AppCompatImageButton mSearchButton;
+    private static AppCompatEditText mSearchWordActive, mSearchWordInactive;
     private static AppCompatTextView mAbout;
     private static List<PackageItem> mRawData;
     private static final List<PackageItem> mAOSP = new ArrayList<>(), mAsus = new ArrayList<>(),
@@ -31,12 +29,12 @@ public class Common {
             mZTE = new ArrayList<>();
     private static String mSearchText;
 
-    public static AppCompatEditText getSearchWord() {
-        return mSearchWord;
+    public static AppCompatEditText getActiveSearchWord() {
+        return mSearchWordActive;
     }
 
-    public static AppCompatImageButton getSearchButton() {
-        return mSearchButton;
+    public static AppCompatEditText getInactiveSearchWord() {
+        return mSearchWordInactive;
     }
 
     public static AppCompatTextView getAboutSummary() {
@@ -44,9 +42,11 @@ public class Common {
     }
 
     public static boolean isTextMatched(String searchText) {
-        for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
-            if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
-                return true;
+        if (searchText != null) {
+            for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
+                if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
+                    return true;
+                }
             }
         }
         return false;
@@ -159,12 +159,12 @@ public class Common {
         return mSearchText;
     }
 
-    public static void initializeSearchButton(View view, int id) {
-        mSearchButton = view.findViewById(id);
+    public static void initializeActiveSearchWord(View view, int id) {
+        mSearchWordActive = view.findViewById(id);
     }
 
-    public static void initializeSearchWord(View view, int id) {
-        mSearchWord = view.findViewById(id);
+    public static void initializeInactiveSearchWord(View view, int id) {
+        mSearchWordInactive = view.findViewById(id);
     }
 
     public static void initializeAboutSummary(View view, int id) {

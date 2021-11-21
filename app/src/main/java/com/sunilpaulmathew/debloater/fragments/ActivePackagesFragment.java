@@ -50,10 +50,10 @@ public class ActivePackagesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_activepackages, container, false);
+        View mRootView = inflater.inflate(R.layout.fragment_packages, container, false);
 
-        Common.initializeSearchWord(mRootView, R.id.search_word);
-        Common.initializeSearchButton(mRootView, R.id.search_button);
+        Common.initializeActiveSearchWord(mRootView, R.id.search_word);
+        AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
         Common.initializeAboutSummary(mRootView, R.id.about_summary);
         MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
         mReverse = mRootView.findViewById(R.id.reverse_button);
@@ -65,26 +65,26 @@ public class ActivePackagesFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
+        Common.getAboutSummary().setText(getString(R.string.active_app_summary));
         mReverse.setElevation(10);
         mReverse.setOnClickListener(v -> {
             sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
             loadUI(requireActivity());
         });
 
-        Common.getSearchButton().setOnClickListener(v -> {
-            if (Common.getSearchWord().getVisibility() == View.VISIBLE) {
+        mSearchButton.setOnClickListener(v -> {
+            if (Common.getActiveSearchWord().getVisibility() == View.VISIBLE) {
                 if (Common.getSearchText() != null && !Common.getSearchText().isEmpty()) {
                     Common.setSearchText(null);
-                    Common.getSearchWord().setText(null);
+                    Common.getActiveSearchWord().setText(null);
                 }
-                Common.getSearchButton().setVisibility(View.VISIBLE);
                 Common.getAboutSummary().setVisibility(View.VISIBLE);
-                Common.getSearchWord().setVisibility(View.GONE);
-                PackageTasks.toggleKeyboard(0, requireActivity());
+                Common.getActiveSearchWord().setVisibility(View.GONE);
+                PackageTasks.toggleKeyboard(Common.getActiveSearchWord(), 0, requireActivity());
             } else {
                 Common.getAboutSummary().setVisibility(View.GONE);
-                Common.getSearchWord().setVisibility(View.VISIBLE);
-                PackageTasks.toggleKeyboard(1, requireActivity());
+                Common.getActiveSearchWord().setVisibility(View.VISIBLE);
+                PackageTasks.toggleKeyboard(Common.getActiveSearchWord(), 1, requireActivity());
             }
         });
 
@@ -92,6 +92,8 @@ public class ActivePackagesFragment extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_system)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_product)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_vendor)));
+
+        mTabLayout.setVisibility(View.VISIBLE);
 
         Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
 
@@ -136,7 +138,7 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
-        Common.getSearchWord().addTextChangedListener(new TextWatcher() {
+        Common.getActiveSearchWord().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -254,12 +256,22 @@ public class ActivePackagesFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        if (Common.getSearchText() != null) {
+            Common.setSearchText(null);
+            Common.getActiveSearchWord().setText(null);
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
 
         if (Common.getSearchText() != null) {
             Common.setSearchText(null);
-            Common.getSearchWord().setText(null);
+            Common.getActiveSearchWord().setText(null);
         }
     }
     
