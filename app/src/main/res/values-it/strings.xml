@@ -5,7 +5,7 @@
     <string name="active">"Attivo"</string>
     <string name="active_app_summary">"L'intero elenco delle applicazioni è dettagliato di seguito. Le applicazioni assegnate alla rimozione verranno eliminate senza sistema dopo un riavvio!"</string>
     <string name="aosp">"AOSP"</string>
-    <string name="apply">"Applicare"</string>
+    <string name="apply">"Applica"</string>
     <string name="apps">"%s Applicazioni"</string>
     <string name="apps_system">"/sistema"</string>
     <string name="apps_vendor">"/venditore"</string>

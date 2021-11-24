@@ -87,7 +87,8 @@
     <string name="storage_access_denied">"Kein Schreibzugriff auf den Speicher!"</string>
     <string name="support">"Support"</string>
     <string name="support_summary">"Besuche die Supportgruppe"</string>
-    <string name="update_available">"Neues Update verfügbar!\n(%s)"</string>
+    <string name="update_available">"Neues Update verfügbar!
+        (%s)"</string>
     <string name="updated_dialog">"Glückwunsch, du hast die letzte Version von De-Bloater installiert!"</string>
     <string name="version">"Version"</string>
     <string name="warning_summary">"De-Bloater ist sehr mächtig ! Bitte nutze es vorsichtig und in eigener Verantwortung! Der Entwickler übernimmt keine Verantwortung für Folgen aus der Nutzung der App."</string>

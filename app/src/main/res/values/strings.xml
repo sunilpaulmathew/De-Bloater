@@ -96,7 +96,7 @@
     <string name="uninstall">Uninstall</string>
     <string name="update_available">New update available!\n(%s)</string>
     <string name="updated_dialog">Congrats! You\'ve already got an up-to-date version of De-Bloater!</string>
-    <string name="updated_system_app_warning">You\'re decided to de-bloat \'%s\', a system app which is already updated. Hence, if you really want to remove this app completely, please consider uninstalling the local updates as well. Otherwise, the app will behave as<!----> a normal user app after a reboot!</string>
+    <string name="updated_system_app_warning">You\'re decided to de-bloat \'%s\', a system app which is already updated. Hence, if you really want to remove this app completely, please consider uninstalling the local updates as well. Otherwise, the app will behave as a normal user app after a reboot!</string>
     <string name="version">Version</string>
     <string name="warning_summary">De-Bloater is too powerful! Please use it carefully. The developer of this application doesn\'t take any responsibility if something wrong happened due the inappropriate use!</string>
     <string name="xiaomi">Xiaomi</string>
