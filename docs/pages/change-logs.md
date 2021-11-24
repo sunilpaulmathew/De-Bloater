@@ -6,6 +6,12 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.23
+- Added French translations (incomplete).
+- Updated Italian & Polish translations.
+- Updated Credits.
+- Miscellaneous changes.
+
 ### v0.22
 - Improved and enhanced main UI.
 - Added option to Swipe change pages.

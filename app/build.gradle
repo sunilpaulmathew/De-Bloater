@@ -18,8 +18,8 @@ android {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 22
-        versionName "v0.22"
+        versionCode 23
+        versionName "v0.23"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false

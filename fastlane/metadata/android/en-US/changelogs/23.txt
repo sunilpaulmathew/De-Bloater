@@ -1,0 +1,4 @@
+* Added French translations (incomplete).
+* Updated Italian & Polish translations.
+* Updated Credits.
+* Miscellaneous changes.

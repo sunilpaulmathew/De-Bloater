@@ -1,8 +1,0 @@
-* Improved and enhanced main UI.
-* Added option to Swipe change pages.
-* Added new credits page.
-* Updated translations message.
-* Main UI now includes package names.
-* Added searching in Inactive apps page.
-* De-Bloater now targets Android 12 (S, SDK 31).
-* Miscellaneous changes.
