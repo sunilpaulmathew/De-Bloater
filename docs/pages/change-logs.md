@@ -6,9 +6,9 @@ permalink: /change-logs/
 
 ## What's New
 
-### (Unreleased)
+### v0.22
 - Improved and enhanced main UI.
-- Added Swipe to change pages.
+- Added option to Swipe change pages.
 - Added new credits page.  
 - Updated translations message.
 - Main UI now includes package names.
