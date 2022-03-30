@@ -6,6 +6,12 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.24
+- Added Vietnamese and Chinese (Simplified) translations.
+- Updated French translations.
+- Updated build tools and dependencies.
+- Miscellaneous changes.
+
 ### v0.23
 - Added French translations (incomplete).
 - Updated Italian & Polish translations.

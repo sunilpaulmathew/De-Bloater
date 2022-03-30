@@ -1,0 +1,4 @@
+* Added Vietnamese and Chinese (Simplified) translations.
+* Updated French translations.
+* Updated build tools and dependencies.
+* Miscellaneous changes.
