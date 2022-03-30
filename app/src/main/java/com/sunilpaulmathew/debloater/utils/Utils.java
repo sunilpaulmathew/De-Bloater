@@ -62,14 +62,14 @@ public class Utils {
     }
 
     public static void runCommand(String command) {
-        Shell.su(command).exec();
+        Shell.cmd(command).exec();
     }
 
     @NonNull
     static String runAndGetOutput(String command) {
         StringBuilder sb = new StringBuilder();
         try {
-            List<String> outputs = Shell.su(command).exec().getOut();
+            List<String> outputs = Shell.cmd(command).exec().getOut();
             if (ShellUtils.isValidOutput(outputs)) {
                 for (String output : outputs) {
                     sb.append(output).append("\n");

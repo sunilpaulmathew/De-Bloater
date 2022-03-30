@@ -41,8 +41,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.sunilpaulmathew:RootFilePicker:v0.6'
-    implementation 'com.github.sunilpaulmathew:sCommon:c1a53e4e85'
-    implementation "com.github.topjohnwu.libsu:core:3.1.2"
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.github.sunilpaulmathew:RootFilePicker:v0.7'
+    implementation 'com.github.sunilpaulmathew:sCommon:05bedfbccc'
+    implementation "com.github.topjohnwu.libsu:core:4.0.3"
+    implementation 'com.google.android.material:material:1.5.0'
 }
