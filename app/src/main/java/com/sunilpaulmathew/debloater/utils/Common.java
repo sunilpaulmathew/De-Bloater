@@ -142,6 +142,8 @@ public class Common {
         mData.add(new sSerializableItems(null, "Valdnet", "Polish Translations", "https://github.com/Valdnet"));
         mData.add(new sSerializableItems(null, "Reno", "French Translations", null));
         mData.add(new sSerializableItems(null, "Ebolateam", "French Translations", null));
+        mData.add(new sSerializableItems(null, "Hoa Gia Đại Thiếu", "Vietnamese Translations", null));
+        mData.add(new sSerializableItems(null, "ひきたり", "Vietnamese Translations", null));
         return mData;
     }
 

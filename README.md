@@ -67,6 +67,7 @@ If you like to appreciate my work, please consider donating to me (either via [L
 * Axel Schaab, German Translations
 * alex, Ktosspl & [Valdnet](https://github.com/Valdnet), Polish Translations
 * Reno & Ebolateam, French Translations
+* Hoa Gia Đại Thiếu & ひきたり, Vietnamese Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
 
 _If you think I missed your name, please let me know._
