@@ -26,6 +26,9 @@
     <string name="custom_scripts_tomatot_list">"Les applications suivantes sont incluses dans ce script!"</string>
     <string name="custom_scripts_tomatot_extreme">"Supprimez toutes les applications incluses dans la liste invisible et légère ainsi que quelques applications et fonctionnalités de Google qui ne sont  absolument pas nécessaires mais utiles pour certaines personnes."</string>
     <string name="custom_scripts_tomatot_invisible">"Supprimez uniquement les applications liées à la télémétrie ou qui n'ont aucune fonction."</string>
+    <string name="custom_scripts_tomatot_light">"Supprimer toutes les applications incluses dans la liste invisible ainsi que certaines autres applications rarement utilisées."</string>
+    <string name="custom_scripts_tomatot_Summary">"Adaptation du script \"debloater\" développé à l'origine par Tomatot pour l'OnePlus 6. Utiliser ce script sur d'autres appareils à vos risques et périls."</string>
+    <string name="custom_scripts_uad">"Universal Android Debloater"</string>
     <string name="custom_scripts_uad_disabled">"Ce script est actuellement désactivé !"</string>
     <string name="custom_scripts_uad_enabled">"Ce script est actuellement activé !"</string>
     <string name="custom_scripts_uad_summary">"Adaptation de \"Universal Android Debloater\" développé à l'origine par W1nst0n dans le but d'améliorer les performances de la batterie et la confidentialité des données en supprimant les applications système inutiles et/ou obscures."</string>
@@ -52,4 +55,52 @@
     <string name="module_status_reset">"Réinitialiser le module"</string>
     <string name="more_apps">"Plus d'applications"</string>
     <string name="more_apps_summary">"Plus d'application du développeur"</string>
+    <string name="motorola">"Motorola"</string>
+    <string name="name">"Nom"</string>
+    <string name="nokia">"Nokia"</string>
+    <string name="no_internet">"Merci de vérifier votre connexion internet"</string>
+    <string name="no_magisk">"Magisk non détecté"</string>
+    <string name="no_root">"Pas de root"</string>
+    <string name="oneplus">"OnePlus"</string>
+    <string name="oppo">"Oppo"</string>
+    <string name="package_id">"Identifiant du package"</string>
+    <string name="press_back_exit">"Appuyez de nouveau sur le bouton \"retour\" pour quitter"</string>
+    <string name="rate_us">"Notez nous"</string>
+    <string name="rate_us_Summary">"Noter ou/et évaluer De-Bloater dans le PlayStore"</string>
+    <string name="reboot">"Redémarrer l'appareil"</string>
+    <string name="remove">"Retirer"</string>
+    <string name="report_issue">"Signaler un problème"</string>
+    <string name="report_issue_summary">"Reporter un problème sur GitHub"</string>
+    <string name="restore">"Restaurer"</string>
+    <string name="restore_error_message">"Vous avez sélectionné un fichier de sauvegarde non valide.  Abandon"</string>
+    <string name="restore_question">"Restaurer à partir de %s ?"</string>
+    <string name="restoring">"Restauration…"</string>
+    <string name="samsung">"Samsung"</string>
+    <string name="search_hint">"Recherche…"</string>
+    <string name="share_app_message">"Obtenir De-Bloater %s de"</string>
+    <string name="sony">"Sony"</string>
+    <string name="sort_by">"Trier les applications par"</string>
+    <string name="source_code">"Code source"</string>
+    <string name="source_code_summary">"Visiter la page GitHub"</string>
+    <string name="status_message_remove">"Sera retiré après un redémarrage"</string>
+    <string name="status_message_restore">"Sera restauré après un redémarrage"</string>
+    <string name="storage_access_denied">"Autorisation refusée pour l'écriture dans le stockage"</string>
+    <string name="support">"Soutien"</string>
+    <string name="support_summary">"Visiter le groupe de soutien"</string>
+    <string name="update_available">"Nouvelle mise à jour disponible (%s)"</string>
+    <string name="updated_dialog">"Félicitations. Vous avez déjà une version à jour de De-Bloater."</string>
+    <string name="version">"Version"</string>
+    <string name="warning_summary">"De-Bloater est trop puissant.  Veuillez l'utiliser avec précaution.  Le développeur de cette application n'assume aucune responsabilité si quelque chose ne fonctionne plus en raison d'une utilisation inappropriée."</string>
+    <string name="xiaomi">"Xiaomi"</string>
+    <string name="zte">"ZTE"</string>
+    <string name="apps_all">"Tous"</string>
+    <string name="start">"Démarrer"</string>
+    <string name="backup_share_message">"Afin de créer une base de données de profils prédéfinis pour un usage public, veuillez envisager de partager vos meilleurs profils de de-bloater avec le développeur de De-Bloater.  Merci.
+
+        Email: smartpack.org@gmail.com
+        Telegram: https://t.me/smartpack_kmanager"</string>
+    <string name="restore_mismatch_message">"Vous avez sélectionné un fichier de sauvegarde créé pour un autre appareil ou une autre version d'Android. Voulez-vous toujours restaurer cette sauvegarde ?"</string>
+    <string name="share_profile">"Partager le profil"</string>
+    <string name="uninstall">"Désinstaller"</string>
+    <string name="updated_system_app_warning">"Vous avez décidé de \"débloater\" '%s', une application système déjà mise à jour.  Par conséquent, si vous voulez vraiment supprimer complètement cette application, veuillez également envisager de désinstaller les mises à jour locales. Sinon, l'application se comportera comme une application utilisateur normale après un redémarrage."</string>
 </resources>
