@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+	<string name="app_name" translatable="false">De-Bloater</string>
 
     <string name="about">"Di"</string>
     <string name="about_summary">"De-Bloater è un'applicazione che utilizza la potenza di Magisk per scaricare applicazioni indesiderate senza sistema!"</string>
@@ -7,14 +8,16 @@
     <string name="aosp">"AOSP"</string>
     <string name="apply">"Applica"</string>
     <string name="apps">"%s Applicazioni"</string>
-    <string name="apps_system">"/sistema"</string>
-    <string name="apps_vendor">"/venditore"</string>
-    <string name="apps_product">"/Prodotto"</string>
+    <string name="apps_all">Tutte</string>									
+    <string name="apps_system">"/system"</string>
+    <string name="apps_vendor">"/vendor"</string>
+    <string name="apps_product">"/product"</string>
     <string name="app_summary">"Usa la potenza di Magisk per disinstallare le applicazioni di sistema intaccando il sistema il meno possibile"</string>
     <string name="asus">"ASUS"</string>
     <string name="backup">"Backup"</string>
     <string name="backup_list_empty">"Non hai ancora rimosso alcuna app!"</string>
     <string name="backup_message">"I file di backup vengono creati come %s!"</string>
+    <string name="backup_share_message">"In modo da creare un database di profili predefiniti per uso pubblico, condividi i profili migliori fatti da te con lo sviluppatore di De-Bloater, per favore. Grazie.\n\nEmail: smartpack.org@gmail.com\nTelegram: https://t.me/smartpack_kmanager"</string>																																																																		   
     <string name="carrier">"Vettore"</string>
     <string name="change_logs">"Log delle modifiche"</string>
     <string name="change_logs_summary">"Visualizza le modifiche recenti su questa app"</string>
@@ -73,22 +76,27 @@
     <string name="report_issue_summary">"Segnala un problema su GitHub"</string>
     <string name="restore">"Ripristina"</string>
     <string name="restore_error_message">"Hai selezionato un file di backup non valido. Interruzione!"</string>
+    <string name="restore_mismatch_message">"Hai selezionato un file di backup creato per un dipositivo o versione di Android diversa. Vuoi comunque continuare il ripristino?"</string>																			
     <string name="restore_question">"Ripristinare da %s?"</string>
     <string name="restoring">"Ripristino …"</string>
     <string name="samsung">"Samsung"</string>
     <string name="search_hint">"Ricerca…"</string>
     <string name="share_app_message">"Ottieni De-Bloater %s da"</string>
+    <string name="share_profile">"Condividi Profilo"</string>												   
     <string name="sony">"Sony"</string>
     <string name="sort_by">"Ordina app per"</string>
     <string name="source_code">"Codice sorgente"</string>
     <string name="source_code_summary">"Visita la pagina GitHub"</string>
+    <string name="start">"Avvio"</string>								   
     <string name="status_message_remove">"Verrà rimosso dopo un riavvio"</string>
     <string name="status_message_restore">"Verrà ripristinato dopo un riavvio"</string>
     <string name="storage_access_denied">"Autorizzazione negata per la scrittura nell'archivio!"</string>
     <string name="support">"Supporto"</string>
     <string name="support_summary">"Visita il gruppo di supporto"</string>
+    <string name="uninstall">"Disinstalla"</string>										   
     <string name="update_available">"Nuovo aggiornamento disponibile!\n(%S)"</string>
     <string name="updated_dialog">"Congratulazioni! Hai già una versione aggiornata di De-Bloater!"</string>
+    <string name="updated_system_app_warning">"Hai deciso di rimuovere \'%s\', un\'app di sistema che è già aggiornata. Quindi, se vuoi davvero rimuovere completamente questa app, per favore prendi in considerazione di disinstallare anche gli aggiornamenti locali. Altrimenti , l\'app si comporterà come una normale app utente dopo un riavvio."</string>																																																																												  
     <string name="version">"Versione"</string>
     <string name="warning_summary">"De-Bloater è troppo potente! Si prega di usarlo con attenzione. Lo sviluppatore di questa applicazione non si assume alcuna responsabilità se qualcosa è andato storto a causa del suo uso inappropriato."</string>
     <string name="xiaomi">"Xiaomi"</string>
