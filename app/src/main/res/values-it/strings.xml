@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-	<string name="app_name" translatable="false">De-Bloater</string>
+    <string name="app_name" translatable="false">De-Bloater</string>
 
     <string name="about">"Di"</string>
     <string name="about_summary">"De-Bloater è un'applicazione che utilizza la potenza di Magisk per scaricare applicazioni indesiderate senza sistema!"</string>
