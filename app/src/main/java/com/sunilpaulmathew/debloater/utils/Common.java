@@ -145,6 +145,7 @@ public class Common {
         mData.add(new sSerializableItems(null, "Hoa Gia Đại Thiếu", "Vietnamese Translations", null));
         mData.add(new sSerializableItems(null, "ひきたり", "Vietnamese Translations", null));
         mData.add(new sSerializableItems(null, "qiaoxin", "Chinese (Simplified) Translations", null));
+        mData.add(new sSerializableItems(null, "MMETMA", "Arabic Translations", "https://github.com/MMETMA"));
         return mData;
     }
 
