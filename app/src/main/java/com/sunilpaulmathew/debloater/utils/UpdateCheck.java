@@ -5,14 +5,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.net.Uri;
 import android.preference.PreferenceManager;
-
-import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sunilpaulmathew.debloater.BuildConfig;
@@ -152,16 +148,6 @@ public class UpdateCheck {
         Utils.download(Common.geLatestAPK(context), getUrl());
     }
 
-    private static void installUpdate(Context context) {
-        Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        Uri uriFile;
-        uriFile = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider",
-                new File(Common.geLatestAPK(context)));
-        intent.setDataAndType(uriFile, "application/vnd.android.package-archive");
-        context.startActivity(Intent.createChooser(intent, ""));
-    }
-
     public static void isManualUpdate(boolean b) {
         mManualUpdate = b;
     }
@@ -226,6 +212,7 @@ public class UpdateCheck {
 
     private static void updaterTask(Context context) {
         new sExecutor() {
+            private String mSid = null;
 
             private ProgressDialog mProgressDialog;
             @Override
@@ -239,6 +226,15 @@ public class UpdateCheck {
             @Override
             public void doInBackground() {
                 getLatestApp(context);
+                mProgressDialog.setMessage("Installing De-Bloater " + getVersionName() + "...");
+                Utils.runCommand("sleep 5");
+                if (Utils.exist(Common.geLatestAPK(context)) && Utils.getChecksum(Common.geLatestAPK(context))
+                        .contains(Objects.requireNonNull(getChecksum()))) {
+                    mSid = Utils.runAndGetOutput("pm install-create").replace(
+                            "Success: created install session [","").replace("]", "");
+                    File mAPK = new File(Common.geLatestAPK(context));
+                    Utils.runCommand("pm install-write -S " + mAPK.length() + " " + mSid + " " + mAPK.getName() + " " + mAPK);
+                }
             }
 
             @Override
@@ -246,8 +242,9 @@ public class UpdateCheck {
                 try {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {}
-                if (Utils.exist(Common.geLatestAPK(context)) && Utils.getChecksum(Common.geLatestAPK(context)).contains(Objects.requireNonNull(getChecksum()))) {
-                    installUpdate(context);
+                if (Utils.exist(Common.geLatestAPK(context)) && Utils.getChecksum(Common.geLatestAPK(context))
+                        .contains(Objects.requireNonNull(getChecksum()))) {
+                    Utils.runCommand("pm install-commit " + mSid);
                 } else {
                     new MaterialAlertDialogBuilder(context)
                             .setMessage(context.getString(R.string.download_failed))
