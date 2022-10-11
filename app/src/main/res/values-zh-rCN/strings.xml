@@ -1,37 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="about">"关于"</string>
+    <string name="about_summary">"De-Bloater是一个使用Magisk无系统地清除不需要的应用程序的app。"</string>
+    <string name="active">"使用中"</string>
+    <string name="active_app_summary">"整个应用程序列表详见下文。 被指定为删除的应用程序将在重启后无系统地被删除。"</string>
     <string name="aosp">"Android开放源代码项目（AOSP）"</string>
     <string name="apply">"应用"</string>
     <string name="apps">"%s 个应用"</string>
     <string name="apps_system">"/system"</string>
     <string name="apps_vendor">"/vendor"</string>
     <string name="apps_product">"/product"</string>
+    <string name="app_summary">"使用Magisk无系统地精简系统应用"</string>
     <string name="asus">"华硕"</string>
     <string name="backup">"备份"</string>
     <string name="backup_list_empty">"你还未移除任何应用"</string>
     <string name="backup_message">"备份文件将生成为 %s"</string>
+    <string name="carrier">"运营商"</string>
     <string name="change_logs">"更新日志"</string>
     <string name="change_logs_summary">"查看此应用的最近更新"</string>
     <string name="check_update">"检查更新"</string>
     <string name="check_update_summary">"检查De-Bloater新版本"</string>
     <string name="custom_scripts">"自定义脚本"</string>
-    <string name="custom_scripts_applied_message">"已完成。重启后将生效"</string>
+    <string name="custom_scripts_applied_message">"已完成设置，重启后将生效。"</string>
+    <string name="custom_scripts_tomatot">"Tomatot Debloater"</string>
     <string name="custom_scripts_tomatot_list">"此脚本包含以下应用"</string>
+    <string name="custom_scripts_tomatot_extreme">"删除不可见和轻列表中包含的所有应用程序以及一些并非绝对必要但对某些人有用的 Google Apps 和功能。"</string>
+    <string name="custom_scripts_tomatot_invisible">"仅删除与遥测有关或没有任何功能的应用程序。"</string>
+    <string name="custom_scripts_tomatot_light">"删除隐藏列表中包含的所有应用程序以及一些很少使用的其他应用程序。"</string>
+    <string name="custom_scripts_tomatot_Summary">"改编自最初由Tomatot为OnePlus 6开发的debloater脚本。 在其他设备上使用这个脚本时风险自负。"</string>
+    <string name="custom_scripts_uad">"通用 Android Debloater"</string>
     <string name="custom_scripts_uad_disabled">"此脚本现在已禁用"</string>
     <string name="custom_scripts_uad_enabled">"此脚本现在已启用"</string>
+    <string name="custom_scripts_uad_summary">"改编自由W1nst0n开发的通用Android Debloater，目的是通过删除不必要的和不明显的系统应用程序来提高电池性能和隐私。"</string>
     <string name="donate">"捐赠"</string>
     <string name="donate_summary">"捐赠给此项目"</string>
+    <string name="download_failed">"下载似乎失败了，或者下载了一个损坏的文件。"</string>
     <string name="downloading">"下载中 %s"</string>
     <string name="extreme">"极端"</string>
     <string name="fdroid">"F-Droid"</string>
     <string name="fdroid_summary">"访问F-Droid页面"</string>
     <string name="google">"Google"</string>
+    <string name="get_it">"获取"</string>
     <string name="huawei">"华为"</string>
+    <string name="inactive">"已禁用"</string>
+    <string name="inactive_apps_summary">"在这个页面中列出了被 systemless-ly 删除或被指定为删除的应用程序"</string>
+    <string name="invisible">"隐藏的"</string>
     <string name="invite_friend">"分享"</string>
     <string name="invite_friend_summary">"邀请朋友使用De-Bloater"</string>
     <string name="lg">"LG"</string>
-    <string name="licence">"授权"</string>
+    <string name="licence">"许可"</string>
     <string name="licence_summary">"查看GPL V3"</string>
     <string name="light">"明亮"</string>
     <string name="miscellaneous">"其它"</string>
@@ -46,15 +63,16 @@
     <string name="no_root">"未Root"</string>
     <string name="oneplus">"一加"</string>
     <string name="oppo">"Oppo"</string>
+    <string name="package_id">"包名"</string>
     <string name="press_back_exit">"再次按返回键退出"</string>
     <string name="rate_us">"评分"</string>
     <string name="rate_us_Summary">"对PlayStore中的De Bloater进行评分或审核"</string>
     <string name="reboot">"重启手机"</string>
     <string name="remove">"移除"</string>
     <string name="report_issue">"报告问题"</string>
-    <string name="report_issue_summary">"在GitHub上提出问题"</string>
+    <string name="report_issue_summary">"在GitHub上提交新问题"</string>
     <string name="restore">"恢复"</string>
-    <string name="restore_error_message">"您选择的备份文件无效。已停止。"</string>
+    <string name="restore_error_message">"您选择的备份文件无效，已停止。"</string>
     <string name="restore_question">"从 %s 恢复？"</string>
     <string name="restoring">"恢复中"</string>
     <string name="samsung">"三星"</string>
@@ -72,11 +90,17 @@
     <string name="update_available">"有新版本可更新(%s)"</string>
     <string name="updated_dialog">"恭喜，你的De-Bloater是最新版本"</string>
     <string name="version">"版本"</string>
+    <string name="warning_summary">"De-Bloater太强大了。请谨慎使用。如果由于使用不当而发生错误，此应用程序的开发人员不承担任何责任。"</string>
     <string name="xiaomi">"小米"</string>
     <string name="zte">"中兴"</string>
     <string name="apps_all">"所以"</string>
     <string name="start">"开始"</string>
+    <string name="backup_share_message">"为了创建供公众使用的预定义配置文件数据库，请考虑与 De-Bloater 的开发人员共享您制作的最佳 de-bloater 配置文件。谢谢。
+
+        Email: smartpack.org@gmail.com
+        Telegram: https://t.me/smartpack_kmanager"</string>
     <string name="restore_mismatch_message">"你选择的备份文件是为其它不同的设备或安卓版本生成的，确定恢复？"</string>
     <string name="share_profile">"分享配置"</string>
     <string name="uninstall">"卸载"</string>
+    <string name="updated_system_app_warning">"您决定对已更新的系统应用程序“%s”进行去膨胀。因此，如果您真的想完全删除此应用程序，请考虑同时卸载本地更新。否则，应用程序将在重新启动后像普通用户应用程序一样运行。"</string>
 </resources>

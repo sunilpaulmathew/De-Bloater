@@ -40,7 +40,7 @@
     <string name="fdroid">"F-Droid"</string>
     <string name="fdroid_summary">"F-droid'i ziyaret et!"</string>
     <string name="google">"Google"</string>
-    <string name="get_it">"Get It"</string>
+    <string name="get_it">"Onu al"</string>
     <string name="huawei">"Huawei"</string>
     <string name="inactive">"İnaktif"</string>
     <string name="inactive_apps_summary">"Burada listenen uygulamalar sistemsiz olarak kaldırılmıştır!"</string>
@@ -93,4 +93,14 @@
     <string name="warning_summary">"De-Bloater çok güçlü! Lütfen dikkatli kullanın. Bu uygulamanın geliştiricisi, uygunsuz kullanımı nedeniyle bir şeyler ters giderse herhangi bir sorumluluk kabul etmez."</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>
+    <string name="apps_all">"Tamamı"</string>
+    <string name="start">"Başla"</string>
+    <string name="backup_share_message">"Herkese açık kullanıma uygun, önceden tanımlanmış profillerden oluşan bir veritabanı oluşturmak için lütfen sizin tarafınızdan yapılan en iyi De-Bloater profillerini. De-Bloater geliştiricisi ile paylaşmayı düşünün. Teşekkür ederim.
+
+        Email: smartpack.org@gmail.com
+        Telegram: https://t.me/smartpack_kmanager"</string>
+    <string name="restore_mismatch_message">"Farklı bir cihaz veya Android sürümü için oluşturulmuş bir yedekleme dosyası seçtiniz. Hala geri yüklemek istiyor musun?"</string>
+    <string name="share_profile">"Profili Paylaş"</string>
+    <string name="uninstall">"Kaldır"</string>
+    <string name="updated_system_app_warning">"Zaten güncellenmiş bir sistem uygulaması olan '% s' yi kaldırmaya karar verdiniz. Bu nedenle, bu uygulamayı gerçekten tamamen kaldırmak istiyorsanız, lütfen yerel güncellemeleri de kaldırmayı düşünün. Aksi takdirde, uygulama yeniden başlatıldıktan sonra normal bir kullanıcı uygulaması gibi davranır."</string>
 </resources>
