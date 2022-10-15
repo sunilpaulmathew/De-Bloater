@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.25
+- Improved app updates.
+- Added French (Belgian), Portuguese (Brazilian) and Chinese (Traditional) translations.
+- Updated other translations.
+- Updated build tools and dependencies.
+- Miscellaneous changes.
+
 ### v0.24
 - Added Vietnamese and Chinese (Simplified) translations.
 - Updated French translations.

@@ -2,7 +2,7 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-v0.24-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
+[![](https://img.shields.io/badge/De--Bloater-v0.25-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
@@ -21,7 +21,7 @@
      height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.sunilpaulmathew.debloater)
      [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
           alt=""
-          height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.24/app-release.apk)
+          height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.25/app-release.apk)
 
 ## Features
 * Easily remove system apps from "/system", "/vendor", and "/product" directories.
@@ -70,6 +70,10 @@ If you like to appreciate my work, please consider donating to me (either via [L
 * Hoa Gia Đại Thiếu & ひきたり, Vietnamese Translations
 * qiaoxin, Chinese (Simplified) Translations
 * [MMETMA](https://github.com/MMETMA), Arabic Translations
+* Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
+* Guima Teixeira, French (Belgian) Translations
+* 蔡承佑, Chinese (Traditional) Translations
+* Geovanni, Portuguese (Brazilian) Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
 
 _If you think I missed your name, please let me know._
