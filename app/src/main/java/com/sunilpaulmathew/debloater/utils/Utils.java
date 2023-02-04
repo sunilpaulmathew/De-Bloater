@@ -34,18 +34,10 @@ public class Utils {
         Shell.enableVerboseLogging = BuildConfig.DEBUG;
     }
 
-    public static boolean isPlayStoreAvailable(Context context) {
-        return sPackageUtils.isPackageInstalled("com.android.vending", context);
-    }
-
-    public static boolean isFDroidAvailable(Context context) {
-        return sPackageUtils.isPackageInstalled("org.fdroid.fdroid", context);
-    }
-
     public static String getAppStoreURL(Context context) {
-        if (isPlayStoreAvailable(context)) {
+        if (sPackageUtils.isPackageInstalled("com.android.vending", context)) {
             return " Google Play: https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater";
-        } else if (isFDroidAvailable(context)) {
+        } else if (sPackageUtils.isPackageInstalled("org.fdroid.fdroid", context)) {
             return " F-Droid: https://f-droid.org/packages/com.sunilpaulmathew.debloater/";
         } else {
             return " GitHub: https://github.com/sunilpaulmathew/De-Bloater/releases/latest";
@@ -106,7 +98,7 @@ public class Utils {
 
     public static boolean exist(String file) {
         String output = runAndGetOutput("[ -e " + file + " ] && echo true");
-        return !output.isEmpty() && output.equals("true");
+        return output.equals("true");
     }
 
     public static void delete(String path) {

@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
-import com.sunilpaulmathew.debloater.utils.Utils;
 
 import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -29,7 +29,8 @@ public class ChangeLogActivity extends AppCompatActivity {
         MaterialTextView mChangeLog = findViewById(R.id.change_log);
         MaterialTextView mTitle = findViewById(R.id.app_title);
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
-        mTitle.setText(getString(R.string.app_name) + (Utils.isPlayStoreAvailable(this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
+        mTitle.setText(getString(R.string.app_name) + (sPackageUtils.isPackageInstalled("com.android.vending",
+                this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
         mChangeLog.setText(sJSONUtils.getString(sJSONUtils.getJSONObject(sUtils.readAssetFile(
                 "release.json", this)), "fullReleaseNotes"));
         mCancel.setOnClickListener(v -> finish());

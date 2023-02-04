@@ -19,6 +19,7 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -44,16 +45,17 @@ public class AboutFragment extends Fragment {
 
     private List<sSerializableItems> getData() {
         List <sSerializableItems> mData = new ArrayList<>();
-        mData.add(new sSerializableItems(sUtils.getDrawable(R.mipmap.ic_launcher_round, requireActivity()), getString(R.string.version), (Utils.isPlayStoreAvailable(requireActivity()) ? "Pro " : "") + BuildConfig.VERSION_NAME, null));
+        mData.add(new sSerializableItems(sUtils.getDrawable(R.mipmap.ic_launcher_round, requireActivity()), getString(R.string.version), (sPackageUtils.isPackageInstalled(
+                "com.android.vending", requireActivity()) ? "Pro " : "") + BuildConfig.VERSION_NAME, null));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_support, requireActivity()), getString(R.string.support), getString(R.string.support_summary),"https://t.me/smartpack_kmanager"));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_github, requireActivity()), getString(R.string.source_code), getString(R.string.source_code_summary),"https://github.com/sunilpaulmathew/De-Bloater"));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_issue, requireActivity()), getString(R.string.report_issue), getString(R.string.report_issue_summary),"https://github.com/sunilpaulmathew/De-Bloater/issues/new"));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_active, requireActivity()), getString(R.string.change_logs), getString(R.string.change_logs_summary), null));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_playstore, requireActivity()), getString(R.string.more_apps), getString(R.string.more_apps_summary), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_licence, requireActivity()), getString(R.string.licence), getString(R.string.licence_summary), "https://www.gnu.org/licenses/gpl-3.0-standalone.html"));
-        if (Utils.isPlayStoreAvailable(requireActivity())) {
+        if (sPackageUtils.isPackageInstalled("com.android.vending", requireActivity())) {
             mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_rate, requireActivity()), getString(R.string.rate_us), getString(R.string.rate_us_Summary), "https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater"));
-        } else if (Utils.isFDroidAvailable(requireActivity())) {
+        } else if (sPackageUtils.isPackageInstalled("org.fdroid.fdroid", requireActivity())) {
             mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_fdroid, requireActivity()), getString(R.string.fdroid), getString(R.string.fdroid_summary), "https://f-droid.org/packages/com.sunilpaulmathew.debloater"));
         } else {
             mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_update, requireActivity()),getString(R.string.check_update), getString(R.string.check_update_summary), null));
@@ -61,7 +63,7 @@ public class AboutFragment extends Fragment {
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_translate, requireActivity()), getString(R.string.translations), getString(R.string.translations_summary), null));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_credits, requireActivity()), getString(R.string.credits), getString(R.string.credits_summary), null));
         mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_share, requireActivity()), getString(R.string.invite_friend), getString(R.string.invite_friend_summary), null));
-        if (!Utils.isPlayStoreAvailable(requireActivity())) {
+        if (!sPackageUtils.isPackageInstalled("com.android.vending", requireActivity())) {
             mData.add(new sSerializableItems(sUtils.getDrawable(R.drawable.ic_donate, requireActivity()), getString(R.string.donate), getString(R.string.donate_summary), "https://smartpack.github.io/donation/"));
         }
         return mData;

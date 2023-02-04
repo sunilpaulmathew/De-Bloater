@@ -20,6 +20,7 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -105,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        if (Utils.rootAccess() && Utils.magiskSupported() && !Utils.isPlayStoreAvailable(this) && UpdateCheck.isSignatureMatched(this)) {
+        if (Utils.rootAccess() && Utils.magiskSupported() && !sPackageUtils.isPackageInstalled(
+                "com.android.vending", this) && UpdateCheck.isSignatureMatched(this)) {
             new UpdateCheck().initialize(1, this);
         }
     }
