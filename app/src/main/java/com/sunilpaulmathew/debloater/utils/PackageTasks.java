@@ -54,7 +54,7 @@ public class PackageTasks {
             if (getSupportedAppsList(item.getAPKPath(), context)) {
                 if (Common.getSearchText() == null) {
                     mData.add(item);
-                } else if (Common.isTextMatched(item.getAppName())) {
+                } else if (Common.isTextMatched(item.getAppName()) || Common.isTextMatched(item.getPackageName())) {
                     mData.add(item);
                 }
             }
@@ -177,7 +177,7 @@ public class PackageTasks {
 
     public static void setToDelete(String path, String name, Context context) {
         initializeModule();
-        new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()).mkdirs();
+        sUtils.mkdir(new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()));
         Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
         Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", Common.getModuleParent());
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
