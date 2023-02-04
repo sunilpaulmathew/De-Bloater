@@ -35,9 +35,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
+    lint {
         abortOnError false
     }
+    namespace 'com.sunilpaulmathew.debloater'
 }
 
 dependencies {
