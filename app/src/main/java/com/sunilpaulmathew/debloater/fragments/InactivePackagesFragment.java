@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
@@ -39,7 +41,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 
-import in.sunilpaulmathew.rootfilepicker.activities.FilePickerActivity;
 import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -191,10 +192,10 @@ public class InactivePackagesFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    FilePicker.setPath(Environment.getExternalStorageDirectory().toString());
-                    FilePicker.setExtension("json");
-                    Intent filePicker = new Intent(getActivity(), FilePickerActivity.class);
-                    startActivityForResult(filePicker, 0);
+                    FilePicker filePicker = new FilePicker(restoreResultLauncher, requireActivity());
+                    filePicker.setPath(Environment.getExternalStorageDirectory().toString());
+                    filePicker.setExtension("json");
+                    filePicker.launch();
                     break;
             }
             return false;
@@ -226,44 +227,44 @@ public class InactivePackagesFragment extends Fragment {
         }.execute();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    ActivityResultLauncher<Intent> restoreResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    File mSelectedFile = FilePicker.getSelectedFile();
+                    if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
+                        sUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
+                        return;
+                    }
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setMessage(Restore.isJSONMatched(mSelectedFile.getAbsolutePath()) ? getString(R.string.restore_question,
+                                    mSelectedFile.getName()) : getString(R.string.restore_mismatch_message))
+                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                            })
+                            .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
+                                    new sExecutor() {
 
-        if (requestCode == 0 && data != null) {
-            File mSelectedFile = FilePicker.getSelectedFile();
-            if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
-               sUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
-                return;
+                                        @Override
+                                        public void onPreExecute() {
+                                            mProgressLayout.setVisibility(View.VISIBLE);
+                                            mProgressText.setText(getString(R.string.restoring));
+                                        }
+
+                                        @Override
+                                        public void doInBackground() {
+                                            Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
+                                        }
+
+                                        @Override
+                                        public void onPostExecute() {
+                                            mProgressLayout.setVisibility(View.GONE);
+                                            loadUI();
+                                        }
+                                    }.execute())
+                            .show();
+                }
             }
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setMessage(Restore.isJSONMatched(mSelectedFile.getAbsolutePath()) ? getString(R.string.restore_question,
-                            mSelectedFile.getName()) : getString(R.string.restore_mismatch_message))
-                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                    })
-                    .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
-                            new sExecutor() {
-
-                                @Override
-                                public void onPreExecute() {
-                                    mProgressLayout.setVisibility(View.VISIBLE);
-                                    mProgressText.setText(getString(R.string.restoring));
-                                }
-
-                                @Override
-                                public void doInBackground() {
-                                    Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
-                                }
-
-                                @Override
-                                public void onPostExecute() {
-                                    mProgressLayout.setVisibility(View.GONE);
-                                    loadUI();
-                                }
-                            }.execute())
-                    .show();
-        }
-    }
+    );
 
     @Override
     public void onStart() {
