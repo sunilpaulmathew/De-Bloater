@@ -68,19 +68,21 @@ If you like to appreciate my work, please consider donating to me (either via [L
 * alex, Ktosspl & [Valdnet](https://github.com/Valdnet), Polish Translations
 * Reno & Ebolateam, French Translations
 * Hoa Gia Đại Thiếu & ひきたり, Vietnamese Translations
-* qiaoxin, Chinese (Simplified) Translations
+* Hongle & qiaoxin, Chinese - Hong Kong (Simplified & Traditional) Translations
 * [MMETMA](https://github.com/MMETMA), Arabic Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
 * Guima Teixeira, French (Belgian) Translations
-* 蔡承佑, Chinese (Traditional) Translations
+* Yadi & 蔡承佑, Chinese (Traditional) Translations
 * Geovanni, Portuguese (Brazilian) Translations
+* Lw201811, Japanese Translations
+* Chong & Lw201811, Chinese (Simplified) Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
 
 _If you think I missed your name, please let me know._
 
 ## License
 
-    Copyright (C) 2022-2023 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2023-2024 sunilpaulmathew <sunil.kde@gmail.com>
 
     De-Bloater is a free softwares: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the

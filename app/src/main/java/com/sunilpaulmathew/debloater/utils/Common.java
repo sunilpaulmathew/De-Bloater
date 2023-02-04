@@ -144,11 +144,14 @@ public class Common {
         mData.add(new sSerializableItems(null, "Ebolateam", "French Translations", null));
         mData.add(new sSerializableItems(null, "Hoa Gia Đại Thiếu", "Vietnamese Translations", null));
         mData.add(new sSerializableItems(null, "ひきたり", "Vietnamese Translations", null));
-        mData.add(new sSerializableItems(null, "qiaoxin", "Chinese (Simplified) Translations", null));
+        mData.add(new sSerializableItems(null, "qiaoxin", "Chinese - Hong Kong (Traditional and Simplified) Translations", null));
         mData.add(new sSerializableItems(null, "MMETMA", "Arabic Translations", "https://github.com/MMETMA"));
         mData.add(new sSerializableItems(null, "Guima Teixeira", "French (Belgian)", null));
         mData.add(new sSerializableItems(null, "蔡承佑", "Chinese (Traditional) Translations", null));
         mData.add(new sSerializableItems(null, "Geovanni", "Portuguese (Brazilian) Translations", null));
+        mData.add(new sSerializableItems(null, "Chong", "Chinese (Simplified) Translations", null));
+        mData.add(new sSerializableItems(null, "Lw201811", "Japanese & Chinese (Simplified) Translations", null));
+        mData.add(new sSerializableItems(null, "Hongle", "Chinese - Hong Kong (Traditional and Simplified) Translations", null));
         return mData;
     }
 
