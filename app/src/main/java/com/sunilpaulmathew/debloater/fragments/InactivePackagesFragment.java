@@ -28,6 +28,7 @@ import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
 import com.sunilpaulmathew.debloater.utils.Common;
+import com.sunilpaulmathew.debloater.utils.EditTextInterface;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Restore;
 import com.sunilpaulmathew.debloater.utils.Utils;
@@ -133,45 +134,58 @@ public class InactivePackagesFragment extends Fragment {
                     break;
                 case 2:
                     if (PackageTasks.getInactivePackageData().size() > 0) {
-                        File jsonFile = new File(PackageTasks.getStoragePath(), Build.MODEL.replace(" ","_") + "_" + Build.VERSION.SDK_INT + ".json");
-                        try {
-                            JSONObject obj = new JSONObject();
-                            JSONObject device = new JSONObject();
-                            JSONArray DeBloater = new JSONArray();
-                            device.put("Manufacturer", Build.MANUFACTURER);
-                            device.put("Brand", Build.BRAND);
-                            device.put("Model", Build.MODEL);
-                            device.put("Version", Build.VERSION.RELEASE);
-                            device.put("SDK", Build.VERSION.SDK_INT);
-                            obj.put("Device", device);
-                            for (String s : PackageTasks.getInactivePackageData()) {
-                                JSONObject app = new JSONObject();
-                                app.put("name", Utils.read(s));
-                                app.put("path", s);
-                                DeBloater.put(app);
-                                obj.put("DeBloater", DeBloater);
+                        new EditTextInterface(Build.MODEL.replace(" ","_")
+                                .replace("(","_").replace(")","_") + "_" +
+                                Build.VERSION.SDK_INT, getString(R.string.backup_list_as), activity) {
+                            @Override
+                            public void positiveButtonLister(Editable editable) {
+                                String name = editable.toString().trim().replace(" ","_")
+                                        .replace("(","_").replace(")","_") + "_" +
+                                        Build.VERSION.SDK_INT;
+                                if (!name.endsWith(".json")) {
+                                    name = name + ".json";
+                                }
+                                File jsonFile = new File(PackageTasks.getStoragePath(), name);
+                                try {
+                                    JSONObject obj = new JSONObject();
+                                    JSONObject device = new JSONObject();
+                                    JSONArray DeBloater = new JSONArray();
+                                    device.put("Manufacturer", Build.MANUFACTURER);
+                                    device.put("Brand", Build.BRAND);
+                                    device.put("Model", Build.MODEL);
+                                    device.put("Version", Build.VERSION.RELEASE);
+                                    device.put("SDK", Build.VERSION.SDK_INT);
+                                    obj.put("Device", device);
+                                    for (String s : PackageTasks.getInactivePackageData()) {
+                                        JSONObject app = new JSONObject();
+                                        app.put("name", Utils.read(s));
+                                        app.put("path", s);
+                                        DeBloater.put(app);
+                                        obj.put("DeBloater", DeBloater);
+                                    }
+                                    Utils.create(obj.toString(), jsonFile.getAbsolutePath());
+                                    new MaterialAlertDialogBuilder(requireActivity())
+                                            .setIcon(R.mipmap.ic_launcher)
+                                            .setTitle(R.string.app_name)
+                                            .setMessage(getString(R.string.backup_message, jsonFile.getAbsolutePath()) + "\n\n" + getString(R.string.backup_share_message))
+                                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                            })
+                                            .setPositiveButton(getString(R.string.share_profile), (dialogInterface, i) -> {
+                                                Uri uriFile = FileProvider.getUriForFile(activity,
+                                                        BuildConfig.APPLICATION_ID + ".provider", jsonFile);
+                                                Intent share = new Intent(Intent.ACTION_SEND);
+                                                share.setType("*/*");
+                                                share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                                                share.putExtra(Intent.EXTRA_TEXT, "De-Bloater profile for " + Build.MODEL + " (SDK: " + Build.VERSION.SDK_INT + ").");
+                                                share.putExtra(Intent.EXTRA_STREAM, uriFile);
+                                                share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                                Intent shareIntent = Intent.createChooser(share, null);
+                                                startActivity(shareIntent);
+                                            }).show();
+                                } catch (JSONException ignored) {
+                                }
                             }
-                            Utils.create(obj.toString(), jsonFile.getAbsolutePath());
-                            new MaterialAlertDialogBuilder(requireActivity())
-                                    .setIcon(R.mipmap.ic_launcher)
-                                    .setTitle(R.string.app_name)
-                                    .setMessage(getString(R.string.backup_message, jsonFile.getAbsolutePath()) + "\n\n" + getString(R.string.backup_share_message))
-                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                    })
-                                    .setPositiveButton(getString(R.string.share_profile), (dialogInterface, i) -> {
-                                        Uri uriFile = FileProvider.getUriForFile(activity,
-                                                BuildConfig.APPLICATION_ID + ".provider", jsonFile);
-                                        Intent share = new Intent(Intent.ACTION_SEND);
-                                        share.setType("*/*");
-                                        share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                                        share.putExtra(Intent.EXTRA_TEXT, "De-Bloater profile for " + Build.MODEL + " (SDK: " + Build.VERSION.SDK_INT + ").");
-                                        share.putExtra(Intent.EXTRA_STREAM, uriFile);
-                                        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                        Intent shareIntent = Intent.createChooser(share, null);
-                                        startActivity(shareIntent);
-                                    }).show();
-                        } catch (JSONException ignored) {
-                        }
+                        }.show();
                     } else {
                         sUtils.snackBar(mRecyclerView, getString(R.string.backup_list_empty)).show();
                     }
