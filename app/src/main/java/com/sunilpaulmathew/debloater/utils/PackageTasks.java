@@ -91,7 +91,7 @@ public class PackageTasks {
                 || apkPath.startsWith("/system/vendor/app") || apkPath.startsWith("/system/vendor/overlay")
                 || apkPath.startsWith("/system/product/overlay") || apkPath.startsWith("/system/system_ext/app")
                 || apkPath.startsWith("/system/system_ext/priv-app") || apkPath.startsWith("/system_ext/app")
-                || apkPath.startsWith("/system_ext/priv-app");
+                || apkPath.startsWith("/system_ext/priv-app") || apkPath.startsWith("/system/preload");
         boolean vendorApps = apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/vendor/app");
         boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/priv-app")
                 || apkPath.startsWith("/product/overlay");
