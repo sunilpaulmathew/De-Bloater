@@ -6,6 +6,16 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.26
+- Exp: Included '/system/preload' to support list.
+- Exporting profiles now allows using custom names.
+- Searching apps now consider for both app and package names.
+- Replaced depreciated onActivityResult with ActivityResultLauncher
+- Added Japanese and Chinese (Simplified & Traditional - HK) translations.
+- Updated other translations.
+- Updated build tools and dependencies.
+- Miscellaneous changes.
+
 ### v0.25
 - Improved app updates.
 - Added French (Belgian), Portuguese (Brazilian) and Chinese (Traditional) translations.

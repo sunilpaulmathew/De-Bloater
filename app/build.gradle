@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-
     signingConfigs {
         release {
             storeFile file("sp.jks")
@@ -11,15 +10,16 @@ android {
         }
     }
 
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
+    namespace 'com.sunilpaulmathew.debloater'
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdkVersion 31
-        versionCode 25
-        versionName "v0.25"
+        targetSdkVersion 33
+        versionCode 26
+        versionName "v0.26"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false
@@ -38,12 +38,11 @@ android {
     lint {
         abortOnError false
     }
-    namespace 'com.sunilpaulmathew.debloater'
 }
 
 dependencies {
-    implementation 'com.github.sunilpaulmathew:RootFilePicker:v0.7'
-    implementation 'com.github.sunilpaulmathew:sCommon:947d85b85e'
+    implementation 'com.github.sunilpaulmathew:RootFilePicker:c918e8fad0'
+    implementation 'com.github.sunilpaulmathew:sCommon:241ad35be0'
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
 }
