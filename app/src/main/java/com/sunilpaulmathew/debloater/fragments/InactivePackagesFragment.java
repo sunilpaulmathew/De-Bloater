@@ -141,8 +141,7 @@ public class InactivePackagesFragment extends Fragment {
                             @Override
                             public void positiveButtonLister(Editable editable) {
                                 String name = editable.toString().trim().replace(" ","_")
-                                        .replace("(","_").replace(")","_") + "_" +
-                                        Build.VERSION.SDK_INT;
+                                        .replace("(","_").replace(")","_");
                                 if (!name.endsWith(".json")) {
                                     name = name + ".json";
                                 }
