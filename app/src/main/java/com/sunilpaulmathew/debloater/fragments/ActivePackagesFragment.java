@@ -183,9 +183,9 @@ public class ActivePackagesFragment extends Fragment {
         }
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(0, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(sCommonUtils.getBoolean("sort_name", false, activity));
+                .setChecked(sCommonUtils.getInt("sort_apps", 1, activity) == 0);
         sort.add(0, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(sCommonUtils.getBoolean("sort_id", true, activity));
+                .setChecked(sCommonUtils.getInt("sort_apps", 1, activity) == 1);
         sort.setGroupCheckable(0, true, true);
         SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
         customScripts.add(Menu.NONE, 4, Menu.NONE, R.string.custom_scripts_tomatot);
@@ -199,16 +199,14 @@ public class ActivePackagesFragment extends Fragment {
                     PackageTasks.removeModule(activity);
                     break;
                 case 2:
-                    if (!sCommonUtils.getBoolean("sort_name", false, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", true, activity);
-                        sCommonUtils.saveBoolean("sort_id", false, activity);
+                    if (sCommonUtils.getInt("sort_apps", 1, activity) != 0) {
+                        sCommonUtils.saveInt("sort_apps", 0, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    if (!sCommonUtils.getBoolean("sort_id", true, activity)) {
-                        sCommonUtils.saveBoolean("sort_id", true, activity);
-                        sCommonUtils.saveBoolean("sort_name", false, activity);
+                    if (sCommonUtils.getInt("sort_apps", 1, activity) != 1) {
+                        sCommonUtils.saveInt("sort_apps", 1, activity);
                         loadUI(activity);
                     }
                     break;

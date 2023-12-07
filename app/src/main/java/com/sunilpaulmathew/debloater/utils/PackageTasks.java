@@ -58,7 +58,7 @@ public class PackageTasks {
                 }
             }
         }
-        if (sCommonUtils.getBoolean("sort_name", true, context)) {
+        if (sCommonUtils.getInt("sort_apps", 1, context) == 0) {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
         } else {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
