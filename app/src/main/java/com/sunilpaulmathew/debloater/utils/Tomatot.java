@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 03, 2020
@@ -169,7 +169,7 @@ public class Tomatot {
                 PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
             }
         }
-        sUtils.saveBoolean(tag, true, context);
+        sCommonUtils.saveBoolean(tag, true, context);
     }
 
     public static void disable(String tag, List<PackageItem> items, Context context) {
@@ -178,11 +178,11 @@ public class Tomatot {
                 PackageTasks.revertDelete(item.getAPKPath());
             }
         }
-        sUtils.saveBoolean(tag, false, context);
+        sCommonUtils.saveBoolean(tag, false, context);
     }
 
     public static boolean isScriptEnabled(String tag, Context context) {
-        return sUtils.getBoolean(tag, false, context);
+        return sCommonUtils.getBoolean(tag, false, context);
     }
 
     public static void setInvisibleData(Context context) {

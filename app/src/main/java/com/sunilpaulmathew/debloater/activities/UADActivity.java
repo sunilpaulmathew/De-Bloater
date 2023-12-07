@@ -14,8 +14,8 @@ import com.sunilpaulmathew.debloater.fragments.UADFragment;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UAD;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2020
@@ -36,7 +36,7 @@ public class UADActivity extends AppCompatActivity {
 
             @Override
             public void onPreExecute() {
-                if (sUtils.isDarkTheme(UADActivity.this)) {
+                if (sThemeUtils.isDarkTheme(UADActivity.this)) {
                     mLinearLayout.setBackgroundColor(Color.BLACK);
                 } else {
                     mLinearLayout.setBackgroundColor(Color.WHITE);

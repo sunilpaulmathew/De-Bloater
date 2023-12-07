@@ -1,7 +1,5 @@
 package com.sunilpaulmathew.debloater.utils;
 
-import static in.sunilpaulmathew.sCommon.Utils.sPackageUtils.isUpdatedSystemApp;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -17,9 +15,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
@@ -38,11 +37,11 @@ public class PackageTasks {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 mData.add(new PackageItem(
                         sPackageUtils.getAppName(packageInfo.packageName, context).toString(),
-                        isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
+                        sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
                                 context) : sPackageUtils.getSourceDir(packageInfo.packageName, context),
                         sPackageUtils.getAppIcon(packageInfo.packageName, context),
                         packageInfo.packageName,
-                        isUpdatedSystemApp(packageInfo.packageName, context)));
+                        sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context)));
             }
         }
         return mData;
@@ -59,12 +58,12 @@ public class PackageTasks {
                 }
             }
         }
-        if (sUtils.getBoolean("sort_name", true, context)) {
+        if (sCommonUtils.getBoolean("sort_name", true, context)) {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
         } else {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
         }
-        if (sUtils.getBoolean("reverse_order", false, context)) {
+        if (sCommonUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;
@@ -85,7 +84,7 @@ public class PackageTasks {
     }
 
     private static boolean getSupportedAppsList(String apkPath, Context context) {
-        String mStatus = sUtils.getString("appTypes", "all", context);
+        String mStatus = sCommonUtils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
                 || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app")
                 || apkPath.startsWith("/system/vendor/app") || apkPath.startsWith("/system/vendor/overlay")
@@ -166,9 +165,9 @@ public class PackageTasks {
     public static void removeModule(Activity activity) {
         Utils.delete(activity.getFilesDir().getPath() + "/De-bloater");
         Utils.delete(Common.getModuleParent());
-        sUtils.saveBoolean("tomatot_extreme", false, activity);
-        sUtils.saveBoolean("tomatot_invisible", false, activity);
-        sUtils.saveBoolean("tomatot_light", false, activity);
+        sCommonUtils.saveBoolean("tomatot_extreme", false, activity);
+        sCommonUtils.saveBoolean("tomatot_invisible", false, activity);
+        sCommonUtils.saveBoolean("tomatot_light", false, activity);
     }
 
     public static boolean isModuleInitialized() {
@@ -177,7 +176,7 @@ public class PackageTasks {
 
     public static void setToDelete(String path, String name, Context context) {
         initializeModule();
-        sUtils.mkdir(new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()));
+        sFileUtils.mkdir(new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()));
         Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
         Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", Common.getModuleParent());
         Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");

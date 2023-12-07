@@ -25,10 +25,11 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sCreditsUtils;
-import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
-import in.sunilpaulmathew.sCommon.Utils.sTranslatorUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sSerializableItems;
+import in.sunilpaulmathew.sCommon.Credits.sCreditsUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
+import in.sunilpaulmathew.sCommon.TranslatorUtils.sTranslatorUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 03, 2021
@@ -53,7 +54,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull AboutAdapter.ViewHolder holder, int position) {
         holder.Title.setText(this.data.get(position).getTextOne());
-        if (sUtils.isDarkTheme(holder.Title.getContext())) {
+        if (sThemeUtils.isDarkTheme(holder.Title.getContext())) {
             holder.Title.setTextColor(Utils.getThemeAccentColor(holder.Title.getContext()));
         } else if (position != 0 && !this.data.get(position).getTextOne().equals(holder.Title.getContext()
                 .getString(R.string.fdroid)) && !this.data.get(position).getTextTwo().equals(holder.Title
@@ -64,7 +65,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
         holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
         holder.mRVLayout.setOnClickListener(v -> {
             if (this.data.get(position).getTextThree() != null) {
-                sUtils.launchUrl(this.data.get(position).getTextThree(), (Activity) holder.mRVLayout.getContext());
+                sCommonUtils.launchUrl(this.data.get(position).getTextThree(), (Activity) holder.mRVLayout.getContext());
             } else if (position == 0) {
                 Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -82,9 +83,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
                         (Activity) v.getContext()).show();
             } else if (position == 9) {
                 new sCreditsUtils(Common.getCredits(),
-                        sUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
-                        sUtils.getDrawable(R.drawable.ic_back, v.getContext()),
-                        sUtils.getColor(R.color.ColorBlue, v.getContext()),
+                        sCommonUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
+                        sCommonUtils.getDrawable(R.drawable.ic_back, v.getContext()),
+                        sCommonUtils.getColor(R.color.ColorBlue, v.getContext()),
                         20, v.getContext().getString(R.string.app_name), "2021-2022, sunilpaulmathew",
                         BuildConfig.VERSION_NAME).launchCredits(v.getContext());
             } else if (position == 10) {

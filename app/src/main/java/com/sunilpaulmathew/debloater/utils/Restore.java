@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.JsonUtils.sJSONUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 17, 2020

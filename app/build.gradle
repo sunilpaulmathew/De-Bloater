@@ -14,14 +14,13 @@ android {
         }
     }
 
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    compileSdk 34
     namespace 'com.sunilpaulmathew.debloater'
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdkVersion 33
+        targetSdk 34
         versionCode 26
         versionName "v0.26"
         vectorDrawables.useSupportLibrary = true
@@ -41,14 +40,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
     lint {
         abortOnError false
     }
 }
 
 dependencies {
-    implementation 'com.github.sunilpaulmathew:RootFilePicker:c918e8fad0'
-    implementation 'com.github.sunilpaulmathew:sCommon:241ad35be0'
+    implementation 'com.github.sunilpaulmathew:RootFilePicker:802663ee90'
+
+    def sCommon_Version = '8c5666a002'
+    implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:apkutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:fileutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:jsonutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:packageutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:permissionutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:themeutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
+
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.10.0'
 }

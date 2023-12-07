@@ -15,8 +15,8 @@ import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 1, 2020
@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
         MaterialTextView mWarning = findViewById(R.id.warning);
         ProgressBar mProgress = findViewById(R.id.progress);
 
-        if (!sUtils.getBoolean("warning_message", false, this)) {
+        if (!sCommonUtils.getBoolean("warning_message", false, this)) {
             mProgress.setVisibility(View.GONE);
             mWarning.setVisibility(View.VISIBLE);
             mStartCard.setVisibility(View.VISIBLE);
@@ -54,8 +54,8 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onPreExecute() {
-                if (!sUtils.getBoolean("warning_message", false, activity)) {
-                    sUtils.saveBoolean("warning_message", true, activity);
+                if (!sCommonUtils.getBoolean("warning_message", false, activity)) {
+                    sCommonUtils.saveBoolean("warning_message", true, activity);
                 }
             }
 

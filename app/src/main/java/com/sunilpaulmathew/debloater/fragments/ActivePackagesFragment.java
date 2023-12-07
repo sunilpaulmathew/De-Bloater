@@ -32,8 +32,8 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -68,7 +68,7 @@ public class ActivePackagesFragment extends Fragment {
         Common.getAboutSummary().setText(getString(R.string.active_app_summary));
         mReverse.setElevation(10);
         mReverse.setOnClickListener(v -> {
-            sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
+            sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
             loadUI(requireActivity());
         });
 
@@ -100,29 +100,29 @@ public class ActivePackagesFragment extends Fragment {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = sUtils.getString("appTypes", "all", requireActivity());
+                String mStatus = sCommonUtils.getString("appTypes", "all", requireActivity());
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("all")) {
-                            sUtils.saveString("appTypes", "all", requireActivity());
+                            sCommonUtils.saveString("appTypes", "all", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("system")) {
-                            sUtils.saveString("appTypes", "system", requireActivity());
+                            sCommonUtils.saveString("appTypes", "system", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 2:
                         if (!mStatus.equals("product")) {
-                            sUtils.saveString("appTypes", "product", requireActivity());
+                            sCommonUtils.saveString("appTypes", "product", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 3:
                         if (!mStatus.equals("vendor")) {
-                            sUtils.saveString("appTypes", "vendor", requireActivity());
+                            sCommonUtils.saveString("appTypes", "vendor", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
@@ -162,7 +162,7 @@ public class ActivePackagesFragment extends Fragment {
     }
 
     private int getTabPosition(Activity activity) {
-        String mStatus = sUtils.getString("appTypes", "all", activity);
+        String mStatus = sCommonUtils.getString("appTypes", "all", activity);
         switch (mStatus) {
             case "vendor":
                 return 3;
@@ -183,9 +183,9 @@ public class ActivePackagesFragment extends Fragment {
         }
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(0, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(sUtils.getBoolean("sort_name", false, activity));
+                .setChecked(sCommonUtils.getBoolean("sort_name", false, activity));
         sort.add(0, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(sUtils.getBoolean("sort_id", true, activity));
+                .setChecked(sCommonUtils.getBoolean("sort_id", true, activity));
         sort.setGroupCheckable(0, true, true);
         SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
         customScripts.add(Menu.NONE, 4, Menu.NONE, R.string.custom_scripts_tomatot);
@@ -199,16 +199,16 @@ public class ActivePackagesFragment extends Fragment {
                     PackageTasks.removeModule(activity);
                     break;
                 case 2:
-                    if (!sUtils.getBoolean("sort_name", false, activity)) {
-                        sUtils.saveBoolean("sort_name", true, activity);
-                        sUtils.saveBoolean("sort_id", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_name", false, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", true, activity);
+                        sCommonUtils.saveBoolean("sort_id", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    if (!sUtils.getBoolean("sort_id", true, activity)) {
-                        sUtils.saveBoolean("sort_id", true, activity);
-                        sUtils.saveBoolean("sort_name", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_id", true, activity)) {
+                        sCommonUtils.saveBoolean("sort_id", true, activity);
+                        sCommonUtils.saveBoolean("sort_name", false, activity);
                         loadUI(activity);
                     }
                     break;

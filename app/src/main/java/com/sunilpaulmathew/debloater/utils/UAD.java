@@ -7,8 +7,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2021
@@ -1436,7 +1436,7 @@ public class UAD {
     }
 
     public static void applyScript(String path, Activity activity) {
-        String script = sUtils.getString("setDefault", null, activity);
+        String script = sCommonUtils.getString("setDefault", null, activity);
         if (Utils.exist(path)) {
             switch (script) {
                 case "aosp":

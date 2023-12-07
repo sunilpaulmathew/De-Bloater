@@ -20,8 +20,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
@@ -44,8 +44,8 @@ public class Utils {
     }
 
     public static int getSpanCount(Activity activity) {
-        return sUtils.isTablet(activity) ? sUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ?
-                4 : 3 : sUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
+        return sCommonUtils.isTablet(activity) ? sCommonUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ?
+                4 : 3 : sCommonUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
     }
 
     public static boolean rootAccess() {

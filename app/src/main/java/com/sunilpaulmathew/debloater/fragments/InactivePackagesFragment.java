@@ -1,5 +1,6 @@
 package com.sunilpaulmathew.debloater.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,8 +43,8 @@ import org.json.JSONObject;
 import java.io.File;
 
 import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
@@ -187,7 +188,7 @@ public class InactivePackagesFragment extends Fragment {
                             }
                         }.show();
                     } else {
-                        sUtils.snackBar(mRecyclerView, getString(R.string.backup_list_empty)).show();
+                        sCommonUtils.snackBar(mRecyclerView, getString(R.string.backup_list_empty)).show();
                     }
                     break;
                 case 3:
@@ -226,13 +227,14 @@ public class InactivePackagesFragment extends Fragment {
         }.execute();
     }
 
+    @SuppressLint("StringFormatInvalid")
     ActivityResultLauncher<Intent> restoreResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     File mSelectedFile = FilePicker.getSelectedFile();
                     if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
-                        sUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
+                        sCommonUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
                         return;
                     }
                     new MaterialAlertDialogBuilder(requireActivity())

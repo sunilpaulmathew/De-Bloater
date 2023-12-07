@@ -27,8 +27,9 @@ import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.UAD;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 26, 2021
@@ -63,7 +64,7 @@ public class UADFragment extends Fragment {
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        if (sUtils.isDarkTheme(requireActivity())) {
+        if (sThemeUtils.isDarkTheme(requireActivity())) {
             mActionMessage.setTextColor(Utils.getThemeAccentColor(requireActivity()));
             mActionIcon.setColorFilter(Utils.getThemeAccentColor(requireActivity()));
             mAppsListTitle.setTextColor(Utils.getThemeAccentColor(requireActivity()));
@@ -122,7 +123,7 @@ public class UADFragment extends Fragment {
 
         setStatus();
 
-        mTitleLayout.setOnClickListener(v -> sUtils.launchUrl( "https://gitlab.com/W1nst0n/universal-android-debloater",
+        mTitleLayout.setOnClickListener(v -> sCommonUtils.launchUrl( "https://gitlab.com/W1nst0n/universal-android-debloater",
                 requireActivity()));
 
         mActionLayout.setOnClickListener(v ->
@@ -206,105 +207,105 @@ public class UADFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    sUtils.saveString("setDefault", "aosp", activity);
+                    sCommonUtils.saveString("setDefault", "aosp", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAOSP());
                     mTitle = getString(R.string.aosp);
                     setStatus();
                     break;
                 case 1:
-                    sUtils.saveString("setDefault", "google", activity);
+                    sCommonUtils.saveString("setDefault", "google", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_google";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getGoogle());
                     mTitle = getString(R.string.google);
                     setStatus();
                     break;
                 case 2:
-                    sUtils.saveString("setDefault", "oneplus", activity);
+                    sCommonUtils.saveString("setDefault", "oneplus", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOnePlus());
                     mTitle = getString(R.string.oneplus);
                     setStatus();
                     break;
                 case 3:
-                    sUtils.saveString("setDefault", "asus", activity);
+                    sCommonUtils.saveString("setDefault", "asus", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAsus());
                     mTitle = getString(R.string.asus);
                     setStatus();
                     break;
                 case 4:
-                    sUtils.saveString("setDefault", "huawei", activity);
+                    sCommonUtils.saveString("setDefault", "huawei", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_huawei";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getHuawei());
                     mTitle = getString(R.string.huawei);
                     setStatus();
                     break;
                 case 5:
-                    sUtils.saveString("setDefault", "lg", activity);
+                    sCommonUtils.saveString("setDefault", "lg", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_lg";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getLG());
                     mTitle = getString(R.string.lg);
                     setStatus();
                     break;
                 case 6:
-                    sUtils.saveString("setDefault", "samsung", activity);
+                    sCommonUtils.saveString("setDefault", "samsung", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_samsung";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSamsung());
                     mTitle = getString(R.string.samsung);
                     setStatus();
                     break;
                 case 7:
-                    sUtils.saveString("setDefault", "motorola", activity);
+                    sCommonUtils.saveString("setDefault", "motorola", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_motorola";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMoto());
                     mTitle = getString(R.string.motorola);
                     setStatus();
                     break;
                 case 8:
-                    sUtils.saveString("setDefault", "nokia", activity);
+                    sCommonUtils.saveString("setDefault", "nokia", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_nokia";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getNokia());
                     mTitle = getString(R.string.nokia);
                     setStatus();
                     break;
                 case 9:
-                    sUtils.saveString("setDefault", "oppo", activity);
+                    sCommonUtils.saveString("setDefault", "oppo", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_oppo";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOppo());
                     mTitle = getString(R.string.oppo);
                     setStatus();
                     break;
                 case 10:
-                    sUtils.saveString("setDefault", "sony", activity);
+                    sCommonUtils.saveString("setDefault", "sony", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_sony";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSony());
                     mTitle = getString(R.string.sony);
                     setStatus();
                     break;
                 case 11:
-                    sUtils.saveString("setDefault", "xiaomi", activity);
+                    sCommonUtils.saveString("setDefault", "xiaomi", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_xiaomi";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getXiaomi());
                     mTitle = getString(R.string.xiaomi);
                     setStatus();
                     break;
                 case 12:
-                    sUtils.saveString("setDefault", "zte", activity);
+                    sCommonUtils.saveString("setDefault", "zte", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_zte";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getZTE());
                     mTitle = getString(R.string.zte);
                     setStatus();
                     break;
                 case 13:
-                    sUtils.saveString("setDefault", "carrier", activity);
+                    sCommonUtils.saveString("setDefault", "carrier", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_carrier";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getCarrier());
                     mTitle = getString(R.string.carrier);
                     setStatus();
                     break;
                 case 14:
-                    sUtils.saveString("setDefault", "misc", activity);
+                    sCommonUtils.saveString("setDefault", "misc", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_misc";
                     mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMisc());
                     mTitle = getString(R.string.miscellaneous);

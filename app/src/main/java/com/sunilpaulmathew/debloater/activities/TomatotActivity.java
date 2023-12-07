@@ -13,8 +13,8 @@ import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.fragments.TomatotDebloaterFragment;
 import com.sunilpaulmathew.debloater.utils.Tomatot;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 4, 2020
@@ -35,7 +35,7 @@ public class TomatotActivity extends AppCompatActivity {
 
             @Override
             public void onPreExecute() {
-                if (sUtils.isDarkTheme(TomatotActivity.this)) {
+                if (sThemeUtils.isDarkTheme(TomatotActivity.this)) {
                     mLinearLayout.setBackgroundColor(Color.BLACK);
                 } else {
                     mLinearLayout.setBackgroundColor(Color.WHITE);

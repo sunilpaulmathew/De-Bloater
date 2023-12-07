@@ -20,9 +20,9 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             mExit = false;
             super.onBackPressed();
         } else {
-            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit)).show();
+            sCommonUtils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit)).show();
             mExit = true;
             mHandler.postDelayed(() -> mExit = false, 2000);
         }

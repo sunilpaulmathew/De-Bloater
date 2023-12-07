@@ -18,7 +18,8 @@ import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 03, 2021
@@ -43,17 +44,18 @@ public class InactivePackagesAdapter extends RecyclerView.Adapter<InactivePackag
     @Override
     public void onBindViewHolder(@NonNull InactivePackagesAdapter.ViewHolder holder, int position) {
         holder.appName.setText(Utils.read(this.data.get(position)));
-        if (sUtils.isDarkTheme(holder.appName.getContext())) {
+        if (sThemeUtils.isDarkTheme(holder.appName.getContext())) {
             holder.appName.setTextColor(Utils.getThemeAccentColor(holder.appName.getContext()));
         }
         holder.appID.setText(this.data.get(position).replace(Common.getModuleParent(),""));
-        holder.appIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_android, holder.appIcon.getContext()));
+        holder.appIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_android, holder.appIcon.getContext()));
         holder.appIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
         holder.statusMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.RED : Color.GREEN);
         holder.actionMessage.setTextColor(Utils.exist(this.data.get(position)) ? Color.GREEN : Color.RED);
         holder.actionIcon.setColorFilter(Utils.exist(this.data.get(position)) ? Color.GREEN : Color.RED);
         holder.actionMessage.setText(Utils.exist(this.data.get(position)) ? holder.actionMessage.getContext().getString(R.string.restore) : holder.actionMessage.getContext().getString(R.string.remove));
-        holder.actionIcon.setImageDrawable(Utils.exist(this.data.get(position)) ? sUtils.getDrawable(R.drawable.ic_restore, holder.actionMessage.getContext()) : sUtils.getDrawable(R.drawable.ic_delete, holder.actionMessage.getContext()));
+        holder.actionIcon.setImageDrawable(Utils.exist(this.data.get(position)) ? sCommonUtils.getDrawable(R.drawable.ic_restore,
+                holder.actionMessage.getContext()) : sCommonUtils.getDrawable(R.drawable.ic_delete, holder.actionMessage.getContext()));
         holder.statusMessage.setText(Utils.exist(this.data.get(position)) ? null : holder.statusMessage.getContext().getString(R.string.status_message_restore));
         holder.statusMessage.setVisibility(Utils.exist(this.data.get(position)) ? View.GONE : View.VISIBLE);
         holder.actionLayout.setOnClickListener(v -> {

@@ -29,10 +29,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.JsonUtils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 31, 2020
@@ -102,7 +102,7 @@ public class UpdateCheck {
                         sPermissionUtils.requestPermission(new String[] {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE
                         }, activity);
-                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied)).show();
+                        sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.storage_access_denied)).show();
                         return;
                     }
                     updaterTask(activity);
@@ -184,7 +184,7 @@ public class UpdateCheck {
             public void onPostExecute() {
                 if (isManualUpdate()) {
                     if (mJSONObject == null) {
-                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet)).show();
+                        sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet)).show();
                         return;
                     }
                     if (isUpdateAvailable()) {

@@ -13,7 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
+import in.sunilpaulmathew.sCommon.CommonUtils.sSerializableItems;
 
 public class Common {
 
