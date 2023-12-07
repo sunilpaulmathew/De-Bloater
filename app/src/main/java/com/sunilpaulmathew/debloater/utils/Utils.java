@@ -17,7 +17,6 @@ import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class Utils {
     }
 
     public static boolean magiskSupported() {
-        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk");
+        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || Utils.exist("/data/adb/ksu/bin/busybox");
     }
 
     public static int getThemeAccentColor(Context context) {
@@ -115,7 +114,7 @@ public class Utils {
 
     static void download(String path, String url) {
         try (InputStream input = new URL(url).openStream();
-             OutputStream output = new FileOutputStream(path)) {
+             FileOutputStream output = new FileOutputStream(path)) {
             byte[] data = new byte[4096];
             int count;
             while ((count = input.read(data)) != -1) {
@@ -140,6 +139,8 @@ public class Utils {
     public static String magiskBusyBox() {
         if (Utils.exist("/data/adb/magisk/busybox")) {
             return "/data/adb/magisk/busybox ";
+        } else if (Utils.exist("/data/adb/ksu/bin/busybox")) {
+            return "/data/adb/ksu/bin/busybox ";
         } else {
             return "";
         }
