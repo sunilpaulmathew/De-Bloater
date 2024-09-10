@@ -1,0 +1,279 @@
+{
+  "Device": {
+    "Manufacturer": "Xiaomi",
+    "Brand": "Redmi",
+    "Model": "23108RN04Y",
+    "Version": "14",
+    "SDK": 34
+  },
+  "DeBloater": [
+    {
+      "name": "Sensor Test Tool",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Longcheer_SensorTestTool/Longcheer_SensorTestTool.apk"
+    },
+    {
+      "name": "Xiaomi Cloud",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MIUICloudServiceGlobal/MIUICloudServiceGlobal.apk"
+    },
+    {
+      "name": "MiCloudSync",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MIUIMiCloudSync/MIUIMiCloudSync.apk"
+    },
+    {
+      "name": "Häufige Sätze",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MIUIFrequentPhrase/MIUIFrequentPhrase.apk"
+    },
+    {
+      "name": "Mi Coin",
+      "path": "/data/adb/modules/De-bloater/system/product/app/PaymentService_Global/PaymentService_Global.apk"
+    },
+    {
+      "name": "Game Center",
+      "path": "/data/adb/modules/De-bloater/system/product/app/GameCenterGlobal/GameCenterGlobal.apk"
+    },
+    {
+      "name": "Drive",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Drive/Drive.apk"
+    },
+    {
+      "name": "Fotos",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Photos/Photos.apk"
+    },
+    {
+      "name": "Google One",
+      "path": "/data/adb/modules/De-bloater/system/product/app/GoogleOne_arm64/GoogleOne_arm64.apk"
+    },
+    {
+      "name": "Meet",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Meet/Meet.apk"
+    },
+    {
+      "name": "YouTube Music",
+      "path": "/data/adb/modules/De-bloater/system/product/app/YTMusic/YTMusic.apk"
+    },
+    {
+      "name": "Android für Barrierefreiheit",
+      "path": "/data/adb/modules/De-bloater/system/product/app/talkback/talkback.apk"
+    },
+    {
+      "name": "Google Kalender-Synchronisierung",
+      "path": "/data/adb/modules/De-bloater/system/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk"
+    },
+    {
+      "name": "Spracherkennung und -Synthese von Google",
+      "path": "/data/adb/modules/De-bloater/system/product/app/SpeechRecognitionAndSynthesisFromGoogle/SpeechRecognitionAndSynthesisFromGoogle.apk"
+    },
+    {
+      "name": "Google TV",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Videos/Videos.apk"
+    },
+    {
+      "name": "YouTube",
+      "path": "/data/adb/modules/De-bloater/system/product/app/YouTube/YouTube.apk"
+    },
+    {
+      "name": "Gmail",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Gmail2/Gmail2.apk"
+    },
+    {
+      "name": "Interkonnektivität-Dienste",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MiLinkGlobal/MiLinkGlobal.apk"
+    },
+    {
+      "name": "FM-Radiodienst",
+      "path": "/data/adb/modules/De-bloater/system/product/app/FmServiceMtk/FmServiceMtk.apk"
+    },
+    {
+      "name": "UKW-Radio",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MIRadioGlobal/MIRadioGlobal.apk"
+    },
+    {
+      "name": "Analytics",
+      "path": "/data/adb/modules/De-bloater/system/product/app/AnalyticsCore/AnalyticsCore.apk"
+    },
+    {
+      "name": "Xiaomi SIM-Aktivierungsdienst",
+      "path": "/data/adb/modules/De-bloater/system/product/app/SimActivateServiceGlobal/SimActivateServiceGlobal.apk"
+    },
+    {
+      "name": "Feedback",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MiuiBugReportGlobal/MiuiBugReportGlobal.apk"
+    },
+    {
+      "name": "Biometric",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Biometric/Biometric.apk"
+    },
+    {
+      "name": "Google-Standortverlauf",
+      "path": "/data/adb/modules/De-bloater/system/product/app/GoogleLocationHistory/GoogleLocationHistory.apk"
+    },
+    {
+      "name": "Fingerpirnt test",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Longcheer_GFTest/Longcheer_GFTest.apk"
+    },
+    {
+      "name": "Schalterzugriff",
+      "path": "/data/adb/modules/De-bloater/system/product/app/SwitchAccess/SwitchAccess.apk"
+    },
+    {
+      "name": "silead manager",
+      "path": "/data/adb/modules/De-bloater/system/product/app/Longcheer_sileadManager/Longcheer_sileadManager.apk"
+    },
+    {
+      "name": "GetApps",
+      "path": "/data/adb/modules/De-bloater/system/product/app/MIUIMiPicks/MIUIMiPicks.apk"
+    },
+    {
+      "name": "Cloud-Sicherung",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIUICloudBackupGlobal/MIUICloudBackupGlobal.apk"
+    },
+    {
+      "name": "Musik",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIUIMusicGlobal/MIUIMusicGlobal.apk"
+    },
+    {
+      "name": "Branchenverzeichnis",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIUIYellowPageGlobal/MIUIYellowPageGlobal.apk"
+    },
+    {
+      "name": "Tool zur Datenwiederherstellung",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/GoogleRestore/GoogleRestore.apk"
+    },
+    {
+      "name": "Digital Wellbeing",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/Wellbeing/Wellbeing.apk"
+    },
+    {
+      "name": "ConfigUpdater",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/ConfigUpdater/ConfigUpdater.apk"
+    },
+    {
+      "name": "Google",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/Velvet/Velvet.apk"
+    },
+    {
+      "name": "Google One Time Init",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/GoogleOneTimeInitializer/GoogleOneTimeInitializer.apk"
+    },
+    {
+      "name": "Android Auto",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/AndroidAutoStub/AndroidAutoStub.apk"
+    },
+    {
+      "name": "Info-Assistent",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIUIGlobalMinusScreenWidget/MIUIGlobalMinusScreenWidget.apk"
+    },
+    {
+      "name": "Mi Browser",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIBrowserGlobal_builtin_before_2021/MIBrowserGlobal_builtin_before_2021.apk"
+    },
+    {
+      "name": "Persönliche Sicherheit",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/PersonalSafety/PersonalSafety.apk"
+    },
+    {
+      "name": "Services und Feedback",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/MIServiceGlobal/MIServiceGlobal.apk"
+    },
+    {
+      "name": "Sicherung",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/Backup/Backup.apk"
+    },
+    {
+      "name": "Device Health Services",
+      "path": "/data/adb/modules/De-bloater/system/product/priv-app/Turbo/Turbo.apk"
+    },
+    {
+      "name": "Market Feedback Agent",
+      "path": "/data/adb/modules/De-bloater/system/system_ext/priv-app/GoogleFeedback/GoogleFeedback.apk"
+    },
+    {
+      "name": "Android-Einrichtung",
+      "path": "/data/adb/modules/De-bloater/system/system_ext/priv-app/SetupWizard/SetupWizard.apk"
+    },
+    {
+      "name": "Gerätesuche",
+      "path": "/data/adb/modules/De-bloater/system/system_ext/priv-app/FindDevice/FindDevice.apk"
+    },
+    {
+      "name": "Rueban(MTB)V6.6.20231228",
+      "path": "/data/adb/modules/De-bloater/system/system_ext/app/ModemTestBox/ModemTestBox.apk"
+    },
+    {
+      "name": "Print Service Recommendation Service",
+      "path": "/data/adb/modules/De-bloater/system/app/GooglePrintRecommendationService/GooglePrintRecommendationService.apk"
+    },
+    {
+      "name": "Bookmark Provider",
+      "path": "/data/adb/modules/De-bloater/system/app/BookmarkProvider/BookmarkProvider.apk"
+    },
+    {
+      "name": "Android Easter Egg",
+      "path": "/data/adb/modules/De-bloater/system/app/EasterEgg/EasterEgg.apk"
+    },
+    {
+      "name": "com.android.providers.partnerbookmarks",
+      "path": "/data/adb/modules/De-bloater/system/app/PartnerBookmarksProvider/PartnerBookmarksProvider.apk"
+    },
+    {
+      "name": "Kommunikation mit Mobilfunkanbieter",
+      "path": "/data/adb/modules/De-bloater/system/app/CarrierDefaultApp/CarrierDefaultApp.apk"
+    },
+    {
+      "name": "Basic Daydreams",
+      "path": "/data/adb/modules/De-bloater/system/app/BasicDreams/BasicDreams.apk"
+    },
+    {
+      "name": "Ablaufverfolgung",
+      "path": "/data/adb/modules/De-bloater/system/app/Traceur/Traceur.apk"
+    },
+    {
+      "name": "Meta App Manager",
+      "path": "/data/adb/modules/De-bloater/system/app/facebook-appmanager/facebook-appmanager.apk"
+    },
+    {
+      "name": "Anmeldung über Captive Portal",
+      "path": "/data/adb/modules/De-bloater/system/app/CaptivePortalLoginGoogle/CaptivePortalLoginGoogle.apk"
+    },
+    {
+      "name": "com.android.wallpaperbackup",
+      "path": "/data/adb/modules/De-bloater/system/app/WallpaperBackup/WallpaperBackup.apk"
+    },
+    {
+      "name": "com.android.stk",
+      "path": "/data/adb/modules/De-bloater/system/app/Stk/Stk.apk"
+    },
+    {
+      "name": "System-Druckservice",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/BuiltInPrintService/BuiltInPrintService.apk"
+    },
+    {
+      "name": "Einrichtung des Arbeitsprofils",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/ManagedProvisioning/ManagedProvisioning.apk"
+    },
+    {
+      "name": "Live-Hintergrund-Auswahl",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LiveWallpapersPicker/LiveWallpapersPicker.apk"
+    },
+    {
+      "name": "Meta App Installer",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/facebook-installer/facebook-installer.apk"
+    },
+    {
+      "name": "Meta Services",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/facebook-services/facebook-services.apk"
+    },
+    {
+      "name": "com.android.sharedstoragebackup",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/SharedStorageBackup/SharedStorageBackup.apk"
+    },
+    {
+      "name": "Call Log Backup/Restore",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/CallLogBackup/CallLogBackup.apk"
+    },
+    {
+      "name": "com.android.backupconfirm",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/BackupRestoreConfirmation/BackupRestoreConfirmation.apk"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+* Kernel SU support.
+* More materialized app UI.
+* Updated other translations.
+* Updated build tools and dependencies.
+* Miscellaneous changes.
