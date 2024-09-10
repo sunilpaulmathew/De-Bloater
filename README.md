@@ -60,6 +60,7 @@ If you like to appreciate my work, please consider donating to me (either via [L
 ## Credits
 * [Grarak](https://github.com/Grarak/), Code contributions (I took some code from [Kernel Adiutor](https://github.com/Grarak/KernelAdiutor/))
 * [John Wu](https://github.com/topjohnwu), libsu & Magisk
+* [weishu](https://github.com/tiann), KernelSU
 * [MONSTER_PC](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
 * [Emre](https://t.me/xcooLwastaken), Turkish Translations
 * [Firerust96](https://github.com/Firerust96), Spanish Translations

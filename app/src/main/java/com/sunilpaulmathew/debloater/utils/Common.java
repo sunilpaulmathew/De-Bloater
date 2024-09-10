@@ -132,6 +132,7 @@ public class Common {
         List<sSerializableItems> mData = new ArrayList<>();
         mData.add(new sSerializableItems(null, "Willi Ye", "Kernel Adiutor", "https://github.com/Grarak/KernelAdiutor"));
         mData.add(new sSerializableItems(null, "John Wu", "libsu & Magisk", "https://github.com/topjohnwu"));
+        mData.add(new sSerializableItems(null, "weishu", "KernelSU", "https://github.com/tiann"));
         mData.add(new sSerializableItems(null, "Nikita", "Russian & Ukrainian Translations", "https://t.me/MONSTER_PC"));
         mData.add(new sSerializableItems(null, "Emre", "Turkish Translations", "https://t.me/xcooLwastaken"));
         mData.add(new sSerializableItems(null, "Firerust96", "Spanish Translations", "https://github.com/Firerust96"));
