@@ -1,0 +1,9 @@
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.DynamicColors.Light">
+        <item name="android:statusBarColor">@color/colorBlack</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorSecondary">@color/ColorBlue</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

@@ -23,8 +23,6 @@
                     android:gravity="center"
                     android:padding="10dp" />
 
-                <View style="@style/Divider"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,8 +73,6 @@
                                     android:focusable="true" />
                         </LinearLayout>
                 </LinearLayout>
-
-                <View style="@style/Divider"/>
 
                 <FrameLayout
                     android:id="@+id/action_layout"

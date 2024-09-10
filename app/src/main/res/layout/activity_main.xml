@@ -32,6 +32,7 @@
         android:layout_height="75dp"
         app:itemIconTint="@color/ColorBlue"
         app:itemTextColor="@color/ColorBlue"
+        app:itemActiveIndicatorStyle="@null"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
