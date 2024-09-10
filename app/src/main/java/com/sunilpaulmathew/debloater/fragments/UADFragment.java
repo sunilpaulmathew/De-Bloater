@@ -159,49 +159,49 @@ public class UADFragment extends Fragment {
     private void selectionMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(requireActivity(), mSelectIcon);
         Menu menu = popupMenu.getMenu();
-        if (Common.getAOSP().size() > 0 || Utils.exist("uad_aosp")) {
+        if (!Common.getAOSP().isEmpty() || Utils.exist("uad_aosp")) {
             menu.add(Menu.NONE, 0, Menu.NONE, R.string.aosp);
         }
-        if (Common.getGoogle().size() > 0 || Utils.exist("uad_google")) {
+        if (!Common.getGoogle().isEmpty() || Utils.exist("uad_google")) {
             menu.add(Menu.NONE, 1, Menu.NONE, R.string.google);
         }
-        if (Common.getOnePlus().size() > 0 || Utils.exist("uad_oneplus")) {
+        if (!Common.getOnePlus().isEmpty() || Utils.exist("uad_oneplus")) {
             menu.add(Menu.NONE, 2, Menu.NONE, R.string.oneplus);
         }
-        if (Common.getAsus().size() > 0 || Utils.exist("uad_asus")) {
+        if (!Common.getAsus().isEmpty() || Utils.exist("uad_asus")) {
             menu.add(Menu.NONE, 3, Menu.NONE, R.string.asus);
         }
-        if (Common.getHuawei().size() > 0 || Utils.exist("uad_huawei")) {
+        if (!Common.getHuawei().isEmpty() || Utils.exist("uad_huawei")) {
             menu.add(Menu.NONE, 4, Menu.NONE, R.string.huawei);
         }
-        if (Common.getLG().size() > 0 || Utils.exist("uad_lg")) {
+        if (!Common.getLG().isEmpty() || Utils.exist("uad_lg")) {
             menu.add(Menu.NONE, 5, Menu.NONE, R.string.lg);
         }
-        if (Common.getSamsung().size() > 0 || Utils.exist("uad_samsung")) {
+        if (!Common.getSamsung().isEmpty() || Utils.exist("uad_samsung")) {
             menu.add(Menu.NONE, 6, Menu.NONE, R.string.samsung);
         }
-        if (Common.getMoto().size() > 0 || Utils.exist("uad_motorola")) {
+        if (!Common.getMoto().isEmpty() || Utils.exist("uad_motorola")) {
             menu.add(Menu.NONE, 7, Menu.NONE, R.string.motorola);
         }
-        if (Common.getNokia().size() > 0 || Utils.exist("uad_nokia")) {
+        if (!Common.getNokia().isEmpty() || Utils.exist("uad_nokia")) {
             menu.add(Menu.NONE, 8, Menu.NONE, R.string.nokia);
         }
-        if (Common.getOppo().size() > 0 || Utils.exist("uad_oppo")) {
+        if (!Common.getOppo().isEmpty() || Utils.exist("uad_oppo")) {
             menu.add(Menu.NONE, 9, Menu.NONE, R.string.oppo);
         }
-        if (Common.getSony().size() > 0 || Utils.exist("uad_sony")) {
+        if (!Common.getSony().isEmpty() || Utils.exist("uad_sony")) {
             menu.add(Menu.NONE, 10, Menu.NONE, R.string.sony);
         }
-        if (Common.getXiaomi().size() > 0 || Utils.exist("uad_xiaomi")) {
+        if (!Common.getXiaomi().isEmpty() || Utils.exist("uad_xiaomi")) {
             menu.add(Menu.NONE, 11, Menu.NONE, R.string.xiaomi);
         }
-        if (Common.getZTE().size() > 0 || Utils.exist("uad_zte")) {
+        if (!Common.getZTE().isEmpty() || Utils.exist("uad_zte")) {
             menu.add(Menu.NONE, 12, Menu.NONE, R.string.zte);
         }
-        if (Common.getCarrier().size() > 0 || Utils.exist("uad_carrier")) {
+        if (!Common.getCarrier().isEmpty() || Utils.exist("uad_carrier")) {
             menu.add(Menu.NONE, 13, Menu.NONE, R.string.carrier);
         }
-        if (Common.getMisc().size() > 0 || Utils.exist("uad_misc")) {
+        if (!Common.getMisc().isEmpty() || Utils.exist("uad_misc")) {
             menu.add(Menu.NONE, 14, Menu.NONE, R.string.miscellaneous);
         }
         popupMenu.setOnMenuItemClickListener(item -> {

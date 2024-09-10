@@ -1,6 +1,5 @@
 package com.sunilpaulmathew.debloater.utils;
 
-import android.content.Context;
 import android.os.Build;
 
 import org.json.JSONArray;
@@ -52,7 +51,7 @@ public class Restore {
         return Objects.equals(getModel(Utils.read(path)), Build.MODEL) && getSDK(Utils.read(path)) == Build.VERSION.SDK_INT;
     }
 
-    public static void restoreBackup(String path, Context context) {
+    public static void restoreBackup(String path) {
         List<String> mRestoreData = new ArrayList<>();
         if (Utils.exist(path)) {
             for (int i = 0; i < Objects.requireNonNull(getAppList(Utils.read(path))).length(); i++) {
@@ -64,7 +63,7 @@ public class Restore {
         }
         for (String s : mRestoreData) {
             if (Utils.exist(Objects.requireNonNull(getPath(s)).replace("/data/adb/modules/De-bloater",""))) {
-                PackageTasks.setToDelete(Objects.requireNonNull(getPath(s)).replace("/data/adb/modules/De-bloater",""), getName(s), context);
+                PackageTasks.setToDelete(Objects.requireNonNull(getPath(s)).replace("/data/adb/modules/De-bloater",""), getName(s));
             }
         }
     }

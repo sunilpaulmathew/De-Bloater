@@ -135,7 +135,7 @@ public class InactivePackagesFragment extends Fragment {
                     Utils.runCommand("svc power reboot");
                     break;
                 case 2:
-                    if (PackageTasks.getInactivePackageData().size() > 0) {
+                    if (!PackageTasks.getInactivePackageData().isEmpty()) {
                         new EditTextInterface(Build.MODEL.replace(" ","_")
                                 .replace("(","_").replace(")","_") + "_" +
                                 Build.VERSION.SDK_INT, getString(R.string.backup_list_as), activity) {
@@ -253,7 +253,7 @@ public class InactivePackagesFragment extends Fragment {
 
                                         @Override
                                         public void doInBackground() {
-                                            Restore.restoreBackup(mSelectedFile.getAbsolutePath(), requireActivity());
+                                            Restore.restoreBackup(mSelectedFile.getAbsolutePath());
                                         }
 
                                         @Override

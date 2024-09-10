@@ -1488,59 +1488,59 @@ public class UAD {
         } else {
             switch (script) {
                 case "aosp":
-                    enable("uad_aosp", Common.getAOSP(), activity);
+                    enable("uad_aosp", Common.getAOSP());
                     break;
                 case "oneplus":
-                    enable("uad_oneplus", Common.getOnePlus(), activity);
+                    enable("uad_oneplus", Common.getOnePlus());
                     break;
                 case "asus":
-                    enable("uad_asus", Common.getAsus(), activity);
+                    enable("uad_asus", Common.getAsus());
                     break;
                 case "carrier":
-                    enable("uad_carrier", Common.getCarrier(), activity);
+                    enable("uad_carrier", Common.getCarrier());
                     break;
                 case "huawei":
-                    enable("uad_huawei", Common.getHuawei(), activity);
+                    enable("uad_huawei", Common.getHuawei());
                     break;
                 case "lg":
-                    enable("uad_lg", Common.getLG(), activity);
+                    enable("uad_lg", Common.getLG());
                     break;
                 case "samsung":
-                    enable("uad_samsung", Common.getSamsung(), activity);
+                    enable("uad_samsung", Common.getSamsung());
                     break;
                 case "motorola":
-                    enable("uad_motorola", Common.getMoto(), activity);
+                    enable("uad_motorola", Common.getMoto());
                     break;
                 case "nokia":
-                    enable("uad_nokia", Common.getNokia(), activity);
+                    enable("uad_nokia", Common.getNokia());
                     break;
                 case "oppo":
-                    enable("uad_oppo", Common.getOppo(), activity);
+                    enable("uad_oppo", Common.getOppo());
                     break;
                 case "sony":
-                    enable("uad_sony", Common.getSony(), activity);
+                    enable("uad_sony", Common.getSony());
                     break;
                 case "xiaomi":
-                    enable("uad_xiaomi", Common.getXiaomi(), activity);
+                    enable("uad_xiaomi", Common.getXiaomi());
                     break;
                 case "zte":
-                    enable("uad_zte", Common.getZTE(), activity);
+                    enable("uad_zte", Common.getZTE());
                     break;
                 case "misc":
-                    enable("uad_misc", Common.getMisc(), activity);
+                    enable("uad_misc", Common.getMisc());
                     break;
                 default:
-                    enable("uad_google", Common.getGoogle(), activity);
+                    enable("uad_google", Common.getGoogle());
                     break;
             }
         }
     }
 
-    private static void enable(String tag, List<PackageItem> items, Context context) {
+    private static void enable(String tag, List<PackageItem> items) {
         PackageTasks.initializeModule();
         StringBuilder mAppList = new StringBuilder();
         for (PackageItem item : items) {
-            PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
+            PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName());
             mAppList.append(item.getAPKPath()).append("\n");
         }
         Utils.create(mAppList.toString(), PackageTasks.getModulePath() + "/" + tag);

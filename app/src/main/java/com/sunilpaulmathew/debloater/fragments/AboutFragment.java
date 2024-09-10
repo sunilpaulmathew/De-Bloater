@@ -45,7 +45,7 @@ public class AboutFragment extends Fragment {
 
     private List<sSerializableItems> getData() {
         List <sSerializableItems> mData = new ArrayList<>();
-        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.mipmap.ic_launcher_round, requireActivity()), getString(R.string.version), (sPackageUtils.isPackageInstalled(
+        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.mipmap.ic_launcher_round, requireActivity()), getString(R.string.version).replace(": %s",""), (sPackageUtils.isPackageInstalled(
                 "com.android.vending", requireActivity()) ? "Pro " : "") + BuildConfig.VERSION_NAME, null));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_support, requireActivity()), getString(R.string.support), getString(R.string.support_summary),"https://t.me/smartpack_kmanager"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_github, requireActivity()), getString(R.string.source_code), getString(R.string.source_code_summary),"https://github.com/sunilpaulmathew/De-Bloater"));

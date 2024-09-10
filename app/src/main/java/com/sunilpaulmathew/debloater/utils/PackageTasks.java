@@ -17,7 +17,6 @@ import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
-import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
@@ -174,12 +173,10 @@ public class PackageTasks {
         return Utils.exist(Common.getModuleParent()) && Utils.exist(Common.getModuleParent() + "/module.prop");
     }
 
-    public static void setToDelete(String path, String name, Context context) {
+    public static void setToDelete(String path, String name) {
         initializeModule();
-        sFileUtils.mkdir(new File(context.getFilesDir().getPath() + "/De-bloater" + new File(path).getParentFile()));
-        Utils.create(name, context.getFilesDir().getPath() + "/De-bloater" + path);
-        Utils.copy(context.getFilesDir().getPath() + "/De-bloater/*", Common.getModuleParent());
-        Utils.delete(context.getFilesDir().getPath() + "/De-bloater/*");
+        Utils.runCommand(Utils.magiskBusyBox() + " mkdir -p " + Common.getModuleParent() + new File(path).getParentFile());
+        Utils.create(name, Common.getModuleParent() + path);
     }
 
     public static void revertDelete(String path) {

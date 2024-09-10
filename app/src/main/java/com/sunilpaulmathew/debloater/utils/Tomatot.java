@@ -166,7 +166,7 @@ public class Tomatot {
         PackageTasks.initializeModule();
         for (PackageItem item : items) {
             if (Utils.exist(item.getAPKPath())) {
-                PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName(), context);
+                PackageTasks.setToDelete(item.getAPKPath(), new File(item.getAPKPath()).getName());
             }
         }
         sCommonUtils.saveBoolean(tag, true, context);

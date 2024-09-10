@@ -73,7 +73,7 @@ public class Utils {
     }
 
     public static boolean magiskSupported() {
-        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || Utils.exist("/data/adb/ksu/bin/busybox");
+        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || isKSUSupported();
     }
 
     public static int getThemeAccentColor(Context context) {
@@ -100,6 +100,10 @@ public class Utils {
         return output.equals("true");
     }
 
+    public static boolean isKSUSupported() {
+        return Utils.exist("/data/adb/ksu/bin/busybox");
+    }
+
     public static void delete(String path) {
         runCommand(magiskBusyBox() + "rm -r " + path);
     }
@@ -124,10 +128,6 @@ public class Utils {
         }
     }
 
-    public static void copy(String source, String dest) {
-        runCommand(magiskBusyBox() + "cp -rf " + source + " " + dest);
-    }
-
     static void chmod(String permission, String path) {
         runCommand(magiskBusyBox() + "chmod " + permission + " " + path);
     }
@@ -139,7 +139,7 @@ public class Utils {
     public static String magiskBusyBox() {
         if (Utils.exist("/data/adb/magisk/busybox")) {
             return "/data/adb/magisk/busybox ";
-        } else if (Utils.exist("/data/adb/ksu/bin/busybox")) {
+        } else if (isKSUSupported()) {
             return "/data/adb/ksu/bin/busybox ";
         } else {
             return "";

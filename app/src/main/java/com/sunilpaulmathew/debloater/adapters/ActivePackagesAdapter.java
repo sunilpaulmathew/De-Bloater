@@ -102,7 +102,7 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
                                     v.getContext().startActivity(remove);
                                 }).show();
                     }
-                    PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()), holder.mName.getText().toString(), holder.actionLayout.getContext());
+                    PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()), holder.mName.getText().toString());
                 }
                 notifyItemChanged(position);
             });
