@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-Welcome to the home page of De-Bloater, an application using the power of Magisk to de-bloat unwanted applications systemless-ly!
+Welcome to the home page of De-Bloater, an application using the power of Magisk/Kernel SU to de-bloat unwanted applications systemless-ly!
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/sunilpaulmathew/De-Bloater/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="" width="250" height="500" /> <img src="https://raw.githubusercontent.com/sunilpaulmathew/De-Bloater/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="" width="250" height="500" /> <img src="https://raw.githubusercontent.com/sunilpaulmathew/De-Bloater/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="" width="250" height="500" /></p>
 

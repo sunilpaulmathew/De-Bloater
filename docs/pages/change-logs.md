@@ -6,6 +6,12 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.27
+- Kernel SU support.
+- More materialized app UI.
+- Build with latest gradle and dependencies.
+- Miscellaneous changes.
+
 ### v0.26
 - Exp: Included '/system/preload' to support list.
 - Exporting profiles now allows using custom names.

@@ -1,1 +1,1 @@
-Use the power of Magisk to de-bloat system applications systemless-ly
+Use the power of Magisk/Kernel SU to de-bloat system applications systemless-ly

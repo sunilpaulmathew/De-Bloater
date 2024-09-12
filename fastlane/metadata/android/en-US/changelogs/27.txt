@@ -1,5 +1,4 @@
 * Kernel SU support.
 * More materialized app UI.
-* Updated other translations.
-* Updated build tools and dependencies.
+* Build with latest gradle and dependencies.
 * Miscellaneous changes.

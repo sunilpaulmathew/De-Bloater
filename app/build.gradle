@@ -14,6 +14,13 @@ android {
         }
     }
 
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+
     compileSdk 34
     namespace 'com.sunilpaulmathew.debloater'
 
@@ -21,8 +28,8 @@ android {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
         targetSdk 34
-        versionCode 26
-        versionName "v0.26"
+        versionCode 27
+        versionName "v0.27"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false

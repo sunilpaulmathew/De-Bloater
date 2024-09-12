@@ -1,6 +1,6 @@
-<i>De-Bloater</i> is an application using the power of Magisk to de-bloat unwanted applications systemless-ly. It easily remove system apps from "/system", "/vendor", and "/product" directories.
+<i>De-Bloater</i> is an application using the power of Magisk/Kernel SU to de-bloat unwanted applications systemless-ly. It easily remove system apps from "/system", "/vendor", and "/product" directories.
 
-<i>De-Bloater</i> requires Root Access and a fully functional Magisk environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
+<i>De-Bloater</i> requires Root Access and a fully functional Magisk or Kernel SU environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
 
 <b>Features</b>
 
@@ -14,7 +14,7 @@
 
 Open the app, click the remove button on each app you want to remove. The selected apps will be removed systemless-ly after a reboot. To restore an app, either Reset Module (on the top menu) or selectively restore from the second page. Please note that a restart is necessary to get any of the changes in effect.
 
-The app will systemless-ly replace the selected APKs by making a Magisk module. As a result, you will see a new Module (name: De-bloater).
+The app will systemless-ly replace the selected APKs by making a Magisk/Kernel SU module. As a result, you will see a new Module (name: De-bloater).
 
 <b>Troubleshooting</b>
 
