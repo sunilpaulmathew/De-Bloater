@@ -58,7 +58,7 @@ android {
 dependencies {
     implementation 'com.github.sunilpaulmathew:RootFilePicker:802663ee90'
 
-    def sCommon_Version = '8c5666a002'
+    def sCommon_Version = 'fcb1b0c0ef'
     implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:apkutils:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"

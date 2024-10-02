@@ -18,7 +18,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@mipmap/ic_launcher_foreground"
             android:layout_gravity="center" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -28,8 +28,7 @@
             android:padding="5dp"
             android:gravity="center"
             android:textSize="23sp"
-            android:textStyle="bold"
-            android:textColor="@color/ColorBlue"/>
+            android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -66,7 +65,6 @@
                         android:text="@string/change_logs"
                         android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/ColorBlue"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
 
@@ -90,8 +88,6 @@
         android:layout_height="50dp"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorBlack"
-        android:textColor="@color/ColorBlue"
         android:text="@string/cancel"
         android:textStyle="bold"
         android:textSize="18sp"

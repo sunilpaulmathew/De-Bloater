@@ -14,7 +14,6 @@
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
             android:orientation="vertical"
             android:padding="15dp" >
 
@@ -22,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/ColorBlue"
                 android:text="@string/custom_scripts_uad"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -34,8 +32,7 @@
                 android:text="@string/custom_scripts_uad_summary"
                 android:textSize="15sp"
                 android:gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="@color/colorWhite" />
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView

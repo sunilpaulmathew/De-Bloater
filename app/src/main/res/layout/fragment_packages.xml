@@ -13,14 +13,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
             android:gravity="center_vertical"
             android:orientation="vertical" >
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorBlack"
                 android:layout_gravity="center_vertical" >
 
                 <com.google.android.material.textview.MaterialTextView
@@ -30,7 +28,6 @@
                     android:layout_marginEnd="50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:textColor="@color/ColorBlue"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
@@ -41,8 +38,7 @@
                     android:layout_marginEnd="40dp"
                     android:src="@drawable/ic_search"
                     android:layout_gravity="end|center_vertical"
-                    android:background="@null"
-                    android:tint="@color/colorWhite" />
+                    android:background="@null" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/menu_button"
@@ -50,8 +46,7 @@
                     android:layout_height="40dp"
                     android:src="@drawable/ic_settings"
                     android:layout_gravity="end"
-                    android:background="@null"
-                    android:tint="@color/ColorBlue" />
+                    android:background="@null" />
             </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView
@@ -62,15 +57,12 @@
                 android:padding="15dp"
                 android:textSize="15sp"
                 android:gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="@color/colorWhite" />
+                android:textStyle="bold|italic" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_word"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/ColorBlue"
-                android:textColor="@color/ColorBlue"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
                 android:hint="@string/search_hint"
@@ -86,9 +78,6 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            app:tabSelectedTextColor="?attr/colorAccent"
-            app:tabTextColor="@color/colorWhite"
             android:visibility="gone"
             app:tabGravity="fill"
             app:tabMode="fixed" />
@@ -100,7 +89,6 @@
         android:id="@+id/reverse_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/ColorBlue"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="10dp"
@@ -112,7 +100,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_reverse"
-            android:tint="@color/colorWhite"
             android:background="@null"
             android:clickable="false" />
     </com.google.android.material.card.MaterialCardView>

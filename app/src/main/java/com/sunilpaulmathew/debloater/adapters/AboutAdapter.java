@@ -85,9 +85,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
                 new sCreditsUtils(Common.getCredits(),
                         sCommonUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
                         sCommonUtils.getDrawable(R.drawable.ic_back, v.getContext()),
-                        sCommonUtils.getColor(R.color.ColorBlue, v.getContext()),
-                        20, v.getContext().getString(R.string.app_name), "2021-2022, sunilpaulmathew",
-                        BuildConfig.VERSION_NAME).launchCredits(v.getContext());
+                        Integer.MIN_VALUE, 20, v.getContext().getString(R.string.app_name),
+                        "2024-2025, sunilpaulmathew", BuildConfig.VERSION_NAME)
+                        .launchCredits(v.getContext());
             } else if (position == 10) {
                 Intent shareapp = new Intent();
                 shareapp.setAction(Intent.ACTION_SEND);

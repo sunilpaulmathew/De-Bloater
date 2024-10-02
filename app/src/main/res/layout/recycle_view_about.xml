@@ -13,7 +13,6 @@
             android:layout_height="25dp"
             android:scaleType="fitCenter"
             android:layout_gravity="center_vertical"
-            android:src="@color/colorBlack"
             android:background="@null" />
 
         <LinearLayout

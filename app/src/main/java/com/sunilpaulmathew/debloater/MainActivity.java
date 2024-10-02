@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(final int i, final float v, final int i2) {
+            public void onPageScrolled(int position, final float positionOffset, final int positionOffsetPixels) {
+                mBottomNav.getMenu().getItem(position).setChecked(true);
             }
             @Override
             public void onPageSelected(int position) {
-                Objects.requireNonNull(mViewPager.getAdapter()).notifyDataSetChanged();
             }
 
             @Override
@@ -79,16 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
         mBottomNav.setOnItemSelectedListener(
                 menuItem -> {
-                    switch (menuItem.getItemId()) {
-                        case R.id.nav_active:
-                            mViewPager.setCurrentItem(0);
-                            break;
-                        case R.id.nav_inactive:
-                            mViewPager.setCurrentItem(1);
-                            break;
-                        case R.id.nav_about:
-                            mViewPager.setCurrentItem(2);
-                            break;
+                    if (menuItem.getItemId() == R.id.nav_active) {
+                        mViewPager.setCurrentItem(0);
+                    } else if (menuItem.getItemId() == R.id.nav_inactive) {
+                        mViewPager.setCurrentItem(1);
+                    } else if (menuItem.getItemId() == R.id.nav_about) {
+                        mViewPager.setCurrentItem(2);
                     }
                     Objects.requireNonNull(mViewPager.getAdapter()).notifyDataSetChanged();
                     return false;
