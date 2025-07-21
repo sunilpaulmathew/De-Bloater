@@ -73,7 +73,7 @@ public class Utils {
     }
 
     public static boolean magiskSupported() {
-        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || isKSUSupported();
+        return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || isAPatchSupported() || isKSUSupported();
     }
 
     public static int getThemeAccentColor(Context context) {
@@ -98,6 +98,10 @@ public class Utils {
     public static boolean exist(String file) {
         String output = runAndGetOutput("[ -e " + file + " ] && echo true");
         return output.equals("true");
+    }
+
+    public static boolean isAPatchSupported() {
+        return Utils.exist("/data/adb/ap/bin/busybox");
     }
 
     public static boolean isKSUSupported() {
@@ -139,6 +143,8 @@ public class Utils {
     public static String magiskBusyBox() {
         if (Utils.exist("/data/adb/magisk/busybox")) {
             return "/data/adb/magisk/busybox ";
+        } else if (isAPatchSupported()) {
+            return "/data/adb/ap/bin/busybox ";
         } else if (isKSUSupported()) {
             return "/data/adb/ksu/bin/busybox ";
         } else {
