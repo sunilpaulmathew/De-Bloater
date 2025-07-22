@@ -30,7 +30,7 @@
             android:layout_margin="10dp"
             android:visibility="gone"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
         <ProgressBar
             android:id="@+id/progress"
@@ -47,11 +47,12 @@
             android:id="@+id/start_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:strokeColor="?attr/colorPrimary"
             android:layout_margin="25dp"
             app:cardCornerRadius="15dp"
             android:visibility="gone" >
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -60,6 +61,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold|italic"
                     android:text="@string/start"
                     android:textAllCaps="true"
@@ -70,12 +72,13 @@
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/ic_back"
                     android:layout_marginEnd="5dp"
                     android:background="@null"
                     android:clickable="false"
                     android:rotation="180" />
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

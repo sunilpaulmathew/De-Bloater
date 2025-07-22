@@ -46,13 +46,13 @@ public class PackageTasks {
         return mData;
     }
 
-    public static List<PackageItem> getActivePackageData(Context context) {
+    public static List<PackageItem> getActivePackageData(Context context, String searchText) {
         List<PackageItem> mData = new ArrayList<>();
         for (PackageItem item : Common.getRawData()) {
             if (getSupportedAppsList(item.getAPKPath(), context)) {
-                if (Common.getSearchText() == null) {
+                if (searchText == null) {
                     mData.add(item);
-                } else if (Common.isTextMatched(item.getAppName()) || Common.isTextMatched(item.getPackageName())) {
+                } else if (Common.isTextMatched(item.getAppName(), searchText) || Common.isTextMatched(item.getPackageName(), searchText)) {
                     mData.add(item);
                 }
             }
@@ -68,13 +68,13 @@ public class PackageTasks {
         return mData;
     }
 
-    public static List<String> getInactivePackageData() {
+    public static List<String> getInactivePackageData(String searchText) {
         List<String> mData = new ArrayList<>();
         for (String line : Utils.runAndGetOutput(Utils.magiskBusyBox() + "find " + Common.getModuleParent() + "/system -type f -name *.apk").split("\\r?\\n")) {
             if (line.endsWith(".apk")) {
-                if (Common.getSearchText() == null) {
+                if (searchText == null) {
                     mData.add(line);
-                } else if (Common.isTextMatched(line)) {
+                } else if (Common.isTextMatched(line, searchText)) {
                     mData.add(line);
                 }
             }
@@ -93,16 +93,12 @@ public class PackageTasks {
         boolean vendorApps = apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/vendor/app");
         boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/priv-app")
                 || apkPath.startsWith("/product/overlay");
-        switch (mStatus) {
-            case "system":
-                return systemApps;
-            case "product":
-                return productApps;
-            case "vendor":
-                return vendorApps;
-            default:
-                return true;
-        }
+        return switch (mStatus) {
+            case "system" -> systemApps;
+            case "product" -> productApps;
+            case "vendor" -> vendorApps;
+            default -> true;
+        };
     }
 
     public static PackageManager getPackageManager(Context context) {

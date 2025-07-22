@@ -2,25 +2,20 @@ package com.sunilpaulmathew.debloater;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.fragments.AboutFragment;
 import com.sunilpaulmathew.debloater.fragments.ActivePackagesFragment;
 import com.sunilpaulmathew.debloater.fragments.InactivePackagesFragment;
-import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
-import java.util.Objects;
-
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
@@ -30,8 +25,7 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean mExit;
-    private final Handler mHandler = new Handler();
+    private Fragment mFragment;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -43,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
         MaterialTextView mUnSupported = findViewById(R.id.unsupported);
-        ViewPager mViewPager = findViewById(R.id.view_pager);
 
         if (!Utils.rootAccess()) {
             mUnSupported.setText(R.string.no_root);
@@ -61,39 +54,25 @@ public class MainActivity extends AppCompatActivity {
         adapter.AddFragment(new InactivePackagesFragment(), null);
         adapter.AddFragment(new AboutFragment(), null);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, final float positionOffset, final int positionOffsetPixels) {
-                mBottomNav.getMenu().getItem(position).setChecked(true);
-            }
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(final int i) {
-            }
-        });
-
-        mViewPager.setAdapter(adapter);
-
         mBottomNav.setOnItemSelectedListener(
                 menuItem -> {
                     if (menuItem.getItemId() == R.id.nav_active) {
-                        mViewPager.setCurrentItem(0);
+                        mFragment = new ActivePackagesFragment();
                     } else if (menuItem.getItemId() == R.id.nav_inactive) {
-                        mViewPager.setCurrentItem(1);
+                        mFragment = new InactivePackagesFragment();
                     } else if (menuItem.getItemId() == R.id.nav_about) {
-                        mViewPager.setCurrentItem(2);
+                        mFragment = new AboutFragment();
                     }
-                    Objects.requireNonNull(mViewPager.getAdapter()).notifyDataSetChanged();
-                    return false;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            mFragment).commit();
+                    return true;
                 }
         );
         mBottomNav.setVisibility(View.VISIBLE);
 
         if (savedInstanceState == null) {
-            mViewPager.setCurrentItem(0);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ActivePackagesFragment()).commit();
         }
 
     }
@@ -105,36 +84,6 @@ public class MainActivity extends AppCompatActivity {
         if (Utils.rootAccess() && Utils.magiskSupported() && !sPackageUtils.isPackageInstalled(
                 "com.android.vending", this) && UpdateCheck.isSignatureMatched(this)) {
             new UpdateCheck().initialize(1, this);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (Common.getActiveSearchWord().getVisibility() == View.VISIBLE || Common.getInactiveSearchWord()
-                .getVisibility() == View.VISIBLE) {
-            if (Common.getSearchText() != null) {
-                Common.setSearchText(null);
-                if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
-                    Common.getInactiveSearchWord().setText(null);
-                } else {
-                    Common.getActiveSearchWord().setText(null);
-                }
-            }
-            Common.getAboutSummary().setVisibility(View.VISIBLE);
-            if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
-                Common.getInactiveSearchWord().setVisibility(View.GONE);
-            } else {
-                Common.getActiveSearchWord().setVisibility(View.GONE);
-            }
-            return;
-        }
-        if (mExit) {
-            mExit = false;
-            super.onBackPressed();
-        } else {
-            sCommonUtils.snackBar(findViewById(android.R.id.content), getString(R.string.press_back_exit)).show();
-            mExit = true;
-            mHandler.postDelayed(() -> mExit = false, 2000);
         }
     }
 

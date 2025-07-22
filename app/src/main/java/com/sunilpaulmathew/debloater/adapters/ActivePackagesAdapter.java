@@ -33,9 +33,11 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAdapter.ViewHolder> {
 
     private final List<PackageItem> data;
+    private final String searchText;
 
-    public ActivePackagesAdapter(List<PackageItem> data) {
+    public ActivePackagesAdapter(List<PackageItem> data, String searchText) {
         this.data = data;
+        this.searchText = searchText;
     }
 
     @NonNull
@@ -58,9 +60,9 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
                 holder.mPackageName.setVisibility(View.GONE);
             }
             holder.mPath.setText(this.data.get(position).getAPKPath());
-            if (Common.getSearchText() != null && Common.isTextMatched(this.data.get(position).getAppName())) {
-                holder.mName.setText(Utils.fromHtml(this.data.get(position).getAppName().replace(Common.getSearchText(),
-                        "<b><i><font color=\"" + Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
+            if (searchText != null && Common.isTextMatched(this.data.get(position).getAppName(), searchText)) {
+                holder.mName.setText(Utils.fromHtml(this.data.get(position).getAppName().replace(searchText,
+                        "<b><i><font color=\"" + Color.RED + "\">" + searchText + "</font></i></b>")));
             } else {
                 holder.mName.setText(this.data.get(position).getAppName());
             }

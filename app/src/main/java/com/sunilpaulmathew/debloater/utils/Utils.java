@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.topjohnwu.superuser.Shell;
@@ -118,6 +119,11 @@ public class Utils {
 
     public static String read(String path) {
         return Utils.runAndGetOutput("cat " + path);
+    }
+
+    public static void navigateToFragment(Activity activity) {
+        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_active);
     }
 
     static void download(String path, String url) {

@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/custom_scripts_tomatot"
+                android:textColor="?attr/colorPrimary"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="20sp" />

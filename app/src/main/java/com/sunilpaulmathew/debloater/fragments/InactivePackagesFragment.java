@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -30,7 +33,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.adapters.InactivePackagesAdapter;
-import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.EditTextInterface;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Restore;
@@ -52,25 +54,27 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 public class InactivePackagesFragment extends Fragment {
 
+    private AppCompatEditText mSearchWord;
     private AppCompatImageButton mMenu;
     private LinearLayout mProgressLayout;
     private MaterialTextView mProgressText;
     private RecyclerView mRecyclerView;
     private InactivePackagesAdapter mRecycleViewAdapter;
+    private String mSearchText = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_packages, container, false);
 
+        mSearchWord = mRootView.findViewById(R.id.search_word);
+        AppCompatTextView mSummary = mRootView.findViewById(R.id.about_summary);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mProgressText = mRootView.findViewById(R.id.progress_text);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         MaterialTextView mTitle = mRootView.findViewById(R.id.page_title);
-        MaterialTextView mSummary = mRootView.findViewById(R.id.about_summary);
-        Common.initializeInactiveSearchWord(mRootView, R.id.search_word);
         AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
 
@@ -79,25 +83,25 @@ public class InactivePackagesFragment extends Fragment {
 
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
-        loadUI();
+        loadUI(mSearchText);
 
         mSearchButton.setOnClickListener(v -> {
-            if (Common.getInactiveSearchWord().getVisibility() == View.VISIBLE) {
-                if (Common.getSearchText() != null && !Common.getSearchText().isEmpty()) {
-                    Common.setSearchText(null);
-                    Common.getInactiveSearchWord().setText(null);
+            if (mSearchWord.getVisibility() == View.VISIBLE) {
+                if (mSearchText != null && !mSearchText.isEmpty()) {
+                    mSearchText = null;
+                    mSearchWord.setText(null);
                 }
-                Common.getAboutSummary().setVisibility(View.VISIBLE);
-                Common.getInactiveSearchWord().setVisibility(View.GONE);
-                PackageTasks.toggleKeyboard(Common.getInactiveSearchWord(), 0, requireActivity());
+                mSummary.setVisibility(View.VISIBLE);
+                mSearchWord.setVisibility(View.GONE);
+                PackageTasks.toggleKeyboard(mSearchWord, 0, requireActivity());
             } else {
-                Common.getAboutSummary().setVisibility(View.GONE);
-                Common.getInactiveSearchWord().setVisibility(View.VISIBLE);
-                PackageTasks.toggleKeyboard(Common.getInactiveSearchWord(), 1, requireActivity());
+                mSummary.setVisibility(View.GONE);
+                mSearchWord.setVisibility(View.VISIBLE);
+                PackageTasks.toggleKeyboard(mSearchWord, 1, requireActivity());
             }
         });
 
-        Common.getInactiveSearchWord().addTextChangedListener(new TextWatcher() {
+        mSearchWord.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -108,8 +112,23 @@ public class InactivePackagesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Common.setSearchText(s.toString().toLowerCase());
-                loadUI();
+                loadUI(s.toString().toLowerCase());
+            }
+        });
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mSearchWord.getVisibility() == View.VISIBLE) {
+                    if (mSearchText != null) {
+                        mSearchText = null;
+                        mSearchWord.setText(null);
+                    }
+                    mSummary.setVisibility(View.VISIBLE);
+                    mSearchWord.setVisibility(View.GONE);
+                    return;
+                }
+                Utils.navigateToFragment(requireActivity());
             }
         });
 
@@ -129,16 +148,17 @@ public class InactivePackagesFragment extends Fragment {
             switch (item.getItemId()) {
                 case 0:
                     PackageTasks.removeModule(activity);
-                    loadUI();
+                    loadUI(mSearchText);
                     break;
                 case 1:
                     Utils.runCommand("svc power reboot");
                     break;
                 case 2:
-                    if (!PackageTasks.getInactivePackageData().isEmpty()) {
+                    if (!PackageTasks.getInactivePackageData(null).isEmpty()) {
                         new EditTextInterface(Build.MODEL.replace(" ","_")
                                 .replace("(","_").replace(")","_") + "_" +
                                 Build.VERSION.SDK_INT, getString(R.string.backup_list_as), activity) {
+                            @SuppressLint("StringFormatInvalid")
                             @Override
                             public void positiveButtonLister(Editable editable) {
                                 String name = editable.toString().trim().replace(" ","_")
@@ -157,7 +177,7 @@ public class InactivePackagesFragment extends Fragment {
                                     device.put("Version", Build.VERSION.RELEASE);
                                     device.put("SDK", Build.VERSION.SDK_INT);
                                     obj.put("Device", device);
-                                    for (String s : PackageTasks.getInactivePackageData()) {
+                                    for (String s : PackageTasks.getInactivePackageData(null)) {
                                         JSONObject app = new JSONObject();
                                         app.put("name", Utils.read(s));
                                         app.put("path", s);
@@ -203,7 +223,7 @@ public class InactivePackagesFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void loadUI() {
+    private void loadUI(String searchText) {
         new sExecutor() {
 
             @Override
@@ -215,7 +235,10 @@ public class InactivePackagesFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData());
+                mRecycleViewAdapter = new InactivePackagesAdapter(PackageTasks.getInactivePackageData(searchText));
+                if (searchText != null) {
+                    mSearchText = searchText;
+                }
             }
 
             @Override
@@ -228,7 +251,7 @@ public class InactivePackagesFragment extends Fragment {
     }
 
     @SuppressLint("StringFormatInvalid")
-    ActivityResultLauncher<Intent> restoreResultLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> restoreResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
@@ -259,7 +282,7 @@ public class InactivePackagesFragment extends Fragment {
                                         @Override
                                         public void onPostExecute() {
                                             mProgressLayout.setVisibility(View.GONE);
-                                            loadUI();
+                                            loadUI(mSearchText);
                                         }
                                     }.execute())
                             .show();
@@ -271,9 +294,9 @@ public class InactivePackagesFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (Common.getSearchText() != null) {
-            Common.setSearchText(null);
-            Common.getInactiveSearchWord().setText(null);
+        if (mSearchText != null) {
+            mSearchText = null;
+            mSearchWord.setText(null);
         }
     }
 
@@ -281,9 +304,9 @@ public class InactivePackagesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        if (Common.getSearchText() != null) {
-            Common.setSearchText(null);
-            Common.getInactiveSearchWord().setText(null);
+        if (mSearchText != null) {
+            mSearchText = null;
+            mSearchWord.setText(null);
         }
     }
     

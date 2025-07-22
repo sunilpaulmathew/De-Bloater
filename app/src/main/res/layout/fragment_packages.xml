@@ -27,6 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="50dp"
                     android:layout_gravity="center_vertical"
+                    android:textColor="?attr/colorPrimary"
                     android:gravity="center_horizontal"
                     android:textStyle="bold"
                     android:textSize="20sp" />
@@ -35,16 +36,19 @@
                     android:id="@+id/search_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginEnd="40dp"
+                    android:layout_marginEnd="50dp"
                     android:src="@drawable/ic_search"
                     android:layout_gravity="end|center_vertical"
+                    android:tint="?attr/colorPrimary"
                     android:background="@null" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/menu_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_settings"
+                    android:tint="?attr/colorPrimary"
                     android:layout_gravity="end"
                     android:background="@null" />
             </FrameLayout>
@@ -53,25 +57,34 @@
                 android:id="@+id/about_summary"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="-15dp"
                 android:layout_marginTop="-15dp"
                 android:padding="15dp"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:textStyle="bold|italic" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/search_word"
-                android:layout_width="match_parent"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/search_card"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
-                android:hint="@string/search_hint"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:imeOptions="actionDone"
-                android:textStyle="italic"
-                android:visibility="gone"
-                android:inputType="text" />
+                android:layout_width="match_parent"
+                app:strokeColor="?attr/colorPrimary"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:cardCornerRadius="45dp" >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_word"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:drawableStart="@drawable/ic_search"
+                    android:layout_gravity="center"
+                    android:gravity="start|center"
+                    android:layout_margin="10dp"
+                    android:background="@null"
+                    android:visibility="gone"
+                    android:inputType="text" />
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
@@ -100,6 +113,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_reverse"
+            android:tint="?attr/colorPrimary"
             android:background="@null"
             android:clickable="false" />
     </com.google.android.material.card.MaterialCardView>

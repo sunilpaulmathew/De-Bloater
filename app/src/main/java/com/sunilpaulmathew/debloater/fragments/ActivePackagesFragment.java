@@ -3,6 +3,7 @@ package com.sunilpaulmathew.debloater.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +30,6 @@ import com.sunilpaulmathew.debloater.R;
 import com.sunilpaulmathew.debloater.activities.TomatotActivity;
 import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
-import com.sunilpaulmathew.debloater.utils.Common;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
@@ -41,20 +44,24 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 public class ActivePackagesFragment extends Fragment {
 
+    private AppCompatEditText mSearchWord;
     private AppCompatImageButton mMenu;
+    private boolean mExit = false;
+    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
     private ActivePackagesAdapter mRecycleViewAdapter;
+    private String mSearchText = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_packages, container, false);
 
-        Common.initializeActiveSearchWord(mRootView, R.id.search_word);
+        mSearchWord = mRootView.findViewById(R.id.search_word);
         AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
-        Common.initializeAboutSummary(mRootView, R.id.about_summary);
+        AppCompatTextView mSummary = mRootView.findViewById(R.id.about_summary);
         MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
         mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
@@ -65,26 +72,26 @@ public class ActivePackagesFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
-        Common.getAboutSummary().setText(getString(R.string.active_app_summary));
+        mSummary.setText(getString(R.string.active_app_summary));
         mReverse.setElevation(10);
         mReverse.setOnClickListener(v -> {
             sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
-            loadUI(requireActivity());
+            loadUI(requireActivity(), mSearchText);
         });
 
         mSearchButton.setOnClickListener(v -> {
-            if (Common.getActiveSearchWord().getVisibility() == View.VISIBLE) {
-                if (Common.getSearchText() != null && !Common.getSearchText().isEmpty()) {
-                    Common.setSearchText(null);
-                    Common.getActiveSearchWord().setText(null);
+            if (mSearchWord.getVisibility() == View.VISIBLE) {
+                if (mSearchText != null && !mSearchText.isEmpty()) {
+                    mSearchText = null;
+                    mSearchWord.setText(null);
                 }
-                Common.getAboutSummary().setVisibility(View.VISIBLE);
-                Common.getActiveSearchWord().setVisibility(View.GONE);
-                PackageTasks.toggleKeyboard(Common.getActiveSearchWord(), 0, requireActivity());
+                mSummary.setVisibility(View.VISIBLE);
+                mSearchWord.setVisibility(View.GONE);
+                PackageTasks.toggleKeyboard(mSearchWord, 0, requireActivity());
             } else {
-                Common.getAboutSummary().setVisibility(View.GONE);
-                Common.getActiveSearchWord().setVisibility(View.VISIBLE);
-                PackageTasks.toggleKeyboard(Common.getActiveSearchWord(), 1, requireActivity());
+                mSummary.setVisibility(View.GONE);
+                mSearchWord.setVisibility(View.VISIBLE);
+                PackageTasks.toggleKeyboard(mSearchWord, 1, requireActivity());
             }
         });
 
@@ -105,25 +112,25 @@ public class ActivePackagesFragment extends Fragment {
                     case 0:
                         if (!mStatus.equals("all")) {
                             sCommonUtils.saveString("appTypes", "all", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(requireActivity(), mSearchText);
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("system")) {
                             sCommonUtils.saveString("appTypes", "system", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(requireActivity(), mSearchText);
                         }
                         break;
                     case 2:
                         if (!mStatus.equals("product")) {
                             sCommonUtils.saveString("appTypes", "product", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(requireActivity(), mSearchText);
                         }
                         break;
                     case 3:
                         if (!mStatus.equals("vendor")) {
                             sCommonUtils.saveString("appTypes", "vendor", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(requireActivity(), mSearchText);
                         }
                         break;
                 }
@@ -138,7 +145,7 @@ public class ActivePackagesFragment extends Fragment {
             }
         });
 
-        Common.getActiveSearchWord().addTextChangedListener(new TextWatcher() {
+        mSearchWord.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -149,30 +156,47 @@ public class ActivePackagesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Common.setSearchText(s.toString().toLowerCase());
-                loadUI(requireActivity());
+                loadUI(requireActivity(), s.toString().toLowerCase());
             }
         });
 
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
-        loadUI(requireActivity());
+        loadUI(requireActivity(), mSearchText);
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mSearchWord.getVisibility() == View.VISIBLE) {
+                    if (mSearchText != null) {
+                        mSearchText = null;
+                        mSearchWord.setText(null);
+                    }
+                    mSearchWord.setVisibility(View.GONE);
+                    return;
+                }
+                if (mExit) {
+                    mExit = false;
+                    requireActivity().finish();
+                } else {
+                    sCommonUtils.toast(getString(R.string.press_back_exit), requireActivity()).show();
+                    mExit = true;
+                    mHandler.postDelayed(() -> mExit = false, 2000);
+                }
+            }
+        });
 
         return mRootView;
     }
 
     private int getTabPosition(Activity activity) {
         String mStatus = sCommonUtils.getString("appTypes", "all", activity);
-        switch (mStatus) {
-            case "vendor":
-                return 3;
-            case "product":
-                return 2;
-            case "system":
-                return 1;
-            default:
-                return 0;
-        }
+        return switch (mStatus) {
+            case "vendor" -> 3;
+            case "product" -> 2;
+            case "system" -> 1;
+            default -> 0;
+        };
     }
 
     private void menuOptions(Activity activity) {
@@ -201,13 +225,13 @@ public class ActivePackagesFragment extends Fragment {
                 case 2:
                     if (sCommonUtils.getInt("sort_apps", 1, activity) != 0) {
                         sCommonUtils.saveInt("sort_apps", 0, activity);
-                        loadUI(activity);
+                        loadUI(activity, mSearchText);
                     }
                     break;
                 case 3:
                     if (sCommonUtils.getInt("sort_apps", 1, activity) != 1) {
                         sCommonUtils.saveInt("sort_apps", 1, activity);
-                        loadUI(activity);
+                        loadUI(activity, mSearchText);
                     }
                     break;
                 case 4:
@@ -227,7 +251,7 @@ public class ActivePackagesFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void loadUI(Activity activity) {
+    private void loadUI(Activity activity, String searchText) {
         new sExecutor() {
 
             @Override
@@ -240,7 +264,10 @@ public class ActivePackagesFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity));
+                mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity, searchText), searchText);
+                if (searchText != null) {
+                    mSearchText = searchText;
+                }
             }
 
             @Override
@@ -257,9 +284,9 @@ public class ActivePackagesFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (Common.getSearchText() != null) {
-            Common.setSearchText(null);
-            Common.getActiveSearchWord().setText(null);
+        if (mSearchText != null) {
+            mSearchText = null;
+            mSearchWord.setText(null);
         }
     }
 
@@ -267,9 +294,9 @@ public class ActivePackagesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        if (Common.getSearchText() != null) {
-            Common.setSearchText(null);
-            Common.getActiveSearchWord().setText(null);
+        if (mSearchText != null) {
+            mSearchText = null;
+            mSearchWord.setText(null);
         }
     }
     

@@ -70,7 +70,7 @@ public class TomatotDebloaterFragment extends Fragment {
             mStatus.setText(R.string.custom_scripts_uad_enabled);
             mActionMessage.setText(R.string.restore);
             mExtremeT = true;
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
         } else if (Tomatot.isScriptEnabled("tomatot_light", requireActivity())) {
@@ -80,7 +80,7 @@ public class TomatotDebloaterFragment extends Fragment {
             mStatus.setText(R.string.custom_scripts_uad_enabled);
             mActionMessage.setText(R.string.restore);
             mLightT = true;
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
         } else {
@@ -92,7 +92,7 @@ public class TomatotDebloaterFragment extends Fragment {
             mActionMessage.setText(sCommonUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
             mInvisibleT = true;
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
             mAppListCard.setVisibility(View.VISIBLE);
         }
@@ -111,7 +111,7 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_invisible);
             mActionMessage.setText(sCommonUtils.getBoolean("tomatot_invisible", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.geTInvisible(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mLight.setOnClickListener(v -> {
@@ -125,7 +125,7 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_light);
             mActionMessage.setText(sCommonUtils.getBoolean("tomatot_light", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTLight(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mExtreme.setOnClickListener(v -> {
@@ -139,7 +139,7 @@ public class TomatotDebloaterFragment extends Fragment {
                     R.string.custom_scripts_uad_enabled : R.string.custom_scripts_tomatot_extreme);
             mActionMessage.setText(sCommonUtils.getBoolean("tomatot_extreme", false, requireActivity()) ?
                     R.string.restore : R.string.apply);
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getTExtreme(), null);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         });
         mActionLayout.setOnClickListener(v ->

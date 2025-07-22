@@ -5,10 +5,6 @@ package com.sunilpaulmathew.debloater.utils;
  */
 
 import android.content.Context;
-import android.view.View;
-
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +12,6 @@ import java.util.List;
 import in.sunilpaulmathew.sCommon.CommonUtils.sSerializableItems;
 
 public class Common {
-
-    private static AppCompatEditText mSearchWordActive, mSearchWordInactive;
-    private static AppCompatTextView mAbout;
     private static List<PackageItem> mRawData;
     private static final List<PackageItem> mAOSP = new ArrayList<>(), mAsus = new ArrayList<>(),
             mCarrier = new ArrayList<>(), mGoogle = new ArrayList<>(), mHuawei = new ArrayList<>(),
@@ -27,26 +20,11 @@ public class Common {
             mOppo = new ArrayList<>(), mSony = new ArrayList<>(), mTInvisible = new ArrayList<>(),
             mTLight = new ArrayList<>(), mTExtreme = new ArrayList<>(), mXiaomi = new ArrayList<>(),
             mZTE = new ArrayList<>();
-    private static String mSearchText;
 
-    public static AppCompatEditText getActiveSearchWord() {
-        return mSearchWordActive;
-    }
-
-    public static AppCompatEditText getInactiveSearchWord() {
-        return mSearchWordInactive;
-    }
-
-    public static AppCompatTextView getAboutSummary() {
-        return mAbout;
-    }
-
-    public static boolean isTextMatched(String searchText) {
-        if (searchText != null) {
-            for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
-                if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
-                    return true;
-                }
+    public static boolean isTextMatched(String searchText, String searchWord) {
+        for (int a = 0; a < searchText.length() - searchWord.length() + 1; a++) {
+            if (searchWord.equalsIgnoreCase(searchText.substring(a, a + searchWord.length()))) {
+                return true;
             }
         }
         return false;
@@ -172,28 +150,8 @@ public class Common {
         return "https://raw.githubusercontent.com/sunilpaulmathew/De-Bloater/master/app/src/main/assets/release.json";
     }
 
-    public static String getSearchText() {
-        return mSearchText;
-    }
-
-    public static void initializeActiveSearchWord(View view, int id) {
-        mSearchWordActive = view.findViewById(id);
-    }
-
-    public static void initializeInactiveSearchWord(View view, int id) {
-        mSearchWordInactive = view.findViewById(id);
-    }
-
-    public static void initializeAboutSummary(View view, int id) {
-        mAbout = view.findViewById(id);
-    }
-
     public static void setRawData(List<PackageItem> rawData) {
         mRawData = rawData;
-    }
-
-    public static void setSearchText(String searchText) {
-        mSearchText = searchText;
     }
 
 }

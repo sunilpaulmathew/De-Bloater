@@ -73,51 +73,51 @@ public class UADFragment extends Fragment {
 
         if (Build.BRAND.equalsIgnoreCase("oneplus")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOnePlus());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOnePlus(), null);
             mTitle = getString(R.string.oneplus);
         } else if (Build.BRAND.equalsIgnoreCase("asus")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_asus";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAsus());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAsus(), null);
             mTitle = getString(R.string.asus);
         } else if (Build.BRAND.equalsIgnoreCase("motorola")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_motorola";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMoto());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMoto(), null);
             mTitle = getString(R.string.motorola);
         } else if (Build.BRAND.equalsIgnoreCase("huawei")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_huawei";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getHuawei());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getHuawei(), null);
             mTitle = getString(R.string.huawei);
         } else if (Build.BRAND.equalsIgnoreCase("lg")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_lg";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getLG());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getLG(), null);
             mTitle = getString(R.string.lg);
         } else if (Build.BRAND.equalsIgnoreCase("samsung")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_samsung";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSamsung());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSamsung(), null);
             mTitle = getString(R.string.samsung);
         } else if (Build.BRAND.equalsIgnoreCase("nokia")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_nokia";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getNokia());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getNokia(), null);
             mTitle = getString(R.string.nokia);
         } else if (Build.BRAND.equalsIgnoreCase("oppo")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_oppo";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOppo());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOppo(), null);
             mTitle = getString(R.string.oppo);
         } else if (Build.BRAND.equalsIgnoreCase("sony")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_sony";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSony());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSony(), null);
             mTitle = getString(R.string.sony);
         } else if (Build.BRAND.equalsIgnoreCase("xiaomi")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_xiaomi";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getXiaomi());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getXiaomi(), null);
             mTitle = getString(R.string.xiaomi);
         } else if (Build.BRAND.equalsIgnoreCase("zte")) {
             mScriptPath = PackageTasks.getModulePath() + "/uad_zte";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getZTE());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getZTE(), null);
             mTitle = getString(R.string.zte);
         } else {
             mScriptPath = PackageTasks.getModulePath() + "/uad_google";
-            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getGoogle());
+            mRecycleViewAdapter = new ActivePackagesAdapter(Common.getGoogle(), null);
             mTitle = getString(R.string.google);
         }
 
@@ -209,105 +209,105 @@ public class UADFragment extends Fragment {
                 case 0:
                     sCommonUtils.saveString("setDefault", "aosp", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAOSP());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAOSP(), null);
                     mTitle = getString(R.string.aosp);
                     setStatus();
                     break;
                 case 1:
                     sCommonUtils.saveString("setDefault", "google", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_google";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getGoogle());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getGoogle(), null);
                     mTitle = getString(R.string.google);
                     setStatus();
                     break;
                 case 2:
                     sCommonUtils.saveString("setDefault", "oneplus", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_oneplus";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOnePlus());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOnePlus(), null);
                     mTitle = getString(R.string.oneplus);
                     setStatus();
                     break;
                 case 3:
                     sCommonUtils.saveString("setDefault", "asus", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_aosp";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAsus());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getAsus(), null);
                     mTitle = getString(R.string.asus);
                     setStatus();
                     break;
                 case 4:
                     sCommonUtils.saveString("setDefault", "huawei", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_huawei";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getHuawei());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getHuawei(), null);
                     mTitle = getString(R.string.huawei);
                     setStatus();
                     break;
                 case 5:
                     sCommonUtils.saveString("setDefault", "lg", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_lg";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getLG());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getLG(), null);
                     mTitle = getString(R.string.lg);
                     setStatus();
                     break;
                 case 6:
                     sCommonUtils.saveString("setDefault", "samsung", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_samsung";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSamsung());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSamsung(), null);
                     mTitle = getString(R.string.samsung);
                     setStatus();
                     break;
                 case 7:
                     sCommonUtils.saveString("setDefault", "motorola", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_motorola";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMoto());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMoto(), null);
                     mTitle = getString(R.string.motorola);
                     setStatus();
                     break;
                 case 8:
                     sCommonUtils.saveString("setDefault", "nokia", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_nokia";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getNokia());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getNokia(), null);
                     mTitle = getString(R.string.nokia);
                     setStatus();
                     break;
                 case 9:
                     sCommonUtils.saveString("setDefault", "oppo", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_oppo";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOppo());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getOppo(), null);
                     mTitle = getString(R.string.oppo);
                     setStatus();
                     break;
                 case 10:
                     sCommonUtils.saveString("setDefault", "sony", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_sony";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSony());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getSony(), null);
                     mTitle = getString(R.string.sony);
                     setStatus();
                     break;
                 case 11:
                     sCommonUtils.saveString("setDefault", "xiaomi", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_xiaomi";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getXiaomi());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getXiaomi(), null);
                     mTitle = getString(R.string.xiaomi);
                     setStatus();
                     break;
                 case 12:
                     sCommonUtils.saveString("setDefault", "zte", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_zte";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getZTE());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getZTE(), null);
                     mTitle = getString(R.string.zte);
                     setStatus();
                     break;
                 case 13:
                     sCommonUtils.saveString("setDefault", "carrier", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_carrier";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getCarrier());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getCarrier(), null);
                     mTitle = getString(R.string.carrier);
                     setStatus();
                     break;
                 case 14:
                     sCommonUtils.saveString("setDefault", "misc", activity);
                     mScriptPath = PackageTasks.getModulePath() + "/uad_misc";
-                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMisc());
+                    mRecycleViewAdapter = new ActivePackagesAdapter(Common.getMisc(), null);
                     mTitle = getString(R.string.miscellaneous);
                     setStatus();
                     break;
