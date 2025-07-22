@@ -21,13 +21,13 @@ android {
         includeInBundle = false
     }
 
-    compileSdk 34
+    compileSdk 36
     namespace 'com.sunilpaulmathew.debloater'
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 23
-        targetSdk 34
+        targetSdk 35
         versionCode 27
         versionName "v0.27"
         vectorDrawables.useSupportLibrary = true
@@ -58,7 +58,7 @@ android {
 dependencies {
     implementation 'com.github.sunilpaulmathew:RootFilePicker:802663ee90'
 
-    def sCommon_Version = 'fcb1b0c0ef'
+    def sCommon_Version = '0a9f4f410f'
     implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:apkutils:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
@@ -71,4 +71,10 @@ dependencies {
 
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
     implementation 'com.google.android.material:material:1.12.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }

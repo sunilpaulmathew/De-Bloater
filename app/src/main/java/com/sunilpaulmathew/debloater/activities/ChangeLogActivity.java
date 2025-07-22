@@ -10,6 +10,8 @@ import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
 import com.sunilpaulmathew.debloater.R;
 
+import java.io.IOException;
+
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.JsonUtils.sJSONUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
@@ -31,8 +33,11 @@ public class ChangeLogActivity extends AppCompatActivity {
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
         mTitle.setText(getString(R.string.app_name) + (sPackageUtils.isPackageInstalled("com.android.vending",
                 this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
-        mChangeLog.setText(sJSONUtils.getString(sJSONUtils.getJSONObject(sFileUtils.readAssetFile(
-                "release.json", this)), "fullReleaseNotes"));
+        try {
+            mChangeLog.setText(sJSONUtils.getString(sJSONUtils.getJSONObject(sFileUtils.readAssetFile(
+                    "release.json", this)), "fullReleaseNotes"));
+        } catch (IOException ignored) {
+        }
         mCancel.setOnClickListener(v -> finish());
     }
 
