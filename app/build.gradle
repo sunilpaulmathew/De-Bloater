@@ -1,4 +1,6 @@
-apply plugin: 'com.android.application'
+plugins {
+    alias(libs.plugins.androidApplication)
+}
 
 def keystoreFile = rootProject.file("app/sp.jks")
 
@@ -56,21 +58,19 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.sunilpaulmathew:RootFilePicker:802663ee90'
+    implementation libs.rootfilepicker
+    implementation libs.adapters
+    implementation libs.apkutils
+    implementation libs.credits
+    implementation libs.fileutils
+    implementation libs.jsonutils
+    implementation libs.packageutils
+    implementation libs.permissionutils
+    implementation libs.themeutils
+    implementation libs.translatorutils
 
-    def sCommon_Version = '0a9f4f410f'
-    implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:apkutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:fileutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:jsonutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:packageutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:permissionutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:themeutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
-
-    implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation libs.core
+    implementation libs.material
 }
 
 java {
