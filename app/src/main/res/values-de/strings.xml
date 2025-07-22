@@ -89,9 +89,20 @@
     <string name="support_summary">"Besuche die Supportgruppe"</string>
     <string name="update_available">"Neues Update verfügbar!
         (%s)"</string>
-    <string name="updated_dialog">"Glückwunsch, du hast die letzte Version von De-Bloater installiert!"</string>
+    <string name="updated_dialog">"Glückwunsch, du hast die neuste Version von De-Bloater installiert!"</string>
     <string name="version">"Version"</string>
     <string name="warning_summary">"De-Bloater ist sehr mächtig ! Bitte nutze es vorsichtig und in eigener Verantwortung! Der Entwickler übernimmt keine Verantwortung für Folgen aus der Nutzung der App."</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>
+    <string name="apps_all">"Alle"</string>
+    <string name="start">"Start"</string>
+    <string name="backup_share_message">"Um eine Datenbank mit vordefinierten Profilen für die öffentliche Nutzung zu erstellen, erwäge bitte, die besten von dir erstellten De-Bloater-Profile mit dem Entwickler von De-Bloater zu teilen. Danke!
+
+        E-Mail: smartpack.org@gmail.com
+        Telegram: https://t.me/smartpack_kmanager"</string>
+    <string name="restore_mismatch_message">"Du hast ein Backup ausgewählt welches für ein anderes Gerät oder eine andere Android Version gemacht wurde ausgewählt. Möchtest du es trotzdem wiederherstellen?"</string>
+    <string name="share_profile">"Profil Teilen"</string>
+    <string name="uninstall">"Deinstallieren"</string>
+    <string name="updated_system_app_warning">"Du hast sich entschieden, „%s“, eine bereits aktualisierte System-App, zu de-bloaten. Wenn du diese App wirklich vollständig entfernen möchtest, solltest du auch die lokalen Updates deinstallieren. Andernfalls verhält sich die App nach einem Neustart wie eine normale Benutzer-App."</string>
+    <string name="backup_list_as">"Sicherung des de-bloater Profil als?"</string>
 </resources>

@@ -14,6 +14,7 @@
     <string name="asus">"ASUS"</string>
     <string name="backup">"نسخة احتياطية"</string>
     <string name="backup_list_empty">"لم تقم بازالة اية تطبيقات بعد"</string>
+    <string name="backup_message">"تم انشاء النسخة الاحتياطية"</string>
     <string name="carrier">"الناقل"</string>
     <string name="change_logs">"سجل التغيرات"</string>
     <string name="change_logs_summary">"لمشاهدة التغييرات الاخيره على هذا التطبيق"</string>

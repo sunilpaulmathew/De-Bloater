@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!-- zh-CN (Simplified, China) -->
 
     <string name="about">"关于"</string>
     <string name="about_summary">"De-Bloater 是一个使用 Magisk 的强大功能来无系统地去除不需要的应用程序。"</string>

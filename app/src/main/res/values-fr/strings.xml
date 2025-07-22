@@ -87,7 +87,8 @@
     <string name="storage_access_denied">"Autorisation refusée pour l'écriture dans le stockage"</string>
     <string name="support">"Soutien"</string>
     <string name="support_summary">"Visiter le groupe de soutien"</string>
-    <string name="update_available">"Nouvelle mise à jour disponible (%s)"</string>
+    <string name="update_available">"Nouvelle mise à jour disponible
+        (%s)"</string>
     <string name="updated_dialog">"Félicitations. Vous avez déjà une version à jour de De-Bloater."</string>
     <string name="version">"Version"</string>
     <string name="warning_summary">"De-Bloater est trop puissant.  Veuillez l'utiliser avec précaution.  Le développeur de cette application n'assume aucune responsabilité si quelque chose ne fonctionne plus en raison d'une utilisation inappropriée."</string>

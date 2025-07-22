@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!-- zh-Hans (Simplified, generic) -->
 
     <string name="about">"关于"</string>
     <string name="about_summary">"De-Bloater是一个使用Magisk无系统地清除不需要的应用程序的app。"</string>
@@ -87,7 +88,8 @@
     <string name="storage_access_denied">"无法获取存储权限"</string>
     <string name="support">"支持"</string>
     <string name="support_summary">"访问支持群组"</string>
-    <string name="update_available">"有新版本可更新(%s)"</string>
+    <string name="update_available">"有新版本可更新
+        (%s)"</string>
     <string name="updated_dialog">"恭喜，你的De-Bloater是最新版本"</string>
     <string name="version">"版本"</string>
     <string name="warning_summary">"De-Bloater太强大了。请谨慎使用。如果由于使用不当而发生错误，此应用程序的开发人员不承担任何责任。"</string>

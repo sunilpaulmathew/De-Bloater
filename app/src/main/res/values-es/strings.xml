@@ -13,8 +13,8 @@
     <string name="app_summary">"Usa el poder de Magisk para desinstalar aplicaciones de sistema."</string>
     <string name="asus">"ASUS"</string>
     <string name="backup">"Copia de seguridad"</string>
-    <string name="backup_list_empty">"Todavía no has removido ninguna app!"</string>
-    <string name="backup_message">"Archivo de respaldo ha sido creado como %s!"</string>
+    <string name="backup_list_empty">"Todavía no has removido ninguna app"</string>
+    <string name="backup_message">"Archivo de respaldo ha sido creado como %s"</string>
     <string name="carrier">"Operador"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="change_logs_summary">"Ver cambios recientes en esta app."</string>
@@ -72,7 +72,7 @@
     <string name="report_issue">"Reportar un problema"</string>
     <string name="report_issue_summary">"Reportar un problema en Github"</string>
     <string name="restore">"Restaurar"</string>
-    <string name="restore_error_message">"Seleccionaste un archivo de respaldo inválido. Cancelando!"</string>
+    <string name="restore_error_message">"Seleccionaste un archivo de respaldo inválido. Cancelando"</string>
     <string name="restore_question">"Restaurar desde %s"</string>
     <string name="restoring">"Restaurando…"</string>
     <string name="samsung">"Samsung"</string>
@@ -94,4 +94,15 @@
     <string name="warning_summary">"De-Bloater es muy poderoso! Por favor úsalo con cuidado. El desarrollador de esta aplicación no se hace responsable si algo sale mal debido a su uso incorrecto."</string>
     <string name="xiaomi">"Xiaomi"</string>
     <string name="zte">"ZTE"</string>
+    <string name="apps_all">"Todo"</string>
+    <string name="start">"Empezar"</string>
+    <string name="backup_share_message">"Para crear una base de datos de perfiles predefinidos para uso público, por favor considere compartir los mejores perfiles de de-bloater hechos por usted con el desarrollador de De-Bloater. Gracias.
+
+        Correo electrónico: smartpack.org@gmail.com
+        Telegram: https://t.me/smartpack_kmanager"</string>
+    <string name="restore_mismatch_message">"Ha seleccionado un archivo de copia de seguridad creado para un dispositivo o versión de Android diferente. ¿Aún desea restaurar?"</string>
+    <string name="share_profile">"Compartir perfil"</string>
+    <string name="uninstall">"Desinstalar"</string>
+    <string name="updated_system_app_warning">"Estás decidido a de-bloat '%s', una aplicación del sistema que ya está actualizada. Por lo tanto, si realmente desea eliminar esta aplicación por completo, considere desinstalar las actualizaciones locales también. De lo contrario, la aplicación se comportará como una aplicación de usuario normal después de un reinicio."</string>
+    <string name="backup_list_as">"¿Copia de seguridad del perfil de-bloater como?"</string>
 </resources>
