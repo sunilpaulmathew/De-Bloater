@@ -153,9 +153,12 @@ public class Common {
         mData.add(new sSerializableItems(null, "Chong", "Chinese (Simplified) Translations", null));
         mData.add(new sSerializableItems(null, "Lw201811", "Japanese & Chinese (Simplified) Translations", null));
         mData.add(new sSerializableItems(null, "Hongle", "Chinese - Hong Kong (Traditional and Simplified) Translations", null));
+        mData.add(new sSerializableItems(null, "Ignác Czébán", "Hungarian Translations", null));
+        mData.add(new sSerializableItems(null, "mx. sony", "Slovakian Translations", null));
+        mData.add(new sSerializableItems(null, "Leudy R. Villa Calcaño", "Dominican Spanish Translations", null));
+        mData.add(new sSerializableItems(null, "Many other volunteers", "Contributed via. POEditor", "https://poeditor.com/join/project?hash=BZS89Ev3WG"));
         return mData;
     }
-
 
     public static String getModuleParent() {
         return "/data/adb/modules/De-bloater";

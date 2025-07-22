@@ -77,13 +77,16 @@ If you like to appreciate my work, please consider donating to me (either via [L
 * Geovanni, Portuguese (Brazilian) Translations
 * Lw201811, Japanese Translations
 * Chong & Lw201811, Chinese (Simplified) Translations
+* Ignác Czébán, Hungarian Translations
+* mx. sony, Slovakian Translations
+* Leudy R. Villa Calcaño, Dominican Spanish Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=BZS89Ev3WG)
 
 _If you think I missed your name, please let me know._
 
 ## License
 
-    Copyright (C) 2023-2024 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2020-2025 sunilpaulmathew <sunil.kde@gmail.com>
 
     De-Bloater is a free softwares: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
