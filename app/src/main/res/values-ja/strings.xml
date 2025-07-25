@@ -2,9 +2,9 @@
     <string name="app_name" translatable="false">De-Bloater</string>
 
     <string name="about">アプリについて</string>
-    <string name="about_summary">De-Bloater は Magisk の力でシステムレスにアプリを削除するツールです。</string>
+    <string name="about_summary">De-Bloater は Magisk を利用してシステムレスにアプリを削除するツールです。</string>
     <string name="active">有効</string>
-    <string name="active_app_summary">インストールされているアプリ一覧\n選んだアプリは、再起動後システムレスに削除されます。</string>
+    <string name="active_app_summary">インストール済みのアプリ一覧\n選んだアプリは、再起動後システムレスに削除されます。</string>
     <string name="aosp">AOSP</string>
     <string name="apply">適用</string>
     <string name="apps">%sなアプリ</string>
@@ -12,11 +12,11 @@
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
-    <string name="app_summary">Magisk の力でシステムレスにアプリを削除</string>
+    <string name="app_summary">Magisk を利用してシステムレスにアプリを削除</string>
     <string name="asus">ASUS</string>
     <string name="backup">バックアップ</string>
     <string name="backup_list_as">バックアップ名</string>
-    <string name="backup_list_empty">削除対象のアプリを選んでないようです</string>
+    <string name="backup_list_empty">削除対象のアプリが選択されていません</string>
     <string name="backup_message">バックアップを %s に作成しました</string>
     <string name="backup_share_message">プロファイルの公開データベースの作成に協力してください。作成したプロファイルを De-Bloater の開発者と共有しませんか？ありがとうございます。\n\nEmail： smartpack.org@gmail.com\nTelegram： https://t.me/smartpack_kmanager</string>
     <string name="carrier">キャリア</string>
@@ -37,7 +37,7 @@
     <string name="custom_scripts_uad_enabled">このスクリプトは現在有効です</string>
     <string name="custom_scripts_uad_summary">W1nst0n 氏が作成した Universal Android Debloater の改変版です。不要で不明瞭なシステムアプリを削除することで、バッテリー性能とプライバシーを改善することを目的としています。</string>
     <string name="donate">寄付</string>
-    <string name="donate_summary">寄付し、開発を支援する</string>
+    <string name="donate_summary">寄付で開発を支援する</string>
     <string name="download_failed">ダウンロードに失敗したか、ファイルが破損しています</string>
     <string name="downloading">%s をダウンロード中</string>
     <string name="extreme">Extreme</string>
@@ -97,7 +97,7 @@
     <string name="uninstall">アンインストール</string>
     <string name="update_available">新しいアップデートです\n(%s)</string>
     <string name="updated_dialog">De-Bloater は最新バージョンです</string>
-    <string name="updated_system_app_warning">「%s」は、更新されたシステムアプリです。完全に削除したい場合は、アプリを出荷時の状態に戻してください。そうしない場合、再起動後にユーザーアプリとして残ります。</string>
+    <string name="updated_system_app_warning">「%s」は、更新済みのシステムアプリです。完全に削除したい場合は、アプリを出荷時の状態に戻してください。そうしない場合、再起動後にユーザーアプリとして残ります。</string>
     <string name="version">バージョン</string>
     <string name="warning_summary">De-Bloater は非常に強力なツールです。注意して使ってください。不適切に使って問題が発生した場合でも、開発者は一切の責任を負いません。</string>
     <string name="xiaomi">Xiaomi</string>
