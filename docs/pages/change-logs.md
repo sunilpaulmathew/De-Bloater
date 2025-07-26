@@ -6,6 +6,14 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.28
+- APatch support (experimental).
+- More materialized app UI.
+- Now targets SDK 35.
+- Build with latest gradle and dependencies.
+- Added Hungarian, Slovak, and Dominican Spanish (and updated) translations
+- Miscellaneous changes..
+
 ### v0.27
 - Kernel SU support.
 - More materialized app UI.

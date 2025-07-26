@@ -1,4 +1,0 @@
-* Kernel SU support.
-* More materialized app UI.
-* Build with latest gradle and dependencies.
-* Miscellaneous changes.

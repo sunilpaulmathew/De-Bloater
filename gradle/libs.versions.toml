@@ -1,6 +1,6 @@
 [versions]
 agp = "8.11.1"
-core = "6.0.0"
+libsu = "6.0.0"
 material = "1.12.0"
 rootfilepicker = "802663ee90"
 scommon = "0a9f4f410f"
@@ -15,7 +15,7 @@ packageutils = { module = "com.github.sunilpaulmathew.sCommon:packageutils", ver
 permissionutils = { module = "com.github.sunilpaulmathew.sCommon:permissionutils", version.ref = "scommon" }
 themeutils = { module = "com.github.sunilpaulmathew.sCommon:themeutils", version.ref = "scommon" }
 translatorutils = { module = "com.github.sunilpaulmathew.sCommon:translatorutils", version.ref = "scommon" }
-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "core" }
+libsu = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsu" }
 rootfilepicker = { module = "com.github.sunilpaulmathew:RootFilePicker", version.ref = "rootfilepicker" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 

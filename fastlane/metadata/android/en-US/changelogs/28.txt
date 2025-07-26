@@ -1,0 +1,6 @@
+* APatch support (experimental).
+* More materialized app UI.
+* Now targets SDK 35.
+* Build with latest gradle and dependencies.
+* Added Hungarian, Slovak, and Dominican Spanish (and updated) translations
+* Miscellaneous changes.

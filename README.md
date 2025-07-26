@@ -2,12 +2,12 @@
 
 ![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/De--Bloater-v0.26-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
+[![](https://img.shields.io/badge/De--Bloater-v0.28-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
 ![](https://img.shields.io/github/languages/top/sunilpaulmathew/De-Bloater)
 ![](https://img.shields.io/github/contributors/sunilpaulmathew/De-Bloater)
 
-### De-Bloater is an application using the power of Magisk/Kernel SU to de-bloat unwanted applications systemless-ly.
+### De-Bloater is an application using the power of Magisk/Kernel SU/APatch to de-bloat unwanted applications systemless-ly.
 
 ## Download
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
@@ -21,19 +21,19 @@
      height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.sunilpaulmathew.debloater)
      [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
           alt=""
-          height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.26/app-release.apk)
+          height="80">](https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.28/app-release.apk)
 
 ## Features
 * Easily remove system apps from "/system", "/vendor", and "/product" directories.
 
 ## Requirement
-De-Bloater requires Root Access and a fully functional Magisk or Kernel SU environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
+De-Bloater requires Root Access and a fully functional Magisk or Kernel SU or APatch environment, including modules, for proper working. As a result, De-Bloater won't work with other rooting solutions as well as in Magisk core-only mode.
 
 ## How to Use
 Open the app, click the remove button on each app you want to remove. The selected apps will be removed systemless-ly after a reboot. To restore an app, either Reset Module (on the top menu) or selectively restore from the second page. Please note that a restart is necessary to get any of the changes in effect.
 
 ## How it works
-The app will systemless-ly replace the selected APKs by making a Magisk/Kernel SU module. As a result, you will see a new Module (name: De-bloater).
+The app will systemless-ly replace the selected APKs by making a Magisk/Kernel SU/APatch module. As a result, you will see a new Module (name: De-bloater).
 
 ## Troubleshooting
 In case, if you accidentally remove some important apps and your phone bootloops, please delete "/data/adb/modules/De-bloater" via recovery.
