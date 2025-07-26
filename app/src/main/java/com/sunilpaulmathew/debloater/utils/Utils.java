@@ -50,7 +50,7 @@ public class Utils {
     }
 
     public static boolean rootAccess() {
-        return Shell.rootAccess();
+        return Shell.getShell().isRoot();
     }
 
     public static void runCommand(String command) {
