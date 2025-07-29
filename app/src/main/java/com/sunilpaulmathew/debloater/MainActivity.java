@@ -16,6 +16,7 @@ import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        if (Utils.rootAccess() && Utils.magiskSupported() && !sPackageUtils.isPackageInstalled(
-                "com.android.vending", this) && UpdateCheck.isSignatureMatched(this)) {
+        if (Utils.rootAccess() && Utils.magiskSupported() && !sPackageUtils.isPackageInstalled("com.android.vending",
+                this) && sCommonUtils.getBoolean("update_enabled", true, this) && UpdateCheck.isSignatureMatched(this)) {
             new UpdateCheck().initialize(1, this);
         }
     }

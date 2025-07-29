@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
@@ -31,6 +32,7 @@ import com.sunilpaulmathew.debloater.activities.TomatotActivity;
 import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
+import com.sunilpaulmathew.debloater.utils.UpdateCheck;
 import com.sunilpaulmathew.debloater.utils.Utils;
 
 import java.util.Objects;
@@ -163,6 +165,23 @@ public class ActivePackagesFragment extends Fragment {
         mMenu.setOnClickListener(v -> menuOptions(requireActivity()));
 
         loadUI(requireActivity(), mSearchText);
+
+        if (UpdateCheck.isSignatureMatched(requireActivity()) && !sCommonUtils.getBoolean("update_info_shown", false, requireActivity())) {
+            new MaterialAlertDialogBuilder(requireActivity())
+                    .setIcon(R.mipmap.ic_launcher_round)
+                    .setTitle("Please Note")
+                    .setMessage("""
+                            De-Bloater includes a built-in auto-update system that is active only when the app is installed via the GitHub release page or through IzzyOnDroid. Updates are fetched directly from the latest official release on GitHub.
+                            
+                            This feature is enabled by default, but you are free to choose whether to enable or opt out of it.""")
+                    .setCancelable(false)
+                    .setNeutralButton("No, Thanks", (dialogInterface, i) ->
+                            sCommonUtils.saveBoolean("update_enabled", false, requireActivity()))
+                    .setPositiveButton("Yes, Enable", (dialogInterface, i) ->
+                            sCommonUtils.saveBoolean("update_enabled", true, requireActivity()))
+                    .show();
+            sCommonUtils.saveBoolean("update_info_shown", true, requireActivity());
+        }
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
