@@ -1,0 +1,3 @@
+* Updated build tools.
+* Added Estonian translations.
+* Miscellaneous changes.

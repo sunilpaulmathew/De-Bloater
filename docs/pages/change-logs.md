@@ -6,6 +6,11 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.30
+- Updated build tools.
+- Added Estonian translations.
+- Miscellaneous changes.
+
 ### v0.29
 - Now possible to opt-out from the auto-update check (only at first launch).
 - Updated Japaneses translations.
