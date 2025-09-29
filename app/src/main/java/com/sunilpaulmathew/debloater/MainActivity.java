@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if (Utils.rootAccess() && Utils.magiskSupported() && !sPackageUtils.isPackageInstalled("com.android.vending",
-                this) && sCommonUtils.getBoolean("update_enabled", true, this) && UpdateCheck.isSignatureMatched(this)) {
+                this) && sCommonUtils.getInt("update_enabled", 2, this) == 0 && UpdateCheck.isSignatureMatched(this)) {
             new UpdateCheck().initialize(1, this);
         }
     }

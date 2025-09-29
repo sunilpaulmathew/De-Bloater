@@ -166,21 +166,20 @@ public class ActivePackagesFragment extends Fragment {
 
         loadUI(requireActivity(), mSearchText);
 
-        if (UpdateCheck.isSignatureMatched(requireActivity()) && !sCommonUtils.getBoolean("update_info_shown", false, requireActivity())) {
+        if (UpdateCheck.isSignatureMatched(requireActivity()) && sCommonUtils.getInt("update_enabled", 2, requireActivity()) == 2) {
             new MaterialAlertDialogBuilder(requireActivity())
                     .setIcon(R.mipmap.ic_launcher_round)
                     .setTitle("Please Note")
                     .setMessage("""
                             De-Bloater includes a built-in auto-update system that is active only when the app is installed via the GitHub release page or through IzzyOnDroid. Updates are fetched directly from the latest official release on GitHub.
                             
-                            This feature is enabled by default, but you are free to choose whether to enable or opt out of it.""")
+                            You can choose to enable or disable this feature. This prompt will keep appearing until you make a decision.""")
                     .setCancelable(false)
                     .setNeutralButton("No, Thanks", (dialogInterface, i) ->
-                            sCommonUtils.saveBoolean("update_enabled", false, requireActivity()))
+                            sCommonUtils.saveInt("update_enabled", 1, requireActivity()))
                     .setPositiveButton("Yes, Enable", (dialogInterface, i) ->
-                            sCommonUtils.saveBoolean("update_enabled", true, requireActivity()))
+                            sCommonUtils.saveInt("update_enabled", 0, requireActivity()))
                     .show();
-            sCommonUtils.saveBoolean("update_info_shown", true, requireActivity());
         }
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {

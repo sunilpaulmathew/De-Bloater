@@ -92,6 +92,7 @@ public class UpdateCheck {
 
     private static MaterialAlertDialogBuilder updateAvailableDialog(Activity activity) {
         return new MaterialAlertDialogBuilder(activity)
+                .setIcon(R.mipmap.ic_launcher)
                 .setTitle(activity.getString(R.string.update_available, getVersionName()))
                 .setMessage(activity.getString(R.string.change_logs) + "\n" + getChangeLogs())
                 .setCancelable(false)
@@ -191,6 +192,8 @@ public class UpdateCheck {
                         updateAvailableDialog(activity).show();
                     } else {
                         new MaterialAlertDialogBuilder(activity)
+                                .setIcon(R.mipmap.ic_launcher)
+                                .setTitle(R.string.app_name)
                                 .setMessage(R.string.updated_dialog)
                                 .setPositiveButton(activity.getString(R.string.cancel), (dialog, id) -> {
                                 }).show();
