@@ -1,0 +1,147 @@
+{
+  "Device": {
+    "Manufacturer": "LGE",
+    "Brand": "lge",
+    "Model": "VS995",
+    "Version": "8.0.0",
+    "SDK": 26
+  },
+  "DeBloater": [
+    {
+      "name": "ELTest",
+      "path": "/data/adb/modules/De-bloater/system/app/elt_test/elt_test.apk"
+    },
+    {
+      "name": "DRM Service",
+      "path": "/data/adb/modules/De-bloater/system/app/DrmService/DrmService.apk"
+    },
+    {
+      "name": "LG Account",
+      "path": "/data/adb/modules/De-bloater/system/app/LGAccount/LGAccount.apk"
+    },
+    {
+      "name": "com.lge.lgdrm.permission",
+      "path": "/data/adb/modules/De-bloater/system/app/LGDrm/LGDrm.apk"
+    },
+    {
+      "name": "MirrorLink",
+      "path": "/data/adb/modules/De-bloater/system/app/MirrorLinkServer/MirrorLinkServer.apk"
+    },
+    {
+      "name": "Audio share",
+      "path": "/data/adb/modules/De-bloater/system/app/LGMusicShare/LGMusicShare.apk"
+    },
+    {
+      "name": "Smart cleaning",
+      "path": "/data/adb/modules/De-bloater/system/app/LGSpringCleaning/LGSpringCleaning.apk"
+    },
+    {
+      "name": "com.lge.smartshare.provider",
+      "path": "/data/adb/modules/De-bloater/system/app/SmartShareProvider/SmartShareProvider.apk"
+    },
+    {
+      "name": "GCUV",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/GCUV/GCUV.apk"
+    },
+    {
+      "name": "LG Mobile Switch",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGBackup/LGBackup.apk"
+    },
+    {
+      "name": "Memories album",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/EdenService/EdenService.apk"
+    },
+    {
+      "name": "Email",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGEmail/LGEmail.apk"
+    },
+    {
+      "name": "License Provider",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LicenseProvider/LicenseProvider.apk"
+    },
+    {
+      "name": "360 Image Wallpaper",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LG360Wallpaper/LG360Wallpaper.apk"
+    },
+    {
+      "name": "Answer me",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGGestureAnswering/LGGestureAnswering.apk"
+    },
+    {
+      "name": "Handwriting",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGEIME_HWR_SOLUTION_MYSCRIPT/LGEIME_HWR_SOLUTION_MYSCRIPT.apk"
+    },
+    {
+      "name": "Home Theme - LG",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGHome_Theme_Optimus/LGHome_Theme_Optimus.apk"
+    },
+    {
+      "name": "LGMapUI",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGMapUI/LGMapUI.apk"
+    },
+    {
+      "name": "SetupView",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGSetupView/LGSetupView.apk"
+    },
+    {
+      "name": "LDB",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGLDB/LGLDB.apk"
+    },
+    {
+      "name": "Content lock",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGPrivacylock/LGPrivacylock.apk"
+    },
+    {
+      "name": "QuickMemo+",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGQMemoplus/LGQMemoplus.apk"
+    },
+    {
+      "name": "Music Widget",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGMusicWidget/LGMusicWidget.apk"
+    },
+    {
+      "name": "SnapPage",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGSnapPage/LGSnapPage.apk"
+    },
+    {
+      "name": "LG Bridge Service",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGPCSuiteService/LGPCSuiteService.apk"
+    },
+    {
+      "name": "Video Wallpaper",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LG360VideoWallpaper/LG360VideoWallpaper.apk"
+    },
+    {
+      "name": "360 Video",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGVRPlayer/LGVRPlayer.apk"
+    },
+    {
+      "name": "LG WFDS Services",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGWfdsServices/LGWfdsServices.apk"
+    },
+    {
+      "name": "LG P2p Service",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGP2pService/LGP2pService.apk"
+    },
+    {
+      "name": "Android Settings",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/Leccp/Leccp.apk"
+    },
+    {
+      "name": "LGSmartcardService",
+      "path": "/data/adb/modules/De-bloater/system/priv-app/LGSmartcardService/LGSmartcardService.apk"
+    },
+    {
+      "name": "GNSS Air Test",
+      "path": "/data/adb/modules/De-bloater/system/vendor/app/GnssAirTest/GnssAirTest.apk"
+    },
+    {
+      "name": "LG GNSS 2.1",
+      "path": "/data/adb/modules/De-bloater/system/vendor/app/GnssPosTest/GnssPosTest.apk"
+    },
+    {
+      "name": "GnssTest 1.2",
+      "path": "/data/adb/modules/De-bloater/system/vendor/app/GnssTest/GnssTest.apk"
+    }
+  ]
+}
