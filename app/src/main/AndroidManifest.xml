@@ -31,8 +31,6 @@
 
         <activity android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".activities.ChangeLogActivity"
-            android:exported="false" />
         <activity android:name=".activities.TomatotActivity"
             android:exported="false" />
         <activity android:name=".activities.UADActivity"

@@ -3,8 +3,12 @@ package com.sunilpaulmathew.debloater;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,7 +27,6 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
  */
-
 public class MainActivity extends AppCompatActivity {
 
     private Fragment mFragment;
@@ -37,7 +40,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
+        FrameLayout mFragmentContainer = findViewById(R.id.fragment_container);
         MaterialTextView mUnSupported = findViewById(R.id.unsupported);
+        View mLayoutRoot = findViewById(R.id.layout_root);
+
+        ViewCompat.setOnApplyWindowInsetsListener(mLayoutRoot, (view, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            view.setPadding(0, systemBars.top, 0, 0);
+
+            return insets;
+        });
 
         if (!Utils.rootAccess()) {
             mUnSupported.setText(R.string.no_root);
@@ -75,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ActivePackagesFragment()).commit();
         }
+
+        mBottomNav.post(() -> mFragmentContainer.setPadding(0, 0, 0, mBottomNav.getHeight()));
 
     }
 

@@ -59,7 +59,7 @@ public class AboutFragment extends Fragment {
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_support, requireActivity()), getString(R.string.support), getString(R.string.support_summary),"https://t.me/smartpack_kmanager"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_github, requireActivity()), getString(R.string.source_code), getString(R.string.source_code_summary),"https://github.com/sunilpaulmathew/De-Bloater"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_issue, requireActivity()), getString(R.string.report_issue), getString(R.string.report_issue_summary),"https://github.com/sunilpaulmathew/De-Bloater/issues/new"));
-        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_active, requireActivity()), getString(R.string.change_logs), getString(R.string.change_logs_summary), null));
+        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_active, requireActivity()), getString(R.string.change_logs), getString(R.string.change_logs_summary), "https://sunilpaulmathew.github.io/De-Bloater/change-logs/"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_playstore, requireActivity()), getString(R.string.more_apps), getString(R.string.more_apps_summary), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_licence, requireActivity()), getString(R.string.licence), getString(R.string.licence_summary), "https://www.gnu.org/licenses/gpl-3.0-standalone.html"));
         if (sPackageUtils.isPackageInstalled("com.android.vending", requireActivity())) {
