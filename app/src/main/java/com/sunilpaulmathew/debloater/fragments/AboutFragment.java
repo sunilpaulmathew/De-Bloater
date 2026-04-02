@@ -70,7 +70,7 @@ public class AboutFragment extends Fragment {
             mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_update, requireActivity()),getString(R.string.check_update), getString(R.string.check_update_summary), null));
         }
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_translate, requireActivity()), getString(R.string.translations), getString(R.string.translations_summary), null));
-        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_credits, requireActivity()), getString(R.string.credits), getString(R.string.credits_summary), null));
+        mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_credits, requireActivity()), getString(R.string.credits), getString(R.string.credits_summary), "https://github.com/sunilpaulmathew/De-Bloater/blob/master/README.md#credits"));
         mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_share, requireActivity()), getString(R.string.invite_friend), getString(R.string.invite_friend_summary), null));
         if (!sPackageUtils.isPackageInstalled("com.android.vending", requireActivity())) {
             mData.add(new sSerializableItems(sCommonUtils.getDrawable(R.drawable.ic_donate, requireActivity()), getString(R.string.donate), getString(R.string.donate_summary), "https://smartpack.github.io/donation/"));

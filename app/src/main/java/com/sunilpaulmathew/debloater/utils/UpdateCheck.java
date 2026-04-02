@@ -70,7 +70,7 @@ public class UpdateCheck {
     private static byte[] getSignature(String packageid, Context context) {
         try {
             PackageInfo pkgInfo = context.getPackageManager().getPackageInfo(packageid, PackageManager.GET_SIGNATURES);
-            return signatureToBytes(pkgInfo.signatures);
+            return signatureToBytes(Objects.requireNonNull(pkgInfo.signatures));
         } catch (PackageManager.NameNotFoundException ignored) {}
         return null;
     }

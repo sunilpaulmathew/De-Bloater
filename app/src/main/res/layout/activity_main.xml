@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -15,6 +14,7 @@
             android:id="@+id/unsupported"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="?attr/colorPrimary"
             android:gravity="center"
             android:textSize="23sp"
             android:textStyle="bold"
@@ -30,9 +30,13 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemTextAppearanceActive="?attr/colorPrimary"
+        app:itemActiveIndicatorStyle="?attr/colorPrimary"
         android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation"
+        app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:itemTextColor="@null"
+        app:itemIconTint="@null" />
 </RelativeLayout>

@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -23,11 +23,10 @@
             android:id="@+id/warning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-35dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/warning_summary"
+            android:layout_marginHorizontal="10dp"
             android:textStyle="bold|italic"
-            android:layout_margin="10dp"
             android:visibility="gone"
             android:gravity="center"
             android:textSize="17sp" />
@@ -37,7 +36,7 @@
             android:layout_width="175dp"
             android:layout_height="20dp"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressBackgroundTint="?attr/colorAccent"
+            android:indeterminateTint="?attr/colorPrimary"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:paddingStart="15dp"
@@ -80,5 +79,5 @@
                     android:rotation="180" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

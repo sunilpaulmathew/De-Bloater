@@ -3,9 +3,7 @@ package com.sunilpaulmathew.debloater.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.text.Html;
-import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +25,6 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 27, 2020
  */
-
 public class Utils {
 
     static {
@@ -75,18 +72,6 @@ public class Utils {
 
     public static boolean magiskSupported() {
         return Utils.exist("/sbin/.magisk") || Utils.exist("/data/adb/magisk") || isAPatchSupported() || isKSUSupported();
-    }
-
-    public static int getThemeAccentColor(Context context) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-        return value.data;
-    }
-
-    public static int getPrimaryTextColor(Context context) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, value, true);
-        return value.data;
     }
 
     private static String removeSuffix(@Nullable String s) {
@@ -159,11 +144,7 @@ public class Utils {
     }
 
     public static CharSequence fromHtml(String text) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            return Html.fromHtml(text);
-        }
+        return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
     }
 
 }

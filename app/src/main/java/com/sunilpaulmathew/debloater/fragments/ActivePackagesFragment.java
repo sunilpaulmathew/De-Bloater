@@ -1,7 +1,6 @@
 package com.sunilpaulmathew.debloater.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -16,20 +15,17 @@ import android.widget.LinearLayout;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.R;
-import com.sunilpaulmathew.debloater.activities.TomatotActivity;
-import com.sunilpaulmathew.debloater.activities.UADActivity;
 import com.sunilpaulmathew.debloater.adapters.ActivePackagesAdapter;
 import com.sunilpaulmathew.debloater.utils.PackageTasks;
 import com.sunilpaulmathew.debloater.utils.UpdateCheck;
@@ -43,15 +39,13 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
  */
-
 public class ActivePackagesFragment extends Fragment {
 
     private AppCompatEditText mSearchWord;
-    private AppCompatImageButton mMenu;
+    private MaterialButton mMenu;
     private boolean mExit = false;
     private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
-    private MaterialCardView mReverse;
     private RecyclerView mRecyclerView;
     private ActivePackagesAdapter mRecycleViewAdapter;
     private String mSearchText = null;
@@ -62,10 +56,9 @@ public class ActivePackagesFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_packages, container, false);
 
         mSearchWord = mRootView.findViewById(R.id.search_word);
-        AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
+        MaterialButton mSearchButton = mRootView.findViewById(R.id.search_button);
         AppCompatTextView mSummary = mRootView.findViewById(R.id.about_summary);
         MaterialTextView mPageTitle = mRootView.findViewById(R.id.page_title);
-        mReverse = mRootView.findViewById(R.id.reverse_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
@@ -75,11 +68,6 @@ public class ActivePackagesFragment extends Fragment {
 
         mPageTitle.setText(getString(R.string.apps, getString(R.string.active)));
         mSummary.setText(getString(R.string.active_app_summary));
-        mReverse.setElevation(10);
-        mReverse.setOnClickListener(v -> {
-            sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
-            loadUI(requireActivity(), mSearchText);
-        });
 
         mSearchButton.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -221,18 +209,17 @@ public class ActivePackagesFragment extends Fragment {
         PopupMenu popupMenu = new PopupMenu(activity, mMenu);
         Menu menu = popupMenu.getMenu();
         if (PackageTasks.isModuleInitialized()) {
-            menu.add(Menu.NONE, 1, Menu.NONE, R.string.module_status_reset);
+            menu.add(Menu.NONE, 1, Menu.NONE, R.string.module_status_reset).setIcon(R.drawable.ic_reset);
         }
-        SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
+        SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by)).setIcon(R.drawable.ic_sort);
         sort.add(0, 2, Menu.NONE, getString(R.string.name)).setCheckable(true)
                 .setChecked(sCommonUtils.getInt("sort_apps", 1, activity) == 0);
         sort.add(0, 3, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(sCommonUtils.getInt("sort_apps", 1, activity) == 1);
         sort.setGroupCheckable(0, true, true);
-        SubMenu customScripts = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.custom_scripts));
-        customScripts.add(Menu.NONE, 4, Menu.NONE, R.string.custom_scripts_tomatot);
-        customScripts.add(Menu.NONE, 5, Menu.NONE, R.string.custom_scripts_uad);
-        menu.add(Menu.NONE, 6, Menu.NONE, R.string.reboot);
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.reverse).setIcon(R.drawable.ic_reverse).setCheckable(true).setChecked(sCommonUtils.getBoolean("reverse_order", false, activity));
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.reboot).setIcon(R.drawable.ic_power);
+        popupMenu.setForceShowIcon(true);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -253,14 +240,10 @@ public class ActivePackagesFragment extends Fragment {
                     }
                     break;
                 case 4:
-                    Intent tomatotScript = new Intent(activity, TomatotActivity.class);
-                    startActivity(tomatotScript);
+                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
+                    loadUI(activity, mSearchText);
                     break;
                 case 5:
-                    Intent uadScript = new Intent(activity, UADActivity.class);
-                    startActivity(uadScript);
-                    break;
-                case 6:
                     Utils.runCommand("svc power reboot");
                     break;
             }
@@ -275,14 +258,13 @@ public class ActivePackagesFragment extends Fragment {
             @Override
             public void onPreExecute() {
                 mProgressLayout.setVisibility(View.VISIBLE);
-                mReverse.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.GONE);
                 mRecyclerView.removeAllViews();
             }
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity, searchText), searchText);
+                mRecycleViewAdapter = new ActivePackagesAdapter(PackageTasks.getActivePackageData(activity, searchText), searchText, activity);
                 if (searchText != null) {
                     mSearchText = searchText;
                 }
@@ -293,7 +275,6 @@ public class ActivePackagesFragment extends Fragment {
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgressLayout.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
-                mReverse.setVisibility(View.VISIBLE);
             }
         }.execute();
     }

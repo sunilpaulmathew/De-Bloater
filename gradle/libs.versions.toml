@@ -8,7 +8,6 @@ scommon = "0a9f4f410f"
 [libraries]
 adapters = { module = "com.github.sunilpaulmathew.sCommon:adapters", version.ref = "scommon" }
 apkutils = { module = "com.github.sunilpaulmathew.sCommon:apkutils", version.ref = "scommon" }
-credits = { module = "com.github.sunilpaulmathew.sCommon:credits", version.ref = "scommon" }
 fileutils = { module = "com.github.sunilpaulmathew.sCommon:fileutils", version.ref = "scommon" }
 jsonutils = { module = "com.github.sunilpaulmathew.sCommon:jsonutils", version.ref = "scommon" }
 packageutils = { module = "com.github.sunilpaulmathew.sCommon:packageutils", version.ref = "scommon" }

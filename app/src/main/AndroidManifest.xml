@@ -31,10 +31,6 @@
 
         <activity android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".activities.TomatotActivity"
-            android:exported="false" />
-        <activity android:name=".activities.UADActivity"
-            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

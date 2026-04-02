@@ -20,7 +20,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.FileProvider;
@@ -28,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.sunilpaulmathew.debloater.BuildConfig;
@@ -51,11 +51,10 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 28, 2020
  */
-
 public class InactivePackagesFragment extends Fragment {
 
     private AppCompatEditText mSearchWord;
-    private AppCompatImageButton mMenu;
+    private MaterialButton mMenu;
     private LinearLayout mProgressLayout;
     private MaterialTextView mProgressText;
     private RecyclerView mRecyclerView;
@@ -75,7 +74,7 @@ public class InactivePackagesFragment extends Fragment {
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         MaterialTextView mTitle = mRootView.findViewById(R.id.page_title);
-        AppCompatImageButton mSearchButton = mRootView.findViewById(R.id.search_button);
+        MaterialButton mSearchButton = mRootView.findViewById(R.id.search_button);
         mMenu = mRootView.findViewById(R.id.menu_button);
 
         mTitle.setText(getString(R.string.apps, getString(R.string.inactive)));
@@ -139,11 +138,12 @@ public class InactivePackagesFragment extends Fragment {
         PopupMenu popupMenu = new PopupMenu(activity, mMenu);
         Menu menu = popupMenu.getMenu();
         if (PackageTasks.isModuleInitialized()) {
-            menu.add(Menu.NONE, 0, Menu.NONE, R.string.module_status_reset);
+            menu.add(Menu.NONE, 0, Menu.NONE, R.string.module_status_reset).setIcon(R.drawable.ic_reset);
         }
-        menu.add(Menu.NONE, 1, Menu.NONE, R.string.reboot);
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.backup);
-        menu.add(Menu.NONE, 3, Menu.NONE, R.string.restore);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.reboot).setIcon(R.drawable.ic_power);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.backup).setIcon(R.drawable.ic_backup_file);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.restore).setIcon(R.drawable.ic_restore);
+        popupMenu.setForceShowIcon(true);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:

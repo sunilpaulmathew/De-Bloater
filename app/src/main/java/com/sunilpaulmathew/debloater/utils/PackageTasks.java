@@ -9,14 +9,20 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
@@ -31,6 +37,7 @@ public class PackageTasks {
 
     public static List<PackageItem> getRawData(Context context) {
         List<PackageItem> mData = new ArrayList<>();
+        List<DebloaterEntry> debloaterEntries = getUADList(context);
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
@@ -38,8 +45,12 @@ public class PackageTasks {
                         sPackageUtils.getAppName(packageInfo.packageName, context).toString(),
                         sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
                                 context) : sPackageUtils.getSourceDir(packageInfo.packageName, context),
-                        sPackageUtils.getAppIcon(packageInfo.packageName, context),
                         packageInfo.packageName,
+                        debloaterEntries.stream()
+                                .filter(entry -> entry.getPackageName().equals(packageInfo.packageName))
+                                .map(DebloaterEntry::getRemovalStatus)
+                                .findFirst()
+                                .orElse(null),
                         sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context)));
             }
         }
@@ -58,14 +69,39 @@ public class PackageTasks {
             }
         }
         if (sCommonUtils.getInt("sort_apps", 1, context) == 0) {
-            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
+            mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
         } else {
-            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
+            mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
         }
         if (sCommonUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;
+    }
+
+    public static List<DebloaterEntry> getUADList(Context context) {
+        List<DebloaterEntry> debloaterEntries = new CopyOnWriteArrayList<>();
+        try {
+            JSONObject root = new JSONObject(sFileUtils.readAssetFile("uad_lists.json", context));
+
+            Iterator<String> keys = root.keys();
+            while (keys.hasNext()) {
+                String packageName = keys.next();
+                JSONObject packageInfo = root.getJSONObject(packageName);
+
+                String list = packageInfo.getString("list");
+                String description = packageInfo.getString("description");
+                JSONArray dependencies = packageInfo.getJSONArray("dependencies");
+                JSONArray neededBy = packageInfo.getJSONArray("neededBy");
+                JSONArray labels = packageInfo.getJSONArray("labels");
+                String removal = packageInfo.getString("removal");
+
+                debloaterEntries.add(new DebloaterEntry(packageName, list, description, dependencies, neededBy, labels, removal));
+            }
+
+        } catch (Exception ignored) {
+        }
+        return debloaterEntries;
     }
 
     public static List<String> getInactivePackageData(String searchText) {
@@ -160,9 +196,6 @@ public class PackageTasks {
     public static void removeModule(Activity activity) {
         Utils.delete(activity.getFilesDir().getPath() + "/De-bloater");
         Utils.delete(Common.getModuleParent());
-        sCommonUtils.saveBoolean("tomatot_extreme", false, activity);
-        sCommonUtils.saveBoolean("tomatot_invisible", false, activity);
-        sCommonUtils.saveBoolean("tomatot_light", false, activity);
     }
 
     public static boolean isModuleInitialized() {

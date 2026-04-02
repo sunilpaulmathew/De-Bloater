@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="removal_recommended">#00B894</color>
+    <color name="removal_advanced">#FDCB6E</color>
+    <color name="removal_expert">#E17055</color>
+    <color name="removal_unsafe">#D63031</color>
+</resources>

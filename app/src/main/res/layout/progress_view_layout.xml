@@ -11,7 +11,8 @@
     <ProgressBar
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"/>
+        android:indeterminateTint="?attr/colorPrimary"
+        android:layout_gravity="center" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/progress_text"

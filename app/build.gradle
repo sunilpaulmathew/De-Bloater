@@ -23,12 +23,12 @@ android {
         includeInBundle = false
     }
 
-    compileSdk 36
+    compileSdkVersion 36
     namespace 'com.sunilpaulmathew.debloater'
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdk 36
         versionCode 30
         versionName "v0.30"
@@ -61,7 +61,6 @@ dependencies {
     implementation libs.rootfilepicker
     implementation libs.adapters
     implementation libs.apkutils
-    implementation libs.credits
     implementation libs.fileutils
     implementation libs.jsonutils
     implementation libs.packageutils
