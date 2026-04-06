@@ -39,6 +39,7 @@
     <string name="no_internet">Please check your internet connection</string>
     <string name="no_magisk">Magisk Not Detected</string>
     <string name="no_root">No Root</string>
+    <string name="non_removable">Non-Removable</string>
     <string name="package_id">Package ID</string>
     <string name="press_back_exit">Press the \"Back\" button again to Exit</string>
     <string name="rate_us">Rate Us</string>

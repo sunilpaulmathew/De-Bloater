@@ -89,24 +89,34 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
                 holder.mStatusIcon.setVisibility(GONE);
             }
 
-            if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getAPKPath()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()))) {
-                holder.mActionIcon.setText(holder.mActionIcon.getContext().getString(R.string.restore));
-                holder.mActionIcon.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mActionIcon.getContext()));
-                holder.mActionIcon.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
-                holder.statusMessage.setText(holder.statusMessage.getContext().getString(R.string.status_message_remove));
-                holder.mActionIcon.setTextColor(Color.BLACK);
-                holder.mActionIcon.setIconTint(ColorStateList.valueOf(Color.BLACK));
-                holder.statusMessage.setTextColor(Color.RED);
-                holder.statusMessage.setVisibility(View.VISIBLE);
+            if (this.data.get(position).isDebloatable()) {
+                holder.mActionIcon.setAlpha(1.0f);
+                if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getAPKPath()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()))) {
+                    holder.mActionIcon.setText(holder.mActionIcon.getContext().getString(R.string.restore));
+                    holder.mActionIcon.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mActionIcon.getContext()));
+                    holder.mActionIcon.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    holder.statusMessage.setText(holder.statusMessage.getContext().getString(R.string.status_message_remove));
+                    holder.mActionIcon.setTextColor(Color.BLACK);
+                    holder.mActionIcon.setIconTint(ColorStateList.valueOf(Color.BLACK));
+                    holder.statusMessage.setTextColor(Color.RED);
+                    holder.statusMessage.setVisibility(View.VISIBLE);
+                } else {
+                    holder.mActionIcon.setText(holder.mActionIcon.getContext().getString(R.string.remove));
+                    holder.mActionIcon.setIcon(sCommonUtils.getDrawable(R.drawable.ic_delete, holder.mActionIcon.getContext()));
+                    holder.mActionIcon.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                    holder.mActionIcon.setTextColor(Color.WHITE);
+                    holder.mActionIcon.setIconTint(ColorStateList.valueOf(Color.WHITE));
+                    holder.statusMessage.setText(null);
+                    holder.statusMessage.setTextColor(Color.GREEN);
+                    holder.statusMessage.setVisibility(View.GONE);
+                }
             } else {
-                holder.mActionIcon.setText(holder.mActionIcon.getContext().getString(R.string.remove));
-                holder.mActionIcon.setIcon(sCommonUtils.getDrawable(R.drawable.ic_delete, holder.mActionIcon.getContext()));
-                holder.mActionIcon.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
-                holder.mActionIcon.setTextColor(Color.WHITE);
+                holder.mActionIcon.setText(holder.mActionIcon.getContext().getString(R.string.non_removable));
+                holder.mActionIcon.setIcon(sCommonUtils.getDrawable(R.drawable.ic_lock, holder.mActionIcon.getContext()));
+                holder.mActionIcon.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                 holder.mActionIcon.setIconTint(ColorStateList.valueOf(Color.WHITE));
-                holder.statusMessage.setText(null);
-                holder.statusMessage.setTextColor(Color.GREEN);
-                holder.statusMessage.setVisibility(View.GONE);
+                holder.mActionIcon.setTextColor(Color.WHITE);
+                holder.mActionIcon.setAlpha(0.5f);
             }
 
             holder.mStatusIcon.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
@@ -125,26 +135,28 @@ public class ActivePackagesAdapter extends RecyclerView.Adapter<ActivePackagesAd
             Common.setSlideInAnimation(holder.itemView, position);
 
             holder.mActionIcon.setOnClickListener(v -> {
-                if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getAPKPath()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()))) {
-                    PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()));
-                } else {
-                    if (this.data.get(position).isUpdatedSystemApp()) {
-                        new MaterialAlertDialogBuilder(v.getContext())
-                                .setIcon(this.data.get(position).getAppIcon())
-                                .setTitle(this.data.get(position).getAppName())
-                                .setMessage(v.getContext().getString(R.string.updated_system_app_warning, this.data.get(position).getAppName()))
-                                .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                                })
-                                .setPositiveButton(R.string.uninstall, (dialog, id) -> {
-                                    Intent remove = new Intent(Intent.ACTION_DELETE);
-                                    remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-                                    remove.setData(Uri.parse("package:" + this.data.get(position).getPackageName()));
-                                    v.getContext().startActivity(remove);
-                                }).show();
+                if (this.data.get(position).isDebloatable()) {
+                    if (Utils.exist(PackageTasks.getModulePath() + this.data.get(position).getAPKPath()) || Utils.exist(PackageTasks.getModulePath() + PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()))) {
+                        PackageTasks.revertDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()));
+                    } else {
+                        if (this.data.get(position).isUpdatedSystemApp()) {
+                            new MaterialAlertDialogBuilder(v.getContext())
+                                    .setIcon(this.data.get(position).getAppIcon())
+                                    .setTitle(this.data.get(position).getAppName())
+                                    .setMessage(v.getContext().getString(R.string.updated_system_app_warning, this.data.get(position).getAppName()))
+                                    .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                                    })
+                                    .setPositiveButton(R.string.uninstall, (dialog, id) -> {
+                                        Intent remove = new Intent(Intent.ACTION_DELETE);
+                                        remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
+                                        remove.setData(Uri.parse("package:" + this.data.get(position).getPackageName()));
+                                        v.getContext().startActivity(remove);
+                                    }).show();
+                        }
+                        PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()), holder.mName.getText().toString());
                     }
-                    PackageTasks.setToDelete(PackageTasks.getAdjAPKPath(this.data.get(position).getAPKPath()), holder.mName.getText().toString());
+                    notifyItemChanged(position);
                 }
-                notifyItemChanged(position);
             });
         } catch (NullPointerException ignored) {}
     }

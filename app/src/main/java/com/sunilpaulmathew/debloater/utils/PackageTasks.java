@@ -43,8 +43,7 @@ public class PackageTasks {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 mData.add(new PackageItem(
                         sPackageUtils.getAppName(packageInfo.packageName, context).toString(),
-                        sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context) ? findSystemAPKPath(packageInfo.packageName,
-                                context) : sPackageUtils.getSourceDir(packageInfo.packageName, context),
+                        findSystemAPKPath(packageInfo.packageName, context),
                         packageInfo.packageName,
                         debloaterEntries.stream()
                                 .filter(entry -> entry.getPackageName().equals(packageInfo.packageName))
@@ -141,11 +140,12 @@ public class PackageTasks {
         return context.getPackageManager();
     }
 
-    public static String findSystemAPKPath(String packageName, Context context) {
-        try {
-            String mAPKPath = null;
-            for (String line : Utils.runAndGetOutput("dumpsys package " + packageName + " | grep resourcePath").replace("resourcePath=", "").split("\\r?\\n")) {
-                if (!line.startsWith("/data/")) {
+    private static String findSystemAPKPath(String packageName, Context context) {
+        String souceDir = sPackageUtils.getSourceDir(packageName, context);
+        if (souceDir.startsWith("/data/")) {
+            try {
+                String mAPKPath = null;
+                for (String line : Utils.runAndGetOutput("dumpsys package " + packageName + " | grep resourcePath | grep -v /data/ | grep -v /apex/").replace("resourcePath=", "").split("\\r?\\n")) {
                     mAPKPath = line.replaceAll("\\s+", "");
                     for (File mFile : Objects.requireNonNull(new File(mAPKPath).listFiles())) {
                         if (Objects.equals(sAPKUtils.getPackageName(mFile.getAbsolutePath(), context), packageName)) {
@@ -153,10 +153,11 @@ public class PackageTasks {
                         }
                     }
                 }
+                if (Utils.exist(mAPKPath)) return mAPKPath;
+            } catch (NullPointerException ignored) {
             }
-            if (Utils.exist(mAPKPath)) return mAPKPath;
-        } catch (NullPointerException ignored) {}
-        return sPackageUtils.getSourceDir(packageName, context);
+        }
+        return souceDir;
     }
 
     public static String getAdjAPKPath(String apkPath) {

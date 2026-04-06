@@ -54,6 +54,10 @@ public class PackageItem implements Serializable {
         return mUpdatedSystemApp;
     }
 
+    public boolean isDebloatable() {
+        return !mAPKPath.startsWith("/data/") && !mAPKPath.startsWith("/apex/");
+    }
+
     public void loadPackages(ImageButton icon, TextView name, TextView packageName) {
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Handler handler = new Handler(Looper.getMainLooper());
