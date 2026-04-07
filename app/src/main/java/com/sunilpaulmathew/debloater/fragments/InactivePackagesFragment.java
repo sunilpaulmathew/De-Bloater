@@ -2,11 +2,11 @@ package com.sunilpaulmathew.debloater.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -42,9 +42,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
 
-import in.sunilpaulmathew.rootfilepicker.utils.FilePicker;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
@@ -212,10 +216,12 @@ public class InactivePackagesFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    FilePicker filePicker = new FilePicker(restoreResultLauncher, requireActivity());
-                    filePicker.setPath(Environment.getExternalStorageDirectory().toString());
-                    filePicker.setExtension("json");
-                    filePicker.launch();
+                    try {
+                        Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
+                        restore.setType("application/json");
+                        restoreResultLauncher.launch(restore);
+                    } catch (ActivityNotFoundException ignored) {
+                    }
                     break;
             }
             return false;
@@ -250,42 +256,70 @@ public class InactivePackagesFragment extends Fragment {
         }.execute();
     }
 
-    @SuppressLint("StringFormatInvalid")
     private final ActivityResultLauncher<Intent> restoreResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    File mSelectedFile = FilePicker.getSelectedFile();
-                    if (!Restore.isValidBackup(mSelectedFile.getAbsolutePath())) {
-                        sCommonUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
-                        return;
-                    }
-                    new MaterialAlertDialogBuilder(requireActivity())
-                            .setMessage(Restore.isJSONMatched(mSelectedFile.getAbsolutePath()) ? getString(R.string.restore_question,
-                                    mSelectedFile.getName()) : getString(R.string.restore_mismatch_message))
-                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                            })
-                            .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
-                                    new sExecutor() {
+                    Intent intent = result.getData();
 
-                                        @Override
-                                        public void onPreExecute() {
-                                            mProgressLayout.setVisibility(View.VISIBLE);
-                                            mProgressText.setText(getString(R.string.restoring));
-                                        }
+                    new sExecutor() {
+                        private String jsonString = null;
+                        private Uri uri = null;
+                        @Override
+                        public void onPreExecute() {
+                            uri = intent.getData();
+                        }
 
-                                        @Override
-                                        public void doInBackground() {
-                                            Restore.restoreBackup(mSelectedFile.getAbsolutePath());
-                                        }
+                        @Override
+                        public void doInBackground() {
+                            try {
+                                InputStream inputStream = requireActivity().getContentResolver().openInputStream(Objects.requireNonNull(uri));
+                                BufferedInputStream bis = new BufferedInputStream(inputStream);
+                                ByteArrayOutputStream buf = new ByteArrayOutputStream();
+                                for (int jsonResult = bis.read(); jsonResult != -1; jsonResult = bis.read()) {
+                                    buf.write((byte) jsonResult);
+                                }
+                                jsonString = buf.toString("UTF-8");
+                            } catch (IOException ignored) {
+                            }
+                        }
 
-                                        @Override
-                                        public void onPostExecute() {
-                                            mProgressLayout.setVisibility(View.GONE);
-                                            loadUI(mSearchText);
-                                        }
-                                    }.execute())
-                            .show();
+                        @Override
+                        public void onPostExecute() {
+                            if (!Restore.isValidBackup(jsonString)) {
+                                sCommonUtils.snackBar(mRecyclerView, getString(R.string.restore_error_message)).show();
+                                return;
+                            }
+                            new MaterialAlertDialogBuilder(requireActivity())
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(Restore.isJSONMatched(jsonString) ? getString(R.string.restore_question,
+                                            Restore.getFileName(Objects.requireNonNull(uri), requireActivity())) : getString(R.string.restore_mismatch_message))
+                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.restore), (dialogInterface, i) ->
+                                            new sExecutor() {
+
+                                                @Override
+                                                public void onPreExecute() {
+                                                    mProgressLayout.setVisibility(View.VISIBLE);
+                                                    mProgressText.setText(getString(R.string.restoring));
+                                                }
+
+                                                @Override
+                                                public void doInBackground() {
+                                                    Restore.restoreBackup(jsonString);
+                                                }
+
+                                                @Override
+                                                public void onPostExecute() {
+                                                    mProgressLayout.setVisibility(View.GONE);
+                                                    loadUI(mSearchText);
+                                                }
+                                            }.execute())
+                                    .show();
+                        }
+                    }.execute();
                 }
             }
     );

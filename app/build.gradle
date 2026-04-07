@@ -58,7 +58,6 @@ android {
 }
 
 dependencies {
-    implementation libs.rootfilepicker
     implementation libs.adapters
     implementation libs.apkutils
     implementation libs.fileutils
