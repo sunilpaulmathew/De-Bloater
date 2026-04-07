@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Updated build tools.\n - Added Estonian translations.\n - Miscellaneous changes.",
-  "latestVersionCode": 30,
-  "latestVersion": "v0.30",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.30/app-release.apk",
-  "sha1": "9736f408ad01d092d363a903ec717fe43b4cbe73"
+  "releaseNotes": " - Fresh new look with a redesigned interface.\n - Added intelligent recommendations to help you identify which apps to remove.\n - Enhanced the initial startup screen with a more accurate progress indicator.\n - Active Apps now clearly identifies non-removable system apps and features improved category filtering.\n - Resolved a critical crash occurring during Database profile restoration.\n - Updated to the latest Android SDK for better security and compatibility.",
+  "latestVersionCode": 31,
+  "latestVersion": "v0.31",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.31/app-release.apk",
+  "sha1": "43bc1a37793513719b293ba60495cd7304b7ea1e"
 }
