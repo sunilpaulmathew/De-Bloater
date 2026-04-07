@@ -38,7 +38,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:indeterminateTint="?attr/colorPrimary"
             android:layout_gravity="center"
-            android:indeterminate="true"
+            android:indeterminate="false"
             android:paddingStart="15dp"
             android:paddingEnd="15dp" />
 

@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
@@ -35,10 +36,15 @@ public class PackageTasks {
         Utils.runCommand(Utils.magiskBusyBox() + "mkdir " + Common.getModuleParent());
     }
 
-    public static List<PackageItem> getRawData(Context context) {
+    public static List<PackageItem> getRawData(ProgressBar progressBar, Context context) {
         List<PackageItem> mData = new ArrayList<>();
         List<DebloaterEntry> debloaterEntries = getUADList(context);
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+
+        if (progressBar != null) {
+            progressBar.setMax(packages.size());
+        }
+
         for (ApplicationInfo packageInfo: packages) {
             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 mData.add(new PackageItem(
@@ -51,6 +57,14 @@ public class PackageTasks {
                                 .findFirst()
                                 .orElse(null),
                         sPackageUtils.isUpdatedSystemApp(packageInfo.packageName, context)));
+
+                if (progressBar != null) {
+                    if (progressBar.getProgress() < packages.size()) {
+                        progressBar.setProgress(progressBar.getProgress() + 1);
+                    } else {
+                        progressBar.setProgress(0);
+                    }
+                }
             }
         }
         return mData;

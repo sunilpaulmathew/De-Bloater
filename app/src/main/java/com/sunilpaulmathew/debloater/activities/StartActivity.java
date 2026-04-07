@@ -38,18 +38,18 @@ public class StartActivity extends AppCompatActivity {
             mWarning.setVisibility(View.VISIBLE);
             mStartCard.setVisibility(View.VISIBLE);
         } else {
-            loadUI(StartActivity.this);
+            loadUI(mProgress, StartActivity.this);
         }
 
         mStartCard.setOnClickListener(v -> {
             mProgress.setVisibility(View.VISIBLE);
             mWarning.setVisibility(View.GONE);
             mStartCard.setVisibility(View.GONE);
-            loadUI(StartActivity.this);
+            loadUI(mProgress, StartActivity.this);
         });
     }
 
-    private static void loadUI(Activity activity) {
+    private static void loadUI(ProgressBar progressBar, Activity activity) {
         new sExecutor() {
 
             @Override
@@ -62,7 +62,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void doInBackground() {
                 // Acquire information about installed apps
-                Common.setRawData(PackageTasks.getRawData(activity));
+                Common.setRawData(PackageTasks.getRawData(progressBar, activity));
             }
 
             @Override
