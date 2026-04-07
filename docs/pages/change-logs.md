@@ -6,6 +6,14 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.31
+- Fresh new look with a redesigned interface.
+- Added intelligent recommendations to help you identify which apps to remove.
+- Enhanced the initial startup screen with a more accurate progress indicator.
+- App Insights: "Active Apps" now clearly identifies non-removable system apps and features improved category filtering.
+- Resolved a critical crash occurring during Database profile restoration.
+- Updated to the latest Android SDK for better security and compatibility.
+
 ### v0.30
 - Updated build tools.
 - Added Estonian translations.

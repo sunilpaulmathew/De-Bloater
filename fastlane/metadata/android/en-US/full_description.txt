@@ -4,9 +4,9 @@
 
 <b>Features</b>
 
-- Easily remove system applications from "/system", "/vendor", and "/product" directories (Reboot required).
+- Easily remove system applications from "/system", "/vendor", "/product", and other directories (Reboot required).
 - Restore de-bloated apps, either individually or as a whole (Reboot required).
-- Includes pre-defined de-bloated scripts (Universal Android and Tomatot debloater).
+- Includes smart app suggestions from UAD-NG project.
 - Elegantly designed user interface with an auto-dark/light theme.
 - A lot more.
 
