@@ -118,20 +118,26 @@ public class PackageTasks {
     }
 
     private static boolean getSupportedAppsList(String apkPath, Context context) {
-        String mStatus = sCommonUtils.getString("appTypes", "all", context);
         boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
-                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app")
-                || apkPath.startsWith("/system/vendor/app") || apkPath.startsWith("/system/vendor/overlay")
-                || apkPath.startsWith("/system/product/overlay") || apkPath.startsWith("/system/system_ext/app")
-                || apkPath.startsWith("/system/system_ext/priv-app") || apkPath.startsWith("/system_ext/app")
-                || apkPath.startsWith("/system_ext/priv-app") || apkPath.startsWith("/system/preload");
-        boolean vendorApps = apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/vendor/app");
+                || apkPath.startsWith("/system/system_ext/app") || apkPath.startsWith("/system/system_ext/priv-app")
+                || apkPath.startsWith("/system_ext/app") || apkPath.startsWith("/system_ext/priv-app");
+        boolean vendorApps = apkPath.startsWith("/vendor/app") || apkPath.startsWith("/vendor/priv-app")
+                || apkPath.startsWith("/system/vendor/app") ;
         boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/priv-app")
+                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app");
+        boolean overlayApps = apkPath.startsWith("/system/vendor/overlay") || apkPath.startsWith("/system/product/overlay")
+                || apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/system_ext/overlay")
                 || apkPath.startsWith("/product/overlay");
-        return switch (mStatus) {
-            case "system" -> systemApps;
-            case "product" -> productApps;
-            case "vendor" -> vendorApps;
+        boolean miscApps = apkPath.startsWith("/preload") || apkPath.startsWith("/product/preinstall")
+                || apkPath.startsWith("/system/preinstall") || apkPath.startsWith("/system/preload")
+                || apkPath.startsWith("/odm/app") || apkPath.startsWith("/odm/priv-app")
+                || apkPath.startsWith("/odm/overlay");
+        return switch (sCommonUtils.getInt("appType", 0, context)) {
+            case 1 -> systemApps;
+            case 2 -> productApps;
+            case 3 -> vendorApps;
+            case 4 -> overlayApps;
+            case 5 -> miscApps;
             default -> true;
         };
     }

@@ -10,6 +10,8 @@
     <string name="apps_system">/system</string>
     <string name="apps_vendor">/vendor</string>
     <string name="apps_product">/product</string>
+    <string name="apps_overlay">/overlay</string>
+    <string name="apps_misc">Misc…</string>
     <string name="backup">Backup</string>
     <string name="backup_list_as">Backup de-bloater profile as?</string>
     <string name="backup_list_empty">You haven\'t removed any apps yet</string>

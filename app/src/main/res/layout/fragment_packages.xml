@@ -87,8 +87,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:tabGravity="fill"
-        app:tabMode="fixed" />
+        app:tabMode="scrollable"
+        app:tabGravity="fill" />
 
     <include layout="@layout/layout_recyclerview" />
 </androidx.appcompat.widget.LinearLayoutCompat>

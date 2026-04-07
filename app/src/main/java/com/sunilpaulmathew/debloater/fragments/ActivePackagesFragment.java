@@ -89,40 +89,21 @@ public class ActivePackagesFragment extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_system)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_product)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_vendor)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_overlay)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apps_misc)));
 
         mTabLayout.setVisibility(View.VISIBLE);
 
-        Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
+        Objects.requireNonNull(mTabLayout.getTabAt(sCommonUtils.getInt("appType", 0, requireActivity()))).select();
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = sCommonUtils.getString("appTypes", "all", requireActivity());
-                switch (tab.getPosition()) {
-                    case 0:
-                        if (!mStatus.equals("all")) {
-                            sCommonUtils.saveString("appTypes", "all", requireActivity());
-                            loadUI(requireActivity(), mSearchText);
-                        }
-                        break;
-                    case 1:
-                        if (!mStatus.equals("system")) {
-                            sCommonUtils.saveString("appTypes", "system", requireActivity());
-                            loadUI(requireActivity(), mSearchText);
-                        }
-                        break;
-                    case 2:
-                        if (!mStatus.equals("product")) {
-                            sCommonUtils.saveString("appTypes", "product", requireActivity());
-                            loadUI(requireActivity(), mSearchText);
-                        }
-                        break;
-                    case 3:
-                        if (!mStatus.equals("vendor")) {
-                            sCommonUtils.saveString("appTypes", "vendor", requireActivity());
-                            loadUI(requireActivity(), mSearchText);
-                        }
-                        break;
+                int position = tab.getPosition();
+
+                if (sCommonUtils.getInt("appType", 0, requireActivity()) != position) {
+                    sCommonUtils.saveInt("appType", position, requireActivity());
+                    loadUI(requireActivity(), mSearchText);
                 }
             }
 
@@ -193,16 +174,6 @@ public class ActivePackagesFragment extends Fragment {
         });
 
         return mRootView;
-    }
-
-    private int getTabPosition(Activity activity) {
-        String mStatus = sCommonUtils.getString("appTypes", "all", activity);
-        return switch (mStatus) {
-            case "vendor" -> 3;
-            case "product" -> 2;
-            case "system" -> 1;
-            default -> 0;
-        };
     }
 
     private void menuOptions(Activity activity) {
