@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
@@ -31,6 +32,32 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 
 public class PackageTasks {
+
+    private static final Set<String> SYSTEM_PATHS = Set.of(
+            "/system/app", "/system/priv-app",
+            "/system/system_ext/app", "/system/system_ext/priv-app",
+            "/system_ext/app", "/system_ext/priv-app"
+    );
+
+    private static final Set<String> VENDOR_PATHS = Set.of(
+            "/vendor/app", "/vendor/priv-app", "/system/vendor/app"
+    );
+
+    private static final Set<String> PRODUCT_PATHS = Set.of(
+            "/product/app", "/product/priv-app", "/system/product/app",
+            "/system/product/priv-app"
+    );
+
+    private static final Set<String> OVERLAY_PATHS = Set.of(
+            "/system/vendor/overlay", "/system/product/overlay", "/vendor/overlay",
+            "/system_ext/overlay", "/product/overlay"
+    );
+
+    private static final Set<String> MISC_PATHS = Set.of(
+            "/preload", "/product/preinstall", "/system/preinstall",
+            "/system/preload", "/odm/app", "/odm/priv-app",
+            "/odm/overlay"
+    );
 
     static void createModuleParent() {
         Utils.runCommand(Utils.magiskBusyBox() + "mkdir " + Common.getModuleParent());
@@ -131,27 +158,19 @@ public class PackageTasks {
         return mData;
     }
 
+    private static boolean isPathInCategory(String apkPath, Set<String> categories) {
+        return categories.stream().anyMatch(apkPath::startsWith);
+    }
+
     private static boolean getSupportedAppsList(String apkPath, Context context) {
-        boolean systemApps = apkPath.startsWith("/system/app") || apkPath.startsWith("/system/priv-app")
-                || apkPath.startsWith("/system/system_ext/app") || apkPath.startsWith("/system/system_ext/priv-app")
-                || apkPath.startsWith("/system_ext/app") || apkPath.startsWith("/system_ext/priv-app");
-        boolean vendorApps = apkPath.startsWith("/vendor/app") || apkPath.startsWith("/vendor/priv-app")
-                || apkPath.startsWith("/system/vendor/app") ;
-        boolean productApps = apkPath.startsWith("/product/app") || apkPath.startsWith("/product/priv-app")
-                || apkPath.startsWith("/system/product/app") || apkPath.startsWith("/system/product/priv-app");
-        boolean overlayApps = apkPath.startsWith("/system/vendor/overlay") || apkPath.startsWith("/system/product/overlay")
-                || apkPath.startsWith("/vendor/overlay") || apkPath.startsWith("/system_ext/overlay")
-                || apkPath.startsWith("/product/overlay");
-        boolean miscApps = apkPath.startsWith("/preload") || apkPath.startsWith("/product/preinstall")
-                || apkPath.startsWith("/system/preinstall") || apkPath.startsWith("/system/preload")
-                || apkPath.startsWith("/odm/app") || apkPath.startsWith("/odm/priv-app")
-                || apkPath.startsWith("/odm/overlay");
-        return switch (sCommonUtils.getInt("appType", 0, context)) {
-            case 1 -> systemApps;
-            case 2 -> productApps;
-            case 3 -> vendorApps;
-            case 4 -> overlayApps;
-            case 5 -> miscApps;
+        int appType = sCommonUtils.getInt("appType", 0, context);
+
+        return switch (appType) {
+            case 1 -> isPathInCategory(apkPath, SYSTEM_PATHS);
+            case 2 -> isPathInCategory(apkPath, PRODUCT_PATHS);
+            case 3 -> isPathInCategory(apkPath, VENDOR_PATHS);
+            case 4 -> isPathInCategory(apkPath, OVERLAY_PATHS);
+            case 5 -> isPathInCategory(apkPath, MISC_PATHS);
             default -> true;
         };
     }
