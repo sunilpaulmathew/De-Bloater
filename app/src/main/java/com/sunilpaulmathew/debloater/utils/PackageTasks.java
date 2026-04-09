@@ -56,7 +56,8 @@ public class PackageTasks {
     private static final Set<String> MISC_PATHS = Set.of(
             "/preload", "/product/preinstall", "/system/preinstall",
             "/system/preload", "/odm/app", "/odm/priv-app",
-            "/odm/overlay"
+            "/odm/overlay", "/oem/app", "/oem/priv-app",
+            "/oem/overlay"
     );
 
     static void createModuleParent() {
