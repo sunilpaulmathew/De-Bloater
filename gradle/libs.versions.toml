@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.0"
+agp = "9.2.0"
 libsu = "6.0.0"
 material = "1.13.0"
 scommon = "0a9f4f410f"
