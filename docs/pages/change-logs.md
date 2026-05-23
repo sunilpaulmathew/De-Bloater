@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### v0.32
+- Added experimental support to /oem/ apps.
+- Brand-New app icon and graphics.
+- Now targets latest Android.
+- Updated UAD-NG database.
+- Miscellaneous changes.
+
 ### v0.31
 - Fresh new look with a redesigned interface.
 - Added intelligent recommendations to help you identify which apps to remove.

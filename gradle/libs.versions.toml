@@ -1,7 +1,7 @@
 [versions]
 agp = "9.2.1"
 libsu = "6.0.0"
-material = "1.13.0"
+material = "1.14.0"
 scommon = "0a9f4f410f"
 
 [libraries]

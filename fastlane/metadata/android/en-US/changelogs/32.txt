@@ -1,0 +1,5 @@
+* Added experimental support to /oem/ apps.
+* Brand-New app icon and graphics.
+* Now targets latest Android.
+* Updated UAD-NG database.
+* Miscellaneous changes.

@@ -21,15 +21,15 @@ android {
         includeInBundle = false
     }
 
-    compileSdkVersion 36
+    compileSdkVersion 37
     namespace 'com.sunilpaulmathew.debloater'
 
     defaultConfig {
         applicationId "com.sunilpaulmathew.debloater"
         minSdkVersion 24
-        targetSdk 36
-        versionCode 31
-        versionName "v0.31"
+        targetSdk 37
+        versionCode 32
+        versionName "v0.32"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false
