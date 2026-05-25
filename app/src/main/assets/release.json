@@ -1,7 +1,7 @@
 {
-  "releaseNotes": " - Fresh new look with a redesigned interface.\n - Added intelligent recommendations to help you identify which apps to remove.\n - Enhanced the initial startup screen with a more accurate progress indicator.\n - Active Apps now clearly identifies non-removable system apps and features improved category filtering.\n - Resolved a critical crash occurring during Database profile restoration.\n - Updated to the latest Android SDK for better security and compatibility.",
-  "latestVersionCode": 31,
-  "latestVersion": "v0.31",
-  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.31/app-release.apk",
-  "sha1": "43bc1a37793513719b293ba60495cd7304b7ea1e"
+  "releaseNotes": " - Added experimental support to /oem/ apps.\n - Brand-New app icon and graphics.\n - Now targets latest Android.\n - Updated UAD-NG database.\n - Miscellaneous changes.",
+  "latestVersionCode": 32,
+  "latestVersion": "v0.32",
+  "releaseUrl": "https://github.com/sunilpaulmathew/De-Bloater/releases/download/v0.32/app-release.apk",
+  "sha1": "60ad9b652995eabe01e1b32ed6989ca31074afd2"
 }
