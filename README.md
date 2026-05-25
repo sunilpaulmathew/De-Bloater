@@ -1,6 +1,6 @@
 # De-Bloater
 
-![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
+![De-Bloater](app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp?raw=true)
 
 [![](https://img.shields.io/badge/De--Bloater-v0.32-green)](https://play.google.com/store/apps/details?id=com.sunilpaulmathew.debloater)
 ![](https://img.shields.io/github/downloads/sunilpaulmathew/De-Bloater/total)
